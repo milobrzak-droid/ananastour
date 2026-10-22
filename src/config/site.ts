@@ -16,12 +16,12 @@ export const site = {
   contact: {
     /** Telegram username without "@" — main contact channel. */
     telegramUsername: process.env.NEXT_PUBLIC_TELEGRAM_USERNAME ?? "Ananas_tours",
-    // TODO(client): Czech phone number and e-mail once known.
-    phone: process.env.NEXT_PUBLIC_PHONE ?? "+420 000 000 000",
-    email: process.env.NEXT_PUBLIC_EMAIL ?? "info@ananastour.com",
+    phone: process.env.NEXT_PUBLIC_PHONE || "+420 723 615 028",
+    // Taken from ananastour.com (contacts page).
+    email: process.env.NEXT_PUBLIC_EMAIL || "otpusk_yarko@ukr.net",
     instagram: "https://instagram.com/ananas_tour_",
-    // TODO(client): Czech office address (or remove if online-only).
-    address: { uk: "Прага, Чехія", cs: "Praha, Česká republika" },
+    // TODO(client): Czech office address — none yet, agency works remotely.
+    address: { uk: "Чехія — працюємо онлайн", cs: "Česko — fungujeme online" },
     hours: { uk: "Пн–Нд 9:00–21:00", cs: "Po–Ne 9:00–21:00" },
   },
 

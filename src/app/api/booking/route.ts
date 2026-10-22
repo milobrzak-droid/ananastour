@@ -1,0 +1,132 @@
+import { NextResponse, type NextRequest } from "next/server";
+import { z } from "zod";
+import { site } from "@/config/site";
+import { locales } from "@/i18n/config";
+import { routes } from "@/i18n/routes";
+import { escapeHtml, sendTelegramMessage } from "@/lib/contact/telegram-bot";
+import { formatDateRange, formatMoney } from "@/lib/format";
+import { tours, type BookingRequest, type BookingResult } from "@/lib/tours";
+
+/**
+ * POST /api/booking — order of one offer. Calls the provider's Booking API;
+ * when the operator does not support direct booking the provider returns
+ * "inquiry" and Aljona finishes it manually. Either way Aljona gets the order
+ * in Telegram immediately.
+ *
+ * Response: BookingResult ({ status: "booked" | "inquiry" | "failed", … }).
+ */
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const optionalText = (max: number) =>
+  z
+    .string()
+    .trim()
+    .max(max)
+    .optional()
+    .transform((v) => (v ? v : undefined));
+
+const schema = z.object({
+  offerId: z.string().trim().min(1).max(200),
+  locale: z.enum(locales).default("uk"),
+  customer: z.object({
+    name: z.string().trim().min(2).max(100),
+    phone: z
+      .string()
+      .trim()
+      .min(6)
+      .max(30)
+      .regex(/^\+?[\d\s()-]{6,}$/),
+    email: z
+      .string()
+      .trim()
+      .max(200)
+      .optional()
+      .transform((v) => (v ? v : undefined))
+      .pipe(z.email().optional()),
+    telegram: optionalText(64).transform((v) => v?.replace(/^@/, "")),
+  }),
+  travellers: z
+    .array(
+      z.object({
+        age: z.number().int().min(0).max(120),
+        firstName: optionalText(60),
+        lastName: optionalText(60),
+        birthDate: z.iso.date().optional(),
+      }),
+    )
+    .min(1)
+    .max(12),
+  note: optionalText(2000),
+  consent: z.literal(true),
+  /** Honeypot — must stay empty. */
+  website: z.string().max(0).optional(),
+});
+
+export async function POST(req: NextRequest) {
+  const json = await req.json().catch(() => null);
+  const parsed = schema.safeParse(json);
+  if (!parsed.success) {
+    return NextResponse.json(
+      { status: "failed", reason: "invalid", issues: z.flattenError(parsed.error).fieldErrors },
+      { status: 400 },
+    );
+  }
+  const { locale, consent: _consent, website: _website, ...data } = parsed.data;
+  void _consent;
+  void _website;
+
+  const offer = await tours().getOffer(data.offerId);
+  if (!offer) {
+    return NextResponse.json({ status: "failed", reason: "offer-not-found" } satisfies BookingResult, { status: 404 });
+  }
+
+  const request: BookingRequest = data;
+  let result: BookingResult;
+  try {
+    result = await tours().book(request);
+  } catch (err) {
+    console.error("[booking]", data.offerId, err);
+    result = { status: "failed", reason: "provider-error" };
+  }
+
+  // Aljona sees every order instantly, including failed ones (she can still sell the tour).
+  const ref = result.status === "booked" ? result.reservationNumber : result.status === "inquiry" ? result.reference : "—";
+  const head = {
+    booked: "✅ Нове бронювання (підтверджено туроператором)",
+    inquiry: "🟡 Нове замовлення — потрібно оформити вручну",
+    failed: "🔴 Замовлення не пройшло — зв'яжіться з клієнтом",
+  }[result.status];
+  const c = data.customer;
+  const lines = [
+    `<b>${head}</b>`,
+    `Ref: <code>${escapeHtml(ref)}</code>`,
+    "",
+    `🏨 ${escapeHtml(`${offer.hotel.name} ${offer.hotel.stars}*, ${offer.hotel.region}`)}`,
+    `📅 ${escapeHtml(formatDateRange(offer.departureDate, offer.returnDate, "uk"))} · ${offer.nights} н. · ${offer.board} · ${escapeHtml(offer.roomType)}`,
+    `✈️ ${escapeHtml(offer.departureAirport ?? offer.transport)} · ${escapeHtml(offer.touroperator)}`,
+    `💰 ${escapeHtml(formatMoney(offer.pricePerPerson, "uk"))} / особа`,
+    "",
+    `👤 ${escapeHtml(c.name)}`,
+    `📞 ${escapeHtml(c.phone)}`,
+    c.email ? `✉️ ${escapeHtml(c.email)}` : "",
+    c.telegram ? `💬 @${escapeHtml(c.telegram)}` : "",
+    `👨‍👩‍👧 ${data.travellers.map((tr) => tr.age).join(", ")} (вік)`,
+    data.note ? `📝 ${escapeHtml(data.note)}` : "",
+    result.status === "failed" ? `⚠️ ${escapeHtml(result.reason)}` : "",
+    `🌐 ${locale}`,
+  ].filter(Boolean);
+  const offerUrl = `${site.url}${routes.offer(locale, offer.id)}`;
+  const sent = await sendTelegramMessage(lines.join("\n"), {
+    buttons: [
+      [
+        { text: "Тур на сайті", url: offerUrl },
+        ...(c.telegram ? [{ text: `@${c.telegram}`, url: `https://t.me/${encodeURIComponent(c.telegram)}` }] : []),
+      ],
+    ],
+  });
+  if (!sent.ok) console.error("[booking] telegram notify failed", sent.error, ref);
+
+  return NextResponse.json(result, { status: result.status === "failed" ? 502 : 200 });
+}
