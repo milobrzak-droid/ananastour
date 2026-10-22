@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local build dirs (NEXT_DIST_DIR) and audit screenshots
+/.next-*/
+/screenshots/
+# keep the env template
+!.env.example
