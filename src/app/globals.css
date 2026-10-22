@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
+/*
+ * Design tokens. Two client references combined:
+ *  - layout ("Пора в поход"): huge radii with one cut corner, pill buttons,
+ *    round arrow buttons, photo mosaics, bold headline over hero photo;
+ *  - brand motif (pineapple pattern): mustard pineapple slices with fibre
+ *    texture, navy ink, circular badge typography, off-white paper.
+ * Red is reserved for primary CTAs. Final design will arrive later —
+ * change values here, not in components.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --c-red: #ec4a2c;
+  --c-red-dark: #c8361b;
+  --c-yellow: #d4c21c; /* pineapple */
+  --c-yellow-light: #efe48a;
+  --c-ice: #a8d9e2;
+  --c-ice-light: #e2f2f5;
+  --c-teal: #5b8d91;
+  --c-grey: #ececea;
+  --c-grey-dark: #b9b9b5;
+  --c-ink: #1d2138; /* navy */
+  --c-paper: #f6f6f3;
+  --c-telegram: #229ed9;
+
+  --radius-xl: 2.5rem; /* big cards */
+  --radius-lg: 1.75rem;
+  --radius-md: 1.25rem;
+  --radius-cut: 0.5rem; /* the one "cut" corner */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-red: var(--c-red);
+  --color-red-dark: var(--c-red-dark);
+  --color-yellow: var(--c-yellow);
+  --color-yellow-light: var(--c-yellow-light);
+  --color-ice: var(--c-ice);
+  --color-ice-light: var(--c-ice-light);
+  --color-teal: var(--c-teal);
+  --color-grey: var(--c-grey);
+  --color-grey-dark: var(--c-grey-dark);
+  --color-ink: var(--c-ink);
+  --color-paper: var(--c-paper);
+  --color-telegram: var(--c-telegram);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+
+  --radius-xl: var(--radius-xl);
+  --radius-lg: var(--radius-lg);
+  --radius-md: var(--radius-md);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Signature card shape: everything round except the bottom-left corner. */
+@utility shape-card {
+  border-radius: var(--radius-xl) var(--radius-xl) var(--radius-xl) var(--radius-cut);
+}
+@utility shape-card-r {
+  border-radius: var(--radius-xl) var(--radius-xl) var(--radius-cut) var(--radius-xl);
+}
+@utility shape-card-tl {
+  border-radius: var(--radius-cut) var(--radius-xl) var(--radius-xl) var(--radius-xl);
+}
+@utility shape-pill {
+  border-radius: 9999px;
+}
+
+@utility font-display {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  letter-spacing: -0.01em;
 }

@@ -1,0 +1,12 @@
+Fatal error
+:  Uncaught ArgumentCountError: Too few arguments to function Tools\Easy\Website\StaticPages::__construct(), 0 passed in /home/ananas1/ananastour.com/www/Services/Website/Main.php on line 212 and exactly 1 expected in /home/ananas1/ananastour.com/www/Tools/Easy/Website/StaticPages.php:13
+Stack trace:
+#0 /home/ananas1/ananastour.com/www/Services/Website/Main.php(212): Tools\Easy\Website\StaticPages->__construct()
+#1 /home/ananas1/ananastour.com/www/Tools/Easy/Routing.php(114): Services\Website\Main->zanzibar('index')
+#2 /home/ananas1/ananastour.com/www/index.php(33): Tools\Easy\Routing::route()
+#3 {main}
+  thrown in
+/home/ananas1/ananastour.com/www/Tools/Easy/Website/StaticPages.php
+on line
+13
+
