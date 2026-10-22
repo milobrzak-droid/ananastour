@@ -88,7 +88,7 @@ export function ServiceOrder({
               <ul className="mt-4 space-y-1.5 text-sm">
                 {s.points.map((p) => (
                   <li key={p} className="flex gap-2">
-                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-red" aria-hidden />
+                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-yellow" aria-hidden />
                     {p}
                   </li>
                 ))}

@@ -7,7 +7,7 @@ import { TelegramCta } from "@/components/content/telegram-cta";
 import { ArrowButton, Container, Pill } from "@/components/ui";
 import { posts } from "@/content/blog";
 import { isLocale, t, type Locale } from "@/i18n/config";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 import { formatDate } from "@/lib/format";
 
 const copy = {
@@ -24,7 +24,7 @@ const copy = {
     uk: "Запитайте Альону в Telegram — вона відповість особисто, зазвичай протягом 15 хвилин.",
     cs: "Zeptejte se Aljony na Telegramu — odpoví osobně, obvykle do 15 minut.",
   },
-  ctaMessage: { uk: "Добрий день, Альона! У мене питання щодо поїздки: ", cs: "Dobrý den, Aljono! Mám dotaz k cestě: " },
+  ctaMessage: { uk: "Добрий день, Альоно! У мене питання щодо поїздки: ", cs: "Dobrý den, Aljono! Mám dotaz k cestě: " },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t(copy.metaTitle, locale),
     description: t(copy.lead, locale),
-    alternates: { languages: { uk: routes.blog("uk"), cs: routes.blog("cs") } },
+    alternates: { canonical: routes.blog(locale), languages: languageAlternates(routes.blog) },
   };
 }
 

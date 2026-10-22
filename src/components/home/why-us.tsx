@@ -13,7 +13,7 @@ const POINTS: Array<{ title: Record<Locale, string>; text: Record<Locale, string
     slice: "half",
     title: { uk: "Надійність", cs: "Spolehlivost" },
     text: {
-      uk: "Працюємо лише з перевіреними чеськими туроператорами за офіційними договорами. Кожна CK в Чехії зобов'язана мати страхування від банкрутства — ваші кошти та відпочинок у безпеці.",
+      uk: "Працюємо лише з перевіреними чеськими туроператорами за офіційними договорами. Кожен туроператор (CK) у Чехії зобов’язаний мати страхування від банкрутства — ваші кошти та відпочинок у безпеці.",
       cs: "Spolupracujeme jen s prověřenými českými cestovními kancelářemi na základě oficiálních smluv. Každá CK v Česku musí mít pojištění proti úpadku — vaše peníze i dovolená jsou v bezpečí.",
     },
   },
@@ -21,7 +21,7 @@ const POINTS: Array<{ title: Record<Locale, string>; text: Record<Locale, string
     slice: "quarter",
     title: { uk: "Підтримка 24/7", cs: "Podpora 24/7" },
     text: {
-      uk: "Ми завжди на зв'язку в Telegram. Супроводжуємо вас від вильоту з аеропорту до щасливого повернення додому — українською чи чеською.",
+      uk: "Ми завжди на зв’язку в Telegram. Супроводжуємо вас від вильоту з аеропорту до щасливого повернення додому — українською чи чеською.",
       cs: "Jsme stále na Telegramu. Provázíme vás od odletu z letiště až po šťastný návrat domů — ukrajinsky i česky.",
     },
   },
@@ -35,7 +35,7 @@ const POINTS: Array<{ title: Record<Locale, string>; text: Record<Locale, string
   },
 ];
 
-const TILE_PHOTOS = [ananasPhotos.services.flights, ananasPhotos.banner.beachUmbrella, ananasPhotos.banner.resortPool];
+const TILE_PHOTOS = [ananasPhotos.services.flights, ananasPhotos.banner.beachUmbrella, ananasPhotos.banner.palmBeach];
 const TONES = ["bg-grey text-ink", "bg-yellow text-ink", "bg-charcoal text-white"];
 
 /** Itinerary-like tile mosaic (Reference 1): photo and text tiles in a checkerboard. */

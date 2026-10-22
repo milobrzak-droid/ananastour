@@ -16,7 +16,7 @@ const tx = {
   stars: { uk: "Зірковість", cs: "Hvězdičky" },
   transport: { uk: "Транспорт", cs: "Doprava" },
   airports: { uk: "Виліт з", cs: "Odlet z" },
-  price: { uk: "Ціна за всіх до, Kč", cs: "Cena za všechny do, Kč" },
+  price: { uk: "Ціна за всіх до (Kč)", cs: "Cena za všechny do (Kč)" },
   apply: { uk: "Застосувати", cs: "Použít" },
   operators: { uk: "Туроператор", cs: "Cestovní kancelář" },
   reset: { uk: "Скинути фільтри", cs: "Zrušit filtry" },

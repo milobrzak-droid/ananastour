@@ -28,7 +28,7 @@ export function SortSelect({
         <input key={k} type="hidden" name={k} value={v} />
       ))}
       <label className="flex items-center gap-2 text-sm">
-        <span className="hidden text-ink/75 sm:inline">{label}</span>
+        <span className="sr-only text-ink/75 sm:not-sr-only sm:inline">{label}</span>
         <select
           name={name}
           defaultValue={value}

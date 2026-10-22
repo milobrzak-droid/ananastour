@@ -9,11 +9,11 @@ const C = {
   kicker: { uk: "Про мене", cs: "O mně" },
   hello: { uk: "Привіт! Я — Альона", cs: "Ahoj! Jsem Aljona" },
   p1: {
-    uk: "Директорка агенції, і моє життя нерозривно пов'язане з туризмом з 2011 року. Для мене це не просто професія — це справжня пристрасть і стиль життя.",
-    cs: "Ředitelka agentury a cestovní ruch je můj život už od roku 2011. Není to pro mě jen profese — je to opravdová vášeň a životní styl.",
+    uk: "Директорка агенції. Моє життя нерозривно пов’язане з туризмом з 2011 року. Для мене це не просто професія — це справжня пристрасть і стиль життя.",
+    cs: "Ředitelka agentury. Cestovní ruch je můj život už od roku 2011. Není to pro mě jen profese — je to opravdová vášeň a životní styl.",
   },
   p2: {
-    uk: "Я особисто відвідала 22 країни і регулярно їжджу в рекламні тури, щоб на власні очі перевіряти готелі та знати ті нюанси, про які не напишуть у каталогах. Тепер я живу в Чехії і допомагаю українцям летіти у відпустку з Праги, Брно, Острави та Пардубіце.",
+    uk: "Я особисто відвідала 22 країни і регулярно їжджу в рекламні тури, щоб на власні очі перевіряти готелі та знати ті нюанси, про які не напишуть у каталогах. Тепер я живу в Чехії і допомагаю українцям летіти у відпустку з Праги, Брна, Острави та Пардубиць.",
     cs: "Osobně jsem navštívila 22 zemí a pravidelně jezdím na inspekční cesty, abych hotely viděla na vlastní oči a znala detaily, které v katalozích nenajdete. Teď žiji v Česku a pomáhám Ukrajincům vyrazit na dovolenou z Prahy, Brna, Ostravy a Pardubic.",
   },
   awards: { uk: "Нагороди", cs: "Ocenění" },

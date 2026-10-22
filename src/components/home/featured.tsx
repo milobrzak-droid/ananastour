@@ -33,7 +33,8 @@ function WideCard({ offer, locale }: { offer: OfferWithHotel; locale: Locale }) 
       href={routes.offer(locale, offer.id)}
       className="group relative isolate block min-h-[26rem] overflow-hidden rounded-[2rem] bg-ink sm:min-h-[34rem] sm:rounded-[2.5rem]"
     >
-      <Image src={offer.hotel.images[0]} alt="" fill priority sizes="(min-width: 1024px) 55vw, 100vw" className="-z-10 object-cover transition duration-700 group-hover:scale-105" />
+      {/* Below the fold on the home page — no priority, lazy-load like the rest. */}
+      <Image src={offer.hotel.images[0]} alt="" fill sizes="(min-width: 1024px) 55vw, 100vw" className="-z-10 object-cover transition duration-700 group-hover:scale-105" />
       <span className="absolute right-4 top-4">
         <ArrowButton label={offer.hotel.name} size={52} direction="down-right" tone="white" />
       </span>

@@ -64,7 +64,9 @@ export async function sendTelegramMessage(text: string, opts: SendOptions = {}):
     return { ok: true, messageId: data.result.message_id };
   } catch (err) {
     const aborted = err instanceof Error && err.name === "AbortError";
-    return { ok: false, error: aborted ? "timeout" : err instanceof Error ? err.message : String(err) };
+    // Never leak the bot token: a fetch error message may contain the request URL.
+    const message = (err instanceof Error ? err.message : String(err)).split(token).join("[token]");
+    return { ok: false, error: aborted ? "timeout" : message };
   } finally {
     clearTimeout(timer);
   }

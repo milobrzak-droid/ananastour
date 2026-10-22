@@ -14,7 +14,7 @@ const C = {
     cs: "— váš klíč k nezapomenutelným cestám z Česka!",
   },
   sub: {
-    uk: "Тури від перевірених чеських туроператорів. Вильоти з Праги, Брно, Острави та Пардубіце.",
+    uk: "Тури від перевірених чеських туроператорів. Вильоти з Праги, Брна, Острави та Пардубиць.",
     cs: "Zájezdy od ověřených českých cestovních kanceláří. Odlety z Prahy, Brna, Ostravy a Pardubic.",
   },
   airports: { uk: "Виліт", cs: "Odlet" },
@@ -125,8 +125,8 @@ export function PillSentence({ locale }: { locale: Locale }) {
           </span>
           <span aria-hidden className={`relative isolate grid h-24 place-items-center overflow-hidden shape-pill px-3 text-white md:px-8 md:h-auto md:flex-[1.6] ${word}`}>
             <Image src={ananasPhotos.banner.palmBeach} alt="" fill sizes="(min-width: 768px) 30vw, 50vw" className="-z-10 object-cover transition duration-700 group-hover:scale-105" />
-            <span className="absolute inset-0 -z-10 bg-ink/55" />
-            {t(C.love, locale)}
+            {/* The word carries its own scrim so the photo stays visible around it. */}
+            <span className="shape-pill bg-ink/60 px-4 py-1.5 backdrop-blur-[2px] sm:px-6 sm:py-2">{t(C.love, locale)}</span>
           </span>
           <span aria-hidden className="grid h-24 place-items-center shape-pill bg-yellow md:h-auto md:w-44 lg:w-56">
             <span className="transition duration-300 group-hover:translate-x-2">
@@ -137,8 +137,7 @@ export function PillSentence({ locale }: { locale: Locale }) {
           </span>
           <span aria-hidden className={`relative isolate grid h-24 place-items-center overflow-hidden shape-pill px-3 text-white md:px-8 md:h-auto md:flex-[1.5] ${word}`}>
             <Image src={ananasPhotos.banner.maldivesAerial} alt="" fill sizes="(min-width: 768px) 35vw, 50vw" className="-z-10 object-cover transition duration-700 group-hover:scale-105" />
-            <span className="absolute inset-0 -z-10 bg-ink/55" />
-            {t(C.sea, locale)}
+            <span className="shape-pill bg-ink/60 px-4 py-1.5 backdrop-blur-[2px] sm:px-6 sm:py-2">{t(C.sea, locale)}</span>
           </span>
         </Link>
       </Container>

@@ -22,7 +22,7 @@ const C = {
     cs: ["Napíšete na Telegram", "Hledám u všech českých cestovních kanceláří", "Dostanete 3 nejlepší varianty"],
   },
   or: { uk: "або", cs: "nebo" },
-  formTitle: { uk: "Залиште номер — я передзвоню", cs: "Nechte číslo — zavolám vám" },
+  formTitle: { uk: "Залиште номер — я передзвоню", cs: "Nechte mi číslo — zavolám vám" },
   formSubmit: { uk: "Отримати підбірку", cs: "Získat výběr" },
   badge: { uk: "3 НАЙКРАЩІ ГОТЕЛІ • ЗА 15 ХВИЛИН • ", cs: "3 NEJLEPŠÍ HOTELY • DO 15 MINUT • " },
 };

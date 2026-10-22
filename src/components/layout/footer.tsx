@@ -53,7 +53,7 @@ export function Footer({ locale }: { locale: Locale }) {
             <ul className="mt-3 grid grid-cols-2 gap-x-4 text-sm font-semibold md:grid-cols-1">
               {links.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="inline-flex min-h-9 items-center hover:underline">
+                  <Link href={l.href} className="-mx-2 inline-flex min-h-10 items-center px-2 hover:underline">
                     {l.label}
                   </Link>
                 </li>
@@ -64,12 +64,12 @@ export function Footer({ locale }: { locale: Locale }) {
             <p className="eyebrow text-ink/75">{t(copy.contacts, locale)}</p>
             <ul className="mt-3 space-y-1 font-semibold">
               <li>
-                <a href={phoneLink()} className="inline-flex min-h-9 items-center hover:underline">
+                <a href={phoneLink()} className="-mx-2 inline-flex min-h-10 items-center px-2 hover:underline">
                   {site.contact.phone}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${site.contact.email}`} className="inline-flex min-h-9 items-center break-all hover:underline">
+                <a href={`mailto:${site.contact.email}`} className="-mx-2 inline-flex min-h-10 items-center break-all px-2 hover:underline">
                   {site.contact.email}
                 </a>
               </li>
@@ -83,10 +83,10 @@ export function Footer({ locale }: { locale: Locale }) {
             © 2011–{new Date().getFullYear()} {site.name} · {site.company.legalName} · IČO {site.company.ico}
           </p>
           <p className="flex gap-4">
-            <Link href={routes.privacy(locale)} className="inline-flex min-h-9 items-center underline-offset-2 hover:underline">
+            <Link href={routes.privacy(locale)} className="-mx-1 inline-flex min-h-10 items-center px-1 underline-offset-2 hover:underline">
               {t(copy.privacy, locale)}
             </Link>
-            <Link href={routes.terms(locale)} className="inline-flex min-h-9 items-center underline-offset-2 hover:underline">
+            <Link href={routes.terms(locale)} className="-mx-1 inline-flex min-h-10 items-center px-1 underline-offset-2 hover:underline">
               {t(copy.terms, locale)}
             </Link>
           </p>

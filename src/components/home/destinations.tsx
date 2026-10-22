@@ -9,7 +9,7 @@ const C = {
   kicker: { uk: "12 країн", cs: "12 zemí" },
   title: { uk: "Що на вас чекає", cs: "Co vás čeká" },
   lead: {
-    uk: "Від Туреччини за 3 години льоту до Мальдів і Занзібару. Вильоти з Праги, Брно, Острави та Пардубіце.",
+    uk: "Від Туреччини за 3 години льоту до Мальдів і Занзібару. Вильоти з Праги, Брна, Острави та Пардубиць.",
     cs: "Od Turecka 3 hodiny letu až po Maledivy a Zanzibar. Odlety z Prahy, Brna, Ostravy a Pardubic.",
   },
   all: { uk: "Усі країни", cs: "Všechny destinace" },

@@ -65,6 +65,16 @@ function extras(locale: Locale): string[] {
   ];
 }
 
+// Tour data comes from tours(): regenerate every 30 min instead of per request,
+// so the AnChoice API is not hammered once it replaces the mock provider.
+export const revalidate = 1800;
+
+// No offers are known at build time (IDs come from the live search), but an
+// empty list opts the route into on-demand ISR so visited offers are cached.
+export function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, id } = await params;
   if (!isLocale(locale)) return {};

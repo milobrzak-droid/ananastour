@@ -12,7 +12,7 @@ import { ArrowButton, ButtonLink, Container, Pill, Section } from "@/components/
 import { destinations, getDestination, type Destination } from "@/content/destinations";
 import { isLocale, t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 import { formatDate, formatMoney } from "@/lib/format";
 import { tours, type Board } from "@/lib/tours";
 import { toQueryString } from "@/lib/tours/query";
@@ -45,7 +45,7 @@ const copy = {
   openOffer: { uk: "Деталі туру", cs: "Detail zájezdu" },
   noDepartures: {
     uk: "Зараз у пошуку немає вільних виїздів — напишіть Альоні, вона перевірить усіх туроператорів вручну.",
-    cs: "Ve vyhledávání teď nejsou volné termíny — napište Aljoně, prověří ručně všechny cestovky.",
+    cs: "Ve vyhledávání teď nejsou volné termíny — napište Aljoně, prověří ručně všechny cestovní kanceláře.",
   },
   moneyTitle: { uk: "Гроші та оплата", cs: "Peníze a placení" },
   payNote: {
@@ -57,10 +57,10 @@ const copy = {
   ctaTitle: { uk: "Хочете {to}? Напишіть Альоні", cs: "Chcete jet {to}? Napište Aljoně" },
   ctaText: {
     uk: "Скажіть дати, кількість людей і бюджет — за 15 хвилин отримаєте 3 найкращі варіанти від перевірених чеських туроператорів.",
-    cs: "Napište termín, počet osob a rozpočet — do 15 minut dostanete 3 nejlepší nabídky od ověřených českých cestovek.",
+    cs: "Napište termín, počet osob a rozpočet — do 15 minut dostanete 3 nejlepší nabídky od ověřených českých cestovních kanceláří.",
   },
   ctaMessage: {
-    uk: "Добрий день, Альона! Мене цікавить відпочинок {in}. Підберіть, будь ласка, варіанти.",
+    uk: "Добрий день, Альоно! Мене цікавить відпочинок {in}. Підберіть, будь ласка, варіанти.",
     cs: "Dobrý den, Aljono! Mám zájem o dovolenou {in}. Můžete mi prosím poslat nabídky?",
   },
   heroCta: { uk: "Підібрати тур {to}", cs: "Vybrat zájezd {to}" },
@@ -81,7 +81,7 @@ const airportLabels: Record<string, { uk: string; cs: string }> = {
   PRG: { uk: "Прага", cs: "Praha" },
   BRQ: { uk: "Брно", cs: "Brno" },
   OSR: { uk: "Острава", cs: "Ostrava" },
-  PED: { uk: "Пардубіце", cs: "Pardubice" },
+  PED: { uk: "Пардубиці", cs: "Pardubice" },
 };
 
 const airport = (code: string | undefined, locale: Locale) =>
@@ -89,6 +89,10 @@ const airport = (code: string | undefined, locale: Locale) =>
 
 const fill = (s: string, d: Destination, locale: Locale) =>
   s.replace("{to}", t(d.nameTo, locale)).replace("{in}", t(d.nameIn, locale));
+
+// Tour data comes from tours(): regenerate every 30 min instead of per request,
+// so the AnChoice API is not hammered once it replaces the mock provider.
+export const revalidate = 1800;
 
 export function generateStaticParams() {
   return destinations.map((d) => ({ slug: d.slug }));
@@ -102,7 +106,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: t(d.seo.title, locale),
     description: t(d.seo.description, locale),
     alternates: {
-      languages: { uk: routes.destination("uk", slug), cs: routes.destination("cs", slug) },
+      canonical: routes.destination(locale, slug),
+      languages: languageAlternates((l) => routes.destination(l, slug)),
     },
     openGraph: {
       title: t(d.seo.title, locale),

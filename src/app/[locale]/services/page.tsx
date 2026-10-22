@@ -7,7 +7,7 @@ import { PageHero } from "@/components/pages/page-hero";
 import { ServiceOrder, type ServiceIcon, type ServiceItem } from "@/components/pages/service-order";
 import { ButtonLink, Container, Section } from "@/components/ui";
 import { isLocale, t, type Locale } from "@/i18n/config";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 
 type L = Record<Locale, string>;
 
@@ -20,7 +20,7 @@ const copy = {
   eyebrow: { uk: "Послуги", cs: "Služby" },
   title: { uk: "Усе для подорожі — в одному чаті", cs: "Vše pro cestu — v jednom chatu" },
   lead: {
-    uk: "Ваш комфорт — наш пріоритет. Окрім турів, допоможемо зі страховкою, квитками, готелями, трансфером, візами та екскурсіями — для вильотів із Праги, Брно, Острави чи Пардубиць.",
+    uk: "Ваш комфорт — наш пріоритет. Окрім турів, допоможемо зі страховкою, квитками, готелями, трансфером, візами та екскурсіями — для вильотів із Праги, Брна, Острави чи Пардубиць.",
     cs: "Váš komfort je naše priorita. Kromě zájezdů vám pomůžeme s pojištěním, letenkami, hotely, transferem, vízy i výlety — pro odlety z Prahy, Brna, Ostravy či Pardubic.",
   },
   heroCta: { uk: "Запитати в Telegram", cs: "Zeptat se na Telegramu" },
@@ -45,7 +45,7 @@ const services: Array<{ id: ServiceIcon; title: L; text: L; points: Record<Local
     id: "insurance",
     title: { uk: "Медичне страхування", cs: "Cestovní pojištění" },
     text: {
-      uk: "Повний захист здоров'я в будь-якій країні. Працюємо лише з перевіреними страховими компаніями та асистанс-службами.",
+      uk: "Повний захист здоров’я в будь-якій країні. Працюємо лише з перевіреними страховими компаніями та асистанс-службами.",
       cs: "Plná ochrana zdraví v jakékoli zemi. Spolupracujeme jen s ověřenými pojišťovnami a asistenčními službami.",
     },
     points: {
@@ -59,7 +59,7 @@ const services: Array<{ id: ServiceIcon; title: L; text: L; points: Record<Local
     id: "flight",
     title: { uk: "Пошук авіаквитків", cs: "Letenky" },
     text: {
-      uk: "Найкращі ціни та зручні пересадки. Знайдемо оптимальний рейс із Праги, Брно, Острави чи Пардубиць за лічені хвилини.",
+      uk: "Найкращі ціни та зручні пересадки. Знайдемо оптимальний рейс із Праги, Брна, Острави чи Пардубиць за лічені хвилини.",
       cs: "Nejlepší ceny a pohodlné přestupy. Optimální let z Prahy, Brna, Ostravy či Pardubic najdeme během pár minut.",
     },
     points: {
@@ -133,7 +133,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t(copy.metaTitle, locale),
     description: t(copy.metaDescription, locale),
-    alternates: { languages: { uk: routes.services("uk"), cs: routes.services("cs") } },
+    alternates: { canonical: routes.services(locale), languages: languageAlternates(routes.services) },
   };
 }
 

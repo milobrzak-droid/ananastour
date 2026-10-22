@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/config/site";
 import { defaultLocale, locales, type Locale } from "@/i18n/config";
 import { routes } from "@/i18n/routes";
+import { posts } from "@/content/blog";
 import { destinations } from "@/content/destinations";
 
 const DESTINATION_SLUGS = destinations.map((d) => d.slug);
@@ -20,6 +21,11 @@ const pages: Entry[] = [
   })),
   { path: routes.services, priority: 0.7, changeFrequency: "monthly" },
   { path: routes.blog, priority: 0.6, changeFrequency: "weekly" },
+  ...posts.map<Entry>((post) => ({
+    path: (l) => routes.post(l, post.slug),
+    priority: 0.5,
+    changeFrequency: "monthly",
+  })),
   { path: routes.about, priority: 0.6, changeFrequency: "monthly" },
   { path: routes.contact, priority: 0.7, changeFrequency: "monthly" },
   { path: routes.privacy, priority: 0.2, changeFrequency: "yearly" },

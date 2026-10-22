@@ -10,7 +10,8 @@ export function TravelAgencyJsonLd({ locale }: { locale: Locale }) {
     "@type": "TravelAgency",
     name: site.name,
     url: new URL(routes.home(locale), site.url).toString(),
-    logo: new URL("/favicon.ico", site.url).toString(),
+    // The app ships src/app/icon.svg (no favicon.ico exists).
+    logo: new URL("/icon.svg", site.url).toString(),
     telephone: site.contact.phone.replace(/\s+/g, ""),
     email: site.contact.email,
     inLanguage: locale,

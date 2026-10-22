@@ -12,13 +12,13 @@ import type { BookingResult } from "@/lib/tours/types";
 const tx = {
   title: { uk: "Оформити замовлення", cs: "Objednat zájezd" },
   lead: {
-    uk: "Без передоплати на сайті. Альона перевірить усе з туроператором і зв'яжеться з вами для підтвердження.",
+    uk: "Без передоплати на сайті. Альона перевірить усе з туроператором і зв’яжеться з вами для підтвердження.",
     cs: "Bez platby na webu. Aljona vše ověří s cestovní kanceláří a ozve se vám kvůli potvrzení.",
   },
-  name: { uk: "Ім'я та прізвище", cs: "Jméno a příjmení" },
+  name: { uk: "Ім’я та прізвище", cs: "Jméno a příjmení" },
   phone: { uk: "Телефон", cs: "Telefon" },
   email: { uk: "E-mail", cs: "E-mail" },
-  telegram: { uk: "Telegram (необов'язково)", cs: "Telegram (nepovinné)" },
+  telegram: { uk: "Telegram (необов’язково)", cs: "Telegram (nepovinné)" },
   adults: { uk: "Дорослі", cs: "Dospělí" },
   children: { uk: "Діти", cs: "Děti" },
   childAge: { uk: "Вік дитини", cs: "Věk dítěte" },
@@ -34,7 +34,7 @@ const tx = {
   submit: { uk: "Відправити замовлення", cs: "Odeslat objednávku" },
   sending: { uk: "Відправляємо…", cs: "Odesíláme…" },
   invalid: {
-    uk: "Перевірте, будь ласка, ім'я, телефон, e-mail і згоду.",
+    uk: "Перевірте, будь ласка, ім’я, телефон, e-mail і згоду.",
     cs: "Zkontrolujte prosím jméno, telefon, e-mail a souhlas.",
   },
   failed: {
@@ -48,7 +48,7 @@ const tx = {
   },
   inquiry: { uk: "Замовлення прийнято!", cs: "Objednávka přijata!" },
   inquiryText: {
-    uk: "Альона вже бачить ваше замовлення, перевірить місця у туроператора і зв'яжеться з вами найближчим часом.",
+    uk: "Альона вже бачить ваше замовлення, перевірить місця у туроператора і зв’яжеться з вами найближчим часом.",
     cs: "Aljona už vaši objednávku vidí, ověří místa u cestovní kanceláře a brzy se vám ozve.",
   },
   ref: { uk: "Номер замовлення", cs: "Číslo objednávky" },

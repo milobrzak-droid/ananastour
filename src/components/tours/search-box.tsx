@@ -75,7 +75,7 @@ function Field({
 }) {
   return (
     <div
-      className={`relative flex min-w-0 flex-col rounded-[1.25rem] bg-paper ring-1 ring-ink/5 lg:rounded-full transition focus-within:ring-2 focus-within:ring-ink ${
+      className={`relative flex min-w-0 flex-col rounded-[1.25rem] bg-paper ring-1 ring-ink/5 xl:rounded-full transition focus-within:ring-2 focus-within:ring-ink ${
         compact ? "px-5 py-1.5" : "px-5 py-2.5"
       }`}
     >
@@ -211,8 +211,8 @@ export function SearchBox({
     <form
       onSubmit={submit}
       role="search"
-      className={`grid gap-2 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_0.9fr_1.3fr_auto] ${
-        compact ? "rounded-[1.75rem] bg-white p-2 lg:rounded-full" : "rounded-[2rem] bg-white p-3 shadow-[0_20px_50px_-30px_rgba(30,34,53,0.5)] sm:p-3 lg:rounded-full"
+      className={`grid gap-2 sm:grid-cols-2 xl:grid-cols-[1.25fr_1fr_1fr_1.05fr_1.3fr_auto] ${
+        compact ? "rounded-[1.75rem] bg-white p-2 xl:rounded-full" : "rounded-[2rem] bg-white p-3 shadow-[0_20px_50px_-30px_rgba(30,34,53,0.5)] sm:p-3 xl:rounded-full"
       }`}
     >
       <Field label={t(L.destination, locale)} htmlFor={id("dest")} compact={compact}>
@@ -336,7 +336,7 @@ export function SearchBox({
 
       <button
         type="submit"
-        className={`inline-flex items-center justify-center gap-2 shape-pill bg-red px-7 font-semibold text-white transition hover:bg-red-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:col-span-2 lg:col-span-1 ${
+        className={`inline-flex items-center justify-center gap-2 shape-pill bg-red px-7 font-semibold text-white transition hover:bg-red-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:col-span-2 xl:col-span-1 ${
           compact ? "py-3" : "py-4 text-lg"
         }`}
       >

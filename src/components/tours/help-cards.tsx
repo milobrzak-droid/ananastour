@@ -41,7 +41,7 @@ export function PickForMeCard({
             {t(
               {
                 uk: "Ми працюємо з усіма великими чеськими туроператорами, знаємо готелі особисто й підкажемо, де справді добре. Підбір безкоштовний.",
-                cs: "Spolupracujeme se všemi velkými českými cestovkami, hotely známe osobně a poradíme, kde je opravdu dobře. Výběr je zdarma.",
+                cs: "Spolupracujeme se všemi velkými českými cestovními kancelářemi, hotely známe osobně a poradíme, kde je opravdu dobře. Výběr je zdarma.",
               },
               locale,
             )}
@@ -62,7 +62,7 @@ export function PickForMeCard({
           fields={["dates", "travellers", "message"]}
           source={`${source}-form`}
           variant="light"
-          title={t({ uk: "Або залиште номер — передзвоню", cs: "Nebo nechte číslo — zavolám vám" }, locale)}
+          title={t({ uk: "Або залиште номер — передзвоню", cs: "Nebo mi nechte číslo — zavolám vám" }, locale)}
         />
       </div>
     </aside>

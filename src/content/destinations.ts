@@ -237,7 +237,7 @@ export const destinations: Destination[] = [
         title: tx("Шарм-ель-Шейх", "Šarm aš-Šajch"),
         text: tx(
           "Рай для дайвінгу та снорклінгу. Курорт захищений горами від вітрів, тому ідеальний взимку. Тут найрозкішніші готелі та активне нічне життя.",
-          "Ráj pro potápění a šnorchlování. Letovisko chrání hory před větrem, takže je ideální i v zimě. Najdete tu nejluxusnější hotely a živý noční život.",
+          "Ráj pro potápění a šnorchlování. Letovisko je chráněné horami, takže je ideální i v zimě. Najdete tu nejluxusnější hotely a živý noční život.",
         ),
         image: img("egypt", 1),
       },
@@ -427,7 +427,7 @@ export const destinations: Destination[] = [
         title: tx("В’їзд", "Vstup"),
         text: tx(
           "Греція — у Шенгені. Зазвичай достатньо біометричного паспорта та чинного документа про перебування в Чехії. Ми підкажемо, що взяти саме у вашій ситуації.",
-          "Řecko je v Schengenu. Obvykle stačí biometrický pas a platný doklad o pobytu v Česku. Poradíme, co si vzít právě ve vaší situaci.",
+          "Řecko je ve Schengenu. Obvykle stačí biometrický pas a platný doklad o pobytu v Česku. Poradíme, co si vzít právě ve vaší situaci.",
         ),
       },
       {
@@ -493,7 +493,7 @@ export const destinations: Destination[] = [
     seo: {
       title: tx("Тури до Греції з Праги — Крит, Родос", "Zájezdy do Řecka — Kréta, Rhodos"),
       description: tx(
-        "Відпочинок у Греції з вильотом з Праги, Брна, Острави, Пардубіце. Крит, Халкідікі, Родос, Санторіні. Підбір туру в Telegram.",
+        "Відпочинок у Греції з вильотом із Праги, Брна, Острави, Пардубиць. Крит, Халкідікі, Родос, Санторіні. Підбір туру в Telegram.",
         "Dovolená v Řecku s odletem z Prahy, Brna, Ostravy a Pardubic. Kréta, Chalkidiki, Rhodos, Santorini. Výběr zájezdu přes Telegram.",
       ),
     },
@@ -513,7 +513,7 @@ export const destinations: Destination[] = [
     ),
     intro: tx(
       "Болгарія — це сонячне узбережжя з безкраїми золотими пляжами, гори та затишні старовинні містечка. Тут кожен знайде свій формат: від активного молодіжного відпочинку до спокійної сімейної відпустки. Літак із Праги долітає до Бургаса чи Варни приблизно за дві години, а для економних є автобусні тури. Ananas Tour відкриє для вас найкращі курорти Чорноморського узбережжя.",
-      "Bulharsko je slunečné pobřeží s nekonečnými zlatými plážemi, hory a útulná historická městečka. Každý si tu najde to své: od dovolené plné zábavy po klidný rodinný odpočinek. Letadlo z Prahy doletí do Burgasu nebo Varny zhruba za dvě hodiny a pro šetřivé jsou tu autobusové zájezdy. Ananas Tour vám ukáže nejlepší letoviska černomořského pobřeží.",
+      "Bulharsko je slunečné pobřeží s nekonečnými zlatými plážemi, hory a útulná historická městečka. Každý si tu najde to své: od dovolené plné zábavy po klidný rodinný odpočinek. Letadlo z Prahy doletí do Burgasu nebo Varny zhruba za dvě hodiny a pro ty, kdo chtějí ušetřit, jsou tu autobusové zájezdy. Ananas Tour vám ukáže nejlepší letoviska černomořského pobřeží.",
     ),
     bestSeason: tx("червень – вересень", "červen – září"),
     flightTime: tx("≈ 2 год з Праги", "cca 2 h z Prahy"), // TODO(client): verify
@@ -901,7 +901,7 @@ export const destinations: Destination[] = [
       {
         q: tx("Що означає «++» у рахунках?", "Co znamená „++“ na účtech?"),
         a: tx(
-          "Що до ціни додадуть державний податок TGST і 10 % сервісного збору. Тому ми зазвичай радимо All Inclusive — ці витрати вже враховані.",
+          "Те, що до ціни додадуть державний податок TGST і 10 % сервісного збору. Тому ми зазвичай радимо All Inclusive — ці витрати вже враховані.",
           "Že se k ceně přičte státní daň TGST a 10% servisní poplatek. Proto obvykle doporučujeme All Inclusive — tyhle náklady už jsou v ceně.",
         ),
       },
@@ -1151,7 +1151,7 @@ export const destinations: Destination[] = [
         title: tx("Гастрономія", "Gastronomie"),
         text: tx(
           "Паелья, гаспачо, хамон і сангрія. Вечеря в Іспанії починається не раніше 20:00–21:00.",
-          "Paella, gazpacho, jamón a sangria. Večeře se ve Španělsku začíná až po 20.–21. hodině.",
+          "Paella, gazpacho, jamón a sangria. Večeře ve Španělsku začíná až po 20.–21. hodině.",
         ),
       },
       {
@@ -1346,7 +1346,7 @@ export const destinations: Destination[] = [
         ),
       },
       {
-        q: tx("Коли можна побачити китів на Самані?", "Kdy uvidíme velryby na Samaná?"),
+        q: tx("Коли можна побачити китів на Самані?", "Kdy uvidíme velryby v zátoce Samaná?"),
         a: tx(
           "З середини січня до кінця березня кити припливають у затоку Самана. Якщо ваша відпустка в ці дати — обов’язково замовте екскурсію.",
           "Od poloviny ledna do konce března připlouvají velryby do zátoky Samaná. Pokud tam budete v tomto termínu, výlet si určitě objednejte.",
@@ -1383,7 +1383,7 @@ export const destinations: Destination[] = [
     ),
     intro: tx(
       "Італія не потребує представлення: батьківщина великого мистецтва, моди та неперевершеної кухні. Від Альп до пляжів Сицилії й Сардинії вона дарує частинку свого вічного свята. Із Праги до Риму чи Кальярі — близько двох годин польоту, а до озера Гарда можна доїхати й власним авто. Ananas Tour пропонує відчути справжню La Dolce Vita.",
-      "Itálii není třeba představovat: kolébka umění, módy a skvělé kuchyně. Od Alp po pláže Sicílie a Sardinie vám dá kousek svého věčného svátku. Z Prahy do Říma nebo Cagliari letíte asi dvě hodiny a k Lago di Garda dojedete i autem. Ananas Tour vám nabízí pravou dolce vitu.",
+      "Itálii není třeba představovat: je kolébkou umění, módy a skvělé kuchyně. Od Alp po pláže Sicílie a Sardinie vám dá kousek svého věčného svátku. Z Prahy do Říma nebo Cagliari letíte asi dvě hodiny a k Lago di Garda dojedete i autem. Ananas Tour vám nabízí pravou dolce vitu.",
     ),
     bestSeason: tx("квітень – жовтень; море — червень – вересень", "duben – říjen; moře červen – září"),
     flightTime: tx("≈ 1,5–2 год з Праги", "cca 1,5–2 h z Prahy"), // TODO(client): verify
@@ -1438,7 +1438,7 @@ export const destinations: Destination[] = [
         title: tx("В’їзд", "Vstup"),
         text: tx(
           "Італія — у Шенгені. Зазвичай достатньо біометричного паспорта та документа про перебування в ЧР.",
-          "Itálie je v Schengenu. Obvykle stačí biometrický pas a doklad o pobytu v ČR.",
+          "Itálie je ve Schengenu. Obvykle stačí biometrický pas a doklad o pobytu v ČR.",
         ),
       },
       {
@@ -1529,7 +1529,7 @@ export const destinations: Destination[] = [
       "Chrámy, rýžové terasy, sopky a oceán — exotika, na kterou se nezapomíná.",
     ),
     intro: tx(
-      "Індонезія — архіпелаг із понад 17 тисяч островів, де кожен знайде свій шматочок раю: давні храми, діючі вулкани та найкращі у світі SPA-ритуали. Дорога з Праги довга, тому ми продумаємо зручну пересадку та, за бажанням, зупинку в Дубаї чи Сінгапурі. Ananas Tour запрошує від культурного Убуду до білосніжних пляжів Нуса-Дуа.",
+      "Індонезія — архіпелаг із понад 17 тисяч островів, де кожен знайде свій шматочок раю: давні храми, активні вулкани та найкращі у світі SPA-ритуали. Дорога з Праги довга, тому ми продумаємо зручну пересадку та, за бажанням, зупинку в Дубаї чи Сінгапурі. Ananas Tour запрошує від культурного Убуду до білосніжних пляжів Нуса-Дуа.",
       "Indonésie je souostroví s více než 17 tisíci ostrovy, kde si každý najde svůj kousek ráje: staré chrámy, činné sopky a nejlepší lázeňské rituály na světě. Cesta z Prahy je dlouhá, proto vymyslíme pohodlný přestup a případně i zastávku v Dubaji nebo Singapuru. Ananas Tour vás zve od kulturního Ubudu po bílé pláže Nusa Dua.",
     ),
     bestSeason: tx("квітень – жовтень (сухий сезон)", "duben – říjen (období sucha)"),
@@ -1670,7 +1670,7 @@ export const destinations: Destination[] = [
       "Bílý písek, tyrkysová voda, Stone Town a safari kousek odtud — Afrika, jakou jste ještě neviděli.",
     ),
     intro: tx(
-      "Занзібар — тропічний острів біля узбережжя Танзанії, де пахне гвоздикою та корицею, а океан має всі відтінки бірюзи. Тут поєднуються пляжний відпочинок, історія арабських султанів у Стоун-Тауні та можливість злітати на справжнє сафарі. У зимовому сезоні з Праги літають прямі чартери, тож потрапити в африканське літо простіше, ніж здається. Ananas Tour підбере готель на тихому півночі чи на сході для кайтсерфінгу.",
+      "Занзібар — тропічний острів біля узбережжя Танзанії, де пахне гвоздикою та корицею, а океан має всі відтінки бірюзи. Тут поєднуються пляжний відпочинок, історія арабських султанів у Стоун-Тауні та можливість злітати на справжнє сафарі. У зимовому сезоні з Праги літають прямі чартери, тож потрапити в африканське літо простіше, ніж здається. Ananas Tour підбере готель на тихій півночі чи на сході для кайтсерфінгу.",
       "Zanzibar je tropický ostrov u pobřeží Tanzanie, kde to voní hřebíčkem a skořicí a oceán hraje všemi odstíny tyrkysové. Spojíte tu odpočinek na pláži, historii arabských sultánů ve Stone Townu i výlet na opravdové safari. V zimní sezóně létají z Prahy přímé chartery, takže africké léto je blíž, než se zdá. Ananas Tour vybere hotel na klidném severu nebo na východě pro kitesurfing.",
     ),
     bestSeason: tx("червень – жовтень, грудень – лютий", "červen – říjen, prosinec – únor"),
@@ -1747,7 +1747,7 @@ export const destinations: Destination[] = [
       {
         title: tx("Екскурсії", "Výlety"),
         text: tx(
-          "Тур прянощами, черепахи на острові Прізон, снорклінг біля Мнемби, Safari Blue та сафарі на материку.",
+          "Тур за прянощами, черепахи на острові Призон, снорклінг біля Мнемби, Safari Blue та сафарі на материку.",
           "Výlet za kořením, želvy na ostrově Prison Island, šnorchlování u Mnemby, Safari Blue a safari na pevnině.",
         ),
       },

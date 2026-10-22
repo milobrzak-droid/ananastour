@@ -10,7 +10,7 @@ import { site } from "@/config/site";
 import { getPost, posts } from "@/content/blog";
 import { getDestination } from "@/content/destinations";
 import { isLocale, t, type Locale } from "@/i18n/config";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 import { formatDate } from "@/lib/format";
 
 type Params = Promise<{ locale: string; slug: string }>;
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return {
     title: t(post.seo.title, locale),
     description: t(post.seo.description, locale),
-    alternates: { languages: { uk: routes.post("uk", slug), cs: routes.post("cs", slug) } },
+    alternates: { canonical: routes.post(locale, slug), languages: languageAlternates((l) => routes.post(l, slug)) },
     openGraph: {
       type: "article",
       title: t(post.seo.title, locale),
@@ -67,7 +67,8 @@ export default async function PostPage({ params }: { params: Params }) {
           headline: title,
           description: t(post.excerpt, locale),
           datePublished: post.date,
-          image: post.image,
+          // schema.org wants absolute URLs (post.image is a /img/... path).
+          image: new URL(post.image, site.url).toString(),
           inLanguage: locale,
           author: { "@type": "Organization", name: site.name },
           mainEntityOfPage: `${site.url}${routes.post(locale, slug)}`,

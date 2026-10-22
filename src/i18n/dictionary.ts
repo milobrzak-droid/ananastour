@@ -17,7 +17,7 @@ const uk = {
   contact: {
     telegramCta: "Написати Альоні",
     telegramShort: "Telegram",
-    telegramLead: "Альона на зв'язку в Telegram — відповідає зазвичай за 15 хвилин",
+    telegramLead: "Альона на зв’язку в Telegram — відповідає зазвичай за 15 хвилин",
     online: "онлайн",
     call: "Зателефонувати",
     askAboutTour: "Запитати про цей тур",

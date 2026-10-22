@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { LegalDocument, localize, type LegalSource as Src } from "@/components/pages/legal";
 import { site } from "@/config/site";
 import { isLocale, t } from "@/i18n/config";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 
 /*
  * Privacy policy (GDPR, Regulation (EU) 2016/679 + zákon č. 110/2019 Sb.).
@@ -49,11 +49,11 @@ function sections(): Src[] {
       heading: { uk: "Які дані ми обробляємо", cs: "Jaké údaje zpracováváme" },
       list: [
         {
-          uk: "Контактні дані: ім'я, телефон, e-mail, ім'я користувача в Telegram.",
+          uk: "Контактні дані: ім’я, телефон, e-mail, ім’я користувача в Telegram.",
           cs: "Kontaktní údaje: jméno, telefon, e-mail, uživatelské jméno na Telegramu.",
         },
         {
-          uk: "Зміст запиту: напрямок, дати, тривалість, кількість і вік подорожуючих, ваше повідомлення.",
+          uk: "Зміст запиту: напрямок, дати, тривалість, кількість і вік мандрівників, ваше повідомлення.",
           cs: "Obsah poptávky: destinace, termín, délka pobytu, počet a věk cestujících, vaše zpráva.",
         },
         {
@@ -61,7 +61,7 @@ function sections(): Src[] {
           cs: "Komunikace, kterou s námi vedete přes Telegram, e-mail nebo telefon.",
         },
         {
-          uk: "Дані для бронювання (лише якщо ви замовляєте тур чи послугу): ім'я та прізвище всіх подорожуючих, дата народження, громадянство, дані паспорта, адреса, платіжна інформація.",
+          uk: "Дані для бронювання (лише якщо ви замовляєте тур чи послугу): ім’я та прізвище всіх мандрівників, дата народження, громадянство, дані паспорта, адреса, платіжна інформація.",
           cs: "Údaje pro rezervaci (jen pokud si objednáte zájezd či službu): jména a příjmení všech cestujících, datum narození, státní občanství, údaje z cestovního dokladu, adresa, platební údaje.",
         },
         {
@@ -87,7 +87,7 @@ function sections(): Src[] {
           cs: "Zprostředkování zájezdu či služby a předání údajů cestovní kanceláři, letecké společnosti nebo pojišťovně — plnění smlouvy (čl. 6 odst. 1 písm. b) GDPR).",
         },
         {
-          uk: "Виконання юридичних обов'язків, зокрема бухгалтерських і податкових (ст. 6(1)(c) GDPR).",
+          uk: "Виконання юридичних обов’язків, зокрема бухгалтерських і податкових (ст. 6(1)(c) GDPR).",
           cs: "Plnění právních povinností, zejména účetních a daňových (čl. 6 odst. 1 písm. c) GDPR).",
         },
         {
@@ -133,7 +133,7 @@ function sections(): Src[] {
       heading: { uk: "Передача даних за межі ЄС", cs: "Předávání údajů mimo EU" },
       paragraphs: [
         {
-          uk: "Telegram та деякі постачальники послуг можуть обробляти дані за межами Європейського економічного простору. Пишучи нам у Telegram, ви користуєтеся цим сервісом на його власних умовах. Якщо віддаєте перевагу іншому каналу, зв'яжіться з нами телефоном чи e-mail. Для інших передач ми використовуємо гарантії відповідно до глави V GDPR (наприклад, стандартні договірні положення).",
+          uk: "Telegram та деякі постачальники послуг можуть обробляти дані за межами Європейського економічного простору. Пишучи нам у Telegram, ви користуєтеся цим сервісом на його власних умовах. Якщо віддаєте перевагу іншому каналу, зв’яжіться з нами телефоном чи e-mail. Для інших передач ми використовуємо гарантії відповідно до глави V GDPR (наприклад, стандартні договірні положення).",
           cs: "Telegram a někteří poskytovatelé služeb mohou údaje zpracovávat mimo Evropský hospodářský prostor. Komunikací přes Telegram využíváte tuto službu za jejích vlastních podmínek. Pokud dáváte přednost jinému kanálu, kontaktujte nás telefonicky nebo e-mailem. U ostatních předání využíváme záruky podle kapitoly V GDPR (např. standardní smluvní doložky).",
         },
       ],
@@ -147,7 +147,7 @@ function sections(): Src[] {
           cs: "Poptávky, které nevedly k objednávce — nejdéle 12 měsíců od posledního kontaktu.",
         },
         {
-          uk: "Дані, пов'язані з укладеним договором, — протягом строку позовної давності та строків, установлених бухгалтерськими й податковими нормами.",
+          uk: "Дані, пов’язані з укладеним договором, — протягом строку позовної давності та строків, установлених бухгалтерськими й податковими нормами.",
           cs: "Údaje související s uzavřenou smlouvou — po dobu promlčecích lhůt a lhůt stanovených účetními a daňovými předpisy.",
         },
         {
@@ -195,7 +195,7 @@ function sections(): Src[] {
       heading: { uk: "Зміни цієї політики", cs: "Změny těchto zásad" },
       paragraphs: [
         {
-          uk: "Ми можемо оновлювати цю політику. Актуальна редакція завжди доступна на цій сторінці. Обов'язковою є чеська версія документа.",
+          uk: "Ми можемо оновлювати цю політику. Актуальна редакція завжди доступна на цій сторінці. Обов’язковою є чеська версія документа.",
           cs: "Tyto zásady můžeme aktualizovat. Aktuální znění je vždy k dispozici na této stránce. Rozhodující je české znění dokumentu.",
         },
       ],
@@ -209,7 +209,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t(meta.title, locale),
     description: t(meta.description, locale),
-    alternates: { languages: { uk: routes.privacy("uk"), cs: routes.privacy("cs") } },
+    alternates: { canonical: routes.privacy(locale), languages: languageAlternates(routes.privacy) },
   };
 }
 

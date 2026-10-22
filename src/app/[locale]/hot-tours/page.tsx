@@ -10,7 +10,7 @@ import { NoResults, PickForMeCard } from "@/components/tours/help-cards";
 import { countryName } from "@/components/tours/labels";
 import { OfferCard } from "@/components/tours/offer-card";
 import { isLocale, t, type Locale } from "@/i18n/config";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 import { tours } from "@/lib/tours";
 
 type Props = {
@@ -22,16 +22,16 @@ type Props = {
 const tx = {
   metaTitle: { uk: "Гарячі тури з Чехії — last minute", cs: "Last minute zájezdy z Česka" },
   metaDescription: {
-    uk: "Гарячі тури з Праги, Брна, Острави та Пардубіце зі знижкою до 40 %. Єгипет, Туреччина, Греція та екзотика. Бронюйте в Telegram.",
+    uk: "Гарячі тури з Праги, Брна, Острави та Пардубиць зі знижкою до 40 %. Єгипет, Туреччина, Греція та екзотика. Бронюйте в Telegram.",
     cs: "Last minute zájezdy z Prahy, Brna, Ostravy a Pardubic se slevou až 40 %. Egypt, Turecko, Řecko i exotika. Rezervace přes Telegram.",
   },
   h1: { uk: "Гарячі тури — відпочивайте за найкращими цінами!", cs: "Last minute — dovolená za nejlepší ceny!" },
   lead: {
-    uk: "Гарячі тури — ваш шанс заощадити до 40 % від початкової вартості путівки без жодних компромісів щодо якості відпочинку. Ми щодня моніторимо пропозиції провідних чеських туроператорів, щоб першими перехоплювати для вас найсмачніші варіанти.",
+    uk: "Гарячі тури — ваш шанс заощадити до 40 % від початкової вартості туру без жодних компромісів щодо якості відпочинку. Ми щодня моніторимо пропозиції провідних чеських туроператорів, щоб першими перехоплювати для вас найсмачніші варіанти.",
     cs: "Last minute je vaše šance ušetřit až 40 % z původní ceny zájezdu bez kompromisů v kvalitě dovolené. Každý den sledujeme nabídky předních českých cestovních kanceláří, abychom pro vás jako první ulovili ty nejchutnější varianty.",
   },
   lead2: {
-    uk: "Єгипет, Туреччина, Європа та екзотика — преміальний сервіс і чудовий готель за мінімальну ціну. Але пам'ятайте: справді вигідні путівки розбирають за лічені години, тож не зволікайте!",
+    uk: "Єгипет, Туреччина, Європа та екзотика — преміальний сервіс і чудовий готель за мінімальну ціну. Але пам’ятайте: справді вигідні тури розбирають за лічені години, тож не зволікайте!",
     cs: "Egypt, Turecko, Evropa i exotika — prvotřídní servis a skvělý hotel za minimální cenu. Ale pozor: opravdu výhodné zájezdy mizí během pár hodin, tak neváhejte!",
   },
   cta: { uk: "Хочу гарячий тур", cs: "Chci last minute" },
@@ -51,11 +51,15 @@ const tx = {
     cs: "Chcete dostávat last minute jako první?",
   },
   notifyText: {
-    uk: "Напишіть Альоні, куди й на скільки хочете полетіти, — вона надішле пропозицію, щойно з'явиться ціна, що вам підходить.",
+    uk: "Напишіть Альоні, куди й на скільки хочете полетіти, — вона надішле пропозицію, щойно з’явиться ціна, що вам підходить.",
     cs: "Napište Aljoně, kam a na jak dlouho chcete letět — pošle vám nabídku, jakmile se objeví cena, která vám sedí.",
   },
   notifyCta: { uk: "Підписатися в Telegram", cs: "Odebírat na Telegramu" },
 };
+
+// Tour data comes from tours(): regenerate every 30 min instead of per request,
+// so the AnChoice API is not hammered once it replaces the mock provider.
+export const revalidate = 1800;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -63,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t(tx.metaTitle, locale),
     description: t(tx.metaDescription, locale),
-    alternates: { canonical: routes.hot(locale), languages: { uk: routes.hot("uk"), cs: routes.hot("cs") } },
+    alternates: { canonical: routes.hot(locale), languages: languageAlternates(routes.hot) },
   };
 }
 

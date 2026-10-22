@@ -53,7 +53,7 @@ export const posts: Post[] = [
     readingMinutes: 4,
     related: ["turkey", "uae"],
     telegramMessage: tx(
-      "Добрий день, Альона! Маю питання щодо Tax Free під час поїздки.",
+      "Добрий день, Альоно! Маю питання щодо Tax Free під час поїздки.",
       "Dobrý den, Aljono! Mám dotaz k tax free na cestě.",
     ),
     seo: {
@@ -184,7 +184,7 @@ export const posts: Post[] = [
     readingMinutes: 5,
     related: ["egypt", "turkey"],
     telegramMessage: tx(
-      "Добрий день, Альона! Хочу оформити страховку до поїздки.",
+      "Добрий день, Альоно! Хочу оформити страховку до поїздки.",
       "Dobrý den, Aljono! Chtěl(a) bych si sjednat cestovní pojištění.",
     ),
     seo: {
@@ -213,7 +213,7 @@ export const posts: Post[] = [
             "Приватні клініки — а на курортах вони часто саме приватні.",
             "Доплати та спільну участь пацієнта, які діють у країні.",
             "Транспортування додому (репатріацію).",
-            "Країни поза ЄС — Туреччину, Єгипет, ОАЕ, Азію, Карибі.",
+            "Країни поза ЄС — Туреччину, Єгипет, ОАЕ, Азію, Кариби.",
           ],
         },
         { type: "h2", text: "Туристичний поліс" },
@@ -237,7 +237,7 @@ export const posts: Post[] = [
           head: ["Регіон", "Приклади", "На що звернути увагу"],
           rows: [
             ["Європа", "Греція, Італія, Іспанія, Болгарія", "Ліміт медичних витрат, приватні клініки"],
-            ["Світ без США", "Туреччина, Єгипет, ОАЕ, Азія, Карибі", "Direct billing, репатріація, активний відпочинок"],
+            ["Світ без США", "Туреччина, Єгипет, ОАЕ, Азія, Кариби", "Direct billing, репатріація, активний відпочинок"],
             ["Увесь світ", "США, Канада, далекі поїздки", "Високі ліміти — лікування там дуже дороге"],
           ],
         },
@@ -310,7 +310,7 @@ export const posts: Post[] = [
         {
           type: "note",
           title: "Váš zájezd je už chráněný",
-          text: "Podle českého zákona musí mít každá cestovní kancelář pojištění proti úpadku. Spolupracujeme jen s takovými cestovkami, takže jsou vaše peníze za zájezd v bezpečí.",
+          text: "Podle českého zákona musí mít každá cestovní kancelář pojištění proti úpadku. Spolupracujeme jen s takovými cestovními kancelářemi, takže jsou vaše peníze za zájezd v bezpečí.",
         },
         {
           type: "p",
@@ -333,7 +333,7 @@ export const posts: Post[] = [
     readingMinutes: 5,
     related: ["egypt", "turkey", "greece"],
     telegramMessage: tx(
-      "Добрий день, Альона! Підкажіть, будь ласка, які документи потрібні для поїздки. Моє громадянство і статус у ЧР: ",
+      "Добрий день, Альоно! Підкажіть, будь ласка, які документи потрібні для поїздки. Моє громадянство і статус у ЧР: ",
       "Dobrý den, Aljono! Poraďte mi prosím, jaké doklady potřebuji na cestu. Moje občanství a pobyt v ČR: ",
     ),
     seo: {
@@ -423,7 +423,7 @@ export const posts: Post[] = [
         // TODO(client): verify Schengen travel rules for temporary-protection / residence-permit holders.
         {
           type: "p",
-          text: "Řecko, Itálie, Španělsko i Bulharsko jsou součástí Schengenu. Držitelé biometrického pasu tam obvykle mohou cestovat bez víza. Vždy si vezměte platný doklad o pobytu v Česku — vízum dočasné ochrany nebo povolení k pobytu —, abyste se bez problémů vrátili.",
+          text: "Řecko, Itálie, Španělsko i Bulharsko jsou součástí Schengenu. Držitelé biometrického pasu tam obvykle mohou cestovat bez víza. Vždy si vezměte platný doklad o pobytu v Česku — vízum dočasné ochrany nebo povolení k pobytu — abyste se bez problémů vrátili.",
         },
         {
           type: "list",
@@ -485,12 +485,12 @@ export const posts: Post[] = [
     title: tx("Позначки готелів: AI, HB, SV та зірки без загадок", "Značky hotelů: AI, HB, SV a hvězdičky bez záhad"),
     excerpt: tx(
       "Розшифровуємо типи харчування, номерів і зірковість — і як ці позначки виглядають у каталогах чеських туроператорів.",
-      "Vysvětlujeme typy stravování, pokojů a hvězdičky — a jak je najdete v katalozích českých cestovek.",
+      "Vysvětlujeme typy stravování, pokojů a hvězdičky — a jak je najdete v katalozích českých cestovních kanceláří.",
     ),
     readingMinutes: 4,
     related: ["turkey", "egypt", "greece"],
     telegramMessage: tx(
-      "Добрий день, Альона! Допоможіть розібратися з типом номера та харчування в готелі.",
+      "Добрий день, Альоно! Допоможіть розібратися з типом номера та харчування в готелі.",
       "Dobrý den, Aljono! Pomozte mi prosím vyznat se v typu pokoje a stravování v hotelu.",
     ),
     seo: {
@@ -573,7 +573,7 @@ export const posts: Post[] = [
         {
           type: "list",
           items: [
-            "Standard — běžný jednopokojový pokoj.",
+            "Standard — základní typ pokoje.",
             "Superior — o něco větší nebo zrekonstruovaný pokoj.",
             "Family Room — rodinný pokoj, často se dvěma ložnicemi.",
             "Suite — apartmá se dvěma místnostmi nebo obývacím pokojem.",

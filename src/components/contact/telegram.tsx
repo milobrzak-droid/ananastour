@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ALJONA_AVATAR } from "@/components/brand/photos";
 import { t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
@@ -198,11 +198,25 @@ export function FloatingContact({ locale }: { locale: Locale }) {
   const inHours = useInHours();
   const [open, setOpen] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const fabRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const id = setTimeout(() => setOpen(true), 6000);
     return () => clearTimeout(id);
   }, []);
+
+  // Keyboard users can close the bubble with Escape; focus moves to the FAB
+  // instead of dropping to <body>.
+  const dismiss = () => {
+    setDismissed(true);
+    fabRef.current?.focus();
+  };
+  useEffect(() => {
+    if (!open || dismissed) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && dismiss();
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, dismissed]);
 
   return (
     <aside aria-label={t(tx.region, locale)}>
@@ -225,7 +239,7 @@ export function FloatingContact({ locale }: { locale: Locale }) {
         {open && !dismissed && (
           <div className="relative w-76 rounded-[1.75rem] rounded-br-md bg-white p-5 shadow-2xl ring-1 ring-ink/5">
             <button
-              onClick={() => setDismissed(true)}
+              onClick={dismiss}
               className="absolute right-2 top-2 grid h-11 w-11 place-items-center rounded-full text-xl leading-none text-ink/70 hover:bg-grey hover:text-ink"
               aria-label={t(tx.close, locale)}
             >
@@ -245,6 +259,7 @@ export function FloatingContact({ locale }: { locale: Locale }) {
           </div>
         )}
         <a
+          ref={fabRef}
           href={telegramLink(dict.contact.prefillGeneral)}
           target="_blank"
           rel="noopener"

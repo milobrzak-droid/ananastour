@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { LegalDocument, localize, type LegalSource } from "@/components/pages/legal";
 import { site } from "@/config/site";
 import { isLocale, t, type Locale } from "@/i18n/config";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 
 /*
  * Terms of a travel AGENCY (cestovní agentura) under zákon č. 159/1999 Sb.
@@ -118,7 +118,7 @@ function sections(): LegalSource[] {
       heading: { uk: "Страхування на випадок банкрутства туроператора", cs: "Pojištění pro případ úpadku CK" },
       paragraphs: [
         {
-          uk: "Ми пропонуємо тури лише тих туроператорів, які мають обов'язкове страхування на випадок банкрутства. Якщо туроператор не зможе виконати зобов'язання через банкрутство, страховик забезпечить повернення на батьківщину та відшкодування сплачених коштів відповідно до закону № 159/1999 Sb.",
+          uk: "Ми пропонуємо тури лише тих туроператорів, які мають обов’язкове страхування на випадок банкрутства. Якщо туроператор не зможе виконати зобов’язання через банкрутство, страховик забезпечить повернення на батьківщину та відшкодування сплачених коштів відповідно до закону № 159/1999 Sb.",
           cs: "Nabízíme pouze zájezdy cestovních kanceláří, které mají povinné pojištění záruky pro případ úpadku. Nesplní-li CK své závazky z důvodu úpadku, pojišťovna zajistí repatriaci a vrácení zaplacených částek podle zákona č. 159/1999 Sb.",
         },
       ],
@@ -142,7 +142,7 @@ function sections(): LegalSource[] {
       heading: { uk: "Інші послуги", cs: "Další služby" },
       paragraphs: [
         {
-          uk: "Під час посередництва в окремих послугах (авіаквитки, проживання, трансфер, страхування, екскурсії) договір укладається з постачальником послуги, і застосовуються його умови. Перед оплатою ми повідомимо, чи йдеться про тур, пов'язані туристичні послуги чи окрему послугу.",
+          uk: "Під час посередництва в окремих послугах (авіаквитки, проживання, трансфер, страхування, екскурсії) договір укладається з постачальником послуги, і застосовуються його умови. Перед оплатою ми повідомимо, чи йдеться про тур, пов’язані туристичні послуги чи окрему послугу.",
           cs: "Při zprostředkování samostatných služeb (letenky, ubytování, transfer, pojištění, výlety) se smlouva uzavírá s poskytovatelem služby a platí jeho podmínky. Před platbou vás upozorníme, zda jde o zájezd, spojené cestovní služby, nebo samostatnou službu.",
         },
       ],
@@ -152,7 +152,7 @@ function sections(): LegalSource[] {
       heading: { uk: "Документи для подорожі", cs: "Cestovní doklady" },
       paragraphs: [
         {
-          uk: "Клієнт відповідає за дійсний закордонний паспорт, візи та виконання умов в'їзду. Ми надаємо загальну інформацію з урахуванням українського громадянства та статусу перебування в Чехії (зокрема тимчасового захисту), але остаточні вимоги встановлюють органи країни призначення.",
+          uk: "Клієнт відповідає за дійсний закордонний паспорт, візи та виконання умов в’їзду. Ми надаємо загальну інформацію з урахуванням українського громадянства та статусу перебування в Чехії (зокрема тимчасового захисту), але остаточні вимоги встановлюють органи країни призначення.",
           cs: "Zákazník odpovídá za platný cestovní doklad, víza a splnění podmínek vstupu. Poskytneme obecné informace s ohledem na ukrajinské občanství a pobytový status v Česku (včetně dočasné ochrany), konečné požadavky však stanovují orgány cílové země.",
         },
       ],
@@ -186,7 +186,7 @@ function sections(): LegalSource[] {
       heading: { uk: "Заключні положення", cs: "Závěrečná ustanovení" },
       paragraphs: [
         {
-          uk: "Відносини регулюються правом Чеської Республіки. Обробку персональних даних описано в Політиці конфіденційності. Обов'язковою є чеська версія умов; український переклад має інформаційний характер.",
+          uk: "Відносини регулюються правом Чеської Республіки. Обробку персональних даних описано в Політиці конфіденційності. Обов’язковою є чеська версія умов; український переклад має інформаційний характер.",
           cs: "Vztahy se řídí právním řádem České republiky. Zpracování osobních údajů popisují Zásady ochrany osobních údajů. Rozhodující je české znění podmínek; ukrajinský překlad má informativní charakter.",
         },
       ],
@@ -200,7 +200,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t(meta.title, locale),
     description: t(meta.description, locale),
-    alternates: { languages: { uk: routes.terms("uk"), cs: routes.terms("cs") } },
+    alternates: { canonical: routes.terms(locale), languages: languageAlternates(routes.terms) },
   };
 }
 

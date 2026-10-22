@@ -18,7 +18,7 @@ export const DESTINATIONS: HomeDestination[] = [
   { slug: "bulgaria", name: { uk: "Болгарія", cs: "Bulharsko" }, tagline: { uk: "Близько і для всієї родини", cs: "Blízko a pro celou rodinu" } },
   { slug: "uae", name: { uk: "ОАЕ", cs: "SAE" }, tagline: { uk: "Дубай, пляжі та шопінг", cs: "Dubaj, pláže a nákupy" } },
   { slug: "maldives", name: { uk: "Мальдіви", cs: "Maledivy" }, tagline: { uk: "Вілли над водою", cs: "Vily nad vodou" } },
-  { slug: "vietnam", name: { uk: "В'єтнам", cs: "Vietnam" }, tagline: { uk: "Екзотика без поспіху", cs: "Exotika bez spěchu" } },
+  { slug: "vietnam", name: { uk: "В’єтнам", cs: "Vietnam" }, tagline: { uk: "Екзотика без поспіху", cs: "Exotika bez spěchu" } },
   { slug: "spain", name: { uk: "Іспанія", cs: "Španělsko" }, tagline: { uk: "Канари та Майорка", cs: "Kanáry a Mallorca" } },
   { slug: "dominicana", name: { uk: "Домінікана", cs: "Dominikána" }, tagline: { uk: "Карибські пляжі", cs: "Karibské pláže" } },
   { slug: "italy", name: { uk: "Італія", cs: "Itálie" }, tagline: { uk: "Море, паста, Сардинія", cs: "Moře, pasta, Sardinie" } },

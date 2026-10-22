@@ -8,7 +8,7 @@ import { TelegramButton } from "@/components/contact/telegram";
 import { ButtonLink, Container, Section } from "@/components/ui";
 import { site } from "@/config/site";
 import { isLocale, t, type Locale } from "@/i18n/config";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 
 type L = Record<Locale, string>;
 
@@ -21,14 +21,14 @@ const copy = {
   eyebrow: { uk: "Про нас", cs: "O nás" },
   title: { uk: "Привіт! Я — Альона", cs: "Dobrý den, jsem Aljona" },
   lead: {
-    uk: "Директорка Ananas Tour. Моє життя пов'язане з туризмом з 2011 року — а тепер я допомагаю українцям у Чехії відпочивати так, як вони на це заслуговують.",
+    uk: "Директорка Ananas Tour. Моє життя пов’язане з туризмом з 2011 року — а тепер я допомагаю українцям у Чехії відпочивати так, як вони на це заслуговують.",
     cs: "Ředitelka Ananas Tour. Cestovnímu ruchu se věnuji od roku 2011 — a teď pomáhám Ukrajincům v Česku vyrazit na dovolenou, jakou si zaslouží.",
   },
   cta: { uk: "Написати Альоні", cs: "Napsat Aljoně" },
   prefill: { uk: "Добрий день, Альоно! Прочитав(-ла) про вас на сайті й хочу підібрати тур.", cs: "Dobrý den, Aljono! Četl(a) jsem o vás na webu a chci vybrat zájezd." },
   services: { uk: "Наші послуги", cs: "Naše služby" },
   photoAlt: { uk: "Альона, директорка Ananas Tour", cs: "Aljona, ředitelka Ananas Tour" },
-  eventAlt: { uk: "Альона на заході туроператора Join UP!", cs: "Aljona na akci touroperátora Join UP!" },
+  eventAlt: { uk: "Альона на заході туроператора Join UP!", cs: "Aljona na akci cestovní kanceláře Join UP!" },
   statYears: { uk: "років у туризмі", cs: "let v cestovním ruchu" },
   statCountries: { uk: "країни відвідано особисто", cs: "zemí navštíveno osobně" },
   statReply: { uk: "хвилин — типова відповідь у Telegram", cs: "minut — obvyklá odpověď na Telegramu" },
@@ -38,7 +38,7 @@ const copy = {
   awardsTitle: { uk: "Нагороди та визнання", cs: "Ocenění a uznání" },
   awardsLead: {
     uk: "Нашу експертність визнають не лише клієнти, а й провідні туроператори.",
-    cs: "Naši odbornost oceňují nejen klienti, ale i přední touroperátoři.",
+    cs: "Naši odbornost oceňují nejen klienti, ale i přední cestovní kanceláře.",
   },
   whyTitle: { uk: "Чому нас обирають", cs: "Proč si nás vybírají" },
   finalTitle: { uk: "Ваша ідеальна відпустка — це наша репутація", cs: "Vaše vysněná dovolená je naše vizitka" },
@@ -54,7 +54,7 @@ const story: L[] = [
     cs: "Cestování je pro mě skutečná vášeň. Za ta léta jsem osobně navštívila 22 zemí a pořád mě to táhne dál. Pravidelně jezdím na odborné inspekční cesty, abych hotely viděla na vlastní oči, poznávala nová letoviska a znala detaily, které v katalogu nikdy nenajdete.",
   },
   {
-    uk: "Наша агенція стала знаком якості та надійності на туристичному ринку України. Тепер ми працюємо в Чехії — для українців, які тут живуть: тури з вильотом із Праги, Брно, Острави та Пардубиць, ціни в кронах, спілкування рідною мовою.",
+    uk: "Наша агенція стала знаком якості та надійності на туристичному ринку України. Тепер ми працюємо в Чехії — для українців, які тут живуть: тури з вильотом із Праги, Брна, Острави та Пардубиць, ціни в кронах, спілкування рідною мовою.",
     cs: "Naše agentura se stala na ukrajinském trhu synonymem kvality a spolehlivosti. Nyní působíme v Česku — pro Ukrajince, kteří zde žijí: zájezdy s odletem z Prahy, Brna, Ostravy a Pardubic, ceny v korunách a komunikace v rodném jazyce.",
   },
   {
@@ -67,7 +67,7 @@ const values: Array<{ title: L; text: L }> = [
   {
     title: { uk: "Чесний підбір турів", cs: "Poctivý výběr" },
     text: {
-      uk: "Рекомендуємо лише ті готелі, у яких впевнені на 100%.",
+      uk: "Рекомендуємо лише ті готелі, у яких впевнені на 100 %.",
       cs: "Doporučujeme jen hotely, za kterými si stoprocentně stojíme.",
     },
   },
@@ -93,14 +93,14 @@ const awards: Array<{ title: L; text: L }> = [
     title: { uk: "Starway від Coral Travel", cs: "Starway od Coral Travel" },
     text: {
       uk: "Почесні учасники престижної щорічної премії туроператора Coral Travel.",
-      cs: "Čestní účastníci prestižního každoročního ocenění touroperátora Coral Travel.",
+      cs: "Čestní účastníci prestižního každoročního ocenění cestovní kanceláře Coral Travel.",
     },
   },
   {
     title: { uk: "ТОП-агенція Join UP!", cs: "TOP agentura Join UP!" },
     text: {
       uk: "Стабільно входимо до числа агентств-лідерів із продажів туроператора Join UP!.",
-      cs: "Dlouhodobě patříme mezi nejprodávanější agentury touroperátora Join UP!.",
+      cs: "Dlouhodobě patříme mezi nejprodávanější agentury cestovní kanceláře Join UP!.",
     },
   },
 ];
@@ -116,7 +116,7 @@ const why: Array<{ title: L; text: L }> = [
   {
     title: { uk: "Підтримка 24/7", cs: "Podpora 24/7" },
     text: {
-      uk: "Ми завжди на зв'язку в Telegram — від вильоту з аеропорту до повернення додому.",
+      uk: "Ми завжди на зв’язку в Telegram — від вильоту з аеропорту до повернення додому.",
       cs: "Jsme stále k zastižení na Telegramu — od odletu až po návrat domů.",
     },
   },
@@ -141,7 +141,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t(copy.metaTitle, locale),
     description: t(copy.metaDescription, locale),
-    alternates: { languages: { uk: routes.about("uk"), cs: routes.about("cs") } },
+    alternates: { canonical: routes.about(locale), languages: languageAlternates(routes.about) },
   };
 }
 

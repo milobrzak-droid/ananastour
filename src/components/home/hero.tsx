@@ -11,7 +11,7 @@ const C = {
   line1: { uk: "Ваше море", cs: "Vaše moře" },
   line2: { uk: "з Праги", cs: "z Prahy" },
   lead: {
-    uk: "Тури від перевірених чеських туроператорів з вильотом із Праги, Брно, Острави та Пардубіце. Напишіть Альоні — 3 найкращі варіанти за 15 хвилин.",
+    uk: "Тури від перевірених чеських туроператорів з вильотом із Праги, Брна, Острави та Пардубиць. Напишіть Альоні — 3 найкращі варіанти за 15 хвилин.",
     cs: "Zájezdy od ověřených českých cestovních kanceláří s odletem z Prahy, Brna, Ostravy a Pardubic. Napište Aljoně — 3 nejlepší varianty do 15 minut.",
   },
   cta: { uk: "Підберіть мені тур", cs: "Vyberte mi zájezd" },
@@ -43,10 +43,19 @@ export function Hero({ locale }: { locale: Locale }) {
               {t(C.kicker, locale)}
             </p>
 
-            {/* Giant headline, Reference 1: tight, uppercase, second line bleeding to the edges */}
+            {/* Giant headline, Reference 1: tight, uppercase, second line bleeding to the edges.
+                Czech "Z PRAHY" sets wider than "З ПРАГИ", so it gets a smaller clamp. */}
             <h1 className="mt-6 font-display font-black uppercase leading-[0.86] tracking-[-0.045em] drop-shadow-[0_4px_30px_rgba(30,34,53,0.35)]">
               <span className="block text-[clamp(2.6rem,8.2vw,7.6rem)]">{t(C.line1, locale)}</span>
-              <span className="-ml-[0.04em] block whitespace-nowrap text-[clamp(2.6rem,15.4vw,14.6rem)] max-sm:text-[13.4vw]">{t(C.line2, locale)}</span>
+              <span
+                className={`-ml-[0.04em] block whitespace-nowrap ${
+                  locale === "cs"
+                    ? "text-[clamp(2.4rem,13.2vw,12rem)] max-sm:text-[11.8vw]"
+                    : "text-[clamp(2.6rem,15.4vw,14.6rem)] max-sm:text-[13.4vw]"
+                }`}
+              >
+                {t(C.line2, locale)}
+              </span>
             </h1>
 
             <div className="mt-auto flex flex-col items-start gap-4 pt-8 lg:ml-auto lg:max-w-md">
@@ -75,7 +84,7 @@ export function Hero({ locale }: { locale: Locale }) {
             </div>
           </Notch>
 
-          <div className="absolute right-6 top-6 hidden md:block lg:right-10 lg:top-10">
+          <div className="absolute right-10 top-10 hidden xl:block">
             <Stamp
               size={150}
               top="ANANAS TOUR • TRAVEL"

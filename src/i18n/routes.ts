@@ -1,4 +1,4 @@
-import type { Locale } from "./config";
+import { defaultLocale, locales, type Locale } from "./config";
 
 /**
  * All internal URLs are built here so slugs stay consistent across pages.
@@ -20,3 +20,15 @@ export const routes = {
   privacy: (l: Locale) => `/${l}/privacy`,
   terms: (l: Locale) => `/${l}/terms`,
 };
+
+/**
+ * hreflang map for `generateMetadata` → `alternates.languages`:
+ * every locale plus `x-default` (the default locale). Relative paths are
+ * resolved against `metadataBase` set in the locale layout.
+ */
+export function languageAlternates(path: (l: Locale) => string): Record<string, string> {
+  return {
+    ...Object.fromEntries(locales.map((l) => [l, path(l)])),
+    "x-default": path(defaultLocale),
+  };
+}

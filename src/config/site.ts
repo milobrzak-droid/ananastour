@@ -17,8 +17,9 @@ export const site = {
     /** Telegram username without "@" — main contact channel. */
     telegramUsername: process.env.NEXT_PUBLIC_TELEGRAM_USERNAME ?? "Ananas_tours",
     phone: process.env.NEXT_PUBLIC_PHONE || "+420 723 615 028",
-    // Taken from ananastour.com (contacts page).
-    email: process.env.NEXT_PUBLIC_EMAIL || "otpusk_yarko@ukr.net",
+    // TODO(client): ananastour.cz is not registered yet (checked 2026-10-22) — register the
+    // domain and create this mailbox before launch, otherwise e-mails bounce.
+    email: process.env.NEXT_PUBLIC_EMAIL || "hello@ananastour.cz",
     instagram: "https://instagram.com/ananas_tour_",
     // TODO(client): Czech office address — none yet, agency works remotely.
     address: { uk: "Чехія — працюємо онлайн", cs: "Česko — fungujeme online" },

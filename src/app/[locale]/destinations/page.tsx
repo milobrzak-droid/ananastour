@@ -7,13 +7,13 @@ import { TelegramCta } from "@/components/content/telegram-cta";
 import { ArrowButton, Container } from "@/components/ui";
 import { destinations } from "@/content/destinations";
 import { isLocale, t, type Locale } from "@/i18n/config";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 
 const copy = {
   title: { uk: "Країни", cs: "Destinace" },
   metaTitle: { uk: "Країни для відпочинку з вильотом із Чехії", cs: "Destinace s odletem z Česka" },
   lead: {
-    uk: "12 напрямків, куди ми відправляємо туристів із Праги, Брна, Острави та Пардубіце. Поради, сезони, гроші й відповіді на часті питання — усе, що Альона розповідає клієнтам особисто.",
+    uk: "12 напрямків, куди ми відправляємо туристів із Праги, Брна, Острави та Пардубиць. Поради, сезони, гроші й відповіді на часті питання — усе, що Альона розповідає клієнтам особисто.",
     cs: "12 destinací, kam posíláme klienty z Prahy, Brna, Ostravy a Pardubic. Tipy, sezóny, peníze a odpovědi na časté otázky — vše, co Aljona klientům říká osobně.",
   },
   metaDescription: {
@@ -29,7 +29,7 @@ const copy = {
     cs: "Napište Aljoně, kdy a s kým chcete jet a jaký máte rozpočet — navrhne 3 země a konkrétní hotely.",
   },
   ctaMessage: {
-    uk: "Добрий день, Альона! Допоможіть обрати країну для відпочинку. Плануємо: ",
+    uk: "Добрий день, Альоно! Допоможіть обрати країну для відпочинку. Плануємо: ",
     cs: "Dobrý den, Aljono! Pomozte mi vybrat destinaci. Plánujeme: ",
   },
 };
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t(copy.metaTitle, locale),
     description: t(copy.metaDescription, locale),
-    alternates: { languages: { uk: routes.destinations("uk"), cs: routes.destinations("cs") } },
+    alternates: { canonical: routes.destinations(locale), languages: languageAlternates(routes.destinations) },
   };
 }
 

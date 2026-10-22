@@ -75,14 +75,25 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
 }
 
-/* Visible focus everywhere; yellow on dark / coloured surfaces. */
+/* Visible focus everywhere. Default is ink (works on paper, white, grey, ice,
+   yellow and even directly on the teal frame). Elements INSIDE a dark container
+   get a light ring instead — yellow on near-black surfaces, paper on the
+   coloured ones where yellow lacks contrast. A light card nested back inside a
+   dark section restores the ink ring (the later rule wins at equal, zero,
+   :where() specificity). Buttons that are themselves red/telegram on a light
+   page keep the default ink ring. */
 :focus-visible {
   outline: 3px solid var(--c-ink);
   outline-offset: 3px;
 }
-:where(.bg-ink, .bg-red, .bg-telegram, .bg-teal, .bg-charcoal, .bg-teal-dark) :focus-visible,
-:where(.bg-ink, .bg-red, .bg-telegram, .bg-charcoal):focus-visible {
+:where(.bg-ink, .bg-ink\/95, .bg-charcoal) :focus-visible {
   outline-color: var(--c-yellow);
+}
+:where(.bg-teal, .bg-teal-dark, .bg-red, .bg-telegram) :focus-visible {
+  outline-color: var(--c-paper);
+}
+:where(.bg-paper, .bg-white, .bg-grey, .bg-ice, .bg-ice-light, .bg-yellow) :focus-visible {
+  outline-color: var(--c-ink);
 }
 
 /* Scrollers must contain absolutely positioned descendants (e.g. .sr-only

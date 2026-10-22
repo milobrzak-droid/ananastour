@@ -17,13 +17,13 @@ const FAQ: Array<{ q: Record<Locale, string>; a: Record<Locale, string> }> = [
     },
     a: {
       uk: "Закордонний біометричний паспорт, дійсний щонайменше 6 місяців після повернення, і чинний документ про перебування в Чехії (дозвіл на проживання або тимчасовий захист), щоб без проблем повернутися. Для деяких країн (наприклад, Єгипту) потрібна віза, яку можна отримати в аеропорту. Перед бронюванням я перевірю вимоги саме для вашої ситуації.",
-      cs: "Biometrický cestovní pas platný alespoň 6 měsíců po návratu a platný doklad o pobytu v Česku (povolení k pobytu nebo dočasná ochrana), abyste se bez potíží vrátili. Do některých zemí (např. Egypt) je potřeba víza, kterou lze získat na letišti. Před rezervací ověřím podmínky přesně pro vaši situaci.",
+      cs: "Biometrický cestovní pas platný alespoň 6 měsíců po návratu a platný doklad o pobytu v Česku (povolení k pobytu nebo dočasná ochrana), abyste se bez potíží vrátili. Do některých zemí (např. Egypt) je potřeba vízum, které lze získat na letišti. Před rezervací ověřím podmínky přesně pro vaši situaci.",
     },
   },
   {
     q: { uk: "Що входить у вартість пакетного туру?", cs: "Co je zahrnuto v ceně zájezdu?" },
     a: {
-      uk: "Зазвичай: переліт з Праги, Брно, Острави чи Пардубіце в обидва боки, трансфер аеропорт–готель–аеропорт, проживання, обраний тип харчування (наприклад, All Inclusive), летовищні збори та паливний збір. Медичне страхування в Чехії часто оформлюється окремо — я підкажу вигідний варіант.",
+      uk: "Зазвичай: переліт із Праги, Брна, Острави чи Пардубиць в обидва боки, трансфер аеропорт–готель–аеропорт, проживання, обраний тип харчування (наприклад, All Inclusive), аеропортові та паливні збори. Медичне страхування в Чехії часто оформлюється окремо — я підкажу вигідний варіант.",
       cs: "Obvykle: let z Prahy, Brna, Ostravy nebo Pardubic tam i zpět, transfer letiště–hotel–letiště, ubytování, zvolená strava (např. All Inclusive), letištní a palivové poplatky. Cestovní pojištění se v Česku často sjednává zvlášť — poradím výhodnou variantu.",
     },
   },
@@ -51,7 +51,7 @@ const FAQ: Array<{ q: Record<Locale, string>; a: Record<Locale, string> }> = [
   {
     q: { uk: "Як дізнатися, чи підходить готель для відпочинку з дітьми?", cs: "Jak poznám, že je hotel vhodný pro děti?" },
     a: {
-      uk: "Ми особисто перевіряємо готелі. Для дітей шукаємо дитяче меню, міні-клуб, пологий вхід у море та підігрівний басейн. Просто скажіть вік дитини — і я підберу ідеальний варіант.",
+      uk: "Ми особисто перевіряємо готелі. Для дітей шукаємо дитяче меню, міні-клуб, пологий вхід у море та басейн із підігрівом. Просто скажіть вік дитини — і я підберу ідеальний варіант.",
       cs: "Hotely osobně prověřujeme. Pro děti hledáme dětské menu, miniklub, pozvolný vstup do moře a vyhřívaný bazén. Stačí mi říct věk dítěte a vyberu ideální variantu.",
     },
   },

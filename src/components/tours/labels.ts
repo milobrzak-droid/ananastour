@@ -28,7 +28,7 @@ export const airportLabels: Record<string, L> = {
   PRG: { uk: "Прага", cs: "Praha" },
   BRQ: { uk: "Брно", cs: "Brno" },
   OSR: { uk: "Острава", cs: "Ostrava" },
-  PED: { uk: "Пардубіце", cs: "Pardubice" },
+  PED: { uk: "Пардубиці", cs: "Pardubice" },
 };
 
 export const sortLabels: Record<NonNullable<SearchParams["sort"]>, L> = {
@@ -46,7 +46,7 @@ export const countryLabels: Record<string, L> = {
   bulgaria: { uk: "Болгарія", cs: "Bulharsko" },
   uae: { uk: "ОАЕ", cs: "SAE" },
   maldives: { uk: "Мальдіви", cs: "Maledivy" },
-  vietnam: { uk: "В'єтнам", cs: "Vietnam" },
+  vietnam: { uk: "В’єтнам", cs: "Vietnam" },
   spain: { uk: "Іспанія", cs: "Španělsko" },
   dominicana: { uk: "Домінікана", cs: "Dominikánská republika" },
   italy: { uk: "Італія", cs: "Itálie" },
@@ -71,6 +71,7 @@ export function formatDistance(metres: number, locale: Locale): string {
 export function travellersLabel(adults: number, childrenAges: number[], locale: Locale): string {
   const a = t({ uk: `${adults} дорос.`, cs: `${adults} dosp.` }, locale);
   if (!childrenAges.length) return a;
-  const k = t({ uk: "дітей", cs: "děti" }, locale);
-  return `${a} + ${childrenAges.length} ${k} (${childrenAges.join(", ")})`;
+  const n = childrenAges.length;
+  const k = t(n === 1 ? { uk: "дитина", cs: "dítě" } : n <= 4 ? { uk: "дитини", cs: "děti" } : { uk: "дітей", cs: "dětí" }, locale);
+  return `${a} + ${n} ${k} (${childrenAges.join(", ")})`;
 }

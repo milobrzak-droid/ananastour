@@ -4,6 +4,7 @@ import { site } from "@/config/site";
 import { locales } from "@/i18n/config";
 import { routes } from "@/i18n/routes";
 import { escapeHtml, sendTelegramMessage, telegramBotConfigured, type InlineButton } from "@/lib/contact/telegram-bot";
+import { decoyDelay, readJsonBody } from "@/lib/request-guard";
 
 /**
  * POST /api/inquiry — every form on the site lands here and is forwarded to
@@ -28,7 +29,7 @@ const DESTINATION_LABELS = {
   bulgaria: "Болгарія",
   uae: "ОАЕ",
   maldives: "Мальдіви",
-  vietnam: "В'єтнам",
+  vietnam: "В’єтнам",
   spain: "Іспанія",
   dominicana: "Домінікана",
   italy: "Італія",
@@ -123,7 +124,9 @@ function safeHttpUrl(value: string | undefined): string | undefined {
   if (!value) return undefined;
   try {
     const url = new URL(value);
-    return url.protocol === "http:" || url.protocol === "https:" ? url.toString() : undefined;
+    // Only links back to our own site. Anything else would let a bot plant a
+    // clickable phishing link in the Telegram message Aljona reads.
+    return url.origin === new URL(site.url).origin ? url.toString() : undefined;
   } catch {
     return undefined;
   }
@@ -183,16 +186,18 @@ function buildMessage(q: Inquiry, reference: string): { text: string; buttons: I
 }
 
 export async function POST(req: NextRequest) {
-  let json: unknown;
-  try {
-    json = await req.json();
-  } catch {
-    return NextResponse.json({ ok: false, error: "invalid-json" }, { status: 400 });
+  const body = await readJsonBody(req);
+  if (!body.ok) {
+    return body.error === "too-large"
+      ? NextResponse.json({ ok: false, error: "payload-too-large" }, { status: 413 })
+      : NextResponse.json({ ok: false, error: "invalid-json" }, { status: 400 });
   }
+  const json = body.json;
 
-  // Bots fill the honeypot: pretend success, send nothing.
+  // Bots fill the honeypot: pretend success (after a realistic delay), send nothing.
   const honeypot = (json as { website?: unknown } | null)?.website;
   if (typeof honeypot === "string" && honeypot.trim() !== "") {
+    await decoyDelay();
     return NextResponse.json({ ok: true, reference: makeReference() });
   }
 

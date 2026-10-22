@@ -22,7 +22,7 @@ export function DeparturesTable({ offers, locale }: { offers: OfferWithHotel[]; 
   const dict = getDictionary(locale);
   return (
     <>
-      <div className="hidden overflow-hidden rounded-[2rem] bg-white p-2 md:block">
+      <div className="hidden overflow-x-auto rounded-[2rem] bg-white p-2 xl:block">
         <table className="w-full text-left text-sm">
           <thead className="text-xs uppercase tracking-wider text-ink/75">
             <tr>
@@ -74,7 +74,7 @@ export function DeparturesTable({ offers, locale }: { offers: OfferWithHotel[]; 
         </table>
       </div>
 
-      <ul className="flex flex-col gap-3 md:hidden">
+      <ul className="flex flex-col gap-3 xl:hidden">
         {offers.map((o) => (
           <li key={o.id} className="flex items-center gap-4 rounded-[1.75rem] bg-white p-4">
             <div className="min-w-0 flex-1">

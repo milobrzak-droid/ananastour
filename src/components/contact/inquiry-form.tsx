@@ -43,7 +43,7 @@ const DESTINATIONS: Array<{ slug: string; uk: string; cs: string }> = [
   { slug: "bulgaria", uk: "Болгарія", cs: "Bulharsko" },
   { slug: "uae", uk: "ОАЕ", cs: "SAE" },
   { slug: "maldives", uk: "Мальдіви", cs: "Maledivy" },
-  { slug: "vietnam", uk: "В'єтнам", cs: "Vietnam" },
+  { slug: "vietnam", uk: "В’єтнам", cs: "Vietnam" },
   { slug: "spain", uk: "Іспанія", cs: "Španělsko" },
   { slug: "dominicana", uk: "Домінікана", cs: "Dominikánská republika" },
   { slug: "italy", uk: "Італія", cs: "Itálie" },
@@ -52,13 +52,13 @@ const DESTINATIONS: Array<{ slug: string; uk: string; cs: string }> = [
 ];
 
 const tx = {
-  title: { uk: "Залиште заявку — Альона підбере тур", cs: "Nechte poptávku — Aljona vybere zájezd" },
-  name: { uk: "Ваше ім'я", cs: "Vaše jméno" },
+  title: { uk: "Залиште заявку — Альона підбере тур", cs: "Nechte nám poptávku — Aljona vybere zájezd" },
+  name: { uk: "Ваше ім’я", cs: "Vaše jméno" },
   phone: { uk: "Телефон", cs: "Telefon" },
   phonePh: { uk: "+420 …", cs: "+420 …" },
   email: { uk: "E-mail", cs: "E-mail" },
   telegram: { uk: "Ваш Telegram", cs: "Váš Telegram" },
-  telegramHint: { uk: "необов'язково — відповімо прямо в Telegram", cs: "nepovinné — odpovíme rovnou na Telegramu" },
+  telegramHint: { uk: "необов’язково — відповімо прямо в Telegram", cs: "nepovinné — odpovíme rovnou na Telegramu" },
   destination: { uk: "Країна", cs: "Země" },
   anyDestination: { uk: "Ще не знаю — порадьте", cs: "Ještě nevím — poraďte" },
   dates: { uk: "Коли хочете летіти", cs: "Kdy chcete letět" },
@@ -68,8 +68,8 @@ const tx = {
   travellers: { uk: "Хто їде", cs: "Kdo cestuje" },
   travellersPh: { uk: "2 дорослих + дитина 5 р.", cs: "2 dospělí + dítě 5 let" },
   message: { uk: "Побажання", cs: "Přání a dotazy" },
-  messagePh: { uk: "Бюджет, готель, харчування, виліт з Праги чи Брно…", cs: "Rozpočet, hotel, strava, odlet z Prahy nebo Brna…" },
-  optional: { uk: "необов'язково", cs: "nepovinné" },
+  messagePh: { uk: "Бюджет, готель, харчування, виліт із Праги чи Брна…", cs: "Rozpočet, hotel, strava, odlet z Prahy nebo Brna…" },
+  optional: { uk: "необов’язково", cs: "nepovinné" },
   submit: { uk: "Надіслати заявку", cs: "Odeslat poptávku" },
   sending: { uk: "Надсилаємо Альоні…", cs: "Posíláme Aljoně…" },
   consentA: {
@@ -107,10 +107,10 @@ const tx = {
   },
   retry: { uk: "Спробувати ще раз", cs: "Zkusit znovu" },
   fieldErrors: {
-    name: { uk: "Вкажіть ім'я", cs: "Vyplňte jméno" },
+    name: { uk: "Вкажіть ім’я", cs: "Vyplňte jméno" },
     phone: { uk: "Вкажіть коректний телефон", cs: "Zadejte platný telefon" },
     email: { uk: "Некоректний e-mail", cs: "Neplatný e-mail" },
-    telegram: { uk: "Ім'я користувача: латиниця, цифри, _", cs: "Uživatelské jméno: písmena, číslice, _" },
+    telegram: { uk: "Ім’я користувача: латиниця, цифри, _", cs: "Uživatelské jméno: písmena, číslice, _" },
   },
 } satisfies Record<string, unknown>;
 
@@ -294,7 +294,18 @@ export function InquiryForm({
 
         {show("destination") && (
           <Field id={`${uid}-destination`} label={t(tx.destination, locale)} hint={t(tx.optional, locale)} mutedCls={s.muted}>
-            <select id={`${uid}-destination`} name="destination" defaultValue="" className={`${inputCls("destination")} appearance-none bg-[url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27m6%209%206%206%206-6%27%20fill%3D%27none%27%20stroke%3D%27%231e2235%27%20stroke-width%3D%272.4%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E")] bg-[length:1.1rem] bg-[position:right_1rem_center] bg-no-repeat pr-10`}>
+            <select
+              id={`${uid}-destination`}
+              name="destination"
+              defaultValue=""
+              // Chevron as an inline style: a data: URI inside a Tailwind arbitrary
+              // background-url class breaks the CSS build (webpack resolves it as a module).
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%231e2235' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E\")",
+              }}
+              className={`${inputCls("destination")} appearance-none bg-[length:1.1rem] bg-[position:right_1rem_center] bg-no-repeat pr-10`}
+            >
               <option value="">{t(tx.anyDestination, locale)}</option>
               {DESTINATIONS.map((d) => (
                 <option key={d.slug} value={d.slug}>

@@ -14,7 +14,7 @@ import { hotelTelegramMessage, searchSummary } from "@/components/tours/messages
 import { site } from "@/config/site";
 import { isLocale, t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 import { formatMoney } from "@/lib/format";
 import { tours } from "@/lib/tours";
 import { parseSearchParams } from "@/lib/tours/query";
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
       locale,
     ),
-    alternates: { canonical: routes.hotel(locale, hotel.id), languages: { uk: routes.hotel("uk", hotel.id), cs: routes.hotel("cs", hotel.id) } },
+    alternates: { canonical: routes.hotel(locale, hotel.id), languages: languageAlternates((l) => routes.hotel(l, hotel.id)) },
     openGraph: { images: hotel.images.slice(0, 1) },
   };
 }

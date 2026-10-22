@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { LogoFull } from "@/components/brand/logo";
 import { TelegramButton } from "@/components/contact/telegram";
 import { localeLabels, locales, t, type Locale } from "@/i18n/config";
@@ -26,14 +26,16 @@ export function Logo({ locale, tone = "ink", size = 48 }: { locale: Locale; tone
   );
 }
 
-function LocaleSwitch({ locale }: { locale: Locale }) {
+function LocaleSwitchInner({ locale }: { locale: Locale }) {
   const pathname = usePathname();
+  // Keep the query string (search filters, dates…) when switching language.
+  const search = useSearchParams().toString();
   return (
     <div className="flex shape-pill bg-grey p-1 text-xs font-bold" role="group" aria-label={t(tx.lang, locale)}>
       {locales.map((l) => (
         <Link
           key={l}
-          href={pathname.replace(/^\/(uk|cs)/, `/${l}`)}
+          href={`${pathname.replace(/^\/(uk|cs)/, `/${l}`)}${search ? `?${search}` : ""}`}
           title={localeLabels[l]}
           hrefLang={l}
           aria-current={l === locale ? "true" : undefined}
@@ -46,10 +48,33 @@ function LocaleSwitch({ locale }: { locale: Locale }) {
   );
 }
 
+/** useSearchParams requires a Suspense boundary so statically rendered pages don't bail out of SSG. */
+function LocaleSwitch({ locale }: { locale: Locale }) {
+  return (
+    <Suspense fallback={null}>
+      <LocaleSwitchInner locale={locale} />
+    </Suspense>
+  );
+}
+
 export function Header({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const pathname = usePathname();
   const [menu, setMenu] = useState(false);
+  const burgerRef = useRef<HTMLButtonElement>(null);
+
+  // Escape closes the mobile menu and returns focus to the burger button.
+  useEffect(() => {
+    if (!menu) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMenu(false);
+        burgerRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menu]);
   const nav = [
     { href: routes.tours(locale), label: dict.nav.tours },
     { href: routes.hot(locale), label: dict.nav.hot },
@@ -95,6 +120,7 @@ export function Header({ locale }: { locale: Locale }) {
             <TelegramButton locale={locale} source="header" size="sm" />
           </span>
           <button
+            ref={burgerRef}
             className="grid h-11 w-11 place-items-center rounded-full bg-ink text-paper xl:hidden"
             onClick={() => setMenu((v) => !v)}
             aria-expanded={menu}

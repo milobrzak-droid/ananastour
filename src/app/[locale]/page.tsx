@@ -12,6 +12,10 @@ import { WhyUs } from "@/components/home/why-us";
 import { isLocale } from "@/i18n/config";
 import { tours } from "@/lib/tours";
 
+// Tour data comes from tours(): regenerate every 30 min instead of per request,
+// so the AnChoice API is not hammered once it replaces the mock provider.
+export const revalidate = 1800;
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();

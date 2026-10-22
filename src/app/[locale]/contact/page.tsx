@@ -10,7 +10,7 @@ import { Container } from "@/components/ui";
 import { site } from "@/config/site";
 import { isLocale, t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 import { phoneLink, telegramLink } from "@/lib/contact/telegram";
 
 type L = Record<Locale, string>;
@@ -18,7 +18,7 @@ type L = Record<Locale, string>;
 const copy = {
   metaTitle: { uk: "Контакти — напишіть Альоні в Telegram", cs: "Kontakt — napište Aljoně na Telegram" },
   metaDescription: {
-    uk: "Найшвидший зв'язок — Telegram: відповідь протягом 15 хвилин. Також телефон, e-mail та Instagram турагенції Ananas Tour у Чехії.",
+    uk: "Найшвидший зв’язок — Telegram: відповідь протягом 15 хвилин. Також телефон, e-mail та Instagram турагенції Ananas Tour у Чехії.",
     cs: "Nejrychlejší kontakt je Telegram: odpověď do 15 minut. Dále telefon, e-mail a Instagram cestovní agentury Ananas Tour.",
   },
   eyebrow: { uk: "Контакти", cs: "Kontakt" },
@@ -31,7 +31,7 @@ const copy = {
   tgReply: { uk: "Відповідь протягом 15 хвилин", cs: "Odpověď do 15 minut" },
   tgText: {
     uk: "Напишіть, куди, коли й скільки вас — і отримаєте 3 найкращі варіанти від перевірених чеських туроператорів.",
-    cs: "Napište kam, kdy a kolik vás pojede — a dostanete 3 nejlepší varianty od prověřených českých cestovních kanceláří.",
+    cs: "Napište, kam, kdy a kolik vás pojede — a dostanete 3 nejlepší varianty od prověřených českých cestovních kanceláří.",
   },
   tgOpen: { uk: "Відкрити чат", cs: "Otevřít chat" },
   qrCaption: { uk: "Наведіть камеру телефону", cs: "Namiřte fotoaparát telefonu" },
@@ -47,7 +47,7 @@ const copy = {
   },
   formTitle: { uk: "Або залиште повідомлення", cs: "Nebo nám nechte zprávu" },
   formLead: {
-    uk: "Заявка миттєво надійде Альоні, і вона зв'яжеться з вами.",
+    uk: "Заявка миттєво надійде Альоні, і вона зв’яжеться з вами.",
     cs: "Zpráva okamžitě dorazí Aljoně a ona se vám ozve.",
   },
   social: { uk: "Ми в соцмережах", cs: "Najdete nás" },
@@ -125,7 +125,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t(copy.metaTitle, locale),
     description: t(copy.metaDescription, locale),
-    alternates: { languages: { uk: routes.contact("uk"), cs: routes.contact("cs") } },
+    alternates: { canonical: routes.contact(locale), languages: languageAlternates(routes.contact) },
   };
 }
 

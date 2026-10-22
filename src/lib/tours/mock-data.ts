@@ -28,10 +28,10 @@ export const PHOTOS = {
     "1572331165267-854da2b10ccc",
     "1551918120-9739cb430c6d",
     "1561501900-3701fa6a0864",
-    "1600596542815-ffad4c1539a9",
-    "1602343168117-bb8ffe3e2e9f",
-    "1613490493576-7fde63acd811",
-    "1613977257363-707ba9348227",
+    "1583037189850-1921ae7c6c22",
+    "1615460549969-36fa19521a4f",
+    "1596436889106-be35e843f974",
+    "1568084680786-a84f91d1153c",
     "1575517111478-7f6afd0973db",
     "1445019980597-93fa8acb246c",
   ],
@@ -109,7 +109,7 @@ export const PHOTOS = {
     "1586500036706-41963de24d8b",
     "1590523741831-ab7e8b8f9c7f",
     "1618245318763-a15156d6b23c",
-    "1513415277900-a62401e19be4",
+    "1505881502353-a1986add3762",
     "1533760881669-80db4d7b4c15",
     "1590523278191-995cbcda646b",
     "1598135753163-6167c1a1ad65",
@@ -505,7 +505,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.land, R.fam, R.famsea],
     amenities: "pool indoor aqua beach pier spa hamam fitness kids kidspool anim alacarte bar disco",
     description:
-      "Rodinný resort na písečné pláži v klidné části Side s velkým aquaparkem a laguna bazény. Všechny pokoje mají balkon, k dispozici jsou i prostorné rodinné pokoje se dvěma ložnicemi. Do historického centra Side s antickými památkami dojedete hotelovým autobusem.",
+      "Rodinný resort na písečné pláži v klidné části Side s velkým aquaparkem a lagunovými bazény. Všechny pokoje mají balkon, k dispozici jsou i prostorné rodinné pokoje se dvěma ložnicemi. Do historického centra Side s antickými památkami dojedete hotelovým autobusem.",
   },
   {
     id: "tr-club-hotel-turan-prince",
@@ -643,7 +643,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach pier reef diving spa fitness kids kidspool anim alacarte bar",
     price: 1.15,
     description:
-      "Moderní resort v Nabq Bay s laguna bazény, pokoji swim-up a vlastním molem k bohatému korálovému útesu. Šnorchlování přímo od hotelu patří k nejlepším v oblasti. Ocenitelné jsou i tiché zóny pro dospělé a pestrá nabídka restaurací.",
+      "Moderní resort v Nabq Bay s lagunovými bazény, pokoji swim-up a vlastním molem k bohatému korálovému útesu. Šnorchlování přímo od hotelu patří k nejlepším v oblasti. Ocenitelné jsou i tiché zóny pro dospělé a pestrá nabídka restaurací.",
   },
   {
     id: "eg-shores-aloha",
@@ -1371,7 +1371,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool spa fitness kids kidspool anim alacarte bar",
     allYear: true,
     description:
-      "Rozlehlý resort na promenádě Meloneras s obřími bazény, tropickou zahradou a jedním z největších spa v Evropě. Do dun Maspalomas se dojdete projít po pobřeží – sluneční jistota po celý rok.",
+      "Rozlehlý resort na promenádě Meloneras s obřími bazény, tropickou zahradou a jedním z největších spa v Evropě. K dunám Maspalomas dojdete procházkou po pobřeží – sluneční jistota po celý rok.",
   },
   {
     id: "es-h10-salou-princess",

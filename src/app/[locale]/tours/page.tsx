@@ -12,7 +12,7 @@ import { Pagination } from "@/components/tours/pagination";
 import { SearchBox } from "@/components/tours/search-box";
 import { SortSelect } from "@/components/tours/sort-select";
 import { isLocale, t, type Locale } from "@/i18n/config";
-import { routes } from "@/i18n/routes";
+import { languageAlternates, routes } from "@/i18n/routes";
 import { tours } from "@/lib/tours";
 import { parseSearchParams, toQueryString } from "@/lib/tours/query";
 import type { SearchParams } from "@/lib/tours/types";
@@ -29,14 +29,19 @@ const tx = {
   title: { uk: "Пошук турів", cs: "Vyhledávání zájezdů" },
   titleTo: { uk: "Тури: ", cs: "Zájezdy: " },
   description: {
-    uk: "Тури з Праги, Брна, Острави та Пардубіце від перевірених чеських туроператорів. Альона допоможе обрати в Telegram.",
+    uk: "Тури з Праги, Брна, Острави та Пардубиць від перевірених чеських туроператорів. Альона допоможе обрати в Telegram.",
     cs: "Zájezdy z Prahy, Brna, Ostravy a Pardubic od ověřených českých cestovních kanceláří. Aljona poradí na Telegramu.",
   },
   found: { uk: "Знайдено турів", cs: "Nalezeno zájezdů" },
+  results: { uk: "Результати пошуку", cs: "Výsledky hledání" },
   filters: { uk: "Фільтри", cs: "Filtry" },
   sort: { uk: "Сортувати:", cs: "Řadit:" },
   apply: { uk: "OK", cs: "OK" },
 };
+
+// Tour data comes from tours(): regenerate every 30 min instead of per request,
+// so the AnChoice API is not hammered once it replaces the mock provider.
+export const revalidate = 1800;
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -53,6 +58,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     robots: filtered ? { index: false, follow: true } : undefined,
     alternates: {
       canonical: routes.tours(locale, sp.destination ? `destination=${sp.destination}` : undefined),
+      languages: languageAlternates((l) => routes.tours(l, sp.destination ? `destination=${sp.destination}` : undefined)),
     },
   };
 }
@@ -125,6 +131,9 @@ export default async function ToursPage({ params, searchParams }: Props) {
               </div>
             </details>
 
+            {/* The visible "Filters" H2 sits inside the collapsed drawer on mobile,
+                so the results list gets its own (visually hidden) H2. */}
+            <h2 className="sr-only">{t(tx.results, locale)}</h2>
             <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
               <p className="text-sm text-ink/70">
                 {t(tx.found, locale)}: <strong className="text-ink">{result.total}</strong>
