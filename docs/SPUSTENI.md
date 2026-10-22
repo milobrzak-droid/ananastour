@@ -104,3 +104,14 @@ aktualizujete grepem výše.
 > Napojení na AnChoice (ostrá data zájezdů) má vlastní runbook:
 > [ANCHOICE.md](ANCHOICE.md). Web lze spustit i na mock datech, ale pak
 > zájezdy neodpovídají realitě — o pořadí spuštění rozhodněte s klientkou.
+
+## Závislosti a bezpečnost (stav 22. 10. 2026)
+
+- Next.js **15.5.28** / React **19.1.10** — obsahuje opravu CVE-2025-66478
+  (Vercel starší 15.5.x odmítá nasadit).
+- `npm audit --omit=dev`: zbývá **PostCSS ≤ 8.5.22 uvnitř `next`** (čtení
+  zdrojových map při buildu). Týká se jen sestavení našeho vlastního CSS,
+  zvenku nezneužitelné. Oprava = upgrade na Next 16 → naplánovat po spuštění
+  (`npm audit fix --force` NEspouštět naslepo, je to breaking change).
+- Kritické nálezy `npm audit` (bez `--omit=dev`) jsou jen ve vývojových
+  nástrojích a do webu se nedostanou.
