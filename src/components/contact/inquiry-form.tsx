@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState, type FormEvent, type ReactNode } from "react";
+import { useId, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { routes } from "@/i18n/routes";
@@ -140,6 +140,47 @@ const styles = {
   },
 } as const;
 
+const NBSP = "\u00A0";
+
+/** A short last word ("vám", "já") never sits alone on the last line of the title: it rides with the word before. */
+const noWidow = (text: string) => text.replace(/ ([A-Za-z\u00C0-\u024F\u0400-\u04FF\d]{1,3}[.!?…]*)$/, `${NBSP}$1`);
+
+/**
+ * `--fit` for the form title, in cqi of the form: the largest size at which the longest word still fits AND the title
+ * wraps into at most ⌈words / 2⌉ + 1 lines. Sized to the longest word alone, «ПЕРЕДЗВОНЮ» filled a narrow sidebar form
+ * and every other word took a line of its own («Не любите / писати? / Залиште / номер — / передзвоню»).
+ * Words joined by NBSP measure as one word in fitLongestWord, so line widths use the same safe-side glyph widths.
+ */
+function fitTitle(text: string): CSSProperties {
+  const words = text.split(/[ \t\n]+/).filter(Boolean);
+  // cqi at which words[from..to) still fit on one line.
+  const size = (from: number, to: number) =>
+    parseFloat((fitLongestWord(words.slice(from, to).join(NBSP)) as Record<string, string>)["--fit"]);
+  // Line count of a greedy wrap at `cqi` (text-balance keeps the count, only evens the lines out).
+  const lines = (cqi: number) => {
+    let count = 1;
+    for (let start = 0, i = 1; i < words.length; i++) {
+      if (size(start, i + 1) < cqi) {
+        count++;
+        start = i;
+      }
+    }
+    return count;
+  };
+  const wordFit = Math.min(...words.map((_, i) => size(i, i + 1)));
+  // Every size at which some run of words just fits is a point where the wrap can change.
+  const candidates = [wordFit];
+  for (let from = 0; from < words.length; from++) {
+    for (let to = from + 2; to <= words.length; to++) {
+      const s = size(from, to);
+      if (s < wordFit) candidates.push(s);
+    }
+  }
+  const maxLines = Math.ceil(words.length / 2) + 1;
+  const fit = candidates.sort((a, b) => b - a).find((c) => lines(c) <= maxLines) ?? wordFit;
+  return { "--fit": `${fit.toFixed(2)}cqi` } as CSSProperties;
+}
+
 export function InquiryForm({
   locale,
   kind,
@@ -241,15 +282,15 @@ export function InquiryForm({
   }
 
   const sending = status === "sending";
-  // Glued (no line starting with "—", no lone "з"/"k"), sized to the form (@container) so the longest
-  // word — ПОВІДОМЛЕННЯ, ПЕРЕДЗВОНЮ — never splits in a narrow card.
-  const heading = glue(title ?? t(tx.title, locale));
+  // Glued (no line starting with "—", no lone "з"/"k", no lone "vám" at the end), sized to the form (@container) so the
+  // longest word — ПОВІДОМЛЕННЯ, ПЕРЕДЗВОНЮ — never splits and a narrow card never stacks it one word per line.
+  const heading = noWidow(glue(title ?? t(tx.title, locale)));
 
   return (
     <form onSubmit={onSubmit} className={`@container relative rounded-[2rem] p-6 sm:rounded-[2.5rem] sm:p-9 ${s.card}`} aria-busy={sending}>
       <h3
         className="font-display text-[clamp(1rem,var(--fit),1.5rem)] font-extrabold uppercase leading-tight text-balance"
-        style={fitLongestWord(heading)}
+        style={fitTitle(heading)}
       >
         {heading}
       </h3>

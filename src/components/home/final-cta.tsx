@@ -8,7 +8,8 @@ import { t, type Locale } from "@/i18n/config";
 import { glue, hasAccents } from "./typo";
 
 const C = {
-  title: { uk: "Море чекає. Я теж.", cs: "Moře čeká. Já taky." },
+  // The reply "Я теж." / "Já taky." is one unit (NBSP): it never splits into a dangling "JÁ / TAKY.".
+  title: { uk: "Море чекає. Я теж.", cs: "Moře čeká. Já taky." },
   lead: {
     uk: "Три рядки в Telegram: куди, коли і скільки вас. Решту беру на себе.",
     cs: "Stačí tři řádky na Telegram: kam, kdy a kolik vás pojede. Zbytek je na mně.",
@@ -26,9 +27,10 @@ export function FinalCta({ locale }: { locale: Locale }) {
           <PineapplePattern preset="hero" opacity={0.7} color="var(--c-yellow-light)" fibre="var(--c-yellow)" className="-z-10" />
           <div className="grid items-stretch gap-6 lg:grid-cols-[1.25fr_1fr]">
             <div className="px-4 py-10 sm:px-10 sm:py-14">
-              {/* Stacked accents (cs "MOŘE / ČEKÁ. / JÁ TAKY.") need a full leading; accent-free uk stays tight. */}
+              {/* Stacked accents (cs "MOŘE / ČEKÁ. / JÁ TAKY.") need a full leading; accent-free uk stays tight.
+                  "JÁ TAKY." is ~5.45em wide: below 360px the size follows the viewport so that line still fits at 320. */}
               <h2
-                className={`font-display text-[clamp(2.6rem,7vw,6rem)] font-black uppercase tracking-[-0.03em] ${hasAccents(title) ? "leading-[1.06]" : "leading-[0.9]"}`}
+                className={`font-display text-[clamp(2.6rem,7vw,6rem)] font-black uppercase tracking-[-0.03em] max-[359px]:text-[11.5vw] ${hasAccents(title) ? "leading-[1.06]" : "leading-[0.9]"}`}
               >
                 {glue(title)}
               </h2>

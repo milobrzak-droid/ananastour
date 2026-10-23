@@ -53,6 +53,9 @@ export default async function DestinationsPage({ params }: { params: Promise<{ l
   // Card names are sized to the card (container query), budgeted for the longest name in this locale,
   // so ДОМІНІКАНА / DOMINIKÁNA never touch the rounded edge (Unbounded is ~0.86 em per capital).
   const longestName = Math.max(...destinations.map((d) => t(d.name, locale).length));
+  // Д/Ц/Щ feet hang ≈0.15 em below the baseline: at leading 0.88 they ran into the line below (ОДНА / АЛЬОНА).
+  const title = t(copy.title, locale);
+  const hasDescender = /[ДЦЩ]/.test(title.toUpperCase());
 
   return (
     <>
@@ -70,7 +73,11 @@ export default async function DestinationsPage({ params }: { params: Promise<{ l
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
               <div className="min-w-0">
                 {/* Phones: also capped by the longest word (АЛЬОНА. ≈ 5.8 em) in the panel (100vw − 5.5rem), so it fits at 320 px. */}
-                <h1 className="font-display text-[length:min(max(3rem,10vw),calc((100vw_-_5.5rem)/6),8rem)] font-black uppercase leading-[0.88] tracking-[-0.045em] lg:text-[clamp(3rem,6.5vw,7rem)]">{t(copy.title, locale)}</h1>
+                <h1
+                  className={`font-display text-[length:min(max(3rem,10vw),calc((100vw_-_5.5rem)/6),8rem)] font-black uppercase ${hasDescender ? "leading-[0.96]" : "leading-[0.88]"} tracking-[-0.045em] lg:text-[clamp(3rem,6.5vw,7rem)]`}
+                >
+                  {title}
+                </h1>
                 <p className="mt-6 max-w-xl text-pretty text-lg text-ink/80">{typeset(t(copy.lead, locale))}</p>
                 <div className="mt-6 flex flex-wrap gap-2 text-2xl" aria-hidden>
                   {destinations.map((d) => (

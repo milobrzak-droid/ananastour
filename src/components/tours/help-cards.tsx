@@ -25,9 +25,12 @@ export function PickForMeCard({
   className?: string;
 }) {
   return (
-    <aside aria-label={t({ uk: "Три готелі на вибір", cs: "Tři hotely na výběr" }, locale)} className={`relative overflow-hidden rounded-[2rem] bg-ice p-5 sm:rounded-[2.5rem] sm:p-10 ${className}`}>
+    // @container: the card sits in a ~600px results column at 1024–1190px (filters sidebar beside it) and spans the
+    // full page elsewhere, so the copy|form split follows the card's own width, not the viewport. Below 48rem it
+    // stacks; side by side the copy column always keeps ≥ 20rem, so the H2 and the pill never get squeezed.
+    <aside aria-label={t({ uk: "Три готелі на вибір", cs: "Tři hotely na výběr" }, locale)} className={`@container relative overflow-hidden rounded-[2rem] bg-ice p-5 sm:rounded-[2.5rem] sm:p-10 ${className}`}>
       <PineapplePattern preset="sparse" opacity={0.5} />
-      <div className="relative grid gap-8 lg:grid-cols-[1fr_minmax(0,26rem)] lg:items-center">
+      <div className="relative grid gap-8 @3xl:grid-cols-[1fr_minmax(0,26rem)] @3xl:items-center">
         <div>
           <h2 className="font-display text-2xl font-black uppercase leading-tight sm:text-3xl">
             {t(
@@ -42,8 +45,10 @@ export function PickForMeCard({
             {glue(
               t(
                 {
-                  uk: "Замість сотні вкладок надішлю 3 готелі під ваші побажання — і поясню, чому саме ці. З 9:00 до 21:00 зазвичай відповідаю за 15 хвилин.",
-                  cs: "Místo stovky záložek v prohlížeči vám pošlu 3 hotely podle vašich přání – i s tím, proč zrovna tyhle. Od 9 do 21 h odpovídám obvykle do 15 minut.",
+                  //  : glue() only joins "9 do" and "21 h"; these keep the whole hour range on one line
+                  // (no "Od / 9 do 21 h" or "Od 9 do / 21 h").
+                  uk: "Замість сотні вкладок надішлю 3 готелі під ваші побажання — і поясню, чому саме ці. З 9:00 до 21:00 зазвичай відповідаю за 15 хвилин.",
+                  cs: "Místo stovky záložek v prohlížeči vám pošlu 3 hotely podle vašich přání – i s tím, proč zrovna tyhle. Od 9 do 21 h odpovídám obvykle do 15 minut.",
                 },
                 locale,
               ),
@@ -55,7 +60,7 @@ export function PickForMeCard({
             size="lg"
             message={message}
             label={t({ uk: "Хочу 3 готелі", cs: "Chci 3 hotely" }, locale)}
-            className="mt-6"
+            className="mt-6 whitespace-nowrap"
           />
         </div>
         <InquiryForm

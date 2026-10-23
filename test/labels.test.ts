@@ -10,24 +10,24 @@ import {
 
 describe("travellersLabel — pluralisation", () => {
   it("adults only", () => {
-    expect(travellersLabel(2, [], "uk")).toBe("2 дорос.");
-    expect(travellersLabel(1, [], "cs")).toBe("1 dosp.");
+    expect(travellersLabel(2, [], "uk")).toBe("2 дорослих");
+    expect(travellersLabel(1, [], "cs")).toBe("1 dospělý");
   });
 
   it("1 child → дитина / dítě", () => {
-    expect(travellersLabel(2, [7], "uk")).toBe("2 дорос. + 1 дитина (7)");
-    expect(travellersLabel(2, [7], "cs")).toBe("2 dosp. + 1 dítě (7)");
+    expect(travellersLabel(2, [7], "uk")).toBe("2 дорослих + 1 дитина (7)");
+    expect(travellersLabel(2, [7], "cs")).toBe("2 dospělí + 1 dítě (7)");
   });
 
   it("2–4 children → дитини / děti", () => {
-    expect(travellersLabel(2, [3, 8], "uk")).toBe("2 дорос. + 2 дитини (3, 8)");
-    expect(travellersLabel(2, [3, 8], "cs")).toBe("2 dosp. + 2 děti (3, 8)");
-    expect(travellersLabel(1, [2, 4, 6, 9], "cs")).toBe("1 dosp. + 4 děti (2, 4, 6, 9)");
+    expect(travellersLabel(2, [3, 8], "uk")).toBe("2 дорослих + 2 дитини (3, 8)");
+    expect(travellersLabel(2, [3, 8], "cs")).toBe("2 dospělí + 2 děti (3, 8)");
+    expect(travellersLabel(1, [2, 4, 6, 9], "cs")).toBe("1 dospělý + 4 děti (2, 4, 6, 9)");
   });
 
   it("5+ children → дітей / dětí", () => {
-    expect(travellersLabel(2, [1, 3, 5, 7, 9], "uk")).toBe("2 дорос. + 5 дітей (1, 3, 5, 7, 9)");
-    expect(travellersLabel(2, [1, 3, 5, 7, 9], "cs")).toBe("2 dosp. + 5 dětí (1, 3, 5, 7, 9)");
+    expect(travellersLabel(2, [1, 3, 5, 7, 9], "uk")).toBe("2 дорослих + 5 дітей (1, 3, 5, 7, 9)");
+    expect(travellersLabel(2, [1, 3, 5, 7, 9], "cs")).toBe("2 dospělí + 5 dětí (1, 3, 5, 7, 9)");
   });
 
   it("lists the ages in the given order", () => {
@@ -40,7 +40,7 @@ describe("boardLabel", () => {
     expect(boardLabel("AI", "cs")).toBe("All inclusive");
     expect(boardLabel("AI", "uk")).toBe("Все включено");
     expect(boardLabel("HB", "cs")).toBe("Polopenze");
-    expect(boardLabel("HB", "uk")).toBe("Сніданок і вечеря");
+    expect(boardLabel("HB", "uk")).toBe("Напівпансіон");
     expect(boardLabel("RO", "cs")).toBe("Bez stravy");
   });
 });

@@ -3,7 +3,7 @@ import { ArrowButton, Pill } from "@/components/ui";
 import { t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { routes } from "@/i18n/routes";
-import { formatMoney } from "@/lib/format";
+import { formatMoney, nightsLabel } from "@/lib/format";
 import type { OfferWithHotel } from "@/lib/tours/types";
 import { airportLabel, boardLabel, dateRangeLabel, roomTypeLabel } from "./labels";
 
@@ -51,7 +51,7 @@ export function DeparturesTable({ offers, locale }: { offers: OfferWithHotel[]; 
                   <p className="font-semibold">{dateRangeLabel(o.departureDate, o.returnDate, locale)}</p>
                   <p className="text-xs text-ink/75">
                     <span className="whitespace-nowrap">
-                      {o.nights} {dict.common.nights}
+                      {o.nights} {nightsLabel(o.nights, locale)}
                     </span>
                     {o.departureAirport && (
                       <>
@@ -101,7 +101,7 @@ export function DeparturesTable({ offers, locale }: { offers: OfferWithHotel[]; 
               <p className="font-semibold">{dateRangeLabel(o.departureDate, o.returnDate, locale)}</p>
               <p className="text-sm text-ink/70">
                 <span className="whitespace-nowrap">
-                  {o.nights} {dict.common.nights}
+                  {o.nights} {nightsLabel(o.nights, locale)}
                 </span>
                 {SEP}
                 <span className="whitespace-nowrap">{boardLabel(o.board, locale)}</span>

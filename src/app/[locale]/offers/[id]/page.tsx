@@ -16,7 +16,7 @@ import { offerTelegramMessage } from "@/components/tours/offer-card";
 import { isLocale, t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { routes } from "@/i18n/routes";
-import { formatDate, formatDateRange, formatMoney } from "@/lib/format";
+import { formatDate, formatDateRange, formatMoney, nightsLabel } from "@/lib/format";
 import { tours } from "@/lib/tours";
 import type { OfferWithHotel } from "@/lib/tours/types";
 
@@ -98,7 +98,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!o) return {};
   const when = formatDateRange(o.departureDate, o.returnDate, locale);
   return {
-    title: `${o.hotel.name} ${o.hotel.stars}* · ${formatDate(o.departureDate, locale)}, ${o.nights} ${getDictionary(locale).common.nights}`,
+    title: `${o.hotel.name} ${o.hotel.stars}* · ${formatDate(o.departureDate, locale)}, ${o.nights} ${nightsLabel(o.nights, locale)}`,
     description: t(
       {
         uk: `${o.hotel.name}, ${countryName(o.hotel.countrySlug, locale, o.hotel.country)}: ${when}, ${boardLabel(o.board, locale)}, від ${formatMoney(o.pricePerPerson, locale)} за особу. Надішліть запит — Альона перевірить місця й ціну в туроператора. На сайті нічого не платите.`,
@@ -124,11 +124,11 @@ export default async function OfferPage({ params }: Props) {
   const { hotel } = offer;
   const tgMessage = offerTelegramMessage(offer, locale);
   const price = formatMoney(offer.pricePerPerson, locale);
-  const summary = `${hotel.name} ${hotel.stars}*, ${formatDateRange(offer.departureDate, offer.returnDate, locale)}, ${offer.nights} ${dict.common.nights}, ${offer.board}`;
+  const summary = `${hotel.name} ${hotel.stars}*, ${formatDateRange(offer.departureDate, offer.returnDate, locale)}, ${offer.nights} ${nightsLabel(offer.nights, locale)}, ${offer.board}`;
 
   const facts: Array<[string, string]> = [
     [t(tx.dates, locale), dateRangeLabel(offer.departureDate, offer.returnDate, locale)],
-    [t(tx.nights, locale), `${offer.nights} ${dict.common.nights}`],
+    [t(tx.nights, locale), `${offer.nights} ${nightsLabel(offer.nights, locale)}`],
     [
       t(tx.transport, locale),
       `${transportLabel(offer.transport, locale)}${offer.departureAirport ? `, ${airportLabel(offer.departureAirport, locale)}` : ""}`,

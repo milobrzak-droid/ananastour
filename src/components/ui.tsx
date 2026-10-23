@@ -127,7 +127,9 @@ export function Section({
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-3xl">
               {eyebrow && <Eyebrow className="mb-3">{eyebrow}</Eyebrow>}
-              {title && <h2 className="font-display text-3xl font-extrabold uppercase leading-[1.02] sm:text-5xl">{title}</h2>}
+              {/* 1.1, not tighter: when the title wraps, Ř Č Ě Á and Ї rise ~1.05em above the baseline and touched the
+                  line above at 1.02 ("ODLETY Z ČESKA / DO ŘECKA", "ВИЛЬОТИ / З ЧЕХІЇ"); 1.1 keeps ~2px between them. */}
+              {title && <h2 className="font-display text-3xl font-extrabold uppercase leading-[1.1] sm:text-5xl">{title}</h2>}
               {lead && <p className="mt-4 max-w-2xl text-ink/75">{lead}</p>}
             </div>
             {action}

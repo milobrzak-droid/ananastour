@@ -113,7 +113,11 @@ export default async function HotToursPage({ params, searchParams }: Props) {
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/80 to-ink/75 lg:bg-gradient-to-r lg:from-ink/90 lg:via-ink/75 lg:to-ink/40" />
           <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
             <div className="max-w-3xl">
-              <p className="inline-flex shape-pill bg-red px-4 py-1.5 text-sm font-bold text-white">{t(tx.kicker, locale)}</p>
+              {/* One line always: below ~378px the font eases down (and the padding below 22rem), so the 25-char
+                  «Вильоти найближчими днями» fits a 320px phone instead of leaving «днями» alone on line 2. */}
+              <p className="inline-flex max-w-full whitespace-nowrap shape-pill bg-red px-3 py-1.5 text-[clamp(0.75rem,3.7vw,0.875rem)] font-bold text-white min-[22rem]:px-4">
+                {t(tx.kicker, locale)}
+              </p>
               {/* Greedy wrap on purpose (overrides the global h1 balance): with "з Чехії" glued it breaks as
                   "ГАРЯЧІ ТУРИ / З ЧЕХІЇ" and "LAST MINUTE / Z ČESKA", like the hero's "ВАШЕ МОРЕ / З ЧЕХІЇ";
                   balance would split the term into "ГАРЯЧІ / ТУРИ З ЧЕХІЇ". */}
@@ -173,11 +177,20 @@ export default async function HotToursPage({ params, searchParams }: Props) {
       <Container className="pb-16">
         <div className="grid gap-6">
           <div className="flex flex-col items-start gap-4 rounded-[2rem] bg-yellow p-6 sm:flex-row sm:items-center sm:justify-between sm:rounded-[2.5rem] sm:p-10">
-            <div className="max-w-2xl">
+            {/* The copy takes what is left (min-w-0 flex-1), the pill keeps its natural width: «Стежити за ціною»
+                never wraps at 768–1024px. */}
+            <div className="min-w-0 max-w-2xl flex-1">
               <h2 className="font-display text-2xl font-black uppercase sm:text-3xl">{t(tx.notifyTitle, locale)}</h2>
               <p className="mt-2 text-pretty text-ink/75">{glue(t(tx.notifyText, locale))}</p>
             </div>
-            <TelegramButton locale={locale} source="hot-notify" size="lg" message={prefill} label={t(tx.notifyCta, locale)} />
+            <TelegramButton
+              locale={locale}
+              source="hot-notify"
+              size="lg"
+              message={prefill}
+              label={t(tx.notifyCta, locale)}
+              className="shrink-0 whitespace-nowrap"
+            />
           </div>
           <PickForMeCard locale={locale} message={prefill} context={t(tx.formContext, locale)} source="hot-inline" />
         </div>

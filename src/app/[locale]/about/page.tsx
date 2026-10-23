@@ -32,7 +32,7 @@ const copy = {
   services: { uk: "Усі послуги", cs: "Všechny služby" },
   photoAlt: { uk: "Альона, директорка Ananas Tour", cs: "Aljona, která vede Ananas Tour" },
   eventAlt: { uk: "Альона на заході туроператора Join UP!", cs: "Aljona na akci cestovní kanceláře Join UP!" },
-  statYears: { uk: "років у туризмі — з 2011-го", cs: "let v oboru – od roku 2011" },
+  statYears: { uk: "років у туризмі — з 2011-\u2060го", cs: "let v oboru – od roku 2011" },
   statCountries: { uk: "країни на власні очі", cs: "zemí na vlastní oči" },
   statReply: { uk: "хвилин зазвичай чекаєте на відповідь (9:00–\u206021:00)", cs: "minut obvykle čekáte na odpověď (9–\u206021 h)" },
   storyTitle: { uk: "Каталог мовчить. Я — ні.", cs: "Katalog mlčí. Já ne." },

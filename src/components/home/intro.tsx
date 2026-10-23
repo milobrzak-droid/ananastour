@@ -93,7 +93,8 @@ export function RouteTagline({ locale }: { locale: Locale }) {
         {" "}
         <span className="normal-case">{glue(t(C.tagline, locale))}</span>
       </p>
-      <p className="mx-auto mt-3 max-w-md text-pretty text-sm text-ink/75">{glue(t(C.sub, locale))}</p>
+      {/* xl: the route dips through this paragraph, so it gets a paper backing like the stat labels (the dots pass under it). */}
+      <p className="mx-auto mt-3 max-w-md text-pretty text-sm text-ink/75 xl:rounded-xl xl:bg-paper/90 xl:px-2 xl:py-1">{glue(t(C.sub, locale))}</p>
     </div>
   );
 

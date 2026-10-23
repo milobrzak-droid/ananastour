@@ -37,6 +37,7 @@ const uk = {
     perPerson: "/ за особу",
     total: "разом",
     from: "від",
+    // Plural for 5+ only. After a number use nightsLabel(n, locale) from @/lib/format: 1 ніч · 3 ночі · 7 ночей.
     nights: "ночей",
     loading: "Чистимо ананас… шукаємо тури",
   },

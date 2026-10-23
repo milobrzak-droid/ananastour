@@ -6,7 +6,7 @@ import { ArrowButton, ButtonLink, Container, Eyebrow, Pill } from "@/components/
 import { t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { routes } from "@/i18n/routes";
-import { formatDate, formatMoney } from "@/lib/format";
+import { formatDate, formatMoney, nightsLabel } from "@/lib/format";
 import type { OfferWithHotel } from "@/lib/tours/types";
 import { glue, leadingFor } from "./typo";
 
@@ -73,7 +73,7 @@ function NearestTable({ offers, locale }: { offers: OfferWithHotel[]; locale: Lo
               <span className="font-normal text-ink/75">
                 {"\u00A0· "}
                 <span className="whitespace-nowrap">
-                  {o.nights} {dict.common.nights}
+                  {o.nights} {nightsLabel(o.nights, locale)}
                 </span>
                 {o.departureAirport ? (
                   <>

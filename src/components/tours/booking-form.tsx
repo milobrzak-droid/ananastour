@@ -273,12 +273,20 @@ export function BookingForm({
       </form>
 
       <div className="mt-4 flex flex-col items-start gap-3 rounded-[2rem] bg-ice p-6 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+        {/* The copy takes what is left (min-w-0 flex-1), the pill keeps its natural width: «Запитати Альону»
+            never wraps in the ~640–860px two-column strip. */}
+        <div className="min-w-0 flex-1">
           <p className="font-display text-lg font-extrabold">{t(tx.prefer, locale)} →</p>
           {/* Glued: "15 хвилин", "9:00 до" and "21 h" never split at a line end. */}
           <p className="text-sm text-ink/70">{glue(t(tx.preferText, locale))}</p>
         </div>
-        <TelegramButton locale={locale} source="booking-prefer" message={telegramMessage} label={t(tx.ask, locale)} />
+        <TelegramButton
+          locale={locale}
+          source="booking-prefer"
+          message={telegramMessage}
+          label={t(tx.ask, locale)}
+          className="shrink-0 whitespace-nowrap"
+        />
       </div>
     </div>
   );

@@ -39,7 +39,13 @@ export function PickTour({ locale }: { locale: Locale }) {
         <div className="grid gap-3 sm:gap-4 lg:grid-cols-2">
           {/* Telegram — primary */}
           <div className="relative isolate overflow-hidden rounded-[2rem] bg-telegram p-7 text-white sm:rounded-[2.5rem] sm:p-12">
-            <PineapplePattern preset="section" opacity={0.16} color="#fff" className="-z-10" />
+            {/* The slices stay on the right edge only: the mask clears the text column (left half-slice, bottom wedge). */}
+            <PineapplePattern
+              preset="section"
+              opacity={0.16}
+              color="#fff"
+              className="-z-10 [mask-image:linear-gradient(to_right,transparent_60%,black_88%)]"
+            />
             {/* Decorative badge in the bottom-right corner. Hidden at lg (1024–1279), where the half-width card has no
                 corner left beside the CTA row; from xl the row reserves the corner instead. */}
             <div className="absolute -bottom-12 -right-12 -z-10 hidden opacity-90 sm:block lg:hidden xl:block">

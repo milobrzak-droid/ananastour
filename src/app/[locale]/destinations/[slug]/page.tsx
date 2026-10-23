@@ -181,7 +181,9 @@ export default async function DestinationPage({ params }: { params: Params }) {
                 // Sized to the longest word so it never breaks mid-word: --hk = letters × 0.98 em (widest Unbounded caps,
                 // МАЛЬДІВИ, measure 0.90 em). The subtracted rem is the real chrome (frame + container + card padding)
                 // at each breakpoint: 6rem phones, 11rem sm–md, 13rem from lg; the 1.4rem floor fits ДОМІНІКАНА at 320 px.
-                className="mt-4 text-balance font-display font-black uppercase leading-[0.88] tracking-[-0.04em] [text-shadow:0_2px_18px_rgb(0_0_0/0.3)] text-[length:clamp(1.4rem,calc((100vw_-_6rem)/var(--hk)),9.5rem)] sm:text-[length:clamp(1.4rem,calc((100vw_-_11rem)/var(--hk)),9.5rem)] lg:text-[length:clamp(1.4rem,calc((min(100vw,86rem)_-_13rem)/var(--hk)),9.5rem)]"
+                // Gap above scales with the size: at leading 0.88 a cap accent (Ř Š Á) rises ≈0.19 em above the line box,
+                // so a fixed 1rem let the giant ŘECKO / ŠPANĚLSKO / ITÁLIE accent run into the pill from 768 px up.
+                className="mt-[max(1rem,0.25rem_+_0.22em)] text-balance font-display font-black uppercase leading-[0.88] tracking-[-0.04em] [text-shadow:0_2px_18px_rgb(0_0_0/0.3)] text-[length:clamp(1.4rem,calc((100vw_-_6rem)/var(--hk)),9.5rem)] sm:text-[length:clamp(1.4rem,calc((100vw_-_11rem)/var(--hk)),9.5rem)] lg:text-[length:clamp(1.4rem,calc((min(100vw,86rem)_-_13rem)/var(--hk)),9.5rem)]"
                 style={{ "--hk": (longestWord * 0.98).toFixed(2) } as CSSProperties}
               >
                 {name}

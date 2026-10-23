@@ -248,7 +248,9 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
             </div>
           </div>
 
-          <div className="relative [&>form]:h-full">
+          {/* sm+: the stamp sits on the form's top-right corner, so the heading reserves that corner
+              (pr-20 ≈ stamp's reach into the card) and text-balance breaks the line before it. */}
+          <div className="relative [&>form]:h-full sm:[&>form>h3]:pr-20">
             <div className="pointer-events-none absolute -right-3 -top-3 z-10 hidden sm:block">
               <Stamp size={120} top={t(stamp.top, locale)} bottom={t(stamp.bottom, locale)} above={t(stamp.above, locale)} word={t(stamp.word, locale)} below={t(stamp.below, locale)} className="rotate-12 drop-shadow-lg" />
             </div>

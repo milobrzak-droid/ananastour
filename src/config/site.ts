@@ -22,7 +22,7 @@ export const site = {
     email: process.env.NEXT_PUBLIC_EMAIL || "hello@ananastour.cz",
     instagram: "https://instagram.com/ananas_tour_",
     // TODO(client): Czech office address — none yet, agency works remotely.
-    address: { uk: "Чехія — працюємо онлайн", cs: "Česko — fungujeme online" },
+    address: { uk: "Чехія — працюємо онлайн", cs: "Česko – fungujeme online" },
     hours: { uk: "Пн–Нд 9:00–21:00", cs: "Po–Ne 9:00–21:00" },
   },
 

@@ -6,7 +6,7 @@ import { Stars } from "@/components/tours/hotel-bits";
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { routes } from "@/i18n/routes";
-import { formatDateRange, formatMoney } from "@/lib/format";
+import { formatDateRange, formatMoney, nightsLabel } from "@/lib/format";
 import type { OfferWithHotel } from "@/lib/tours/types";
 import { site } from "@/config/site";
 import { t } from "@/i18n/config";
@@ -23,7 +23,7 @@ export function offerTelegramMessage(offer: OfferWithHotel, locale: Locale): str
   return [
     dict.contact.prefillTour,
     `${offer.hotel.name} ${"★".repeat(offer.hotel.stars)}, ${offer.hotel.region}`,
-    `${formatDateRange(offer.departureDate, offer.returnDate, locale)} (${offer.nights} ${dict.common.nights}), ${boardLabel(offer.board, locale)}`,
+    `${formatDateRange(offer.departureDate, offer.returnDate, locale)} (${offer.nights} ${nightsLabel(offer.nights, locale)}), ${boardLabel(offer.board, locale)}`,
     `${formatMoney(offer.totalPrice, locale)}`,
     `${site.url}${routes.offer(locale, offer.id)}`,
   ].join("\n");
@@ -66,7 +66,7 @@ export function OfferCard({ offer, locale, source = "offer-card" }: { offer: Off
           {dateRangeLabel(offer.departureDate, offer.returnDate, locale)}
           {" · "}
           <span className="whitespace-nowrap">
-            {offer.nights} {dict.common.nights}
+            {offer.nights} {nightsLabel(offer.nights, locale)}
           </span>
           {" · "}
           <span className="whitespace-nowrap">{boardLabel(offer.board, locale)}</span>
