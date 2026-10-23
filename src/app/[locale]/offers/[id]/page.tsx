@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { cache } from "react";
+import { cache, type CSSProperties } from "react";
 import { PineapplePattern } from "@/components/brand/pineapple";
 import { TelegramButton } from "@/components/contact/telegram";
 import { ArrowIcon, ButtonLink, Container, Notch, Pill } from "@/components/ui";
 import { AvailabilityCheck } from "@/components/tours/availability-check";
 import { BookingForm } from "@/components/tours/booking-form";
 import { HotelLocation, HotelRating, Stars } from "@/components/tours/hotel-bits";
-import { airportLabel, boardLabel, countryName, dateRangeLabel, transportLabel } from "@/components/tours/labels";
-import { glue } from "@/components/home/typo";
+import { airportLabel, boardLabel, countryName, dateRangeLabel, roomTypeLabel, transportLabel } from "@/components/tours/labels";
+import { fitLongestWord, glue } from "@/components/home/typo";
 import { displayLeading } from "@/components/tours/display";
 import { offerTelegramMessage } from "@/components/tours/offer-card";
 import { isLocale, t, type Locale } from "@/i18n/config";
@@ -38,9 +38,10 @@ const tx = {
   extra: { uk: "Що оплачується окремо", cs: "Co v ceně není" },
   order: { uk: "Хочу цей тур", cs: "Chci tenhle zájezd" },
   ask: { uk: "Запитати Альону", cs: "Zeptat se Aljony" },
+  // No-break space before the separator: the "·" stays at the end of a line and never starts the next one.
   noPay: {
-    uk: "На сайті нічого не платите · чеські CK застраховані від банкрутства",
-    cs: "Na webu nic neplatíte · české CK jsou pojištěné proti úpadku",
+    uk: "На сайті нічого не платите · чеські CK застраховані від банкрутства",
+    cs: "Na webu nic neplatíte · české CK jsou pojištěné proti úpadku",
   },
   lastMinute: { uk: "Гарячий тур", cs: "Last minute" },
   verified: { uk: "✓ Ціну перевірено", cs: "✓ Cena ověřena" },
@@ -56,7 +57,7 @@ function included(o: OfferWithHotel, locale: Locale): string[] {
         : "",
     o.transport === "flight" ? t({ uk: "Аеропортові й паливні збори", cs: "Letištní a palivové poplatky" }, locale) : "",
     o.transport !== "own" ? t({ uk: "Трансфер до готелю й назад", cs: "Transfer do hotelu a zpět" }, locale) : "",
-    t({ uk: `Проживання: ${o.nights} ночей, ${o.roomType}`, cs: `Ubytování: ${o.nights} nocí, ${o.roomType}` }, locale),
+    t({ uk: `Проживання: ${o.nights} ночей, ${roomTypeLabel(o.roomType, locale)}`, cs: `Ubytování: ${o.nights} nocí, ${o.roomType}` }, locale),
     `${t({ uk: "Харчування", cs: "Strava" }, locale)}: ${boardLabel(o.board, locale)}`,
     t({ uk: "Представник туроператора на місці", cs: "Delegát CK na místě" }, locale),
     t({ uk: "Страхування туроператора від банкрутства (за законом)", cs: "Pojištění CK proti úpadku (ze zákona)" }, locale),
@@ -70,6 +71,14 @@ function extras(locale: Locale): string[] {
     t({ uk: "Віза, якщо потрібна, — перевірю ще до бронювання", cs: "Vízum, pokud je potřeba – ověřím ještě před rezervací" }, locale),
     t({ uk: "Сусідні місця в літаку й додатковий багаж", cs: "Místa vedle sebe v letadle a zavazadlo navíc" }, locale),
   ];
+}
+
+/**
+ * `--amt`: width of a formatted price in em of Unbounded Black. Digits, caps and the grouping spaces measure
+ * ~0.73em per character ("79 990 CZK" = 7.2–7.3em, "79 990 Kč" = 6.25em); 0.75 keeps a margin.
+ */
+function amountFit(amount: string): CSSProperties {
+  return { "--amt": (amount.length * 0.75).toFixed(2) } as CSSProperties;
 }
 
 // Tour data comes from tours(): regenerate every 30 min instead of per request,
@@ -114,6 +123,7 @@ export default async function OfferPage({ params }: Props) {
   const dict = getDictionary(locale);
   const { hotel } = offer;
   const tgMessage = offerTelegramMessage(offer, locale);
+  const price = formatMoney(offer.pricePerPerson, locale);
   const summary = `${hotel.name} ${hotel.stars}*, ${formatDateRange(offer.departureDate, offer.returnDate, locale)}, ${offer.nights} ${dict.common.nights}, ${offer.board}`;
 
   const facts: Array<[string, string]> = [
@@ -124,7 +134,8 @@ export default async function OfferPage({ params }: Props) {
       `${transportLabel(offer.transport, locale)}${offer.departureAirport ? `, ${airportLabel(offer.departureAirport, locale)}` : ""}`,
     ],
     [t(tx.board, locale), `${boardLabel(offer.board, locale)} (${offer.board})`],
-    [t(tx.room, locale), offer.roomType],
+    // Glued: a one-letter preposition ("pokoj s výhledem") never ends a line.
+    [t(tx.room, locale), glue(roomTypeLabel(offer.roomType, locale))],
     [t(tx.operator, locale), offer.touroperator],
   ];
 
@@ -160,12 +171,19 @@ export default async function OfferPage({ params }: Props) {
         </div>
       </Container>
 
-      <Container className="grid gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-10">
-        <div className="min-w-0">
+      {/* minmax(0,1fr) also below lg: an auto track would grow to the widest unbreakable content (the aside price)
+          and push both the column and the aside past the panel on a 320px phone. */}
+      <Container className="grid grid-cols-[minmax(0,1fr)] gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-10">
+        {/* @container: the H1 is sized against this column, so a long provider name (INTERCONTINENTAL,
+            STEIGENBERGER) shrinks until its longest word fits instead of splitting mid-word; short names keep the clamp. */}
+        <div className="@container min-w-0">
           <p className="eyebrow text-ink/75">
             <HotelLocation hotel={hotel} locale={locale} />
           </p>
-          <h1 className={`mt-2 text-balance font-display text-[clamp(1.9rem,4.4vw,3.6rem)] font-black uppercase ${displayLeading(hotel.name)} tracking-[-0.03em]`}>
+          <h1
+            className={`mt-2 text-balance font-display text-[min(var(--fit),clamp(1.9rem,4.4vw,3.6rem))] font-black uppercase ${displayLeading(hotel.name)} tracking-[-0.03em]`}
+            style={fitLongestWord(hotel.name)}
+          >
             {hotel.name} <span className="align-middle text-[0.42em]"><Stars n={hotel.stars} locale={locale} /></span>
           </h1>
           <div className="mt-4 flex flex-wrap items-center gap-4">
@@ -175,12 +193,14 @@ export default async function OfferPage({ params }: Props) {
             </Link>
           </div>
 
-          <dl className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+          {/* Columns follow the column width (@container): one tile per row on a 320px phone, where a half-width
+              tile is narrower than "Dvoulůžkový", two from 17.5rem, three from 30rem. */}
+          <dl className="mt-8 grid grid-cols-1 gap-2 @min-[17.5rem]:grid-cols-2 @min-[30rem]:grid-cols-3 sm:gap-3">
             {facts.map(([k, v], i) => (
               <div key={k} className={`min-w-0 rounded-[1.5rem] px-4 py-4 sm:px-5 ${i === 0 ? "bg-yellow" : i === 3 ? "bg-ice" : "bg-grey"}`}>
                 {/* Tighter tracking than the global eyebrow: ТУРОПЕРАТОР is one word and must fit a half-width tile. */}
                 <dt className="eyebrow tracking-[0.12em] text-ink/80">{k}</dt>
-                <dd className="mt-1.5 font-semibold leading-snug">{v}</dd>
+                <dd className="mt-1.5 break-words font-semibold leading-snug">{v}</dd>
               </div>
             ))}
           </dl>
@@ -194,10 +214,13 @@ export default async function OfferPage({ params }: Props) {
               opacity={0.3}
               className="[mask-image:linear-gradient(to_bottom,transparent_45%,black_80%)]"
             />
-            <div className="relative">
+            {/* @container: the price is capped to this box (100cqi / --amt), so "26 790 CZK" fits a 320px phone. */}
+            <div className="@container relative">
               <p className="eyebrow text-paper/80">{t(tx.priceTitle, locale)}</p>
               {offer.originalPrice && <p className="mt-3 text-paper/75 line-through">{formatMoney(offer.originalPrice, locale)}</p>}
-              <p className="mt-1 font-display text-4xl font-black leading-none">{formatMoney(offer.pricePerPerson, locale)}</p>
+              <p className="mt-1 whitespace-nowrap font-display text-[min(2.25rem,calc(100cqi_/_var(--amt)))] font-black leading-none" style={amountFit(price)}>
+                {price}
+              </p>
               <p className="mt-1 text-sm text-paper/80">{dict.common.perPerson}</p>
               <p className="mt-3 text-sm">
                 {t(tx.total, locale)}: <strong>{formatMoney(offer.totalPrice, locale)}</strong>
@@ -219,14 +242,21 @@ export default async function OfferPage({ params }: Props) {
 
       {/* "Стоимость тура" (Reference 1): dark photo background with price pill and cards */}
       <Container>
-        <section aria-labelledby="price-title" className="relative isolate overflow-hidden rounded-[2rem] bg-ink p-3 sm:rounded-[2.75rem] sm:p-8 lg:p-12">
+        <section aria-labelledby="price-title" className="@container relative isolate overflow-hidden rounded-[2rem] bg-ink p-3 sm:rounded-[2.75rem] sm:p-8 lg:p-12">
           <Image src={hotel.images[3] ?? hotel.images[0]} alt="" fill sizes="100vw" className="-z-10 object-cover" />
           <div className="absolute inset-0 -z-10 bg-ink/65" />
           <h2 id="price-title" className="px-3 pt-4 font-display text-[clamp(1.8rem,4.2vw,3.4rem)] font-black uppercase leading-none tracking-[-0.03em] text-white sm:px-0 sm:pt-0">
             {t(tx.priceTitle, locale)}
           </h2>
-          <div className="mt-6 inline-flex flex-wrap items-baseline gap-x-4 gap-y-1 rounded-[2rem] bg-white px-6 py-4 sm:rounded-full sm:px-10 sm:py-6">
-            <span className="font-display text-[clamp(2.2rem,6vw,4.8rem)] font-black leading-none tracking-[-0.03em]">{formatMoney(offer.pricePerPerson, locale)}</span>
+          {/* The amount never wraps and is capped to the pill's text box (section width minus the pill padding,
+              divided by the amount's width in em, --amt), so "79 990 CZK" fits a 320px phone; wider screens keep the clamp. */}
+          <div className="mt-6 inline-flex max-w-full flex-wrap items-baseline gap-x-4 gap-y-1 rounded-[2rem] bg-white px-4 py-4 sm:rounded-full sm:px-10 sm:py-6">
+            <span
+              className="whitespace-nowrap font-display text-[min(clamp(2.2rem,6vw,4.8rem),calc((100cqi_-_2rem)_/_var(--amt)))] font-black leading-none tracking-[-0.03em] sm:text-[min(clamp(2.2rem,6vw,4.8rem),calc((100cqi_-_5rem)_/_var(--amt)))]"
+              style={amountFit(price)}
+            >
+              {price}
+            </span>
             <span className="text-lg font-semibold text-ink/80">{dict.common.perPerson}</span>
           </div>
           <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-[1.2fr_1fr]">

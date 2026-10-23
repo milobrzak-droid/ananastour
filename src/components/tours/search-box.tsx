@@ -76,7 +76,7 @@ function Field({
   return (
     <div
       className={`relative flex min-w-0 flex-col rounded-[1.25rem] bg-paper ring-1 ring-ink/5 xl:rounded-full transition focus-within:ring-2 focus-within:ring-ink ${
-        compact ? "px-5 py-1.5" : "px-5 py-2.5"
+        compact ? "px-5 py-1.5 xl:px-4" : "px-5 py-2.5 xl:px-4"
       }`}
     >
       <label htmlFor={htmlFor} className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-ink/75">
@@ -207,11 +207,14 @@ export function SearchBox({
   const control = "w-full min-w-0 bg-transparent font-semibold text-ink outline-none";
   const id = (k: string) => `${uid}-${k}`;
 
+  // One row from xl. The date columns have a floor of 10.25rem: a native date field needs ~8.1rem for an empty
+  // "mm/dd/yyyy" / "дд.мм.рррр" plus its calendar icon, and at 1280px plain fr shares left it ~7.4rem ("mm/dd/yyy").
+  // The space comes from destination and travellers, which have room to spare.
   return (
     <form
       onSubmit={submit}
       role="search"
-      className={`grid gap-2 sm:grid-cols-2 xl:grid-cols-[1.25fr_1fr_1fr_1.05fr_1.3fr_auto] ${
+      className={`grid gap-2 sm:grid-cols-2 xl:grid-cols-[1.15fr_minmax(10.25rem,1fr)_minmax(10.25rem,1fr)_1fr_1.25fr_auto] ${
         compact ? "rounded-[1.75rem] bg-white p-2 xl:rounded-full" : "rounded-[2rem] bg-white p-3 shadow-[0_20px_50px_-30px_rgba(30,34,53,0.5)] sm:p-3 xl:rounded-full"
       }`}
     >

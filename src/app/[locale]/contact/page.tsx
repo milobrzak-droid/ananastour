@@ -29,7 +29,9 @@ const copy = {
   },
   // Telegram card: a person instead of a call-centre queue.
   tgTitle: { uk: "Чат замість черги", cs: "Chat místo fronty" },
-  tgReply: { uk: "Зазвичай за 15 хв · 9:00–21:00", cs: "Obvykle do 15 min · 9–21 h" },
+  // Fixed-width status pill: one line at 320px, so the hours use the stamp's short form (9–21);
+  // NBSP before "·" and word joiners keep the time range in one piece.
+  tgReply: { uk: "Зазвичай за 15\u00A0хв\u00A0· 9–\u206021", cs: "Obvykle do 15\u00A0min\u00A0· 9–\u206021\u00A0h" },
   tgText: {
     uk: "Без кол-центру й «ваш дзвінок дуже важливий для нас». Напишіть, куди, коли й скільки вас, — відповім особисто, українською чи чеською.",
     cs: "Žádné call centrum, žádné „váš hovor je pro nás důležitý“. Napište kam, kdy a kolik vás je – odpovím osobně, česky i ukrajinsky.",
@@ -99,7 +101,7 @@ function ContactRow({ label, icon, children }: { label: string; icon: ReactNode;
         </span>
         {label}
       </dt>
-      <dd className="mt-0.5 min-w-0 text-lg font-semibold">{children}</dd>
+      <dd className="mt-0.5 min-w-0 text-pretty text-base font-semibold min-[360px]:text-lg">{children}</dd>
     </div>
   );
 }
@@ -155,10 +157,11 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       {/* Telegram — the primary option */}
       <Container className="pt-3">
         <div className="relative isolate overflow-hidden rounded-[2rem] bg-telegram p-6 text-white sm:rounded-[2.5rem] sm:p-12">
-          <PineappleSlice kind="ring" size={340} color="rgba(255,255,255,0.10)" texture={false} className="absolute -bottom-32 -left-24 -z-10" />
+          {/* From lg the ring moves to the QR corner so it never sits behind the white paragraph. */}
+          <PineappleSlice kind="ring" size={340} color="rgba(255,255,255,0.10)" texture={false} className="absolute -bottom-32 -left-24 -z-10 lg:left-auto lg:-right-24" />
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
             <div>
-              <span className="inline-flex items-center gap-2 shape-pill bg-ink/30 px-4 py-1.5 text-sm font-bold text-white">
+              <span className="inline-flex max-w-full items-center gap-2 shape-pill bg-ink/30 px-4 py-1.5 text-sm font-bold text-white">
                 <span className="relative flex h-2.5 w-2.5" aria-hidden>
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-300 opacity-75" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-300" />
@@ -166,15 +169,20 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 {t(copy.tgReply, locale)}
               </span>
               <h2 className="mt-5 font-display text-[clamp(2rem,5vw,4rem)] font-black uppercase leading-[1.08] tracking-[-0.03em]">{t(copy.tgTitle, locale)}</h2>
-              <div className="mt-5 flex items-center gap-4">
+              {/* The handle never splits: fluid size keeps it beside the avatar (inline icon drops below 400px),
+                  and flex-wrap moves it under the avatar if a longer handle still doesn't fit. */}
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <AljonaAvatar size={60} ring="white" />
                 <a
                   href={telegramLink(dict.contact.prefillGeneral)}
                   target="_blank"
                   rel="noopener"
-                  className="inline-flex min-h-11 min-w-0 items-center gap-2 break-all font-display text-lg font-bold text-white hover:underline sm:gap-3 sm:text-3xl"
+                  className="inline-flex min-h-11 items-center gap-2 whitespace-nowrap font-display text-[clamp(0.95rem,4.6vw,1.125rem)] font-bold text-white hover:underline sm:gap-3 sm:text-3xl"
                 >
-                  <TelegramIcon size={30} />@{username}
+                  <span className="shrink-0 max-[400px]:hidden">
+                    <TelegramIcon size={30} />
+                  </span>
+                  @{username}
                 </a>
               </div>
               <p className="mt-4 max-w-xl text-white">{t(copy.tgText, locale)}</p>
@@ -192,7 +200,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       <Container className="py-4 sm:py-6">
         <div className="grid gap-3 sm:gap-4 lg:grid-cols-[1fr_1.35fr]">
           <div className="flex flex-col gap-3 sm:gap-4">
-            <div className="relative flex-1 overflow-hidden rounded-[2rem] bg-red p-7 text-white sm:rounded-[2.5rem] sm:p-10">
+            <div className="relative flex-1 overflow-hidden rounded-[2rem] bg-red p-5 text-white min-[360px]:p-7 sm:rounded-[2.5rem] sm:p-10">
               <PineappleSlice kind="half" size={220} rotate={-120} color="rgba(255,255,255,0.12)" texture={false} className="absolute -right-16 -top-16" />
               <h2 className="relative font-display text-3xl font-black uppercase leading-tight sm:text-4xl">{t(copy.contactsTitle, locale)}</h2>
               <dl className="relative mt-6 divide-y divide-white/25">
@@ -207,12 +215,13 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   </a>
                 </ContactRow>
                 <ContactRow label={t(copy.email, locale)} icon={ico.mail}>
-                  <a href={`mailto:${site.contact.email}`} className="break-all hover:underline">
+                  <a href={`mailto:${site.contact.email}`} className="[overflow-wrap:anywhere] hover:underline">
                     {site.contact.email}
                   </a>
                 </ContactRow>
                 <ContactRow label={t(copy.hours, locale)} icon={ico.clock}>
-                  {t(site.contact.hours, locale)}
+                  {/* Word joiners after the dashes: the hours only wrap at the space ("Пн–Нд / 9:00–21:00"). */}
+                  {t(site.contact.hours, locale).replace(/–/g, "–⁠")}
                 </ContactRow>
                 <ContactRow label={t(copy.address, locale)} icon={ico.pin}>
                   {t(site.contact.address, locale)}

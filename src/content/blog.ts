@@ -396,7 +396,7 @@ export const posts: Post[] = [
         {
           type: "list",
           items: [
-            "Біометричний закордонний паспорт із запасом строку дії (часто 3–6 місяців після повернення).",
+            "Біометричний закордонний паспорт із запасом строку дії (часто 3⁠–⁠6 місяців після повернення).",
             "Документ про перебування в Чехії.",
             "Страховий поліс і номер асистансу.",
             "Ваучер, квитки й деталі трансферу — я надішлю їх у Telegram.",
@@ -461,7 +461,7 @@ export const posts: Post[] = [
         {
           type: "list",
           items: [
-            "Biometrický cestovní pas s rezervou platnosti (často 3–6 měsíců po návratu).",
+            "Biometrický cestovní pas s rezervou platnosti (často 3⁠–⁠6 měsíců po návratu).",
             "Doklad o pobytu v Česku.",
             "Pojistka a číslo asistenční služby.",
             "Voucher, letenky a informace k transferu – všechno vám pošlu na Telegram.",

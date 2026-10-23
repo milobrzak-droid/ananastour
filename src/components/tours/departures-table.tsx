@@ -1,10 +1,11 @@
+import { glue } from "@/components/home/typo";
 import { ArrowButton, Pill } from "@/components/ui";
 import { t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { routes } from "@/i18n/routes";
 import { formatMoney } from "@/lib/format";
 import type { OfferWithHotel } from "@/lib/tours/types";
-import { airportLabel, boardLabel, dateRangeLabel } from "./labels";
+import { airportLabel, boardLabel, dateRangeLabel, roomTypeLabel } from "./labels";
 
 const tx = {
   date: { uk: "Дати", cs: "Termín" },
@@ -69,7 +70,8 @@ export function DeparturesTable({ offers, locale }: { offers: OfferWithHotel[]; 
                   )}
                 </td>
                 <td className="px-3 py-3">
-                  <p>{o.roomType}</p>
+                  {/* Glued: "pokoj s / výhledem" never leaves the one-letter preposition at a line end. */}
+                  <p>{glue(roomTypeLabel(o.roomType, locale))}</p>
                   <p className="text-xs text-ink/75">
                     {boardLabel(o.board, locale)} ({o.board})
                   </p>
@@ -104,7 +106,7 @@ export function DeparturesTable({ offers, locale }: { offers: OfferWithHotel[]; 
                 {SEP}
                 <span className="whitespace-nowrap">{boardLabel(o.board, locale)}</span>
                 {SEP}
-                {o.roomType}
+                {glue(roomTypeLabel(o.roomType, locale))}
               </p>
               <p className="text-xs text-ink/75">
                 <span className="whitespace-nowrap">{o.touroperator}</span>

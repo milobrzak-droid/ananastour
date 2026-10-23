@@ -20,7 +20,8 @@ const copy = {
   minutes: { uk: "хв читання", cs: "min čtení" },
   related: { uk: "Де це знадобиться", cs: "Kde se to hodí" },
   more: { uk: "Що ще варто знати", cs: "Co ještě vědět" },
-  ctaTitle: { uk: "Куди? Коли? Скільки вас?", cs: "Kam? Kdy? Kolik vás?" },
+  // NBSP: «Скільки вас?» stays one unit, so «ВАС?» never hangs alone on the last line.
+  ctaTitle: { uk: "Куди? Коли? Скільки вас?", cs: "Kam? Kdy? Kolik vás?" },
   ctaText: {
     uk: "Три відповіді в Telegram — і я почну шукати. А питання про вашу ситуацію просто допишіть у повідомлення.",
     cs: "Tři odpovědi na Telegram a začnu hledat. Řešíte něco konkrétního? Rovnou to připište do zprávy.",
@@ -134,17 +135,18 @@ export default async function PostPage({ params }: { params: Params }) {
       <section className="pb-16">
         <Container>
           <h2 className="font-display text-2xl font-black uppercase sm:text-3xl">{t(copy.more, locale)}</h2>
-          <ul className="mt-5 grid gap-4 md:grid-cols-3">
+          {/* 3 columns only from lg: at 768 a third of the row minus the photo left ~100px, one word per line. */}
+          <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {others.map((p) => (
               <li key={p.slug}>
                 <Link
                   href={routes.post(locale, p.slug)}
                   className="group flex h-full items-center gap-4 rounded-full bg-white p-3 pr-6 transition hover:bg-yellow"
                 >
-                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full">
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full lg:h-20 lg:w-20">
                     <Image src={p.image} alt="" fill sizes="80px" className="object-cover" />
                   </div>
-                  <span className="font-display font-bold leading-tight group-hover:underline">{t(p.title, locale)}</span>
+                  <span className="min-w-0 text-balance font-display font-bold leading-tight group-hover:underline">{t(p.title, locale)}</span>
                 </Link>
               </li>
             ))}

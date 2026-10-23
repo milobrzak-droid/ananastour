@@ -74,7 +74,7 @@ export const destinations: Destination[] = [
       "Готелів тут тисячі, і на фото в усіх однаково блакитний басейн. Я підкажу, де справді пологий вхід у море, де анімація до ночі, а де тиша й сосни.",
       "Hotelů jsou tu tisíce a na fotkách mají všechny stejně modrý bazén. Řeknu vám, kde je opravdu pozvolný vstup do moře, kde jede animace do noci a kde je jen klid a borovice.",
     ),
-    bestSeason: tx("травень–жовтень", "květen–říjen"),
+    bestSeason: tx("травень\u2060–\u2060жовтень", "květen\u2060–\u2060říjen"),
     flightTime: tx("≈ 3 год з Праги", "cca 3 h z Prahy"), // TODO(client): verify
     airports: ALL_CZ, // TODO(client): verify seasonal departures
     currency: tx("турецька ліра (TRY)", "turecká lira (TRY)"),
@@ -140,7 +140,7 @@ export const destinations: Destination[] = [
         title: tx("Розетки", "Zásuvky"),
         text: tx(
           "Як у Чехії: тип F, 230 В. Перехідник можна спокійно лишити вдома.",
-          "Stejné jako v Česku: typ F, 230 V. Adaptér klidně nechte doma.",
+          "Stejné jako v Česku: typ F, 230 V. Adaptér klidně nechte doma.",
         ),
       },
       {
@@ -227,7 +227,7 @@ export const destinations: Destination[] = [
       "Коли в Чехії сіро й мокро, Червоне море лишається теплим, а рейси сюди є цілий рік. Головне — обрати правильну бухту: підкажу, де взимку менше вітру, а де найкращий риф.",
       "Když je v Česku šedivo a mokro, Rudé moře je pořád teplé – a létá se sem celý rok. Jde jen o to vybrat správnou zátoku: poradím, kde v zimě tolik nefouká a kde je nejhezčí útes.",
     ),
-    bestSeason: tx("цілий рік, найкраще — жовтень–травень", "celoročně, nejlépe říjen–květen"),
+    bestSeason: tx("цілий рік, найкраще — жовтень\u2060–\u2060травень", "celoročně, nejlépe říjen\u2060–\u2060květen"),
     flightTime: tx("≈ 4,5 год з Праги", "cca 4,5 h z Prahy"), // TODO(client): verify
     airports: ALL_CZ, // TODO(client): verify seasonal departures
     currency: tx("єгипетський фунт (EGP)", "egyptská libra (EGP)"),
@@ -374,7 +374,7 @@ export const destinations: Destination[] = [
       "Греція — це щонайменше чотири різні відпустки: Крит, коли хочеться всього одразу, Халкідікі для сімей, Родос для історії, Санторіні для заходів сонця. Скажіть, яка з них ваша, — і я підберу готель.",
       "Řecko, to jsou nejmíň čtyři dovolené: Kréta, když chcete všechno najednou, Chalkidiki pro rodiny, Rhodos pro historii a Santorini pro západy slunce. Řekněte, která je ta vaše, a já k ní najdu hotel.",
     ),
-    bestSeason: tx("травень–жовтень", "květen–říjen"),
+    bestSeason: tx("травень\u2060–\u2060жовтень", "květen\u2060–\u2060říjen"),
     flightTime: tx("≈ 2,5–3 год з Праги", "cca 2,5–3 h z Prahy"), // TODO(client): verify
     airports: ALL_CZ, // TODO(client): verify seasonal departures
     currency: tx("євро (EUR)", "euro (EUR)"),
@@ -515,7 +515,7 @@ export const destinations: Destination[] = [
       "Найближче море, до якого з Чехії можна й долетіти, і доїхати автобусом. Літаком до Бургаса чи Варни — близько двох годин, а на місці — ситна кухня й помірні ціни.",
       "Nejbližší moře, kam se z Česka dá letět i dojet autobusem. Do Burgasu nebo Varny letíte zhruba dvě hodiny a na místě čeká vydatná kuchyně a příjemné ceny.",
     ),
-    bestSeason: tx("червень–вересень", "červen–září"),
+    bestSeason: tx("червень\u2060–\u2060вересень", "červen\u2060–\u2060září"),
     flightTime: tx("≈ 2 год з Праги", "cca 2 h z Prahy"), // TODO(client): verify
     airports: ALL_CZ, // TODO(client): verify seasonal departures
     // TODO(client): verify — Bulgaria adopted the euro on 1 Jan 2026.
@@ -658,7 +658,7 @@ export const destinations: Destination[] = [
       "Емірати — найкоротший шлях від чеського листопада до літа: прямий переліт, а з жовтня до квітня — тепло без сорокаградусної спеки. Підкажу, де жити: у Дубаї, спокійному Абу-Дабі чи в Рас-ель-Хаймі.",
       "Emiráty jsou nejkratší cesta z českého listopadu do léta: přímý let a od října do dubna teplo bez čtyřicetistupňových veder. Poradím, kde bydlet: v Dubaji, v klidném Abú Dhabí, nebo v Ras Al Khaimah.",
     ),
-    bestSeason: tx("жовтень–квітень", "říjen–duben"),
+    bestSeason: tx("жовтень\u2060–\u2060квітень", "říjen\u2060–\u2060duben"),
     flightTime: tx("≈ 6 год з Праги", "cca 6 h z Prahy"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("дирхам ОАЕ (AED)", "dirham SAE (AED)"),
@@ -805,7 +805,7 @@ export const destinations: Destination[] = [
       "Тут один острів — один готель, тож від вибору острова залежить усе: риф, пляж, трансфер і ціна вечері. Я порівняю резорти й гестхауси в межах вашого бюджету й продумаю зручний переліт.",
       "Tady platí: jeden ostrov, jeden hotel. Na výběru ostrova proto závisí všechno – útes, pláž, transfer i cena večeře. Porovnám hotely i menší penziony podle vašeho rozpočtu a vymyslím pohodlný let.",
     ),
-    bestSeason: tx("листопад–квітень", "listopad–duben"),
+    bestSeason: tx("листопад\u2060–\u2060квітень", "listopad\u2060–\u2060duben"),
     flightTime: tx("≈ 10–12 год (з пересадкою або чартером)", "cca 10–12 h (s přestupem nebo charterem)"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("руфія (MVR), на курортах — USD", "maledivská rupie (MVR), v hotelech USD"),
@@ -952,7 +952,7 @@ export const destinations: Destination[] = [
       "Фо ви, найпевніше, вже куштували — в’єтнамська громада в Чехії велика. Але на батьківщині воно ще смачніше, а до нього — море Нячангу, пагоди й неспішний ритм, який швидко стає вашим.",
       "Phở jste v Česku nejspíš už ochutnali – vietnamská komunita je tu velká. Ve Vietnamu ale chutná ještě líp a k tomu moře v Nha Trangu, pagody a pomalý rytmus, kterému rychle propadnete.",
     ),
-    bestSeason: tx("лютий–вересень (Нячанг)", "únor–září (Nha Trang)"),
+    bestSeason: tx("лютий\u2060–\u2060вересень (Нячанг)", "únor\u2060–\u2060září (Nha Trang)"),
     flightTime: tx("≈ 12–15 год з пересадкою", "cca 12–15 h s přestupem"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("в’єтнамський донг (VND)", "vietnamský dong (VND)"),
@@ -1092,7 +1092,7 @@ export const destinations: Destination[] = [
       "Іспанія — це дві відпустки в одній країні: літнє Середземномор’я з Барселоною й Майоркою та Канари, де тепло навіть у січні. Скажіть, що вам ближче, — і я підберу острів чи узбережжя.",
       "Španělsko nabízí dvě dovolené v jedné zemi: letní Středomoří s Barcelonou a Mallorkou, nebo Kanáry, kde je teplo i v lednu. Řekněte, co je vám bližší, a já vyberu ostrov či pobřeží.",
     ),
-    bestSeason: tx("червень–вересень; Канари — цілий рік", "červen–září; Kanáry celoročně"),
+    bestSeason: tx("червень\u2060–\u2060вересень; Канари — цілий рік", "červen\u2060–\u2060září; Kanáry celoročně"),
     flightTime: tx("≈ 2,5 год (Майорка), ≈ 5 год (Канари)", "cca 2,5 h (Mallorca), cca 5 h (Kanáry)"), // TODO(client): verify
     airports: ["PRG", "BRQ", "OSR"], // TODO(client): verify
     currency: tx("євро (EUR)", "euro (EUR)"),
@@ -1238,7 +1238,7 @@ export const destinations: Destination[] = [
       "Той самий краєвид, що на заставці робочого комп’ютера, — тільки наживо й з теплим морем. Підкажу, що вам ближче: хвилі Атлантики чи спокійне Карибське море, — і підберу резорт, де вам буде добре.",
       "Přesně ta pláž, kterou máte na tapetě pracovního počítače – jen naživo a s teplým mořem. Poradím, co je vám bližší, jestli vlny Atlantiku, nebo klidné Karibské moře, a vyberu hotel, který vám sedne.",
     ),
-    bestSeason: tx("листопад–квітень", "listopad–duben"),
+    bestSeason: tx("листопад\u2060–\u2060квітень", "listopad\u2060–\u2060duben"),
     flightTime: tx("≈ 10–11 год з Праги (чартер)", "cca 10–11 h z Prahy (charter)"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("домініканське песо (DOP), USD", "dominikánské peso (DOP), USD"),
@@ -1385,7 +1385,7 @@ export const destinations: Destination[] = [
       "Італія зовсім поруч: літаком — до двох годин, а можна доїхати й автобусом. Скажіть, чого хочеться більше — моря, міст чи всього одразу, — і я складу таку відпустку.",
       "Itálie je skoro za rohem: letadlem do dvou hodin a dojet se dá i autobusem. Řekněte, co vás táhne víc – moře, města, nebo všechno najednou – a já vám takovou dovolenou poskládám.",
     ),
-    bestSeason: tx("квітень–жовтень; море — червень–вересень", "duben–říjen; k moři červen–září"),
+    bestSeason: tx("квітень\u2060–\u2060жовтень; море — червень\u2060–\u2060вересень", "duben\u2060–\u2060říjen; k moři červen\u2060–\u2060září"),
     flightTime: tx("≈ 1,5–2 год з Праги", "cca 1,5–2 h z Prahy"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("євро (EUR)", "euro (EUR)"),
@@ -1532,7 +1532,7 @@ export const destinations: Destination[] = [
       "Летіти сюди довго, тож я продумаю зручну пересадку — і, якщо хочете, зупинку в Дубаї чи Сінгапурі. А на місці підкажу, де оселитися: серед джунглів Убуду чи на пляжах Нуса-Дуа.",
       "Letí se sem dlouho, proto vymyslím pohodlný přestup – a když budete chtít, i zastávku v Dubaji nebo Singapuru. Na místě pak poradím, kde bydlet: v džungli u Ubudu, nebo na plážích Nusa Dua.",
     ),
-    bestSeason: tx("квітень–жовтень (сухий сезон)", "duben–říjen (období sucha)"),
+    bestSeason: tx("квітень\u2060–\u2060жовтень (сухий сезон)", "duben\u2060–\u2060říjen (období sucha)"),
     flightTime: tx("≈ 16–20 год з пересадкою", "cca 16–20 h s přestupem"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("індонезійська рупія (IDR)", "indonéská rupie (IDR)"),
@@ -1673,7 +1673,7 @@ export const destinations: Destination[] = [
       "Острів біля узбережжя Танзанії, де пахне гвоздикою й корицею, а взимку з Чехії літають прямі чартери. Підкажу, де жити: на півночі, щоб купатися без відпливів, чи на сході — заради кайту.",
       "Ostrov u pobřeží Tanzanie, kde to voní hřebíčkem a skořicí a kam v zimě létají přímé chartery z Česka. Poradím, kde bydlet: na severu, kde koupání nekazí odliv, nebo na východě, kam se jezdí za kitem.",
     ),
-    bestSeason: tx("червень–жовтень, грудень–лютий", "červen–říjen, prosinec–únor"),
+    bestSeason: tx("червень\u2060–\u2060жовтень, грудень\u2060–\u2060лютий", "červen\u2060–\u2060říjen, prosinec\u2060–\u2060únor"),
     flightTime: tx("≈ 9 год з Праги (чартер)", "cca 9 h z Prahy (charter)"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("танзанійський шилінг (TZS), USD", "tanzanský šilink (TZS), USD"),

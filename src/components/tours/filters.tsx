@@ -16,7 +16,8 @@ const tx = {
   stars: { uk: "Зірковість", cs: "Hvězdičky" },
   transport: { uk: "Транспорт", cs: "Doprava" },
   airports: { uk: "Звідки летите", cs: "Odkud letíte" },
-  price: { uk: "Бюджет на всіх, Kč", cs: "Celkový rozpočet, Kč" },
+  // uk prices read "26 790 CZK" (formatMoney), so the uk budget label names the same unit.
+  price: { uk: "Бюджет на всіх, CZK", cs: "Celkový rozpočet, Kč" },
   apply: { uk: "Показати", cs: "Zobrazit" },
   operators: { uk: "Туроператор", cs: "Cestovní kancelář" },
   reset: { uk: "Скинути фільтри", cs: "Zrušit filtry" },
@@ -51,11 +52,18 @@ export function activeFilterCount(p: SearchParams): number {
   );
 }
 
+/**
+ * Group heading. The legend is floated, so it no longer sits in the fieldset's top border: the border is a
+ * full-width rule above the group and a long legend ("CELKOVÝ ROZPOČET, KČ", two lines) wraps freely below it,
+ * instead of leaving a few-pixel stub of rule after the text.
+ */
+const legendClass = "float-left mb-2 w-full text-balance font-display text-sm font-bold uppercase tracking-wider text-ink/70";
+
 function Group({ title, children }: { title: string; children: ReactNode }) {
   return (
     <fieldset className="border-t border-ink/10 py-4 first:border-t-0 first:pt-0">
-      <legend className="mb-2 pr-3 font-display text-sm font-bold uppercase tracking-wider text-ink/70">{title}</legend>
-      <ul className="flex flex-col gap-1">{children}</ul>
+      <legend className={legendClass}>{title}</legend>
+      <ul className="clear-left flex flex-col gap-1">{children}</ul>
     </fieldset>
   );
 }
@@ -156,10 +164,8 @@ export function Filters({
       </Group>
 
       <fieldset className="border-t border-ink/10 py-4">
-        <legend className="mb-2 text-balance pr-3 font-display text-sm font-bold uppercase tracking-wider text-ink/70">
-          {t(tx.price, locale)}
-        </legend>
-        <form action={routes.tours(locale)} method="get" className="flex gap-2">
+        <legend className={legendClass}>{t(tx.price, locale)}</legend>
+        <form action={routes.tours(locale)} method="get" className="clear-left flex gap-2">
           <HiddenSearchFields params={params} omit={["priceMax"]} />
           <input
             type="number"

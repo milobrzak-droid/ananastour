@@ -67,13 +67,23 @@ function PillColumn({ offer, locale }: { offer: OfferWithHotel; locale: Locale }
       href={routes.offer(locale, offer.id)}
       className="@container group relative isolate flex min-h-[22rem] flex-col items-center justify-between overflow-hidden rounded-[999px] bg-ink px-3 pb-10 pt-4 text-center text-white sm:min-h-[34rem]"
     >
-      <Image src={offer.hotel.images[0]} alt="" fill sizes="(min-width: 1024px) 18vw, 50vw" className="-z-10 object-cover transition duration-700 group-hover:scale-110" />
+      <Image
+        src={offer.hotel.images[0]}
+        alt=""
+        fill
+        sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 22vw, (min-width: 360px) 50vw, 100vw"
+        className="-z-10 object-cover transition duration-700 group-hover:scale-110"
+      />
       <span className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/30 to-ink/0" />
       <ArrowButton label={offer.hotel.name} size={48} direction="down-right" tone="white" />
       <span>
-        {/* Long proper names ("INTERCONTINENTAL DANANG…") shrink to the pill instead of splitting mid-word. */}
+        {/* Long proper names ("INTERCONTINENTAL DANANG…") shrink to the pill instead of splitting mid-word. The grid
+            keeps every pill wide enough for the longest word at the floor (one column under 360px, two pills at lg),
+            so the lg floor can be a legible 0.75rem. Hotel names are English: a future word too long even for that
+            hyphenates by English rules (12+ letters only); breaking anywhere is the last resort, never clipping. */}
         <span
-          className="block font-display text-[clamp(0.6rem,var(--fit),0.95rem)] font-extrabold uppercase leading-tight [overflow-wrap:break-word] lg:text-[clamp(0.6rem,var(--fit),1rem)]"
+          lang="en"
+          className="block font-display text-[clamp(0.6rem,var(--fit),0.95rem)] font-extrabold uppercase leading-tight hyphens-auto [hyphenate-limit-chars:12_5_5] [overflow-wrap:break-word] lg:text-[clamp(0.75rem,var(--fit),1rem)]"
           style={fitLongestWord(offer.hotel.name)}
         >
           {offer.hotel.name}
@@ -105,12 +115,14 @@ export function Featured({ offers, locale }: { offers: OfferWithHotel[]; locale:
         </div>
 
         {first && (
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5">
-            <div className="col-span-2">
+          // Under 360px two pills side by side are too narrow for a long hotel word, so they stack. At lg (1024–1279)
+          // a 5-column row squeezed the pills to ~145px (names fell to ~9.6px): lg shows two pills, xl all three.
+          <div className="grid grid-cols-2 gap-3 max-[359px]:grid-cols-1 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5">
+            <div className="col-span-2 max-[359px]:col-span-1">
               <WideCard offer={first} locale={locale} />
             </div>
             {rest.map((o, i) => (
-              <div key={o.id} className={i === 2 ? "hidden lg:block" : ""}>
+              <div key={o.id} className={i === 2 ? "hidden xl:block" : ""}>
                 <PillColumn offer={o} locale={locale} />
               </div>
             ))}

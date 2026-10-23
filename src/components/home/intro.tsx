@@ -55,7 +55,9 @@ const POINTS: RoutePoint[] = [
 function StatLabel({ value, label, className = "" }: { value: string; label: string; className?: string }) {
   return (
     <span className={`block min-w-0 rounded-xl bg-paper/90 px-1.5 py-0.5 leading-tight ${className}`}>
-      <span className="block font-display text-xl font-extrabold [overflow-wrap:break-word]">{value}</span>
+      {/* A stat value is one short word (≤ 7 characters, COPY-GUIDE §8): it never wraps. "Starway" is 5.5em wide,
+          so below 370px the size follows the viewport and still fits the 2-column grid at 320px. */}
+      <span className="block whitespace-nowrap font-display text-[clamp(1rem,5.4vw,1.25rem)] font-extrabold">{value}</span>
       <span className="block text-pretty text-xs text-ink/75">{glue(label)}</span>
     </span>
   );
@@ -64,7 +66,9 @@ function StatLabel({ value, label, className = "" }: { value: string; label: str
 /** Centred tagline framed by a dotted travel route with pins and photo bubbles. */
 export function RouteTagline({ locale }: { locale: Locale }) {
   // Doodle labels wrap at a fixed measure so a longer label grows down, never sideways off the panel.
-  const pinLabel = (i: number) => <StatLabel value={STATS[i].value} label={t(STATS[i].label, locale)} className="max-w-[8.5rem]" />;
+  const pinLabel = (i: number, measure = "max-w-[8.5rem]") => (
+    <StatLabel value={STATS[i].value} label={t(STATS[i].label, locale)} className={measure} />
+  );
   const stops: RouteStop[] = [
     { at: [120, 150], kind: "pin", tone: "red", label: pinLabel(0), labelSide: "left" },
     { at: [250, 70], kind: "photo", src: PHOTOS.island, size: 9.5 },
@@ -75,14 +79,19 @@ export function RouteTagline({ locale }: { locale: Locale }) {
     { at: [870, 210], kind: "pin", tone: "ink", label: pinLabel(2), labelSide: "right" },
     { at: [950, 70], kind: "photo", src: PHOTOS.diving, size: 9.5 },
     // The last pin sits near the right edge: its label hangs below it so it can never run off the panel.
-    { at: [1080, 150], kind: "pin", tone: "yellow", label: pinLabel(3), labelSide: "bottom" },
+    // A narrower measure keeps that centred label clear of the "Starway" label to its left (they read as one run at 1280).
+    { at: [1080, 150], kind: "pin", tone: "yellow", label: pinLabel(3, "max-w-[7rem]"), labelSide: "bottom" },
   ];
 
   const text = (
     <div className="mx-auto max-w-xl px-4 text-center">
       <PineappleSlice kind="ring" size={54} seed={12} className="mx-auto" />
-      <p className="mt-4 text-balance font-display text-2xl font-extrabold uppercase leading-[1.1] sm:text-[2rem]">
-        {t(C.brand, locale)} <span className="normal-case">{glue(t(C.tagline, locale))}</span>
+      {/* The brand never splits and the dash stays on its line (NBSP), so no line starts with "—".
+          "«ANANAS TOUR» —" is ~12em wide: on phones the size follows the viewport so that unit always fits. */}
+      <p className="mt-4 text-balance font-display text-[clamp(1.125rem,6vw,1.5rem)] font-extrabold uppercase leading-[1.1] sm:text-[2rem]">
+        <span className="whitespace-nowrap">{t(C.brand, locale)}</span>
+        {" "}
+        <span className="normal-case">{glue(t(C.tagline, locale))}</span>
       </p>
       <p className="mx-auto mt-3 max-w-md text-pretty text-sm text-ink/75">{glue(t(C.sub, locale))}</p>
     </div>
@@ -101,17 +110,18 @@ export function RouteTagline({ locale }: { locale: Locale }) {
         {/* Mobile / tablet / small laptop: tagline + stats as a compact route */}
         <div className="xl:hidden">
           {text}
-          <ol className="relative mx-auto mt-8 grid max-w-lg grid-cols-2 gap-x-4 gap-y-6 sm:max-w-xl md:max-w-3xl md:grid-cols-4">
+          <ol className="relative mx-auto mt-8 grid max-w-lg grid-cols-2 gap-x-3 gap-y-6 max-[359px]:gap-x-2 sm:max-w-xl md:max-w-3xl md:grid-cols-4">
             {STATS.map((s, i) => (
-              <li key={s.value} className="flex min-w-0 items-center gap-3">
+              <li key={s.value} className="flex min-w-0 items-center gap-3 max-[359px]:gap-2">
                 <span className={`h-3.5 w-3.5 shrink-0 rounded-full border-[3px] border-ink ${i % 2 ? "bg-yellow" : "bg-red"}`} aria-hidden />
                 <StatLabel value={s.value} label={t(s.label, locale)} />
               </li>
             ))}
           </ol>
         </div>
+        {/* Each "·" is glued to the word before it, so it always ends a line and never starts one. */}
         <p className="mt-6 text-balance text-center text-xs font-bold uppercase tracking-[0.2em] text-ink/75">
-          {glue(t(C.airports, locale))}
+          {glue(t(C.airports, locale)).replace(/ · /g, " · ")}
         </p>
       </Container>
     </section>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { t, type Locale } from "@/i18n/config";
 import type { Hotel } from "@/lib/tours/types";
-import { countryName, formatDistance } from "./labels";
+import { countryName, formatDistance, regionLabel } from "./labels";
 
 /** Photo mosaic: one big rounded photo + up to 4 smaller ones. */
 export function HotelGallery({ hotel, max = 5 }: { hotel: Hotel; max?: number }) {
@@ -45,13 +45,15 @@ export function Stars({ n, locale, tone = "light" }: { n: number; locale?: Local
 export function HotelRating({ hotel, locale }: { hotel: Hotel; locale: Locale }) {
   if (!hotel.rating) return null;
   const { score, reviews, source } = hotel.rating;
+  const intl = locale === "uk" ? "uk-UA" : "cs-CZ";
   return (
     <span className="inline-flex items-center gap-2 text-sm">
+      {/* Decimal comma in both languages: "4,2", like "3 240 recenzí" next to it. */}
       <span className="grid h-9 min-w-9 place-items-center shape-pill bg-ink px-2 font-display font-extrabold text-paper">
-        {score.toFixed(1)}
+        {score.toLocaleString(intl, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
       </span>
       <span className="text-ink/70">
-        / 5 · {reviews.toLocaleString(locale === "uk" ? "uk-UA" : "cs-CZ")} {t({ uk: "відгуків", cs: "recenzí" }, locale)}
+        / 5 · {reviews.toLocaleString(intl)} {t({ uk: "відгуків", cs: "recenzí" }, locale)}
         {source === "tripadvisor" ? " (TripAdvisor)" : ""}
       </span>
     </span>
@@ -61,7 +63,7 @@ export function HotelRating({ hotel, locale }: { hotel: Hotel; locale: Locale })
 export function HotelLocation({ hotel, locale }: { hotel: Hotel; locale: Locale }) {
   return (
     <span>
-      {hotel.region}, {countryName(hotel.countrySlug, locale, hotel.country)}
+      {regionLabel(hotel.region, locale)}, {countryName(hotel.countrySlug, locale, hotel.country)}
     </span>
   );
 }

@@ -20,7 +20,8 @@ const copy = {
   },
   minutes: { uk: "хв читання", cs: "min čtení" },
   read: { uk: "Читати далі", cs: "Číst dál" },
-  ctaTitle: { uk: "Куди? Коли? Скільки вас?", cs: "Kam? Kdy? Kolik vás?" },
+  // NBSP: «Скільки вас?» stays one unit, so «ВАС?» never hangs alone on the last line.
+  ctaTitle: { uk: "Куди? Коли? Скільки вас?", cs: "Kam? Kdy? Kolik vás?" },
   ctaText: {
     uk: "Три відповіді в Telegram — і я почну шукати. З 9:00 до 21:00 зазвичай відповідаю за 15 хвилин.",
     cs: "Tři odpovědi na Telegram a začnu hledat. Od 9 do 21 h odpovídám obvykle do 15 minut.",

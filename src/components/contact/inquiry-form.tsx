@@ -8,6 +8,7 @@ import { routes } from "@/i18n/routes";
 import { trackContact } from "@/lib/analytics";
 import { PineappleSpinner } from "@/components/brand/pineapple";
 import { TelegramButton } from "@/components/contact/telegram";
+import { fitLongestWord, glue } from "@/components/home/typo";
 
 /**
  * Inquiry form used across the site. Submits to POST /api/inquiry, which
@@ -240,13 +241,23 @@ export function InquiryForm({
   }
 
   const sending = status === "sending";
+  // Glued (no line starting with "—", no lone "з"/"k"), sized to the form (@container) so the longest
+  // word — ПОВІДОМЛЕННЯ, ПЕРЕДЗВОНЮ — never splits in a narrow card.
+  const heading = glue(title ?? t(tx.title, locale));
 
   return (
     <form onSubmit={onSubmit} className={`@container relative rounded-[2rem] p-6 sm:rounded-[2.5rem] sm:p-9 ${s.card}`} aria-busy={sending}>
-      <h3 className="font-display text-2xl font-extrabold uppercase leading-tight">{title ?? t(tx.title, locale)}</h3>
+      <h3
+        className="font-display text-[clamp(1rem,var(--fit),1.5rem)] font-extrabold uppercase leading-tight text-balance"
+        style={fitLongestWord(heading)}
+      >
+        {heading}
+      </h3>
       {context && <p className={`mt-2 text-sm ${s.muted}`}>{context}</p>}
 
-      <div className="mt-6 grid gap-4 @lg:grid-cols-2">
+      {/* grid-cols-1 = minmax(0,1fr): an implicit auto track would grow to the inputs' intrinsic ~210px and push
+          fields past the padding of a narrow (≈190px) form. */}
+      <div className="mt-6 grid grid-cols-1 gap-4 @lg:grid-cols-2">
         <Field id={`${uid}-name`} label={t(tx.name, locale)} error={invalid.includes("name") ? t(tx.fieldErrors.name, locale) : undefined}>
           <input id={`${uid}-name`} name="name" required minLength={2} maxLength={80} autoComplete="name" className={inputCls("name")} />
         </Field>
@@ -376,10 +387,12 @@ export function InquiryForm({
       )}
 
       <div className="mt-6 flex flex-col gap-4 @md:flex-row @md:items-center">
+        {/* Padding and size follow the form's width (@container), not the viewport, so «Передзвоніть мені» /
+            «Надіслати Альоні» stay on one line even in a doubly padded card on a 320px phone. */}
         <button
           type="submit"
           disabled={sending}
-          className="inline-flex min-h-13 items-center justify-center gap-2 shape-pill bg-red px-9 py-3 text-lg font-bold text-white shadow-[0_12px_28px_-14px_rgba(217,50,25,0.9)] transition hover:bg-red-dark disabled:opacity-70"
+          className="inline-flex min-h-13 items-center justify-center gap-2 text-balance shape-pill bg-red px-4 py-3 text-[0.9375rem] font-bold text-white shadow-[0_12px_28px_-14px_rgba(217,50,25,0.9)] transition hover:bg-red-dark disabled:opacity-70 @[14rem]:px-6 @[14rem]:text-base @[18rem]:px-9 @[18rem]:text-lg"
         >
           {sending ? t(tx.sending, locale) : status === "error" && errorKind !== "validation" ? t(tx.retry, locale) : submitLabel ?? t(tx.submit, locale)}
         </button>
@@ -387,11 +400,11 @@ export function InquiryForm({
       </div>
 
       <p className={`mt-4 text-xs ${s.muted}`}>
-        {t(tx.consentA, locale)}
+        {glue(t(tx.consentA, locale))}
         <Link href={routes.privacy(locale)} className={`${s.link} underline-offset-2`}>
           {t(tx.consentLink, locale)}
         </Link>
-        {t(tx.consentB, locale)}
+        {glue(t(tx.consentB, locale))}
       </p>
     </form>
   );
@@ -416,7 +429,10 @@ function Field({
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className="text-sm font-semibold">
         {label}
-        {hint && <span className={`ml-2 font-normal ${mutedCls}`}>({hint})</span>}
+        {/* A real space (plus ml-1 ≈ the old ml-2) gives a break opportunity: "Побажання(необов’язково)" glued by a
+            bare margin ran ~20px past a narrow form. */}
+        {hint && " "}
+        {hint && <span className={`ml-1 font-normal ${mutedCls}`}>({hint})</span>}
       </label>
       {children}
       {error && <span className="text-sm font-medium text-red">{error}</span>}

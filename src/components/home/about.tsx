@@ -64,8 +64,9 @@ export function AboutTeaser({ locale }: { locale: Locale }) {
             </div>
           </div>
 
-          <div className="@container relative overflow-hidden rounded-[2rem] bg-grey p-6 sm:rounded-[2.5rem] sm:p-9 lg:col-span-2">
-            <PineappleSlice kind="quarter" size={150} rotate={200} seed={8} className="absolute -right-10 -top-12 opacity-80" />
+          <div className="@container relative isolate overflow-hidden rounded-[2rem] bg-grey p-6 sm:rounded-[2.5rem] sm:p-9 lg:col-span-2">
+            {/* Decor sits in the corner and behind the text (isolate + -z-10), so it can never paint over the heading's accents. */}
+            <PineappleSlice kind="quarter" size={150} rotate={200} seed={8} className="absolute -right-14 -top-16 -z-10 opacity-80" />
             <Eyebrow>{t(C.kicker, locale)}</Eyebrow>
             {/* From sm the size follows the card, so "АЛЬОНА" fits the half-width md card; accents get a full leading. */}
             <h2

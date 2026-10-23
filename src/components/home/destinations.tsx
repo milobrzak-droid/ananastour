@@ -4,6 +4,7 @@ import { ArrowButton, ButtonLink, Container, Eyebrow } from "@/components/ui";
 import { destinations } from "@/content/destinations";
 import { t, type Locale } from "@/i18n/config";
 import { routes } from "@/i18n/routes";
+import { glue } from "./typo";
 
 const C = {
   kicker: { uk: "12 країн, 1 чат", cs: "12 zemí, 1 chat" },
@@ -25,7 +26,7 @@ export function Destinations({ locale }: { locale: Locale }) {
           <div className="max-w-2xl">
             <Eyebrow>{t(C.kicker, locale)}</Eyebrow>
             <h2 className="mt-3 font-display text-[clamp(2.2rem,6vw,5rem)] font-black uppercase leading-[0.92] tracking-[-0.035em]">{t(C.title, locale)}?</h2>
-            <p className="mt-4 text-ink/75">{t(C.lead, locale)}</p>
+            <p className="mt-4 text-pretty text-ink/75">{glue(t(C.lead, locale))}</p>
           </div>
           <ButtonLink href={routes.destinations(locale)} variant="outline">
             {t(C.all, locale)} →

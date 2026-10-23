@@ -175,8 +175,9 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <Container className="relative grid items-center gap-12 lg:grid-cols-2">
           <div>
             <p className="eyebrow mb-4 inline-flex items-center gap-2 text-ink/75"><span aria-hidden className="h-2 w-2 rounded-full bg-yellow" />{t(copy.eyebrow, locale)}</p>
-            {/* Sized so "JSEM ALJONA" / "Я АЛЬОНА" stays on one line: full width below lg, half column from lg. */}
-            <h1 className="text-balance font-display text-[clamp(2.1rem,9.2vw,4.6rem)] font-black uppercase leading-[1.08] tracking-[-0.035em] lg:text-[clamp(2.6rem,4.4vw,4rem)]">{t(copy.title, locale)}</h1>
+            {/* Sized so "JSEM ALJONA" / "Я АЛЬОНА" stays on one line: full width below lg, half column from lg.
+                The 1.6rem floor only applies below ~280px, so 9.2vw keeps "JSEM ALJONA" (9.2em) whole at 320. */}
+            <h1 className="text-balance font-display text-[clamp(1.6rem,9.2vw,4.6rem)] font-black uppercase leading-[1.08] tracking-[-0.035em] lg:text-[clamp(2.6rem,4.4vw,4rem)]">{t(copy.title, locale)}</h1>
             <p className="mt-5 max-w-xl text-lg text-ink/80">{t(copy.lead, locale)}</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <TelegramButton locale={locale} source="about-hero" message={prefill} label={t(copy.cta, locale)} size="lg" />
@@ -310,10 +311,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       {/* Why us */}
       <Section title={t(copy.whyTitle, locale)}>
-        <div className="grid gap-6 md:grid-cols-3">
+        {/* Same rhythm as "Moje pravidla": 2 columns at tablet (the third card spans both), 3 only from lg. */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {why.map((w) => (
-            <div key={w.title.uk} className="rounded-[2rem] bg-ice p-8 sm:rounded-[2.5rem]">
-              <h3 className="font-display text-xl font-extrabold">{t(w.title, locale)}</h3>
+            <div key={w.title.uk} className="min-w-0 rounded-[2rem] bg-ice p-8 sm:rounded-[2.5rem] sm:last:col-span-2 lg:last:col-span-1">
+              <h3 className="text-balance font-display text-xl font-extrabold">{t(w.title, locale)}</h3>
               <p className="mt-3 text-ink/75">{t(w.text, locale)}</p>
             </div>
           ))}

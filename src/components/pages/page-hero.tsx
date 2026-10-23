@@ -20,10 +20,11 @@ export function PageHero({
 }) {
   // Two-sentence manifestos ("Sladké vám. Pichlavé nám.") get a fluid size that keeps each
   // sentence on one line (≈14 chars of Unbounded Black at every width, also beside the lg aside),
-  // so nothing dangles. Short titles keep the giant size.
+  // so nothing dangles. Short titles keep the giant size. The phone minimum (1.2rem) never wins
+  // above ~305px, so the vw term keeps "СОЛОДКЕ — ВАМ." (11.4em) inside the 236px column at 320.
   const size =
     typeof title === "string" && title.length > 18
-      ? "text-[clamp(1.4rem,8.4vw_-_0.4rem,2.75rem)] sm:text-[clamp(2.5rem,8vw_-_0.9rem,4.6rem)] lg:text-[clamp(2.9rem,8.4vw_-_2.5rem,4.6rem)]"
+      ? "text-[clamp(1.2rem,8.4vw_-_0.4rem,2.75rem)] sm:text-[clamp(2.5rem,8vw_-_0.9rem,4.6rem)] lg:text-[clamp(2.9rem,8.4vw_-_2.5rem,4.6rem)]"
       : "text-[clamp(2.1rem,5.6vw,4.6rem)]";
   return (
     <section className="pb-4 pt-2 sm:pt-4">

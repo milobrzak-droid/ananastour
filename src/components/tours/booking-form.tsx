@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useId, useState, type FormEvent, type ReactNode } from "react";
 import { TelegramButton } from "@/components/contact/telegram";
+import { glue } from "@/components/home/typo";
 import { Button, Pill } from "@/components/ui";
 import { t, type Locale } from "@/i18n/config";
 import { routes } from "@/i18n/routes";
@@ -61,9 +62,10 @@ const tx = {
     cs: "Dobrý den, Aljono! Píšu kvůli žádosti o rezervaci z webu, číslo:",
   },
   prefer: { uk: "Не любите форми?", cs: "Formuláře nemusíte?" },
+  // No-break spaces keep the hour range whole ("з 9:00 до 21:00", "od 9 do 21 h"); glue() binds the rest.
   preferText: {
-    uk: "Напишіть Альоні в Telegram: з 9:00 до 21:00 вона зазвичай відповідає за 15 хвилин.",
-    cs: "Napište Aljoně na Telegram: od 9 do 21 h odpovídá obvykle do 15 minut.",
+    uk: "Напишіть Альоні в Telegram: з 9:00 до\u00A021:00 вона зазвичай відповідає за 15 хвилин.",
+    cs: "Napište Aljoně na Telegram: od\u00A09 do\u00A021 h odpovídá obvykle do 15 minut.",
   },
   ask: { uk: "Запитати Альону", cs: "Zeptat se Aljony" },
 };
@@ -273,7 +275,8 @@ export function BookingForm({
       <div className="mt-4 flex flex-col items-start gap-3 rounded-[2rem] bg-ice p-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="font-display text-lg font-extrabold">{t(tx.prefer, locale)} →</p>
-          <p className="text-sm text-ink/70">{t(tx.preferText, locale)}</p>
+          {/* Glued: "15 хвилин", "9:00 до" and "21 h" never split at a line end. */}
+          <p className="text-sm text-ink/70">{glue(t(tx.preferText, locale))}</p>
         </div>
         <TelegramButton locale={locale} source="booking-prefer" message={telegramMessage} label={t(tx.ask, locale)} />
       </div>

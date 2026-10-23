@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Stamp } from "@/components/brand/pineapple";
 import { TelegramButton } from "@/components/contact/telegram";
+import { glue } from "@/components/home/typo";
 import { Logo } from "@/components/layout/header";
 import { site } from "@/config/site";
 import { t, type Locale } from "@/i18n/config";
@@ -51,7 +52,7 @@ export function Footer({ locale }: { locale: Locale }) {
           />
           <div>
             <Logo locale={locale} />
-            <p className="mt-4 max-w-sm text-sm text-ink/80">{t(copy.about, locale)}</p>
+            <p className="mt-4 max-w-sm text-pretty text-sm text-ink/80">{glue(t(copy.about, locale))}</p>
             <TelegramButton locale={locale} source="footer" size="md" className="mt-5 whitespace-nowrap" />
           </div>
           <nav aria-label={t(copy.nav, locale)}>

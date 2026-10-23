@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { TelegramIcon } from "@/components/contact/telegram";
+import { hasAccents } from "@/components/home/typo";
 import { Button, ButtonLink, Container } from "@/components/ui";
 import { defaultLocale, isLocale, t, type Locale } from "@/i18n/config";
 import { telegramLink } from "@/lib/contact/telegram";
@@ -35,7 +36,12 @@ export default function LocaleError({ error, reset }: { error: Error & { digest?
     <section className="py-16 sm:py-24">
       <Container className="max-w-2xl text-center">
         <p aria-hidden className="text-6xl">🍍</p>
-        <h1 className="mt-6 font-display text-[clamp(1.8rem,4.5vw,3rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
+        {/* Accent-aware leading (as on the 404): Й in РЕЙСУ / Ž Ě in ZPOŽDĚNÍ would touch a wrapped line above. */}
+        <h1
+          className={`mt-6 font-display text-[clamp(1.8rem,4.5vw,3rem)] font-black uppercase tracking-[-0.03em] ${
+            hasAccents(t(copy.title, locale)) ? "leading-[1.06]" : "leading-[0.98]"
+          }`}
+        >
           {t(copy.title, locale)}
         </h1>
         <p className="mt-5 text-lg text-ink/80">{t(copy.text, locale)}</p>

@@ -8,6 +8,7 @@ import { TelegramButton } from "@/components/contact/telegram";
 import { FaqList, faqJsonLd } from "@/components/content/faq";
 import { JsonLd } from "@/components/content/json-ld";
 import { TelegramCta } from "@/components/content/telegram-cta";
+import { keepRanges, typeset } from "@/components/content/typeset";
 import { offerTelegramMessage } from "@/components/tours/offer-card";
 import { ArrowButton, ButtonLink, Container, Pill, Section } from "@/components/ui";
 import { destinations, getDestination, type Destination } from "@/content/destinations";
@@ -137,13 +138,23 @@ export default async function DestinationPage({ params }: { params: Params }) {
   const telegramMessage = fill(t(copy.ctaMessage, locale), d, locale);
   const faq = d.faq.map((f) => ({ q: t(f.q, locale), a: t(f.a, locale) }));
 
+  // Typeset: "k moři", "найкраще — …", "10–12" never leave a one-letter word, a dash or half a range at a line
+  // edge. The flight time only gets its ranges held: its spaces are set in the copy ("cca·4,5·h z·Prahy"), and
+  // glue() would also chain "h z", so the value could no longer wrap inside a half-width card.
   const facts = [
-    { label: copy.facts.flight, value: t(d.flightTime, locale) },
-    { label: copy.facts.season, value: t(d.bestSeason, locale) },
+    { label: copy.facts.flight, value: keepRanges(t(d.flightTime, locale)) },
+    { label: copy.facts.season, value: typeset(t(d.bestSeason, locale)) },
     { label: copy.facts.airports, value: d.airports.map((a) => airport(a, locale)).join(", ") },
-    { label: copy.facts.currency, value: t(d.currency, locale) },
-    { label: copy.facts.entry, value: t(d.entry, locale) },
+    { label: copy.facts.currency, value: typeset(t(d.currency, locale)) },
+    { label: copy.facts.entry, value: typeset(t(d.entry, locale)) },
   ];
+  // Phones: season, currency and entry always take the full row ("листопад–квітень", "домініканське песо");
+  // flight or airports too when they hold a run of 12+ characters ("(з·пересадкою" ≈ 8 em, wider than half a
+  // 320px row). Half cards stay in pairs, so no card sits alone next to a hole.
+  const longestRun = (s: string) => Math.max(...s.replace(/⁠/g, "").split(/[ \t\n]+/).map((w) => w.length));
+  const wide = facts.map((f, i) => i === 1 || i >= 3 || longestRun(f.value) >= 12);
+  const halves = wide.flatMap((w, i) => (w ? [] : [i]));
+  if (halves.length % 2) wide[halves[halves.length - 1]] = true;
 
   const regionShapes = ["shape-card", "shape-card-r", "shape-card-tl"];
   const longestOf = (s: string) => Math.max(...s.split(/\s+/).map((w) => w.length));
@@ -158,7 +169,9 @@ export default async function DestinationPage({ params }: { params: Params }) {
         <Container>
           <div className="relative flex min-h-[540px] flex-col justify-end overflow-hidden shape-card bg-ink text-paper sm:min-h-[640px]">
             <Image src={d.heroImage} alt={name} fill priority sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/65 via-55% to-ink/20 sm:via-ink/35 sm:via-50% sm:to-ink/10" />
+            {/* Desktop keeps the lower half dark (via-ink/50 at 45%) so the giant name and the teaser stay readable
+                over bright sky or water; the top of the photo stays light. */}
+            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/65 via-55% to-ink/20 sm:via-ink/50 sm:via-45% sm:to-ink/10" />
             <div className="absolute right-5 top-5 hidden sm:block">
               <CircleBadge size={150} color="var(--c-paper)" text={`${name.toUpperCase()} • ANANAS TOUR • `} center={<span className="text-5xl">{d.flag}</span>} />
             </div>
@@ -173,7 +186,7 @@ export default async function DestinationPage({ params }: { params: Params }) {
               >
                 {name}
               </h1>
-              <p className="mt-5 max-w-2xl text-pretty text-lg text-paper [text-shadow:0_1px_12px_rgb(0_0_0/0.35)] sm:text-paper/85">{t(d.teaser, locale)}</p>
+              <p className="mt-5 max-w-2xl text-pretty text-lg text-paper [text-shadow:0_1px_12px_rgb(0_0_0/0.35)]">{t(d.teaser, locale)}</p>
               <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap">
                 <TelegramButton
                   locale={locale}
@@ -192,15 +205,17 @@ export default async function DestinationPage({ params }: { params: Params }) {
           </div>
 
           {/* Key facts */}
-          {/* 5 in a row only from xl: at 1024 a fifth of the row is too narrow for "листопад–квітень" or "громадянства". */}
-          <dl className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
+          {/* 5 in a row only from xl: at 1024 a fifth of the row is too narrow for "листопад–квітень" or "громадянства".
+              Below md, season, currency and entry span the row (dense flow pulls airports up next to the flight),
+              so a glued range or "домініканське" never has to break inside a half-width card. */}
+          <dl className="mt-4 grid grid-cols-2 gap-3 max-md:grid-flow-row-dense md:grid-cols-3 xl:grid-cols-5">
             {facts.map((f, i) => (
               <div
                 key={i}
-                className={`min-w-0 rounded-[1.5rem] p-4 sm:p-5 ${i === 0 ? "bg-yellow" : i === 3 ? "bg-ice" : "bg-grey"} ${i === facts.length - 1 ? "col-span-2 md:col-span-1" : ""}`}
+                className={`min-w-0 rounded-[1.5rem] p-4 sm:p-5 ${i === 0 ? "bg-yellow" : i === 3 ? "bg-ice" : "bg-grey"} ${wide[i] ? "col-span-2 md:col-span-1" : ""}`}
               >
                 <dt className="text-xs font-semibold uppercase tracking-wider text-ink/75">{t(f.label, locale)}</dt>
-                {/* Longest unbreakable value ≈ 8 em ("танзанійський", "(з пересадкою"): scaled with vw on phones so it fits a half-width card. */}
+                {/* Half-width cards (flight, airports) hold ≈ 8 em unbroken ("(з пересадкою", "Пардубиці"): scaled with vw on phones. */}
                 <dd className="mt-1.5 text-pretty text-[clamp(0.92rem,3.9vw,1.05rem)] font-bold leading-snug [overflow-wrap:break-word]">
                   {f.value}
                 </dd>
@@ -211,7 +226,11 @@ export default async function DestinationPage({ params }: { params: Params }) {
       </section>
 
       {/* Intro + regions mosaic */}
-      <Section title={t(copy.regionsTitle, locale)} lead={t(d.intro, locale)}>
+      <Section
+        title={t(copy.regionsTitle, locale)}
+        // Block span: text-pretty needs a block box, and the lead <p> belongs to the shared Section.
+        lead={<span className="block text-pretty">{typeset(t(d.intro, locale))}</span>}
+      >
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2">
           {d.regions.map((r, i) => (
             <article
@@ -231,8 +250,10 @@ export default async function DestinationPage({ params }: { params: Params }) {
               <div className="relative p-6 sm:p-8">
                 <h3
                   className={`text-balance font-display font-extrabold ${i === 0 ? "leading-[1.12]" : "text-2xl"}`}
-                  // Big tile: sized to its longest word (≈0.77 em per letter), so "Острови-резорти" stays on one line on phones.
-                  style={i === 0 ? { fontSize: `clamp(1.45rem, calc((100vw - 6rem) / ${(longestOf(t(r.title, locale)) * 0.77).toFixed(2)}), 2.25rem)` } : undefined}
+                  // Big tile: sized to its longest word. Cyrillic lowercase measures ≈0.80 em per letter ("Класична" 6.43 em,
+                  // "Барселона" 7.13 em), budgeted at 0.84 so no word splits at 320 px; very long compounds
+                  // ("Острови-резорти") reach the floor and wrap at their hyphen.
+                  style={i === 0 ? { fontSize: `clamp(1.45rem, calc((100vw - 6rem) / ${(longestOf(t(r.title, locale)) * 0.84).toFixed(2)}), 2.25rem)` } : undefined}
                 >
                   {t(r.title, locale)}
                 </h3>
@@ -255,57 +276,104 @@ export default async function DestinationPage({ params }: { params: Params }) {
         }
       >
         {departures.length > 0 ? (
-          <div className="overflow-x-auto rounded-[2rem] bg-white p-2 sm:rounded-[2.5rem]">
-            <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="border-b border-ink/10 text-xs uppercase tracking-wider text-ink/75">
-                <tr>
-                  <th className="px-6 py-4 font-semibold">{t(copy.th.hotel, locale)}</th>
-                  <th className="px-3 py-4 font-semibold">{t(copy.th.date, locale)}</th>
-                  <th className="px-3 py-4 font-semibold">{t(copy.th.nights, locale)}</th>
-                  <th className="px-3 py-4 font-semibold">{t(copy.th.board, locale)}</th>
-                  <th className="px-3 py-4 font-semibold">{t(copy.th.from, locale)}</th>
-                  <th className="px-3 py-4 text-right font-semibold">{t(copy.th.price, locale)}</th>
-                  <th className="px-6 py-4">
-                    <span className="sr-only">{t(copy.openOffer, locale)}</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-ink/5">
-                {departures.map((o) => (
-                  <tr key={o.id} className="transition hover:bg-paper">
-                    <td className="px-6 py-4">
-                      <Link href={routes.offer(locale, o.id)} className="font-display font-bold hover:underline">
-                        {o.hotel.name}
-                      </Link>{" "}
-                      <span className="text-yellow">{"★".repeat(o.hotel.stars)}</span>
-                      <div className="text-xs text-ink/75">{o.hotel.region}</div>
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-4">
-                      {formatDate(o.departureDate, locale, { weekday: "short", day: "numeric", month: "short" })}
-                    </td>
-                    <td className="px-3 py-4">{o.nights}</td>
-                    <td className="px-3 py-4">{t(boardLabels[o.board], locale)}</td>
-                    <td className="px-3 py-4">{o.transport === "bus" ? "🚌" : airport(o.departureAirport, locale)}</td>
-                    <td className="whitespace-nowrap px-3 py-4 text-right font-display text-lg font-extrabold">
-                      {formatMoney(o.pricePerPerson, locale)}
-                    </td>
-                    <td className="px-6 py-3">
-                      <div className="flex items-center justify-end gap-2">
-                        <TelegramButton
-                          locale={locale}
-                          source={`destination-table-${slug}`}
-                          message={offerTelegramMessage(o, locale)}
-                          label={dict.contact.telegramShort}
-                          size="sm"
-                        />
-                        <ArrowButton href={routes.offer(locale, o.id)} label={t(copy.openOffer, locale)} size={40} />
+          <>
+            {/* Below xl: one card per departure. The 7-column table needs ~960px (more in Ukrainian); in a scroller its
+                Telegram and detail buttons sat off-screen and hotel names stacked one word per line. */}
+            <ul className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:hidden">
+              {departures.map((o) => (
+                <li key={o.id} className="flex flex-col rounded-[1.75rem] bg-white p-5">
+                  <p className="text-balance">
+                    <Link href={routes.offer(locale, o.id)} className="font-display font-bold hover:underline">
+                      {o.hotel.name}
+                    </Link>{" "}
+                    <span className="text-yellow">{"★".repeat(o.hotel.stars)}</span>
+                  </p>
+                  <p className="text-xs text-ink/75">{o.hotel.region}</p>
+                  <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                    {[
+                      { label: copy.th.date, value: formatDate(o.departureDate, locale, { weekday: "short", day: "numeric", month: "short" }) },
+                      { label: copy.th.nights, value: o.nights },
+                      { label: copy.th.board, value: t(boardLabels[o.board], locale) },
+                      { label: copy.th.from, value: o.transport === "bus" ? "🚌" : airport(o.departureAirport, locale) },
+                    ].map((f, i) => (
+                      <div key={i} className="min-w-0">
+                        <dt className="text-xs font-semibold uppercase tracking-wider text-ink/75">{t(f.label, locale)}</dt>
+                        <dd className="text-pretty">{f.value}</dd>
                       </div>
-                    </td>
+                    ))}
+                  </dl>
+                  <div className="mt-auto flex flex-wrap items-center justify-between gap-x-4 gap-y-3 pt-4">
+                    <p className="flex flex-wrap items-baseline gap-x-1.5 font-display text-lg font-extrabold">
+                      <span className="whitespace-nowrap">{formatMoney(o.pricePerPerson, locale)}</span>
+                      <span className="whitespace-nowrap font-sans text-xs font-normal text-ink/75">{dict.common.perPerson}</span>
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <TelegramButton
+                        locale={locale}
+                        source={`destination-table-${slug}`}
+                        message={offerTelegramMessage(o, locale)}
+                        label={dict.contact.telegramShort}
+                        size="sm"
+                      />
+                      <ArrowButton href={routes.offer(locale, o.id)} label={t(copy.openOffer, locale)} size={40} />
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="hidden overflow-x-auto rounded-[2rem] bg-white p-2 sm:rounded-[2.5rem] xl:block">
+              <table className="w-full min-w-[760px] text-left text-sm">
+                <thead className="border-b border-ink/10 text-xs uppercase tracking-wider text-ink/75">
+                  <tr>
+                    {/* min-w: the hotel column keeps ~2 words per line ("Viva Dominicus / Beach by Wyndham"). */}
+                    <th className="min-w-[13rem] px-6 py-4 font-semibold">{t(copy.th.hotel, locale)}</th>
+                    <th className="px-3 py-4 font-semibold">{t(copy.th.date, locale)}</th>
+                    <th className="px-3 py-4 font-semibold">{t(copy.th.nights, locale)}</th>
+                    <th className="px-3 py-4 font-semibold">{t(copy.th.board, locale)}</th>
+                    <th className="px-3 py-4 font-semibold">{t(copy.th.from, locale)}</th>
+                    <th className="px-3 py-4 text-right font-semibold">{t(copy.th.price, locale)}</th>
+                    <th className="px-6 py-4">
+                      <span className="sr-only">{t(copy.openOffer, locale)}</span>
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="divide-y divide-ink/5">
+                  {departures.map((o) => (
+                    <tr key={o.id} className="transition hover:bg-paper">
+                      <td className="px-6 py-4">
+                        <Link href={routes.offer(locale, o.id)} className="font-display font-bold hover:underline">
+                          {o.hotel.name}
+                        </Link>{" "}
+                        <span className="text-yellow">{"★".repeat(o.hotel.stars)}</span>
+                        <div className="text-xs text-ink/75">{o.hotel.region}</div>
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4">
+                        {formatDate(o.departureDate, locale, { weekday: "short", day: "numeric", month: "short" })}
+                      </td>
+                      <td className="px-3 py-4">{o.nights}</td>
+                      <td className="whitespace-nowrap px-3 py-4">{t(boardLabels[o.board], locale)}</td>
+                      <td className="px-3 py-4">{o.transport === "bus" ? "🚌" : airport(o.departureAirport, locale)}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-right font-display text-lg font-extrabold">
+                        {formatMoney(o.pricePerPerson, locale)}
+                      </td>
+                      <td className="px-6 py-3">
+                        <div className="flex items-center justify-end gap-2">
+                          <TelegramButton
+                            locale={locale}
+                            source={`destination-table-${slug}`}
+                            message={offerTelegramMessage(o, locale)}
+                            label={dict.contact.telegramShort}
+                            size="sm"
+                          />
+                          <ArrowButton href={routes.offer(locale, o.id)} label={t(copy.openOffer, locale)} size={40} />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         ) : (
           <div className="flex flex-wrap items-center justify-between gap-4 shape-card bg-white p-8 ring-1 ring-ink/5">
             <p className="max-w-xl text-ink/75">{t(copy.noDepartures, locale)}</p>
@@ -320,20 +388,21 @@ export default async function DestinationPage({ params }: { params: Params }) {
           {d.money.map((m, i) => (
             <div key={i} className={`${i % 2 ? "shape-card-r" : "shape-card"} bg-grey p-7`}>
               <h3 className="font-display text-xl font-bold">{t(m.title, locale)}</h3>
-              <p className="mt-2 text-pretty leading-relaxed text-ink/75">{t(m.text, locale)}</p>
+              <p className="mt-2 text-pretty leading-relaxed text-ink/75">{typeset(t(m.text, locale))}</p>
             </div>
           ))}
           <div className="relative overflow-hidden shape-card-tl bg-yellow p-7">
             <PineappleSlice kind="half" size={140} rotate={200} className="absolute -bottom-10 -right-8 opacity-40" color="var(--c-paper)" />
             <p className="relative font-display text-xl font-bold">Kč</p>
-            <p className="relative mt-2 text-pretty leading-relaxed">{t(copy.payNote, locale)}</p>
+            <p className="relative mt-2 text-pretty leading-relaxed">{typeset(t(copy.payNote, locale))}</p>
           </div>
         </div>
       </Section>
 
       {/* Tips */}
       <section className="relative overflow-hidden bg-ink py-12 text-paper sm:py-16">
-        <PineapplePattern preset="sparse" opacity={0.3} />
+        {/* Masked off the heading band (top 7rem, fading in by 11rem): the corner wedge never lands on the h2. */}
+        <PineapplePattern preset="sparse" opacity={0.3} className="[mask-image:linear-gradient(to_bottom,transparent_7rem,black_11rem)]" />
         <Container className="relative">
           <h2 className="font-display text-3xl font-black uppercase leading-[1] tracking-[-0.03em] sm:text-5xl">{t(copy.tipsTitle, locale)}</h2>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -342,7 +411,7 @@ export default async function DestinationPage({ params }: { params: Params }) {
                 <PineappleSlice kind="wedge" size={40} seed={i + 2} className="shrink-0" />
                 <div>
                   <h3 className="font-display text-lg font-bold text-yellow-light">{t(tip.title, locale)}</h3>
-                  <p className="mt-1 text-pretty leading-relaxed text-paper/80">{t(tip.text, locale)}</p>
+                  <p className="mt-1 text-pretty leading-relaxed text-paper/80">{typeset(t(tip.text, locale))}</p>
                 </div>
               </li>
             ))}

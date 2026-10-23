@@ -59,6 +59,8 @@ const tx = {
     cs: "Napište kam, kdy a za kolik – ozvu se, jakmile se objeví ta vaše nabídka.",
   },
   notifyCta: { uk: "Стежити за ціною", cs: "Hlídat cenu" },
+  // Context line of the callback form (shown under its title, sent with the inquiry): the section's own name.
+  formContext: { uk: "Гарячі тури", cs: "Last minute" },
 };
 
 // Tour data comes from tours(): regenerate every 30 min instead of per request,
@@ -103,9 +105,12 @@ export default async function HotToursPage({ params, searchParams }: Props) {
     <>
       <Container className="pt-2 sm:pt-4">
         <section className="relative isolate overflow-hidden rounded-[2rem] bg-ink px-5 py-10 text-white sm:rounded-[2.5rem] sm:px-10 sm:py-14 lg:px-14">
-          <Image src={ananasPhotos.banner.beachUmbrella} alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
-          {/* Below lg the copy runs the full width, so the scrim stays dark top to bottom instead of fading out on the right. */}
-          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/80 to-ink/75 lg:bg-gradient-to-r lg:from-ink/90 lg:via-ink/70 lg:to-ink/30" />
+          {/* scale-[1.01]: the photo has a ~3px black column on its right edge (x 1277–1279); the slight zoom keeps it
+              outside the card. Proper fix: re-export banner-beach-umbrella.jpg cropped by 4px on the right. */}
+          <Image src={ananasPhotos.banner.beachUmbrella} alt="" fill priority sizes="100vw" className="-z-10 scale-[1.01] object-cover" />
+          {/* Below lg the copy runs the full width, so the scrim stays dark top to bottom instead of fading out on the right.
+              From lg it fades only to ink/40 (via ink/75), so the lead stays ≥ 4.5:1 over the light sand and deck chairs. */}
+          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/80 to-ink/75 lg:bg-gradient-to-r lg:from-ink/90 lg:via-ink/75 lg:to-ink/40" />
           <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
             <div className="max-w-3xl">
               <p className="inline-flex shape-pill bg-red px-4 py-1.5 text-sm font-bold text-white">{t(tx.kicker, locale)}</p>
@@ -115,8 +120,9 @@ export default async function HotToursPage({ params, searchParams }: Props) {
               <h1 className={`mt-5 text-wrap! font-display text-[clamp(2rem,5.4vw,4.4rem)] font-black uppercase ${displayLeading(t(tx.h1, locale))} tracking-[-0.035em]`}>
                 {glue(t(tx.h1, locale))}
               </h1>
-              <p className="mt-6 text-pretty text-lg text-white">{glue(t(tx.lead, locale))}</p>
-              <p className="mt-3 text-pretty text-white">{glue(t(tx.lead2, locale))}</p>
+              {/* max-w-2xl keeps the lead lines on the darker left half of the scrim. */}
+              <p className="mt-6 max-w-2xl text-pretty text-lg text-white">{glue(t(tx.lead, locale))}</p>
+              <p className="mt-3 max-w-2xl text-pretty text-white">{glue(t(tx.lead2, locale))}</p>
               <TelegramButton locale={locale} source="hot-hero" size="lg" message={prefill} label={t(tx.cta, locale)} className="mt-8" />
             </div>
             <Stamp
@@ -173,7 +179,7 @@ export default async function HotToursPage({ params, searchParams }: Props) {
             </div>
             <TelegramButton locale={locale} source="hot-notify" size="lg" message={prefill} label={t(tx.notifyCta, locale)} />
           </div>
-          <PickForMeCard locale={locale} message={prefill} context="Last minute" source="hot-inline" />
+          <PickForMeCard locale={locale} message={prefill} context={t(tx.formContext, locale)} source="hot-inline" />
         </div>
       </Container>
     </>

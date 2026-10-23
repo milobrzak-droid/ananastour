@@ -1,7 +1,7 @@
 import { TelegramButton } from "@/components/contact/telegram";
 import { Container } from "@/components/ui";
 import { t, type Locale } from "@/i18n/config";
-import { glue } from "./typo";
+import { glue, keepParticles, leadingFor } from "./typo";
 
 const C = {
   title: { uk: "Без дрібного шрифту", cs: "Bez drobného písma" },
@@ -89,7 +89,10 @@ export function Faq({ locale }: { locale: Locale }) {
     <section className="py-12 sm:py-16">
       <Container className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <h2 className="text-balance font-display text-4xl font-extrabold uppercase sm:text-5xl">{glue(t(C.title, locale))}</h2>
+          {/* sm:text-5xl alone sets a line-height of 1, so the acute of "PÍSMA" touched "DROBNÉHO": accents get 1.06. */}
+          <h2 className={`text-balance font-display text-4xl font-extrabold uppercase sm:text-5xl ${leadingFor(t(C.title, locale))}`}>
+            {glue(t(C.title, locale))}
+          </h2>
           <p className="mt-4 text-pretty text-ink/70">{glue(t(C.lead, locale))}</p>
           <TelegramButton locale={locale} source="home-faq" label={t(C.ask, locale)} message={t(C.askMsg, locale)} className="mt-6" />
         </div>
@@ -101,7 +104,7 @@ export function Faq({ locale }: { locale: Locale }) {
               className="group rounded-[var(--radius-lg)] bg-white ring-1 ring-ink/5 transition open:shadow-md"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-pretty px-6 py-5 font-display text-lg font-bold [&::-webkit-details-marker]:hidden">
-                {glue(t(f.q, locale))}
+                {keepParticles(glue(t(f.q, locale)))}
                 <span
                   aria-hidden
                   className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-yellow text-2xl leading-none transition group-open:rotate-45"
@@ -109,7 +112,7 @@ export function Faq({ locale }: { locale: Locale }) {
                   +
                 </span>
               </summary>
-              <p className="text-pretty px-6 pb-6 text-ink/75">{glue(t(f.a, locale))}</p>
+              <p className="text-pretty px-6 pb-6 text-ink/75">{keepParticles(glue(t(f.a, locale)))}</p>
             </details>
           ))}
         </div>

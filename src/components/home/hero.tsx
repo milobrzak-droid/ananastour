@@ -46,6 +46,9 @@ export function Hero({ locale }: { locale: Locale }) {
             className="-z-10 object-cover"
           />
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/60 via-ink/15 to-ink/60" />
+          {/* Scrim behind the headline: the white H1 sits on the bright sunset sky (brightest 10% behind the letters
+              was 2.7:1). Holding ink/35 down to the horizon lifts it to ~4.7:1+, then fades out above the lead. */}
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-3/4 bg-gradient-to-b from-ink/40 via-ink/35 via-55% to-transparent" />
 
           <div className="flex min-h-[38rem] flex-col p-5 pb-24 sm:min-h-[40rem] sm:p-8 sm:pb-32 lg:min-h-[44rem] lg:p-10">
             <p className="inline-flex w-fit max-w-full items-center gap-2 whitespace-nowrap shape-pill bg-white/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em] backdrop-blur-md max-[380px]:px-3 max-[380px]:text-[0.68rem] max-[380px]:tracking-[0.06em] sm:text-sm sm:normal-case sm:tracking-normal">

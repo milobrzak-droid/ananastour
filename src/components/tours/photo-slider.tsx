@@ -54,7 +54,14 @@ export function PhotoSlider({
           <button type="button" onClick={() => go(-1)} aria-label={prevLabel} className={`${btn} left-3 sm:left-5`}>
             <ArrowIcon size={22} rotate={180} />
           </button>
-          <button type="button" onClick={() => go(1)} aria-label={nextLabel} className={`${btn} right-3 sm:right-5`}>
+          {/* On the first photo's right edge (slides are 88% / 78% wide), not the strip's: the strip bleeds to the
+              panel edge, where the fixed Telegram button sits and would cover the arrow (1280×800). */}
+          <button
+            type="button"
+            onClick={() => go(1)}
+            aria-label={nextLabel}
+            className={`${btn} right-[calc(12%+0.75rem)] sm:right-[calc(22%+1.25rem)]`}
+          >
             <ArrowIcon size={22} />
           </button>
         </>

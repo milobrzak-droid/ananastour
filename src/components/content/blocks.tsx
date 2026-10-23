@@ -90,7 +90,8 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
                 <PineappleSlice kind="half" size={96} rotate={160} className="absolute -right-8 -top-10" color="var(--c-yellow-light)" />
                 {/* Float keeps the first line(s) clear of the light slice in the corner; lines below run full width. */}
                 <span aria-hidden className="float-right h-8 w-10 sm:h-6 sm:w-8" />
-                {b.title && <p className="relative font-display text-lg font-bold text-ink">{b.title}</p>}
+                {/* Balanced: "To není můj slib, / to je zákon" instead of a lone "zákon" on line 2. */}
+                {b.title && <p className="relative text-balance font-display text-lg font-bold text-ink">{b.title}</p>}
                 <p className="relative mt-1 text-ink/85">{b.text}</p>
               </div>
             );

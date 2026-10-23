@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 import { PineapplePattern } from "@/components/brand/pineapple";
-import { glue } from "@/components/home/typo";
+import { fitLongestWord, glue } from "@/components/home/typo";
 import { displayLeading } from "@/components/tours/display";
 import { Container } from "@/components/ui";
 import { Filters, activeFilterCount } from "@/components/tours/filters";
@@ -41,6 +41,10 @@ const tx = {
   filters: { uk: "Фільтри", cs: "Filtry" },
   sort: { uk: "Сортувати:", cs: "Řadit:" },
   apply: { uk: "OK", cs: "OK" },
+  // Labels for the search summary, so "2 dospělí" never stands alone as a stray caption (as on the hotel page).
+  yourSearch: { uk: "Ваш пошук:", cs: "Vaše hledání:" },
+  // Form context: also the first line of the Telegram prefill, so it is neutral, not "your".
+  searchContext: { uk: "Пошук:", cs: "Hledání:" },
 };
 
 // Tour data comes from tours(): regenerate every 30 min instead of per request,
@@ -100,10 +104,17 @@ export default async function ToursPage({ params, searchParams }: Props) {
   return (
     <>
       <Container className="pt-2 sm:pt-4">
-        <div className="relative isolate overflow-hidden rounded-[2rem] bg-teal px-3 pb-3 pt-8 text-white sm:rounded-[2.5rem] sm:px-6 sm:pb-6 sm:pt-12">
+        {/* @container: the H1 is sized against the hero, so only a long country word (BULHARSKA, ДОМІНІКАНИ) shrinks
+            on a 320px phone instead of breaking mid-word; wider screens keep the clamp. */}
+        <div className="@container relative isolate overflow-hidden rounded-[2rem] bg-teal px-3 pb-3 pt-8 text-white sm:rounded-[2.5rem] sm:px-6 sm:pb-6 sm:pt-12">
           <PineapplePattern preset="section" opacity={0.22} className="-z-10" />
-          <h1 className={`text-balance px-2 font-display text-[clamp(2rem,5vw,4.2rem)] font-black uppercase ${displayLeading(heading)} tracking-[-0.035em]`}>{heading}</h1>
-          <p className="mt-3 px-2 text-sm font-medium text-white">{glue(summary)}</p>
+          <h1
+            className={`text-balance px-2 font-display text-[min(var(--fit),clamp(2rem,5vw,4.2rem))] font-black uppercase ${displayLeading(heading)} tracking-[-0.035em]`}
+            style={fitLongestWord(heading)}
+          >
+            {heading}
+          </h1>
+          <p className="mt-3 px-2 text-sm font-medium text-white">{glue(`${t(tx.yourSearch, locale)} ${summary}`)}</p>
           <div className="mt-6 text-ink">
             <SearchBox locale={locale} initial={sp} variant="bar" />
           </div>
@@ -176,7 +187,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
                         <PickForMeCard
                           locale={locale}
                           message={tgMessage}
-                          context={summary}
+                          context={`${t(tx.searchContext, locale)} ${summary}`}
                           source="tours-inline"
                           className="sm:col-span-2 xl:col-span-3"
                         />

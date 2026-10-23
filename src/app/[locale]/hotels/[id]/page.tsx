@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { InquiryForm } from "@/components/contact/inquiry-form";
-import { glue } from "@/components/home/typo";
+import { fitLongestWord, glue } from "@/components/home/typo";
 import { displayLeading } from "@/components/tours/display";
 import { TelegramButton } from "@/components/contact/telegram";
 import { ArrowButton, Container, Pill } from "@/components/ui";
@@ -11,7 +11,7 @@ import { PhotoSlider } from "@/components/tours/photo-slider";
 import { DeparturesTable } from "@/components/tours/departures-table";
 import { NoResults } from "@/components/tours/help-cards";
 import { HotelDistances, HotelLocation, HotelRating, Stars } from "@/components/tours/hotel-bits";
-import { countryName } from "@/components/tours/labels";
+import { amenityLabel, countryName, regionName } from "@/components/tours/labels";
 import { hotelTelegramMessage, searchSummary } from "@/components/tours/messages";
 import { site } from "@/config/site";
 import { isLocale, t, type Locale } from "@/i18n/config";
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isLocale(locale)) return {};
   const hotel = await getHotel(id);
   if (!hotel) return {};
-  const where = `${hotel.region}, ${countryName(hotel.countrySlug, locale, hotel.country)}`;
+  const where = `${regionName(hotel.region, locale)}, ${countryName(hotel.countrySlug, locale, hotel.country)}`;
   return {
     title: `${hotel.name} ${hotel.stars}* — ${where}`,
     description: t(
@@ -93,11 +93,17 @@ export default async function HotelPage({ params, searchParams }: Props) {
           {t(tx.back, locale)}
         </Link>
         <div className="mt-2 flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-4xl">
+          {/* A shrinkable size container (definite basis, min-w-0): it fills the row next to the price pill, or the
+              whole row once the pill wraps, and never grows past the panel to the width of a long word. The H1 is
+              sized against it, so INTERCONTINENTAL / STEIGENBERGER shrink until the longest word fits; short names keep the clamp. */}
+          <div className="@container min-w-0 grow basis-[min(100%,36rem)] max-w-4xl">
             <p className="eyebrow text-ink/75">
               <HotelLocation hotel={hotel} locale={locale} />
             </p>
-            <h1 className={`mt-2 text-balance font-display text-[clamp(2rem,5vw,4.2rem)] font-black uppercase ${displayLeading(hotel.name)} tracking-[-0.035em]`}>
+            <h1
+              className={`mt-2 text-balance font-display text-[min(var(--fit),clamp(2rem,5vw,4.2rem))] font-black uppercase ${displayLeading(hotel.name)} tracking-[-0.035em]`}
+              style={fitLongestWord(hotel.name)}
+            >
               {hotel.name} <span className="align-middle text-[0.42em]"><Stars n={hotel.stars} locale={locale} /></span>
             </h1>
             <div className="mt-4">
@@ -109,7 +115,8 @@ export default async function HotelPage({ params, searchParams }: Props) {
               <span>
                 <span className="block text-xs font-bold uppercase tracking-widest text-ink/75">{t(tx.from, locale)}</span>
                 <span className="font-display text-2xl font-black leading-none sm:text-3xl">{formatMoney(cheapest.pricePerPerson, locale)}</span>
-                <span className="ml-1 text-sm text-ink/75">{dict.common.perPerson}</span>
+                {/* nowrap: "za osobu" drops under the price as one unit, never as "za / osobu". */}
+                <span className="ml-1 whitespace-nowrap text-sm text-ink/75">{dict.common.perPerson}</span>
               </span>
               <ArrowButton label={t(tx.departures, locale)} size={52} direction="down-right" />
             </a>
@@ -135,8 +142,11 @@ export default async function HotelPage({ params, searchParams }: Props) {
             {hotel.description && (
               <section className="col-span-full rounded-[2rem] bg-grey p-6 sm:rounded-[2.5rem] sm:p-9">
                 <h2 className="font-display text-2xl font-black uppercase">{t(tx.about, locale)}</h2>
-                {/* TODO(anchoice): description comes in the provider's language; request uk/cs texts. */}
-                <p className="mt-3 whitespace-pre-line leading-relaxed text-ink/85">{hotel.description}</p>
+                {/* TODO(anchoice): description comes in the provider's language; request uk/cs texts.
+                    Until then it is marked as Czech on the Ukrainian page, for screen readers and hyphenation. */}
+                <p lang={locale === "uk" ? "cs" : undefined} className="mt-3 whitespace-pre-line leading-relaxed text-ink/85">
+                  {hotel.description}
+                </p>
               </section>
             )}
             {hotel.amenities.length > 0 && (
@@ -145,7 +155,7 @@ export default async function HotelPage({ params, searchParams }: Props) {
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {hotel.amenities.map((a) => (
                     <li key={a}>
-                      <Pill tone="white">{a}</Pill>
+                      <Pill tone="white">{amenityLabel(a, locale)}</Pill>
                     </li>
                   ))}
                 </ul>
@@ -183,7 +193,7 @@ export default async function HotelPage({ params, searchParams }: Props) {
           <InquiryForm
             locale={locale}
             kind="pick-tour"
-            context={`${hotel.name} ${hotel.stars}*, ${hotel.region}`}
+            context={`${hotel.name} ${hotel.stars}*, ${regionName(hotel.region, locale)}`}
             fields={["dates", "travellers", "message"]}
             source="hotel-form"
             variant="light"

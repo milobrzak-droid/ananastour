@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ALJONA_AVATAR } from "@/components/brand/photos";
+import { glue } from "@/components/home/typo";
 import { t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import { phoneLink, telegramLink } from "@/lib/contact/telegram";
@@ -24,6 +25,15 @@ const tx = {
   region: { uk: "Написати Альоні", cs: "Napsat Aljoně" },
   stripRegion: { uk: "Швидкий зв’язок з Альоною", cs: "Rychlý kontakt na Aljonu" },
 };
+
+/**
+ * glue() plus a short word before a number ("Od 9", "до 21:00", "do 21 h"), so an hour range
+ * («З 9:00 до 21:00», „Od 9 do 21 h“) never splits across lines or leaves "Od" dangling.
+ */
+function glueHours(text: string): string {
+  // glue() has already turned some spaces into no-break ones ("9:00 до"), hence \s.
+  return glue(text).replace(/(^|\s)([A-Za-zÀ-ɏЀ-ӿ]{1,2}) (?=\d)/g, "$1$2 ");
+}
 
 /** Aljona's working hours (site.contact.hours): 9:00–21:00 Europe/Prague, every day. */
 const OPEN_HOUR = 9;
@@ -135,11 +145,15 @@ export function TelegramButton({
   tone?: "blue" | "white";
 }) {
   const dict = getDictionary(locale);
+  // Below 400px the pills tighten (padding and gap; md/lg also icon and a fluid font), so a canonical label
+  // such as «Написати Альоні» / «Запитати Альону» stays on one line in a ~170–210px column (320px phone,
+  // padded card) instead of wrapping.
   const sizes = {
-    sm: "min-h-10 pl-1.5 pr-4 py-1.5 text-sm gap-2",
-    md: "min-h-12 pl-2 pr-6 py-2 gap-2.5",
-    lg: "min-h-14 pl-2.5 pr-7 py-2.5 text-lg gap-3",
+    sm: "min-h-10 py-1.5 pl-1.5 pr-3 gap-1.5 text-sm min-[25rem]:pr-4 min-[25rem]:gap-2",
+    md: "min-h-12 py-2 pl-1.5 pr-4 gap-2 max-[25rem]:text-[clamp(0.875rem,4.2vw,1rem)] min-[25rem]:pl-2 min-[25rem]:pr-6 min-[25rem]:gap-2.5",
+    lg: "min-h-14 py-2.5 pl-1.5 pr-4 gap-2 text-[clamp(0.9375rem,4.6vw,1.125rem)] min-[25rem]:pl-2.5 min-[25rem]:pr-7 min-[25rem]:gap-3",
   };
+  const iconBox = { sm: "size-7", md: "size-[30px] min-[25rem]:size-[34px]", lg: "size-[34px] min-[25rem]:size-10" }[size];
   const icon = { sm: 28, md: 34, lg: 40 }[size];
   const tones = {
     blue: "bg-telegram text-white hover:bg-telegram-dark shadow-[0_12px_28px_-14px_rgba(26,120,173,0.9)]",
@@ -154,14 +168,14 @@ export function TelegramButton({
       className={`relative inline-flex items-center justify-center shape-pill font-bold transition ${tones[tone]} ${sizes[size]} ${className}`}
     >
       <span
-        className={`grid shrink-0 place-items-center rounded-full ${tone === "blue" ? "bg-white text-telegram" : "bg-telegram text-white"}`}
-        style={{ width: icon, height: icon }}
+        className={`grid shrink-0 place-items-center rounded-full ${iconBox} ${tone === "blue" ? "bg-white text-telegram" : "bg-telegram text-white"}`}
       >
         <span style={{ marginLeft: -icon * 0.06 }} className="grid place-items-center">
           <TelegramIcon size={Math.round(icon * 0.55)} />
         </span>
       </span>
-      <span>{label ?? dict.contact.telegramCta}</span>
+      {/* Wraps only as a last resort (long custom label in a tight card) — then into two even lines. */}
+      <span className="text-balance">{label ?? dict.contact.telegramCta}</span>
       <span className="sr-only"> {t(tx.newTab, locale)}</span>
     </a>
   );
@@ -176,10 +190,10 @@ export function ContactStrip({ locale }: { locale: Locale }) {
       <div className="mx-auto flex max-w-[1680px] items-center justify-between gap-3 px-4 py-2 text-sm sm:px-6 lg:px-8">
         <p className="flex min-w-0 items-center gap-2.5 font-medium">
           <StatusDot on={inHours} />
-          <span className="min-w-0 text-pretty max-sm:text-xs max-sm:leading-tight lg:hidden">
-            {t(inHours ? tx.stripShort : tx.stripShortOff, locale)}
+          <span className="min-w-0 text-balance max-sm:text-xs max-sm:leading-tight lg:hidden">
+            {glueHours(t(inHours ? tx.stripShort : tx.stripShortOff, locale))}
           </span>
-          <span className="hidden min-w-0 text-pretty lg:inline">{inHours ? dict.contact.telegramLead : t(tx.offHoursLead, locale)}</span>
+          <span className="hidden min-w-0 text-pretty lg:inline">{glueHours(inHours ? dict.contact.telegramLead : t(tx.offHoursLead, locale))}</span>
         </p>
         <div className="flex shrink-0 items-center gap-1 sm:gap-3">
           <a
@@ -189,7 +203,16 @@ export function ContactStrip({ locale }: { locale: Locale }) {
           >
             <PhoneIcon size={14} /> {site.contact.phone}
           </a>
-          <TelegramButton locale={locale} source="strip" size="sm" label={`@${site.contact.telegramUsername}`} tone="white" />
+          {/* Below 360px the pill goes icon-only (the @handle stays as its accessible name), so the
+              status line keeps ~210px and fits in two lines instead of four. */}
+          <TelegramButton
+            locale={locale}
+            source="strip"
+            size="sm"
+            label={`@${site.contact.telegramUsername}`}
+            tone="white"
+            className="max-[22.5rem]:pr-1.5 max-[22.5rem]:[&>span:nth-of-type(2)]:sr-only"
+          />
         </div>
       </div>
     </aside>
@@ -228,14 +251,16 @@ export function FloatingContact({ locale }: { locale: Locale }) {
   return (
     <aside aria-label={t(tx.region, locale)}>
       {/* Mobile bottom bar */}
-      <div className="fixed inset-x-2 bottom-2 z-50 grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-full bg-ink/95 p-1.5 shadow-2xl backdrop-blur md:hidden">
-        <AljonaAvatar size={48} online={inHours} ring="none" />
-        <TelegramButton locale={locale} source="mobile-bar" className="w-full" />
+      {/* Below 380px the avatar (40px), call button (44px) and gaps shrink so «Написати Альоні» keeps one line
+          and the bar keeps its height; the label never wraps here (it would grow the fixed bar over content). */}
+      <div className="fixed inset-x-2 bottom-2 z-50 grid grid-cols-[auto_1fr_auto] items-center gap-1.5 rounded-full bg-ink/95 p-1.5 shadow-2xl backdrop-blur min-[23.75rem]:gap-2 md:hidden">
+        <AljonaAvatar size={48} online={inHours} ring="none" className="max-[23.75rem]:size-10!" />
+        <TelegramButton locale={locale} source="mobile-bar" className="w-full whitespace-nowrap" />
         <a
           href={phoneLink()}
           onClick={() => trackContact("phone", "mobile-bar")}
           aria-label={dict.contact.call}
-          className="grid h-12 w-12 place-items-center rounded-full bg-yellow text-ink"
+          className="grid size-11 place-items-center rounded-full bg-yellow text-ink min-[23.75rem]:size-12"
         >
           <PhoneIcon />
         </a>
@@ -261,7 +286,7 @@ export function FloatingContact({ locale }: { locale: Locale }) {
             <p className="mt-2 pr-8 font-display text-lg font-bold leading-snug">
               {inHours ? dict.contact.floatingTitle : t(tx.offHoursTitle, locale)}
             </p>
-            <p className="mt-1 text-sm text-ink/75">{dict.contact.floatingText}</p>
+            <p className="mt-1 text-pretty text-sm text-ink/75">{glueHours(dict.contact.floatingText)}</p>
             <TelegramButton locale={locale} source="bubble" size="sm" className="mt-4 w-full" />
           </div>
         )}

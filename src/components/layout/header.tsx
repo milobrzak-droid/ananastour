@@ -18,9 +18,19 @@ const tx = {
   lang: { uk: "Мова", cs: "Jazyk" },
 };
 
-export function Logo({ locale, tone = "ink", size = 48 }: { locale: Locale; tone?: "ink" | "paper"; size?: number }) {
+export function Logo({
+  locale,
+  tone = "ink",
+  size = 48,
+  className = "",
+}: {
+  locale: Locale;
+  tone?: "ink" | "paper";
+  size?: number;
+  className?: string;
+}) {
   return (
-    <Link href={routes.home(locale)} className="group flex min-h-11 shrink-0 items-center" aria-label="Ananas Tour">
+    <Link href={routes.home(locale)} className={`group flex min-h-11 shrink-0 items-center ${className}`} aria-label="Ananas Tour">
       <LogoFull size={size} tone={tone} className="transition duration-300 group-hover:-rotate-2" />
     </Link>
   );
@@ -39,7 +49,7 @@ function LocaleSwitchInner({ locale }: { locale: Locale }) {
           title={localeLabels[l]}
           hrefLang={l}
           aria-current={l === locale ? "true" : undefined}
-          className={`grid h-9 min-w-10 place-items-center shape-pill px-2.5 uppercase ${l === locale ? "bg-ink text-paper" : "text-ink/75 hover:text-ink"}`}
+          className={`grid h-9 min-w-10 place-items-center shape-pill px-2.5 uppercase max-[22.5rem]:min-w-9 max-[22.5rem]:px-2 ${l === locale ? "bg-ink text-paper" : "text-ink/75 hover:text-ink"}`}
         >
           {l === "uk" ? "UA" : "CZ"}
         </Link>
@@ -88,8 +98,10 @@ export function Header({ locale }: { locale: Locale }) {
 
   return (
     <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[84rem] items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-10">
-        <Logo locale={locale} />
+      {/* Below 360px: tighter gutters and gaps, a 90% logo and slimmer UA/CZ pills, so logo + switch + menu
+          (≈270px) fit the 284px row of a 320px phone instead of pushing the menu button past the panel edge. */}
+      <div className="mx-auto flex max-w-[84rem] items-center justify-between gap-2 px-3 py-2.5 min-[22.5rem]:gap-4 min-[22.5rem]:px-4 sm:px-6 lg:px-10">
+        <Logo locale={locale} className="max-[22.5rem]:[zoom:0.9]" />
         <nav aria-label={t(tx.main, locale)} className="hidden items-center gap-1 text-[0.82rem] font-semibold xl:flex">
           {nav.map((n) => (
             <Link
@@ -104,7 +116,7 @@ export function Header({ locale }: { locale: Locale }) {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 min-[22.5rem]:gap-2">
           <LocaleSwitch locale={locale} />
           <Link
             href={routes.tours(locale)}

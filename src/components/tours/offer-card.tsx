@@ -10,7 +10,7 @@ import { formatDateRange, formatMoney } from "@/lib/format";
 import type { OfferWithHotel } from "@/lib/tours/types";
 import { site } from "@/config/site";
 import { t } from "@/i18n/config";
-import { boardLabel, countryName, dateRangeLabel } from "@/components/tours/labels";
+import { boardLabel, countryName, dateRangeLabel, regionLabel } from "@/components/tours/labels";
 
 const pills = {
   lastMinute: { uk: "Гарячий тур", cs: "Last minute" },
@@ -50,9 +50,10 @@ export function OfferCard({ offer, locale, source = "offer-card" }: { offer: Off
           <ArrowButton label={offer.hotel.name} size={44} direction="up-right" />
         </span>
       </Link>
-      <div className="flex flex-1 flex-col gap-1.5 px-3 pb-3 pt-4">
+      {/* @container: the Telegram button below tightens to the card's width, not the viewport. */}
+      <div className="@container flex flex-1 flex-col gap-1.5 px-3 pb-3 pt-4">
         <p className="eyebrow text-ink/75">
-          {countryName(offer.hotel.countrySlug, locale, offer.hotel.country)} · {offer.hotel.region}
+          {countryName(offer.hotel.countrySlug, locale, offer.hotel.country)} · {regionLabel(offer.hotel.region, locale)}
         </p>
         <h3 className="font-display text-lg font-bold leading-tight">
           <Link href={href} className="hover:underline">
@@ -86,7 +87,9 @@ export function OfferCard({ offer, locale, source = "offer-card" }: { offer: Off
           size="sm"
           message={offerTelegramMessage(offer, locale)}
           label={dict.contact.askAboutTour}
-          className="mt-3 w-full"
+          // In a card narrower than 11.5rem (home carousel on a 320px phone) the pill tightens its gap, right
+          // padding and type a step, so «Запитати Альону» / „Zeptat se Aljony“ stays on one line.
+          className="mt-3 w-full @max-[11.5rem]:gap-1 @max-[11.5rem]:pr-2.5 @max-[11.5rem]:text-[0.8125rem]"
         />
       </div>
     </article>

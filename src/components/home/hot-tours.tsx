@@ -51,9 +51,14 @@ function NearestTable({ offers, locale }: { offers: OfferWithHotel[]; locale: Lo
             className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 px-3 py-4 sm:px-2 lg:grid-cols-[minmax(0,2fr)_auto_minmax(9rem,1.1fr)_minmax(8.5rem,auto)_auto] lg:py-5"
           >
             <Link href={routes.offer(locale, o.id)} className="min-w-0 hover:underline">
-              <span className="block text-balance font-display text-base font-bold sm:text-lg lg:truncate lg:text-base xl:text-lg">{o.hotel.name}</span>
-              <span className="block truncate text-sm text-ink/75">
-                {countryName(o.hotel.countrySlug, locale, o.hotel.country)} · {o.hotel.region}
+              {/* The row has room for two lines, so a long hotel name shows in full instead of "Aldemar Knossos R…". */}
+              <span className="block text-balance font-display text-base font-bold sm:text-lg lg:line-clamp-2 lg:text-base xl:text-lg">{o.hotel.name}</span>
+              {/* Stacked rows (below lg) have room: the place wraps after "· " instead of "Maledivy · Atol Dh…".
+                  Only the dense one-line table row at lg keeps the ellipsis. */}
+              <span className="block text-pretty text-sm text-ink/75 lg:truncate">
+                {countryName(o.hotel.countrySlug, locale, o.hotel.country)}
+                {" · "}
+                {o.hotel.region}
               </span>
             </Link>
             <span className="row-span-3 self-center lg:order-last lg:row-span-1">
@@ -125,8 +130,10 @@ export function HotTours({ offers, locale }: { offers: OfferWithHotel[]; locale:
           {table.length > 0 && <NearestTable offers={table} locale={locale} />}
 
           <div className="mt-10 flex justify-center">
-            <ButtonLink href={routes.hot(locale)} variant="primary" className="px-8 py-4 text-lg">
-              {t(C.all, locale)} →
+            {/* The arrow is glued to the last word (NBSP); under 360px the button is a step smaller so it stays on one line. */}
+            <ButtonLink href={routes.hot(locale)} variant="primary" className="px-8 py-4 text-lg max-[359px]:px-5 max-[359px]:text-base">
+              {t(C.all, locale)}
+              {" →"}
             </ButtonLink>
           </div>
         </div>

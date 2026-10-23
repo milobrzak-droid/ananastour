@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { PineapplePattern } from "@/components/brand/pineapple";
+import { PineappleSlice } from "@/components/brand/pineapple";
 import { InquiryForm } from "@/components/contact/inquiry-form";
 import { TelegramButton } from "@/components/contact/telegram";
 import { Button } from "@/components/ui";
@@ -110,11 +110,16 @@ export function ServiceOrder({
       </div>
 
       <div ref={formRef} id="service-order" className="relative mt-12 scroll-mt-28 overflow-hidden rounded-[2rem] bg-ink p-5 text-paper sm:rounded-[2.75rem] sm:p-12">
-        <PineapplePattern preset="section" opacity={0.35} />
+        {/* Slices only where no text sits: a wedge in the top-right corner and, from lg, a half slice
+            under the left column. A scattered pattern put olive fibres behind the lead (≈4.2:1). */}
+        <div className="pointer-events-none absolute inset-0 opacity-35" aria-hidden>
+          <PineappleSlice kind="wedge" size={96} rotate={135} seed={36} className="absolute -right-9 -top-9 sm:-right-5 sm:-top-5" />
+          <PineappleSlice kind="half" size={170} rotate={90} seed={5} className="absolute -bottom-6 -left-20 hidden lg:block" />
+        </div>
         <div className="relative grid gap-10 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <h2 className="text-balance font-display text-3xl font-black uppercase leading-[1.08] sm:text-5xl lg:text-[clamp(2.25rem,4vw,3rem)]">{formTitle}</h2>
-            <p className="mt-3 text-paper/75">{formLead}</p>
+            <p className="mt-3 text-paper/85">{formLead}</p>
             <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-paper/75">{chooseLabel}</p>
             <div className="mt-3 flex flex-wrap gap-2" role="radiogroup" aria-label={chooseLabel}>
               {services.map((s) => (

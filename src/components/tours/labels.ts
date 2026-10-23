@@ -1,3 +1,4 @@
+import { glue } from "@/components/home/typo";
 import { t, type Locale } from "@/i18n/config";
 import { formatDateRange } from "@/lib/format";
 import type { Board, SearchParams, Transport } from "@/lib/tours/types";
@@ -61,6 +62,130 @@ export const airportLabel = (code: string, locale: Locale) =>
   airportLabels[code] ? `${t(airportLabels[code], locale)} (${code})` : code;
 export const countryName = (slug: string, locale: Locale, fallback?: string) =>
   countryLabels[slug] ? t(countryLabels[slug], locale) : (fallback ?? slug);
+
+/*
+ * Provider texts (AnChoice, mock) arrive in Czech. The finite sets — resort regions, room types and amenities —
+ * get a Ukrainian label here, keyed by the provider's exact Czech text. On `cs`, and for any text not listed yet,
+ * the provider text is shown as is. Telegram prefills keep the raw provider text (Aljona looks it up at the CK).
+ * TODO(anchoice): extend the maps with the real API values (or switch to their codes once documented).
+ */
+const UK_REGIONS: Record<string, string> = {
+  Alanya: "Аланія",
+  "Antalya – Lara": "Анталія — Лара",
+  "Atol Dhaalu": "Атол Даалу",
+  "Atol Jižní Ari": "Атол Південний Арі",
+  "Atol Noonu": "Атол Нуну",
+  "Atol Severní Male": "Атол Північний Мале",
+  "Bali – Jimbaran": "Балі — Джимбаран",
+  "Bali – Legian": "Балі — Легіан",
+  "Bali – Nusa Dua": "Балі — Нуса-Дуа",
+  "Bali – Tanjung Benoa": "Балі — Танджунг-Беноа",
+  Bayahibe: "Баяібе",
+  Belek: "Белек",
+  Bodrum: "Бодрум",
+  Chalkidiki: "Халкідіки",
+  "Costa Blanca": "Коста-Бланка",
+  "Costa Dorada": "Коста-Дорада",
+  "Da Nang": "Дананг",
+  Dubaj: "Дубай",
+  Fujairah: "Фуджейра",
+  "Gran Canaria": "Гран-Канарія",
+  Hurghada: "Хургада",
+  Kalábrie: "Калабрія",
+  Kemer: "Кемер",
+  Kendwa: "Кендва",
+  Kiwengwa: "Ківенгва",
+  Korfu: "Корфу",
+  Kos: "Кос",
+  Kréta: "Крит",
+  "Makadi Bay": "Макаді-Бей",
+  Mallorca: "Майорка",
+  "Marsa Alam": "Марса-Алам",
+  "Mui Ne": "Муйне",
+  Nesebar: "Несебр",
+  "Nha Trang": "Нячанг",
+  Nungwi: "Нунгві",
+  "Phu Quoc": "Фукуок",
+  "Punta Cana": "Пунта-Кана",
+  "Ras Al Khaimah": "Рас-ель-Хайма",
+  Rhodos: "Родос",
+  "Sahl Hasheesh": "Сахл-Хашиш",
+  Sardinie: "Сардинія",
+  "Sharm El Sheikh": "Шарм-ель-Шейх",
+  Sicílie: "Сицилія",
+  Side: "Сіде",
+  "Slunečné pobřeží": "Сонячний берег",
+  Tenerife: "Тенерифе",
+  Zakynthos: "Закінф",
+  "Zlaté písky": "Золоті піски",
+};
+
+const UK_ROOM_TYPES: Record<string, string> = {
+  "Dvoulůžkový pokoj Standard": "Двомісний номер Standard",
+  "Dvoulůžkový pokoj s výhledem na moře": "Двомісний номер з видом на море",
+  "Dvoulůžkový pokoj s výhledem do zahrady": "Двомісний номер з видом на сад",
+  "Pokoj Superior": "Номер Superior",
+  "Rodinný pokoj": "Сімейний номер",
+  "Rodinný pokoj s výhledem na moře": "Сімейний номер з видом на море",
+  "Junior suite": "Junior Suite",
+  Bungalov: "Бунгало",
+  "Pokoj se vstupem do bazénu (swim-up)": "Номер з виходом до басейну (swim-up)",
+  "Vila s vlastním bazénem": "Вілла з власним басейном",
+  "Pokoj Club": "Номер Club",
+  "Pokoj Deluxe": "Номер Deluxe",
+  "Pokoj Deluxe s výhledem na moře": "Номер Deluxe з видом на море",
+  Studio: "Студіо",
+  "Apartmán 1+1": "Апартаменти 1+1",
+};
+
+const UK_AMENITIES: Record<string, string> = {
+  "Wi-Fi zdarma": "Безкоштовний Wi-Fi",
+  Klimatizace: "Кондиціонер",
+  "Venkovní bazén": "Відкритий басейн",
+  "Krytý bazén": "Критий басейн",
+  "Aquapark s tobogány": "Аквапарк із гірками",
+  "Vlastní písečná pláž": "Власний піщаний пляж",
+  "Oblázková pláž": "Гальковий пляж",
+  "Molo do moře": "Пірс у море",
+  "Korálový útes u hotelu": "Кораловий риф біля готелю",
+  "Potápěčské centrum": "Дайвінг-центр",
+  "Vodní sporty": "Водні види спорту",
+  "Spa a wellness": "Спа й велнес",
+  "Hamam (turecké lázně)": "Хамам (турецька лазня)",
+  "Fitness centrum": "Фітнес-центр",
+  "Dětský klub": "Дитячий клуб",
+  "Dětský bazén": "Дитячий басейн",
+  "Animační programy": "Анімація",
+  "Restaurace à la carte": "Ресторани à la carte",
+  "Tenisové kurty": "Тенісні корти",
+  "Golfové hřiště": "Поле для гольфу",
+  "Jen pro dospělé": "Лише для дорослих",
+  "Plážový bar": "Пляжний бар",
+  "Kyvadlová doprava na pláž": "Шатл до пляжу",
+  "Služby butlera": "Послуги батлера",
+  "Jóga a pilates": "Йога й пілатес",
+  "Parkoviště zdarma": "Безкоштовна парковка",
+  Diskotéka: "Дискотека",
+  "Transfer hydroplánem": "Трансфер гідролітаком",
+  "Minibar zdarma": "Безкоштовний мінібар",
+  "Centrum a obchody na dosah": "Центр і магазини поруч",
+};
+
+// Looked up with plain spaces: some provider texts already carry a no-break space ("u hotelu").
+const fromProvider = (uk: Record<string, string>) => (text: string, locale: Locale) =>
+  locale === "uk" ? (uk[text.replace(/ /g, " ")] ?? text) : text;
+
+/** Resort region as plain text ("Slunečné pobřeží" → «Сонячний берег» on uk), for titles and meta. */
+export const regionName = fromProvider(UK_REGIONS);
+/**
+ * Resort region for visible text: glued (the " — " in «Балі — Нуса-Дуа» never starts a line) and with a word joiner
+ * after each hyphen, so a place name such as «Шарм-ель-Шейх» / «Танджунг-Беноа» wraps whole, never at its hyphen.
+ */
+export const regionLabel = (text: string, locale: Locale) => glue(regionName(text, locale)).replace(/-(?=\S)/g, "-⁠");
+/** Room type ("Rodinný pokoj" → «Сімейний номер» on uk). */
+export const roomTypeLabel = fromProvider(UK_ROOM_TYPES);
+/** Hotel amenity ("Klimatizace" → «Кондиціонер» on uk). */
+export const amenityLabel = fromProvider(UK_AMENITIES);
 
 /** 300 → "300 m", 25000 → "25 km". */
 export function formatDistance(metres: number, locale: Locale): string {

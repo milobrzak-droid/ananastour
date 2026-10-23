@@ -21,6 +21,23 @@ export function glue(text: string): string {
     .replace(/ ([—–]) /g, `${NBSP}$1 `);
 }
 
+const WORD_JOINER = "⁠"; // invisible, default-ignorable: forbids a line break at its position
+const CYR = "\\u0400-\\u04FF";
+const UK_PARTICLE = new RegExp(
+  `(^|[^${CYR}])(будь|казна|хтозна)-(?=[${CYR}])|([${CYR}])-(?=(?:от|бо|но|то|таки|небудь)(?![${CYR}]))`,
+  "giu",
+);
+
+/**
+ * Ukrainian particles written with a hyphen stay with their word (будь-якою, як-от, все-таки): the browser would
+ * otherwise break after the hyphen ("будь- / якою"). Opt-in, for body copy; Latin text is left untouched.
+ */
+export function keepParticles(text: string): string {
+  return text.replace(UK_PARTICLE, (_m, before: string | undefined, prefix: string | undefined, letter: string | undefined) =>
+    prefix ? `${before}${prefix}-${WORD_JOINER}` : `${letter}-${WORD_JOINER}`,
+  );
+}
+
 /**
  * True when the text has stacked accents (Č Ř Š Á, Ї Й…). In Unbounded caps those rise ~0.99em
  * above the baseline, so multi-line display type needs a leading of ~1.06 to keep them
@@ -30,9 +47,15 @@ export function hasAccents(text: string): boolean {
   return /[\u0300-\u036f]/.test(text.normalize("NFD"));
 }
 
-/** Leading for a section H2 (Unbounded Black caps): tight 0.95, or 1.06 when a wrapped line could carry accents. */
+/** Cyrillic caps that hang below the baseline in Unbounded: at 0.95 a wrapped "ДРІБНОГО" sat ~1px above "ШРИФТУ". */
+const DESCENDERS = /[ДЦЩдцщ]/;
+
+/**
+ * Leading for a section H2 (Unbounded Black caps): tight 0.95, or 1.06 when a wrapped line could carry accents
+ * (rising into the line above) or descenders (hanging into the line below).
+ */
 export function leadingFor(title: string): string {
-  return hasAccents(title) ? "leading-[1.06]" : "leading-[0.95]";
+  return hasAccents(title) || DESCENDERS.test(title) ? "leading-[1.06]" : "leading-[0.95]";
 }
 
 // Advance widths of Unbounded ExtraBold/Black caps, in em (measured): most letters 0.8–0.98,
