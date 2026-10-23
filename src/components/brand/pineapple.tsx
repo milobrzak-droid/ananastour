@@ -243,8 +243,66 @@ export function CircleBadge({
 }
 
 /**
+ * Advance widths (em) of the stamp fonts' capitals, measured in the browser and
+ * grouped, rounding up. The stamp is server-rendered, so nothing can be measured
+ * at render time: these estimates size the text so it never runs past the rings.
+ * Unknown characters count as wide.
+ */
+function emCounter(groups: Array<[string, number]>, fallback: number) {
+  const table = new Map<string, number>();
+  for (const [chars, em] of groups) for (const ch of chars) table.set(ch, em);
+  return (s: string) => [...s].reduce((sum, ch) => sum + (table.get(ch.toUpperCase()) ?? fallback), 0);
+}
+
+/** Roboto Slab 800 (arcs and the centre word). */
+const slabEm = emCounter(
+  [
+    [" ’'.,:;·", 0.28],
+    ["IÍІЇ•()!", 0.36],
+    ["-1", 0.45],
+    ["023456789+", 0.57],
+    ["LJZŽSŠFГҐЗ", 0.62],
+    ["EÉĚCČPBGЕЄРСВЬБЯ–", 0.67],
+    ["TŤRŘDĎOÓQТУОК", 0.72],
+    ["AÁXYÝVKUÚŮАХЛЧ", 0.76],
+    ["HNŇДНИЙПЦФ—", 0.81],
+    ["MWМЖШЩЮ", 1.09],
+  ],
+  0.82,
+);
+
+/** Montserrat 800 (the small caps lines above and below the word). */
+const capsEm = emCounter(
+  [
+    [" ’'.,:;·", 0.32],
+    ["IÍІЇ•()!-1", 0.4],
+    ["023456789+–JLSŠTŤFZŽEÉĚYÝГҐТЗЕ", 0.7],
+    ["CČPRŘXKЄРСЬБВУЧЯКХ", 0.75],
+    ["ABGVUÚŮDĎOÓQHNŇАИЙНПЛДОЦ", 0.85],
+    ["MWМФЖШЩЮ—", 1.18],
+  ],
+  0.9,
+);
+
+/** Text inside the inner ring (r 34.5) keeps this distance from the centre, leaving air before the ring. */
+const STAMP_ROOM = 31.5;
+/** Arc length the ring text may use: top arc is 122.5 long, bottom 133.8, minus air around the side dots. */
+const ARC_ROOM = { top: 112, bottom: 120 };
+/** The centre word may be condensed to this share of its natural width before it gets smaller. */
+const WORD_SQUEEZE = 0.85;
+
+/** Widest text that fits inside the inner ring between two heights of the 100×100 box. */
+function ringChord(yTop: number, yBottom: number): number {
+  const d = Math.max(Math.abs(yTop - 50), Math.abs(yBottom - 50));
+  return d >= STAMP_ROOM ? 0 : 2 * Math.sqrt(STAMP_ROOM ** 2 - d ** 2);
+}
+
+/**
  * Navy fruit-crate stamp (Reference 2): text on the top and bottom arcs,
- * spaced caps inside and one heavy slab word in the middle.
+ * spaced caps inside and one heavy slab word in the middle. Every line is
+ * fitted to the rings, so any copy length in either language stays readable:
+ * long arcs shrink (both arcs together, so the ring reads as one), the word
+ * condenses and then shrinks, long caps lines condense.
  */
 export function Stamp({
   top = "ANANAS TOUR • TRAVEL",
@@ -273,9 +331,26 @@ export function Stamp({
   const accent = tone === "navy" ? "var(--c-yellow)" : "var(--c-ink)";
   const slab = { fontFamily: "var(--font-slab), Georgia, serif" };
   const caps = { fontFamily: "var(--font-body), sans-serif" };
-  const wordSize = Math.min(15, 78 / Math.max(word.length, 1) / 0.62);
   const centerLines = above.length + below.length;
   const step = 6.4;
+  const capsSize = 4.6;
+  const capsSpacing = 1.1;
+  // Word baseline for a given size, using the same layout maths as the render below.
+  const wordBaseline = (fs: number) => 50 - (centerLines * step + fs) / 2 + 4.6 + above.length * step + fs * 0.72 - 2.6;
+  const wordRoom = (fs: number) => ringChord(wordBaseline(fs) - fs * 0.72, wordBaseline(fs));
+  const wordWidth = slabEm(word);
+  let wordSize = 15;
+  while (wordSize > 5 && wordWidth * wordSize * WORD_SQUEEZE > wordRoom(wordSize)) wordSize -= 0.25;
+  const wordFit = wordRoom(wordSize) > 0 && wordWidth * wordSize > wordRoom(wordSize) ? r2(wordRoom(wordSize)) : undefined;
+  // Both arcs share one scale so the ring text reads as one line of type.
+  const arcLength = (s: string) => slabEm(s) * 6.6 + Math.max([...s].length - 1, 0) * 1.6;
+  const arcScale = Math.min(1, ARC_ROOM.top / Math.max(arcLength(top), 1), ARC_ROOM.bottom / Math.max(arcLength(bottom), 1));
+  const arcFont = { fontSize: r2(6.6 * arcScale), letterSpacing: r2(1.6 * arcScale) };
+  // Caps lines: condense a line only when it would cross the ring at its height.
+  const capsFit = (l: string, baseline: number) => {
+    const room = ringChord(baseline - capsSize * 0.72, baseline);
+    return room > 0 && capsEm(l) * capsSize + Math.max([...l].length - 1, 0) * capsSpacing > room ? r2(room) : undefined;
+  };
   const blockH = centerLines * step + wordSize;
   let y = 50 - blockH / 2 + 4.6;
   return (
@@ -288,12 +363,12 @@ export function Stamp({
       <g className={spin ? "origin-center animate-[spin_40s_linear_infinite]" : undefined}>
         <circle cx="50" cy="50" r="47" fill="none" stroke={fg} strokeWidth="0.5" />
         <circle cx="50" cy="50" r="34.5" fill="none" stroke={fg} strokeWidth="0.5" />
-        <text fill={fg} fontSize="6.6" fontWeight={800} letterSpacing="1.6" style={slab}>
+        <text fill={fg} fontSize={arcFont.fontSize} fontWeight={800} letterSpacing={arcFont.letterSpacing} style={slab}>
           <textPath href={`#${id}t`} startOffset="50%" textAnchor="middle">
             {top}
           </textPath>
         </text>
-        <text fill={fg} fontSize="6.6" fontWeight={800} letterSpacing="1.6" style={slab}>
+        <text fill={fg} fontSize={arcFont.fontSize} fontWeight={800} letterSpacing={arcFont.letterSpacing} style={slab}>
           <textPath href={`#${id}b`} startOffset="50%" textAnchor="middle">
             {bottom}
           </textPath>
@@ -303,21 +378,55 @@ export function Stamp({
       </g>
       {above.map((l) => {
         const el = (
-          <text key={`a${l}`} x="50" y={y} textAnchor="middle" fill={fg} fontSize="4.6" fontWeight={800} letterSpacing="1.1" style={caps}>
+          <text
+            key={`a${l}`}
+            x="50"
+            y={y}
+            textAnchor="middle"
+            fill={fg}
+            fontSize={capsSize}
+            fontWeight={800}
+            letterSpacing={capsSpacing}
+            textLength={capsFit(l, y)}
+            lengthAdjust="spacingAndGlyphs"
+            style={caps}
+          >
             {l}
           </text>
         );
         y += step;
         return el;
       })}
-      <text x="50" y={y + wordSize * 0.72 - 2.6} textAnchor="middle" fill={accent} fontSize={wordSize} fontWeight={900} style={slab}>
+      <text
+        x="50"
+        y={y + wordSize * 0.72 - 2.6}
+        textAnchor="middle"
+        fill={accent}
+        fontSize={wordSize}
+        fontWeight={900}
+        textLength={wordFit}
+        lengthAdjust="spacingAndGlyphs"
+        style={slab}
+      >
         {word}
       </text>
       {(() => {
         y += wordSize + 1.4;
         return below.map((l) => {
           const el = (
-            <text key={`b${l}`} x="50" y={y} textAnchor="middle" fill={fg} fontSize="4.6" fontWeight={800} letterSpacing="1.1" style={caps}>
+            <text
+              key={`b${l}`}
+              x="50"
+              y={y}
+              textAnchor="middle"
+              fill={fg}
+              fontSize={capsSize}
+              fontWeight={800}
+              letterSpacing={capsSpacing}
+              textLength={capsFit(l, y)}
+              lengthAdjust="spacingAndGlyphs"
+              style={caps}
+            >
               {l}
             </text>
           );

@@ -5,18 +5,20 @@ import { AljonaAvatar, TelegramButton } from "@/components/contact/telegram";
 import { Container } from "@/components/ui";
 import { site } from "@/config/site";
 import { t, type Locale } from "@/i18n/config";
+import { glue, hasAccents } from "./typo";
 
 const C = {
-  title: { uk: "Валіза вже чекає?", cs: "Kufr už čeká?" },
+  title: { uk: "Море чекає. Я теж.", cs: "Moře čeká. Já taky." },
   lead: {
-    uk: "Напишіть Альоні в Telegram: куди, коли і скільки вас. Решту я візьму на себе.",
-    cs: "Napište Aljoně na Telegram: kam, kdy a kolik vás je. Zbytek zařídím já.",
+    uk: "Три рядки в Telegram: куди, коли і скільки вас. Решту беру на себе.",
+    cs: "Stačí tři řádky na Telegram: kam, kdy a kolik vás pojede. Zbytek je na mně.",
   },
   cta: { uk: "Написати Альоні", cs: "Napsat Aljoně" },
-  badge: { uk: "ВІДПОВІДЬ ЗА 15 ХВИЛИН • ", cs: "ODPOVĚĎ DO 15 MINUT • " },
+  badge: { uk: "ЗАЗВИЧАЙ ЗА 15 ХВ • 9:00–21:00 • ", cs: "OBVYKLE DO 15 MIN • 9–21 H • " },
 };
 
 export function FinalCta({ locale }: { locale: Locale }) {
+  const title = t(C.title, locale);
   return (
     <section className="pb-12 pt-12 sm:pb-16 sm:pt-16">
       <Container>
@@ -24,8 +26,13 @@ export function FinalCta({ locale }: { locale: Locale }) {
           <PineapplePattern preset="hero" opacity={0.7} color="var(--c-yellow-light)" fibre="var(--c-yellow)" className="-z-10" />
           <div className="grid items-stretch gap-6 lg:grid-cols-[1.25fr_1fr]">
             <div className="px-4 py-10 sm:px-10 sm:py-14">
-              <h2 className="font-display text-[clamp(2.6rem,7vw,6rem)] font-black uppercase leading-[0.88] tracking-[-0.04em]">{t(C.title, locale)}</h2>
-              <p className="mt-6 max-w-xl text-lg text-ink/85">{t(C.lead, locale)}</p>
+              {/* Stacked accents (cs "MOŘE / ČEKÁ. / JÁ TAKY.") need a full leading; accent-free uk stays tight. */}
+              <h2
+                className={`font-display text-[clamp(2.6rem,7vw,6rem)] font-black uppercase tracking-[-0.03em] ${hasAccents(title) ? "leading-[1.06]" : "leading-[0.9]"}`}
+              >
+                {glue(title)}
+              </h2>
+              <p className="mt-6 max-w-xl text-pretty text-lg text-ink/85">{glue(t(C.lead, locale))}</p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <AljonaAvatar size={60} ring="white" />
                 <TelegramButton locale={locale} source="home-final" size="lg" label={t(C.cta, locale)} />

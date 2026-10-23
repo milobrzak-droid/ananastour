@@ -3,34 +3,36 @@ import { ananasPhotos } from "@/content/ananas-photos";
 import { PineappleSlice, type SliceKind } from "@/components/brand/pineapple";
 import { Container } from "@/components/ui";
 import { t, type Locale } from "@/i18n/config";
+import { fitLongestWord, glue, leadingFor } from "./typo";
 
 const C = {
-  title: { uk: "Чому нас обирають?", cs: "Proč si vybrat nás?" },
+  // A·NA·NÁS pun, once on this screen — every tile below is the proof of what is "on us".
+  title: { uk: "А що на нас?", cs: "A co je na nás?" },
 };
 
 const POINTS: Array<{ title: Record<Locale, string>; text: Record<Locale, string>; slice: Exclude<SliceKind, "ring"> }> = [
   {
     slice: "half",
-    title: { uk: "Надійність", cs: "Spolehlivost" },
+    title: { uk: "Гроші під захистом", cs: "Peníze v suchu" },
     text: {
-      uk: "Працюємо лише з перевіреними чеськими туроператорами за офіційними договорами. Кожен туроператор (CK) у Чехії зобов’язаний мати страхування від банкрутства — ваші кошти та відпочинок у безпеці.",
-      cs: "Spolupracujeme jen s prověřenými českými cestovními kancelářemi na základě oficiálních smluv. Každá CK v Česku musí mít pojištění proti úpadku — vaše peníze i dovolená jsou v bezpečí.",
+      uk: "Я продаю тури лише чеських туроператорів, а кожен за законом застрахований від банкрутства. Це закон, а не моя обіцянка.",
+      cs: "Prodávám jen zájezdy českých CK a každá musí být ze zákona pojištěná proti úpadku. To není můj slib, to je zákon.",
     },
   },
   {
     slice: "quarter",
-    title: { uk: "Підтримка 24/7", cs: "Podpora 24/7" },
+    title: { uk: "Людина, а не бот", cs: "Člověk, ne robot" },
     text: {
-      uk: "Ми завжди на зв’язку в Telegram. Супроводжуємо вас від вильоту з аеропорту до щасливого повернення додому — українською чи чеською.",
-      cs: "Jsme stále na Telegramu. Provázíme vás od odletu z letiště až po šťastný návrat domů — ukrajinsky i česky.",
+      uk: "Пишете в Telegram — відповідаю я, з 9:00 до 21:00 зазвичай за 15 хвилин. Пізно ввечері? Відповім зранку, за першою кавою.",
+      cs: "Na Telegramu odpovídám já sama – od 9 do 21 h obvykle do 15 minut. Pozdě večer? Ráno u první kávy.",
     },
   },
   {
     slice: "wedge",
-    title: { uk: "Експертність", cs: "Odbornost" },
+    title: { uk: "Бачила сама", cs: "Na vlastní oči" },
     text: {
-      uk: "Особисто інспектуємо курорти і жили в більшості готелів, які пропонуємо. Рекомендуємо лише найкраще.",
-      cs: "Letoviska osobně prověřujeme a ve většině nabízených hotelů jsme sami bydleli. Doporučujeme jen to nejlepší.",
+      uk: "Регулярно їжджу перевіряти готелі. Тож скажу не лише, скільки в готелю зірок, а й чи заслужені вони.",
+      cs: "Pravidelně jezdím kontrolovat hotely. Řeknu vám nejen, kolik má hotel hvězd, ale i jestli si je zaslouží.",
     },
   },
 ];
@@ -45,7 +47,7 @@ export function WhyUs({ locale }: { locale: Locale }) {
     const p = POINTS[i];
     const dark = i === 2;
     return (
-      <li key={`t${i}`} className={`${tile} ${TONES[i]} flex min-h-[16rem] flex-col p-6 sm:p-8`}>
+      <li key={`t${i}`} className={`${tile} ${TONES[i]} @container flex min-h-[16rem] flex-col p-6 sm:p-8`}>
         <PineappleSlice
           kind={p.slice}
           size={84}
@@ -56,8 +58,14 @@ export function WhyUs({ locale }: { locale: Locale }) {
           className="absolute -right-3 -top-3"
         />
         <span className={`font-display text-sm font-extrabold ${dark ? "text-yellow" : "text-ink/75"}`}>0{i + 1}</span>
-        <h3 className="mt-auto pt-8 font-display text-2xl font-extrabold uppercase">{t(p.title, locale)}</h3>
-        <p className={`mt-2 text-[0.95rem] ${dark ? "text-white/85" : "text-ink/80"}`}>{t(p.text, locale)}</p>
+        {/* Sized to the tile: in the 3-column mosaic (~160px of text) "ЗАХИСТОМ" shrinks instead of splitting. */}
+        <h3
+          className="mt-auto text-balance pt-8 font-display text-[clamp(1.05rem,var(--fit),1.5rem)] font-extrabold uppercase leading-tight"
+          style={fitLongestWord(t(p.title, locale))}
+        >
+          {glue(t(p.title, locale))}
+        </h3>
+        <p className={`mt-2 text-pretty text-[0.95rem] ${dark ? "text-white/85" : "text-ink/80"}`}>{glue(t(p.text, locale))}</p>
       </li>
     );
   };
@@ -69,8 +77,10 @@ export function WhyUs({ locale }: { locale: Locale }) {
   return (
     <section className="py-12 sm:py-16">
       <Container>
-        <h2 className="mb-8 max-w-3xl font-display text-[clamp(2rem,4.4vw,3.6rem)] font-black uppercase leading-[0.95] tracking-[-0.03em]">
-          {t(C.title, locale)}
+        <h2
+          className={`mb-8 max-w-3xl text-balance font-display text-[clamp(2rem,4.4vw,3.6rem)] font-black uppercase tracking-[-0.03em] ${leadingFor(t(C.title, locale))}`}
+        >
+          {glue(t(C.title, locale))}
         </h2>
         <ol className="grid gap-3 sm:gap-4 md:grid-cols-3">
           {photo(0)}

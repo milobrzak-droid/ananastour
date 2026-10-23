@@ -23,9 +23,9 @@ export function Pagination({
   });
 
   return (
-    <nav aria-label={t({ uk: "Сторінки", cs: "Stránky" }, locale)} className="mt-10 flex items-center justify-center gap-2">
+    <nav aria-label={t({ uk: "Сторінки результатів", cs: "Stránky výsledků" }, locale)} className="mt-10 flex items-center justify-center gap-2">
       {page > 1 ? (
-        <ArrowButton href={href(page - 1)} direction="left" size={44} label={t({ uk: "Попередня", cs: "Předchozí" }, locale)} />
+        <ArrowButton href={href(page - 1)} direction="left" size={44} label={t({ uk: "Попередня сторінка", cs: "Předchozí stránka" }, locale)} />
       ) : (
         <span className="w-11" />
       )}
@@ -51,7 +51,7 @@ export function Pagination({
         )}
       </ul>
       {page < pages ? (
-        <ArrowButton href={href(page + 1)} size={44} label={t({ uk: "Наступна", cs: "Další" }, locale)} />
+        <ArrowButton href={href(page + 1)} size={44} label={t({ uk: "Наступна сторінка", cs: "Další stránka" }, locale)} />
       ) : (
         <span className="w-11" />
       )}

@@ -43,8 +43,15 @@ export function LegalDocument({
   return (
     <Container className="pb-10 pt-2 sm:pb-16 sm:pt-4">
       <header className="relative mb-10 overflow-hidden rounded-[2rem] bg-grey px-6 py-10 sm:rounded-[2.5rem] sm:px-12 sm:py-14">
-        <PineappleSlice kind="half" size={220} rotate={200} seed={9} className="absolute -right-12 -top-16 opacity-80" />
-        <h1 className="relative font-display text-[clamp(2rem,5vw,4rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">{title}</h1>
+        {/* Phone: a small slice tucked into the corner above the text; from sm the full slice sits in the h1's right padding. */}
+        <PineappleSlice
+          kind="half"
+          size={220}
+          rotate={200}
+          seed={9}
+          className="absolute -right-8 -top-10 h-28 w-28 opacity-80 sm:-right-12 sm:-top-16 sm:h-[220px] sm:w-[220px]"
+        />
+        <h1 className="relative text-balance font-display text-[clamp(2rem,5vw,4rem)] font-black uppercase leading-[1.14] tracking-[-0.03em] sm:pr-40">{title}</h1>
         <p className="relative mt-4 text-sm text-ink/80">{updated}</p>
       </header>
       <div className="grid gap-10 lg:grid-cols-[260px_1fr]">

@@ -35,18 +35,18 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
           <p aria-hidden style={{ fontSize: 48, margin: 0 }}>
             🍍
           </p>
-          <h1 style={{ fontSize: 26, margin: "16px 0 8px" }}>Щось пішло не так</h1>
+          <h1 style={{ fontSize: 26, margin: "16px 0 8px" }}>Затримка рейсу</h1>
           <p style={{ margin: "0 0 20px", opacity: 0.8 }}>
-            Сайт тимчасово не працює. Спробуйте ще раз або напишіть нам у Telegram.
+            Сайт не завантажився. Спробуйте ще раз — або напишіть Альоні в Telegram: вона не затримується.
           </p>
-          <h2 style={{ fontSize: 18, margin: "0 0 4px" }}>Něco se pokazilo</h2>
-          <p style={{ margin: "0 0 24px", opacity: 0.8 }}>Web dočasně nefunguje. Zkuste to znovu, nebo nám napište na Telegram.</p>
+          <h2 style={{ fontSize: 18, margin: "0 0 4px" }}>Zpoždění letu</h2>
+          <p style={{ margin: "0 0 24px", opacity: 0.8 }}>Web se nenačetl. Zkuste to znovu, nebo napište Aljoně na Telegram – ta zpoždění nemá.</p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <button type="button" onClick={() => reset()} style={{ ...button, background: "#1d2440", color: "#fdf8ef" }}>
               Спробувати ще раз / Zkusit znovu
             </button>
             <a href="https://t.me/Ananas_tours" style={{ ...button, background: "#1a78ad", color: "#ffffff" }}>
-              Telegram
+              Написати Альоні / Napsat Aljoně
             </a>
           </div>
         </main>

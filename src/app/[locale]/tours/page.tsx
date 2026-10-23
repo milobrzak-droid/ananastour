@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 import { PineapplePattern } from "@/components/brand/pineapple";
+import { glue } from "@/components/home/typo";
+import { displayLeading } from "@/components/tours/display";
 import { Container } from "@/components/ui";
 import { Filters, activeFilterCount } from "@/components/tours/filters";
 import { NoResults, PickForMeCard } from "@/components/tours/help-cards";
@@ -11,6 +13,7 @@ import { OfferCard } from "@/components/tours/offer-card";
 import { Pagination } from "@/components/tours/pagination";
 import { SearchBox } from "@/components/tours/search-box";
 import { SortSelect } from "@/components/tours/sort-select";
+import { getDestination } from "@/content/destinations";
 import { isLocale, t, type Locale } from "@/i18n/config";
 import { languageAlternates, routes } from "@/i18n/routes";
 import { tours } from "@/lib/tours";
@@ -26,11 +29,12 @@ const PAGE_SIZE = 12;
 const SORTS = Object.keys(sortLabels) as Array<NonNullable<SearchParams["sort"]>>;
 
 const tx = {
-  title: { uk: "Пошук турів", cs: "Vyhledávání zájezdů" },
-  titleTo: { uk: "Тури: ", cs: "Zájezdy: " },
+  title: { uk: "Тури з Чехії", cs: "Zájezdy z Česka" },
+  titleTo: { uk: "Тури з Чехії: ", cs: "Zájezdy z Česka: " },
+  titleDest: { uk: "Тури", cs: "Zájezdy" },
   description: {
-    uk: "Тури з Праги, Брна, Острави та Пардубиць від перевірених чеських туроператорів. Альона допоможе обрати в Telegram.",
-    cs: "Zájezdy z Prahy, Brna, Ostravy a Pardubic od ověřených českých cestovních kanceláří. Aljona poradí na Telegramu.",
+    uk: "Пакетні тури чеських туроператорів, застрахованих від банкрутства. Ціни в кронах. Знайшли свій тур? Напишіть Альоні в Telegram — вона перевірить ціну й місця.",
+    cs: "Vyhledávání zájezdů českých CK pojištěných proti úpadku, ceny v korunách. Zaujalo vás něco? Aljona vám na Telegramu ověří cenu i volná místa.",
   },
   found: { uk: "Знайдено турів", cs: "Nalezeno zájezdů" },
   results: { uk: "Результати пошуку", cs: "Výsledky hledání" },
@@ -83,17 +87,23 @@ export default async function ToursPage({ params, searchParams }: Props) {
     ...new URLSearchParams(toQueryString({ ...sp, sort: undefined, page: undefined })).entries(),
   ] as Array<[string, string]>;
 
-  const heading = sp.destination
-    ? `${t(tx.titleTo, locale)}${countryName(sp.destination, locale)}`
-    : t(tx.title, locale);
+  // COPY-GUIDE §7.3: with a country filter the H1 is "ТУРИ ДО ТУРЕЧЧИНИ" / "ZÁJEZDY DO TURECKA".
+  const dest = sp.destination ? getDestination(sp.destination) : undefined;
+  const heading = glue(
+    dest
+      ? `${t(tx.titleDest, locale)} ${t(dest.nameTo, locale)}`
+      : sp.destination
+        ? `${t(tx.titleTo, locale)}${countryName(sp.destination, locale)}`
+        : t(tx.title, locale),
+  );
 
   return (
     <>
       <Container className="pt-2 sm:pt-4">
         <div className="relative isolate overflow-hidden rounded-[2rem] bg-teal px-3 pb-3 pt-8 text-white sm:rounded-[2.5rem] sm:px-6 sm:pb-6 sm:pt-12">
           <PineapplePattern preset="section" opacity={0.22} className="-z-10" />
-          <h1 className="px-2 font-display text-[clamp(2rem,5vw,4.2rem)] font-black uppercase leading-[0.95] tracking-[-0.035em]">{heading}</h1>
-          <p className="mt-3 px-2 text-sm font-medium text-white">{summary}</p>
+          <h1 className={`text-balance px-2 font-display text-[clamp(2rem,5vw,4.2rem)] font-black uppercase ${displayLeading(heading)} tracking-[-0.035em]`}>{heading}</h1>
+          <p className="mt-3 px-2 text-sm font-medium text-white">{glue(summary)}</p>
           <div className="mt-6 text-ink">
             <SearchBox locale={locale} initial={sp} variant="bar" />
           </div>

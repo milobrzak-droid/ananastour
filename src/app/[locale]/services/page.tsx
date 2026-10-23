@@ -12,115 +12,129 @@ import { languageAlternates, routes } from "@/i18n/routes";
 type L = Record<Locale, string>;
 
 const copy = {
-  metaTitle: { uk: "Наші послуги — страхування, авіаквитки, готелі, візи", cs: "Naše služby — pojištění, letenky, hotely, víza" },
+  metaTitle: { uk: "Послуги: страховка, авіаквитки, готелі, візи", cs: "Služby: pojištění, letenky, hotely a víza" },
   metaDescription: {
-    uk: "Медичне страхування, авіаквитки з Праги, бронювання готелів, трансфер, візова підтримка та екскурсії. Замовте послугу в Telegram.",
-    cs: "Cestovní pojištění, letenky z Prahy, hotely, transfery, vízová podpora a výlety. Objednejte službu přes Telegram.",
+    uk: "Страховка, авіаквитки, готелі, трансфер, візи й екскурсії — в одному чаті. Напишіть Альоні в Telegram: вона все підбере й пояснить українською чи чеською.",
+    cs: "Pojištění, letenky, hotely, transfer, víza i výlety v jednom chatu. Aljona vybere, prověří a vysvětlí lidsky – česky i ukrajinsky. Napište jí na Telegram.",
   },
-  eyebrow: { uk: "Послуги", cs: "Služby" },
-  title: { uk: "Усе для подорожі — в одному чаті", cs: "Vše pro cestu — v jednom chatu" },
+  eyebrow: { uk: "Усе в одному чаті", cs: "Vše v jednom chatu" },
+  // Brand manifest (COPY-GUIDE §0.2): the sweet part is yours, the prickly part is mine.
+  title: { uk: "Солодке — вам. Колюче — нам.", cs: "Sladké vám. Pichlavé nám." },
   lead: {
-    uk: "Ваш комфорт — наш пріоритет. Окрім турів, допоможемо зі страховкою, квитками, готелями, трансфером, візами та екскурсіями — для вильотів із Праги, Брна, Острави чи Пардубиць.",
-    cs: "Váš komfort je naše priorita. Kromě zájezdů vám pomůžeme s pojištěním, letenkami, hotely, transferem, vízy i výlety — pro odlety z Prahy, Brna, Ostravy či Pardubic.",
+    uk: "Море — солодка частина. Квитки, готель, трансфер, страховка, віза й екскурсії — колюча. Її я беру на себе, а від вас — лише одне повідомлення.",
+    cs: "Moře je ta sladká část. Ta pichlavá? Letenky, hotel, transfer, pojištění, víza a výlety. Tu beru na sebe – od vás stačí jedna zpráva.",
   },
-  heroCta: { uk: "Запитати в Telegram", cs: "Zeptat se na Telegramu" },
-  heroTours: { uk: "Шукати тур", cs: "Hledat zájezd" },
+  heroCta: { uk: "Написати Альоні", cs: "Napsat Aljoně" },
+  heroTours: { uk: "Знайти тур", cs: "Najít zájezd" },
   telegramLabel: { uk: "Telegram", cs: "Telegram" },
-  formTitle: { uk: "Замовити послугу", cs: "Objednat službu" },
+  formTitle: { uk: "Немає Telegram? Не біда.", cs: "Nemáte Telegram? Nevadí." },
   formLead: {
-    uk: "Залиште контакт — Альона отримає заявку миттєво й напише вам. Або одразу відкрийте чат у Telegram.",
-    cs: "Nechte nám kontakt — Aljona dostane poptávku okamžitě a ozve se vám. Nebo rovnou otevřete chat na Telegramu.",
+    uk: "Оберіть послугу й залиште номер — відповім особисто: з 9:00 до 21:00 зазвичай за 15 хвилин. А якщо Telegram таки є, кнопка нижче відкриє чат із готовим повідомленням.",
+    cs: "Vyberte službu a nechte mi číslo – ozvu se osobně, od 9 do 21 h obvykle do 15 minut. A kdyby se Telegram přece jen našel, tlačítko níže otevře chat s připravenou zprávou.",
   },
-  choose: { uk: "Оберіть послугу", cs: "Vyberte službu" },
-  prefill: { uk: "Добрий день, Альоно! Мене цікавить послуга: ", cs: "Dobrý den, Aljono! Mám zájem o službu: " },
-  approachTitle: { uk: "Індивідуальний підхід і турбота", cs: "Individuální přístup a péče" },
+  choose: { uk: "Що вам потрібно?", cs: "Co potřebujete?" },
+  // Sent as "{prefill}{service}." — the service name completes the last line.
+  prefill: { uk: "Добрий день, Альоно!\nКуди: …\nКоли: …\nМене цікавить: ", cs: "Dobrý den, Aljono!\nKam: …\nKdy: …\nZajímá mě: " },
+  approachTitle: { uk: "Хочете свій маршрут?", cs: "Chcete vlastní trasu?" },
   approach: {
-    uk: "Кожен мандрівник унікальний. Тому ми пропонуємо як готові пакетні тури від перевірених чеських туроператорів, так і складні індивідуальні маршрути. Персональний трансфер, оренда яхти чи авторська екскурсійна програма — довірте організаційні клопоти нам і просто насолоджуйтеся відпочинком.",
-    cs: "Každý cestovatel je jiný. Proto nabízíme jak hotové zájezdy od prověřených českých cestovních kanceláří, tak i individuální trasy na míru. Soukromý transfer, pronájem jachty nebo vlastní program výletů — organizaci nechte na nás a vy si jen užívejte dovolenou.",
+    uk: "Два міста замість одного курорту, свої дати чи готель поза каталогом — зберу подорож, як пазл: переліт, готель, трансфер, страховка. Підбираю й перевіряю я, вирішуєте ви, а на сайті нічого не платите. Чогось немає в списку? Напишіть — розберемося.",
+    cs: "Dvě města místo jednoho letoviska, vlastní termíny nebo hotel mimo katalog – složím vám cestu jako puzzle: let, hotel, transfer, pojištění. Vybírám a prověřuju já, rozhodujete vy – a na webu nic neplatíte. Něco v seznamu chybí? Napište mi, vymyslíme to.",
   },
 } satisfies Record<string, L>;
+
+// Hero stamp, read top to bottom: "Ananas Tour from Czechia · six services, one chat · in Ukrainian and Czech".
+const stamp = {
+  top: { uk: "ANANAS TOUR • З ЧЕХІЇ", cs: "ANANAS TOUR • Z ČESKA" },
+  above: { uk: ["ШІСТЬ"], cs: ["ŠEST"] },
+  word: { uk: "ПОСЛУГ", cs: "SLUŽEB" },
+  below: { uk: ["ОДИН ЧАТ"], cs: ["JEDEN CHAT"] },
+  bottom: { uk: "УКРАЇНСЬКОЮ • ЧЕСЬКОЮ", cs: "ČESKY • UKRAJINSKY" },
+};
 
 const services: Array<{ id: ServiceIcon; title: L; text: L; points: Record<Locale, string[]>; order: L; photo: string }> = [
   {
     id: "insurance",
-    title: { uk: "Медичне страхування", cs: "Cestovní pojištění" },
+    title: { uk: "Страхування", cs: "Pojištění" },
     text: {
-      uk: "Повний захист здоров’я в будь-якій країні. Працюємо лише з перевіреними страховими компаніями та асистанс-службами.",
-      cs: "Plná ochrana zdraví v jakékoli zemi. Spolupracujeme jen s ověřenými pojišťovnami a asistenčními službami.",
+      uk: "Поясню, що покриває поліс, — ще до того, як ви його купите. І які винятки ховаються в дрібному шрифті.",
+      cs: "Vysvětlím, co pojistka kryje, ještě než ji koupíte – a jaké výluky se schovávají v drobném písmu.",
     },
+    // TODO(client): insurance for holders of temporary protection — confirm before mentioning it here.
     points: {
-      uk: ["Поліс за 10 хвилин онлайн", "Страхування від невиїзду", "Для власників тимчасового захисту в ЧР"],
-      cs: ["Pojistka online do 10 minut", "Pojištění storna zájezdu", "I pro držitele dočasné ochrany v ČR"],
+      uk: ["Медичні витрати за кордоном", "Страхування від невиїзду", "Умови — українською"],
+      cs: ["Léčebné výlohy v zahraničí", "Pojištění storna zájezdu", "Podmínky vysvětlené lidsky"],
     },
-    order: { uk: "Оформити поліс", cs: "Sjednat pojištění" },
+    order: { uk: "Підібрати страховку", cs: "Vybrat pojištění" },
     photo: ananasPhotos.services.insurance,
   },
   {
     id: "flight",
-    title: { uk: "Пошук авіаквитків", cs: "Letenky" },
+    title: { uk: "Авіаквитки", cs: "Letenky" },
     text: {
-      uk: "Найкращі ціни та зручні пересадки. Знайдемо оптимальний рейс із Праги, Брна, Острави чи Пардубиць за лічені хвилини.",
-      cs: "Nejlepší ceny a pohodlné přestupy. Optimální let z Prahy, Brna, Ostravy či Pardubic najdeme během pár minut.",
+      uk: "Коли потрібен лише переліт. Підкажу, де багаж уже в ціні, а де дешевий квиток дорожчає аж біля стійки реєстрації.",
+      cs: "Potřebujete jen let? Poradím, kde je zavazadlo v ceně a kde se levná letenka prodraží až u přepážky.",
     },
     points: {
-      uk: ["Регулярні рейси та лоукости", "Багаж і місця — без сюрпризів", "Квитки для всієї родини"],
-      cs: ["Pravidelné i nízkonákladové lety", "Zavazadla a místa bez překvapení", "Letenky pro celou rodinu"],
+      uk: ["Вильоти з аеропортів Чехії", "Ціна одразу з багажем", "Зручні пересадки"],
+      cs: ["Odlety z letišť v Česku", "Cena rovnou se zavazadlem", "Rozumné přestupy"],
     },
     order: { uk: "Знайти рейс", cs: "Najít let" },
     photo: ananasPhotos.services.flights,
   },
   {
     id: "hotel",
-    title: { uk: "Бронювання готелів", cs: "Rezervace hotelů" },
+    title: { uk: "Готелі", cs: "Hotely" },
     text: {
-      uk: "Понад 500 000 варіантів проживання — від затишних апартаментів до розкішних вілл. Більшість готелів Альона бачила на власні очі.",
-      cs: "Přes 500 000 možností ubytování — od útulných apartmánů po luxusní vily. Většinu hotelů Aljona viděla na vlastní oči.",
+      uk: "Без туру, просто готель. Знаю, куди з дітьми, куди вдвох — і куди краще не їхати.",
+      cs: "Jen hotel, bez zájezdu. Vím, kam s dětmi, kam ve dvou – a kam radši ne.",
     },
     points: {
-      uk: ["Готелі, перевірені особисто", "Сімейні номери та дитячі клуби", "Чесні відгуки, а не каталог"],
-      cs: ["Osobně prověřené hotely", "Rodinné pokoje a dětské kluby", "Upřímné reference, ne katalog"],
+      uk: ["3 готелі під ваші побажання", "Сімейні номери й дитячі клуби", "Чесно скажу й про мінуси"],
+      cs: ["3 hotely podle vašich přání", "Rodinné pokoje a dětské kluby", "Na rovinu řeknu i mínusy"],
     },
     order: { uk: "Обрати готель", cs: "Vybrat hotel" },
     photo: ananasPhotos.services.hotels,
   },
   {
     id: "transfer",
-    title: { uk: "Індивідуальний трансфер", cs: "Soukromý transfer" },
+    title: { uk: "Трансфер", cs: "Transfer" },
     text: {
-      uk: "Ваша приватність понад усе. Зустріч із табличкою в аеропорту та комфортна поїздка до самого готелю.",
-      cs: "Vaše soukromí na prvním místě. Přivítání s cedulkou na letišti a pohodlná cesta až k hotelu.",
+      uk: "Зустріч в аеропорту з табличкою — і просто до готелю. Без таксі-\u2060лотереї о другій ночі.",
+      cs: "Na letišti vás vyzvednou s cedulkou a odvezou rovnou do hotelu. Žádná loterie s taxíky ve dvě ráno.",
     },
+    // TODO(client): transfers to Czech airports — confirm before offering them.
     points: {
-      uk: ["Зустріч із табличкою", "Дитячі крісла на запит", "Трансфер до аеропорту в Чехії"],
-      cs: ["Přivítání s cedulkou", "Dětské autosedačky na přání", "Odvoz na letiště v Česku"],
+      uk: ["Груповий або індивідуальний", "Туди й назад", "Ціна відома наперед"],
+      cs: ["Skupinový i individuální", "Tam i zpět", "Cenu znáte předem"],
     },
-    order: { uk: "Замовити авто", cs: "Objednat auto" },
+    order: { uk: "Замовити трансфер", cs: "Objednat transfer" },
     photo: ananasPhotos.services.transfer,
   },
   {
     id: "visa",
-    title: { uk: "Візова підтримка", cs: "Vízová podpora" },
+    title: { uk: "Візи", cs: "Víza" },
     text: {
-      uk: "Консультація та допомога зі збором документів для віз будь-якої складності — з урахуванням вашого статусу перебування в Чехії.",
-      cs: "Konzultace a pomoc s dokumenty k vízům jakékoli složitosti — s ohledem na váš pobytový status v Česku.",
+      uk: "Врахую ваш паспорт, документ про перебування в Чехії й країну поїздки — і скажу, що саме взяти з собою, щоб на кордоні обійшлося без сюрпризів.",
+      cs: "Podívám se na váš pas, doklad o pobytu v Česku i cílovou zemi a řeknu vám, co přesně si vzít s sebou. Ať vás na hranicích nic nepřekvapí.",
     },
     points: {
-      uk: ["Що потрібно з українським паспортом", "Перелік документів під вашу країну", "Віза по прильоту чи заздалегідь"],
-      cs: ["Co platí pro ukrajinský pas", "Seznam dokumentů pro vaši destinaci", "Vízum po příletu, nebo předem"],
+      uk: ["Перевірю, чи потрібна віза", "Перелік документів", "Допомога із заявою"],
+      cs: ["Ověřím, jestli potřebujete vízum", "Seznam dokladů na míru", "Pomoc se žádostí"],
     },
-    order: { uk: "Консультація", cs: "Konzultace" },
+    order: { uk: "Запитати про візу", cs: "Poradit s vízem" },
     photo: ananasPhotos.services.visa,
   },
   {
     id: "excursion",
-    title: { uk: "Екскурсії та розваги", cs: "Výlety a zábava" },
+    title: { uk: "Екскурсії", cs: "Výlety" },
     text: {
-      uk: "Авторські маршрути та унікальні локації. Зробимо ваше дозвілля на відпочинку по-справжньому яскравим.",
-      cs: "Autorské trasy a jedinečná místa. Postaráme se, aby vaše dovolená byla opravdu pestrá.",
+      uk: "Підкажу, що справді варто побачити, а що можна спокійно пропустити, — навіть якщо гід на зустрічі в готелі вмовляє з усіх сил.",
+      cs: "Poradím, co opravdu stojí za vidění a co můžete s klidem vynechat – i kdyby vás delegát na uvítací schůzce přemlouval sebevíc.",
     },
+    // TODO(client): Ukrainian-speaking guides — confirm before mentioning them.
     points: {
-      uk: ["Україномовні гіди, де це можливо", "Яхти, сафарі, дайвінг", "Програми для дітей"],
-      cs: ["Ukrajinsky mluvící průvodci, kde to jde", "Jachty, safari, potápění", "Programy pro děti"],
+      uk: ["Групові й приватні", "Бронювання наперед", "Чесна порада, що обрати"],
+      cs: ["Skupinové i soukromé", "Rezervace předem", "Upřímná rada, co vybrat"],
     },
     order: { uk: "Обрати екскурсію", cs: "Vybrat výlet" },
     photo: ananasPhotos.services.excursions,
@@ -157,7 +171,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
         eyebrow={t(copy.eyebrow, locale)}
         title={t(copy.title, locale)}
         lead={t(copy.lead, locale)}
-        aside={<Stamp size={200} top="ANANAS TOUR • SERVICE" bottom="CARE • SINCE 2011" above={["ALL", "IN ONE"]} word="CHAT" below={["UA", "CZ"]} className="rotate-6" />}
+        aside={<Stamp size={200} top={t(stamp.top, locale)} bottom={t(stamp.bottom, locale)} above={t(stamp.above, locale)} word={t(stamp.word, locale)} below={t(stamp.below, locale)} className="rotate-6" />}
       >
         <TelegramButton locale={locale} source="services-hero" label={t(copy.heroCta, locale)} size="lg" />
         <ButtonLink href={routes.tours(locale)} variant="outline">
@@ -179,7 +193,7 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
       <Container className="pb-16">
         <div className="relative overflow-hidden rounded-[2rem] bg-yellow p-7 text-ink sm:rounded-[2.5rem] sm:p-12">
           <PineappleSlice kind="half" size={260} rotate={200} seed={31} color="var(--c-yellow-light)" fibre="var(--c-yellow)" className="absolute -bottom-24 -right-16" />
-          <h2 className="relative max-w-3xl font-display text-[clamp(1.8rem,4vw,3.2rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">{t(copy.approachTitle, locale)}</h2>
+          <h2 className="relative max-w-3xl font-display text-[clamp(1.8rem,4vw,3.2rem)] text-balance font-black uppercase leading-[1.08] tracking-[-0.03em]">{t(copy.approachTitle, locale)}</h2>
           <p className="relative mt-5 max-w-3xl text-lg text-ink/85">{t(copy.approach, locale)}</p>
         </div>
       </Container>

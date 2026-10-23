@@ -10,27 +10,27 @@ import { isLocale, t, type Locale } from "@/i18n/config";
 import { languageAlternates, routes } from "@/i18n/routes";
 
 const copy = {
-  title: { uk: "Країни", cs: "Destinace" },
-  metaTitle: { uk: "Країни для відпочинку з вильотом із Чехії", cs: "Destinace s odletem z Česka" },
+  title: { uk: "12 країн. Одна Альона.", cs: "12 zemí. Jedna Aljona." },
+  metaTitle: { uk: "Куди полетіти з Чехії: 12 країн", cs: "Kam letět z Česka: 12 zemí" },
   lead: {
-    uk: "12 напрямків, куди ми відправляємо туристів із Праги, Брна, Острави та Пардубиць. Поради, сезони, гроші й відповіді на часті питання — усе, що Альона розповідає клієнтам особисто.",
-    cs: "12 destinací, kam posíláme klienty z Prahy, Brna, Ostravy a Pardubic. Tipy, sezóny, peníze a odpovědi na časté otázky — vše, co Aljona klientům říká osobně.",
+    uk: "Куди я відправляю туристів із Чехії і що про кожну країну варто знати до вильоту: сезон, переліт, гроші, документи.",
+    cs: "Kam posílám klienty z Česka a co o každé zemi vědět před odletem: sezóna, let, peníze, doklady.",
   },
   metaDescription: {
-    uk: "Туреччина, Єгипет, Греція, Мальдіви, ОАЕ та ще 7 країн. Гіди від Ananas Tour для українців у Чехії та підбір туру в Telegram.",
-    cs: "Turecko, Egypt, Řecko, Maledivy, SAE a dalších 7 zemí. Průvodce od Ananas Tour a výběr zájezdu přes Telegram.",
+    uk: "Туреччина, Єгипет, Греція, Мальдіви, Балі й ще 7 країн, куди летять із Чехії: коли їхати, що з грошима й документами. Альона підбере 3 готелі в Telegram.",
+    cs: "Turecko, Egypt, Řecko, Maledivy, Bali a dalších 7 zemí, kam se z Česka létá: kdy jet a jak to chodí s penězi i doklady. Aljona vám vybere 3 hotely.",
   },
-  badge: { uk: "12 КРАЇН • ВИЛІТ З ЧЕХІЇ • ", cs: "12 ZEMÍ • ODLETY Z ČESKA • " },
+  badge: { uk: "КРАЇН З МОРЕМ • ВИЛЬОТИ З ЧЕХІЇ • ", cs: "ZEMÍ S MOŘEM • ODLETY Z ČESKA • " },
   season: { uk: "Сезон", cs: "Sezóna" },
-  open: { uk: "Відкрити", cs: "Otevřít" },
-  ctaTitle: { uk: "Не знаєте, куди полетіти?", cs: "Nevíte, kam letět?" },
+  open: { uk: "Путівник", cs: "Průvodce" },
+  ctaTitle: { uk: "Не знаєте, куди?", cs: "Nevíte kam?" },
   ctaText: {
-    uk: "Напишіть Альоні, коли й з ким плануєте відпустку та який бюджет — вона запропонує 3 країни й конкретні готелі.",
-    cs: "Napište Aljoně, kdy a s kým chcete jet a jaký máte rozpočet — navrhne 3 země a konkrétní hotely.",
+    uk: "Ідеальний момент написати. Скажіть, коли хочете поїхати й скільки вас, — підкажу, де в ці дати тепле море, і надішлю 3 готелі.",
+    cs: "Ideální chvíle napsat. Řekněte mi, kdy chcete jet a kolik vás je – poradím, kde bude v tu dobu teplé moře, a pošlu 3 hotely.",
   },
   ctaMessage: {
-    uk: "Добрий день, Альоно! Допоможіть обрати країну для відпочинку. Плануємо: ",
-    cs: "Dobrý den, Aljono! Pomozte mi vybrat destinaci. Plánujeme: ",
+    uk: "Добрий день, Альоно! Ще не знаю, куди поїхати.\nКоли: …\nСкільки нас (вік дітей): …\nБюджет: …",
+    cs: "Dobrý den, Aljono! Ještě nevím, kam jet.\nKdy: …\nKolik nás je (věk dětí): …\nRozpočet: …",
   },
 };
 
@@ -49,6 +49,9 @@ export default async function DestinationsPage({ params }: { params: Promise<{ l
   if (!isLocale(raw)) notFound();
   const locale: Locale = raw;
   const [a, b, c] = destinations;
+  // Card names are sized to the card (container query), budgeted for the longest name in this locale,
+  // so ДОМІНІКАНА / DOMINIKÁNA never touch the rounded edge (Unbounded is ~0.86 em per capital).
+  const longestName = Math.max(...destinations.map((d) => t(d.name, locale).length));
 
   return (
     <>
@@ -57,9 +60,9 @@ export default async function DestinationsPage({ params }: { params: Promise<{ l
         <Container>
           <div className="relative isolate overflow-hidden rounded-[2rem] bg-grey px-5 py-10 sm:rounded-[2.5rem] sm:px-10 sm:py-12 lg:px-14">
             <PineapplePattern preset="section" opacity={0.9} className="-z-10" />
-            <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+            <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
               <div>
-                <h1 className="font-display text-[clamp(3rem,10vw,8rem)] font-black uppercase leading-[0.88] tracking-[-0.045em]">{t(copy.title, locale)}</h1>
+                <h1 className="font-display text-[clamp(3rem,10vw,8rem)] font-black uppercase leading-[0.88] tracking-[-0.045em] lg:text-[clamp(3rem,6.5vw,7rem)]">{t(copy.title, locale)}</h1>
                 <p className="mt-6 max-w-xl text-lg text-ink/80">{t(copy.lead, locale)}</p>
                 <div className="mt-6 flex flex-wrap gap-2 text-2xl" aria-hidden>
                   {destinations.map((d) => (
@@ -72,14 +75,17 @@ export default async function DestinationsPage({ params }: { params: Promise<{ l
                   <Link
                     key={d.slug}
                     href={routes.destination(locale, d.slug)}
-                    className={`relative isolate flex aspect-[2/5] items-end justify-center overflow-hidden rounded-full bg-ink pb-8 text-center ${i === 1 ? "translate-y-8" : ""}`}
+                    className={`@container relative isolate flex aspect-[2/5] min-w-0 items-end justify-center overflow-hidden rounded-full bg-ink pb-8 text-center ${i === 1 ? "translate-y-8" : ""}`}
                   >
                     <Image src={d.heroImage} alt="" fill sizes="(min-width: 1024px) 14vw, 30vw" className="-z-10 object-cover" priority={i === 0} />
-                    <span className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
-                    <span className="px-2 font-display text-[clamp(0.75rem,1.4vw,1.1rem)] font-extrabold uppercase text-white">{t(d.name, locale)}</span>
+                    <span className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 via-ink/45 via-55% to-ink/5" />
+                    {/* Name runs up the pill like a book spine: sized to the pill width, so any name fits at any viewport. */}
+                    <span className="rotate-180 whitespace-nowrap font-display text-[clamp(0.75rem,17cqw,1.5rem)] font-extrabold uppercase leading-[1.15] tracking-[0.02em] text-white [text-shadow:0_1px_10px_rgb(0_0_0/0.45)] [writing-mode:vertical-rl]">
+                      {t(d.name, locale)}
+                    </span>
                   </Link>
                 ))}
-                <div className="absolute -left-6 -top-6 hidden sm:block">
+                <div className="absolute -left-6 -top-6 hidden sm:block lg:-left-10 lg:-top-10">
                   <CircleBadge size={130} text={t(copy.badge, locale)} center={<span className="font-display text-3xl font-black">12</span>} className="rounded-full bg-yellow" />
                 </div>
               </div>
@@ -93,9 +99,10 @@ export default async function DestinationsPage({ params }: { params: Promise<{ l
         <Container>
           <ul className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
             {destinations.map((d, i) => (
-              <li key={d.slug} className={i % 2 === 1 ? "sm:translate-y-8" : ""}>
+              // Stagger only in the 4-column grid, where the shifted columns stay the same from row to row.
+              <li key={d.slug} className={i % 2 === 1 ? "lg:translate-y-8" : ""}>
                 <Link href={routes.destination(locale, d.slug)} className="group block">
-                  <div className="relative aspect-[3/5] overflow-hidden rounded-full bg-grey">
+                  <div className="@container relative aspect-[3/5] overflow-hidden rounded-full bg-grey">
                     <Image
                       src={d.heroImage}
                       alt={t(d.name, locale)}
@@ -103,16 +110,21 @@ export default async function DestinationsPage({ params }: { params: Promise<{ l
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                       className="object-cover transition duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 flex flex-col items-center px-4 pb-10 text-center text-paper">
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/70 via-55% to-ink/10" />
+                    <div className="absolute inset-x-0 bottom-0 flex flex-col items-center px-3 pb-10 text-center text-paper [text-shadow:0_1px_8px_rgb(0_0_0/0.35)]">
                       <span className="text-3xl" aria-hidden>
                         {d.flag}
                       </span>
-                      <h2 className="mt-1 font-display text-xl font-extrabold uppercase leading-tight sm:text-2xl">
+                      <h2
+                        className="mt-1 whitespace-nowrap font-display font-extrabold uppercase leading-tight"
+                        style={{ fontSize: `clamp(0.85rem, calc((100cqi - 2rem) / ${(longestName * 0.9).toFixed(2)}), 1.5rem)` }}
+                      >
                         {t(d.name, locale)}
                       </h2>
-                      <p className="mt-1 text-xs text-paper/80">
-                        {t(copy.season, locale)}: {t(d.bestSeason, locale)}
+                      {/* The value is an inline-block: a range like "listopad–duben" drops below the label as one piece
+                          instead of splitting after the dash; a long value still wraps inside it. */}
+                      <p className="mt-1 text-pretty text-[0.8rem] leading-snug text-paper">
+                        {t(copy.season, locale)}: <span className="inline-block">{t(d.bestSeason, locale)}</span>
                       </p>
                       <span className="mt-4">
                         <ArrowButton label={`${t(copy.open, locale)}: ${t(d.name, locale)}`} size={44} />

@@ -299,7 +299,7 @@ export const DESTINATIONS: Record<string, DestinationConfig> = {
     density: 10,
   },
   dominicana: {
-    country: "Dominikánská republika",
+    country: "Dominikána",
     style: "tropical",
     base: 22000,
     fixedShare: 0.45,
@@ -359,28 +359,28 @@ export const AMENITY: Record<string, string> = {
   beach: "Vlastní písečná pláž",
   pebble: "Oblázková pláž",
   pier: "Molo do moře",
-  reef: "Korálový útes u hotelu",
+  reef: "Korálový útes u hotelu",
   diving: "Potápěčské centrum",
   water: "Vodní sporty",
   spa: "Spa a wellness",
-  hamam: "Turecké lázně (hamam)",
+  hamam: "Hamam (turecké lázně)",
   fitness: "Fitness centrum",
   kids: "Dětský klub",
   kidspool: "Dětský bazén",
   anim: "Animační programy",
-  alacarte: "À la carte restaurace",
+  alacarte: "Restaurace à la carte",
   tennis: "Tenisové kurty",
   golf: "Golfové hřiště",
-  adults: "Pouze pro dospělé (16+)",
+  adults: "Jen pro dospělé",
   bar: "Plážový bar",
   shuttle: "Kyvadlová doprava na pláž",
-  butler: "Butler servis",
+  butler: "Služby butlera",
   yoga: "Jóga a pilates",
   parking: "Parkoviště zdarma",
   disco: "Diskotéka",
   seaplane: "Transfer hydroplánem",
   minibar: "Minibar zdarma",
-  center: "Blízko centra a obchodů",
+  center: "Centrum a obchody na dosah",
 };
 
 // ---------------------------------------------------------------------------
@@ -414,16 +414,16 @@ const R = {
   std: "Dvoulůžkový pokoj Standard",
   sea: "Dvoulůžkový pokoj s výhledem na moře",
   land: "Dvoulůžkový pokoj s výhledem do zahrady",
-  sup: "Superior pokoj",
+  sup: "Pokoj Superior",
   fam: "Rodinný pokoj",
   famsea: "Rodinný pokoj s výhledem na moře",
-  jun: "Junior Suite",
+  jun: "Junior suite",
   bung: "Bungalov",
-  swim: "Pokoj s přímým přístupem do bazénu (swim-up)",
+  swim: "Pokoj se vstupem do bazénu (swim-up)",
   villa: "Vila s vlastním bazénem",
-  club: "Club pokoj",
-  dlx: "Deluxe pokoj",
-  dlxsea: "Deluxe pokoj s výhledem na moře",
+  club: "Pokoj Club",
+  dlx: "Pokoj Deluxe",
+  dlxsea: "Pokoj Deluxe s výhledem na moře",
   studio: "Studio",
   apt: "Apartmán 1+1",
 };
@@ -447,7 +447,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool indoor aqua beach pier spa hamam fitness kids kidspool anim alacarte tennis golf bar disco",
     price: 1.45,
     description:
-      "Luxusní resort v borovicovém háji přímo u dlouhé písečné pláže Beleku. Ultra all inclusive zahrnuje devět à la carte restaurací, aquapark, Rixy Kids Club pro děti a večerní show na úrovni velkých scén. Ideální pro rodiny i páry, které chtějí opravdovou prémiovou dovolenou.",
+      "Borovicový háj a hned za ním dlouhá písečná pláž Beleku. Ultra all inclusive tu znamená devět à la carte restaurací, aquapark, dětský Rixy Kids Club a večerní show, která by se neztratila ani na velkém jevišti. Rodiny i páry tu klidně celý týden nevytáhnou paty z areálu.",
   },
   {
     id: "tr-titanic-deluxe-golf-belek",
@@ -466,7 +466,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool indoor aqua beach pier spa hamam fitness kids kidspool anim alacarte tennis golf bar",
     price: 1.25,
     description:
-      "Elegantní hotel sousedící s 27jamkovým golfovým hřištěm a vlastní pláží s molem. Rozlehlý areál nabízí několik bazénů, tobogány, velké spa centrum a pestrou gastronomii v režimu ultra all inclusive. Oblíbený u rodin s dětmi i golfistů.",
+      "Na jedné straně 27jamkové golfové hřiště, na druhé vlastní pláž s molem. V rozlehlém areálu najdete několik bazénů, tobogány, velké spa a ultra all inclusive s pestrou kuchyní. Golfisté i rodiny s dětmi si tu přijdou na své.",
   },
   {
     id: "tr-delphin-imperial-lara",
@@ -486,7 +486,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool indoor aqua beach pier spa hamam fitness kids kidspool anim alacarte tennis bar disco",
     price: 1.1,
     description:
-      "Monumentální resort na pláži Lara jen 12 km od letiště v Antalyi – transfer trvá necelých 20 minut. Hotel láká na velký aquapark, vnitřní i venkovní bazény a vyhlášenou kuchyni v rámci ultra all inclusive. Skvělá volba pro kratší pobyty i rodiny s menšími dětmi.",
+      "Od letiště v Antalyi jen 12 km, transfer trvá necelých 20 minut – víc času u moře, míň v autobuse. Monumentální hotel přímo na pláži Lara má velký aquapark, venkovní i kryté bazény a vyhlášenou kuchyni v ultra all inclusive. Hodí se na kratší pobyt i pro rodiny s malými dětmi.",
   },
   {
     id: "tr-crystal-sunset-side",
@@ -505,7 +505,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.land, R.fam, R.famsea],
     amenities: "pool indoor aqua beach pier spa hamam fitness kids kidspool anim alacarte bar disco",
     description:
-      "Rodinný resort na písečné pláži v klidné části Side s velkým aquaparkem a lagunovými bazény. Všechny pokoje mají balkon, k dispozici jsou i prostorné rodinné pokoje se dvěma ložnicemi. Do historického centra Side s antickými památkami dojedete hotelovým autobusem.",
+      "Klidnější část Side: písečná pláž, lagunové bazény a velký aquapark. Všechny pokoje mají balkon a větší rodiny se vejdou do prostorných pokojů se dvěma ložnicemi. Do historického centra s antickými památkami vás doveze hotelový autobus.",
   },
   {
     id: "tr-club-hotel-turan-prince",
@@ -524,7 +524,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.sea, R.fam, R.bung],
     amenities: "pool indoor aqua beach pier spa hamam fitness kids kidspool anim alacarte tennis bar",
     description:
-      "Rozlehlý zelený areál u písečné pláže v Kumköy s hlavní budovou i bungalovy v zahradě. Hotel nabízí aquapark, miniklub, bohatý animační program a několik à la carte restaurací. Oceňován za ochotný personál a výbornou kuchyni.",
+      "Rozlehlá zelená zahrada u písečné pláže v Kumköy – bydlet můžete v hlavní budově, nebo v bungalovu mezi stromy. Pro děti aquapark a miniklub, pro všechny animační program a několik à la carte restaurací. Hosté nejvíc chválí ochotný personál a kuchyni.",
   },
   {
     id: "tr-pegasos-resort-alanya",
@@ -544,7 +544,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach spa hamam fitness kids kidspool anim bar disco",
     price: 0.95,
     description:
-      "Oblíbený rodinný hotel v letovisku Incekum s přímým vstupem na jemnou písečnou pláž a mírným vstupem do moře. All inclusive, aquapark a animace pro všechny věkové kategorie dělají z hotelu jistotu pro dovolenou s dětmi za rozumnou cenu.",
+      "V Incekumu sejdete z hotelu rovnou do jemného písku a do moře se vstupuje pozvolna – rodiny s malými dětmi to ocení. All inclusive, aquapark a animace pro malé i velké za rozumnou cenu. Jen počítejte s delším transferem: od letiště je to 85 km.",
   },
   {
     id: "tr-akka-alinda-kemer",
@@ -563,7 +563,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.sea, R.fam, R.villa],
     amenities: "pool indoor beach pier spa hamam fitness kids kidspool anim alacarte tennis bar",
     description:
-      "Hotel v Kirişu pod pohořím Taurus, obklopený borovicovými lesy a tyrkysovým mořem. Oblázkovo-písečná pláž s molem, krásná zahrada a klidnější atmosféra ocení páry i rodiny, které hledají přírodu místo velkoměstského ruchu.",
+      "Kiriş pod pohořím Taurus: za zády borovicové lesy, před sebou tyrkysové moře. Oblázkovo-písečná pláž s molem, krásná zahrada a klidnější tempo než v rušných letoviscích. Pro páry i rodiny, kterým je příroda bližší než noční život.",
   },
   {
     id: "tr-kemer-dream",
@@ -583,7 +583,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool pebble spa hamam fitness kidspool anim bar center",
     price: 0.85,
     description:
-      "Menší hotel v centru Kemeru, pár minut chůze od oblázkové pláže a přístavu. Výhodná volba pro ty, kdo chtějí all inclusive za dobrou cenu a večer se projít po promenádě s obchůdky a kavárnami.",
+      "Menší hotel v centru Kemeru: k oblázkové pláži 150 metrů, do přístavu pár minut pěšky. All inclusive za dobrou cenu a večer promenáda s obchůdky a kavárnami hned za rohem. Sedne těm, kdo dají přednost městu na dosah před vlastní pláží.",
   },
   {
     id: "tr-kefaluka-bodrum",
@@ -603,7 +603,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool indoor beach pier spa hamam fitness kids kidspool anim alacarte tennis bar water",
     price: 1.1,
     description:
-      "Butikový resort v klidné zátoce Akyarlar na Bodrumském poloostrově s průzračným mořem a vlastní pláží. Bílé egejské domky ve svahu, moderní spa a vynikající řecko-turecká kuchyně vytvářejí atmosféru pro odpočinek daleko od masového turismu.",
+      "Bílé egejské domky ve svahu nad klidnou zátokou Akyarlar na Bodrumském poloostrově. Průzračné moře, vlastní pláž, moderní spa a výborná řecko-turecká kuchyně. Odpočinek daleko od masové turistiky.",
   },
 
   // ------------------------------ Egypt ----------------------------------
@@ -624,7 +624,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach pier reef diving spa hamam fitness kids kidspool anim alacarte tennis bar disco",
     price: 1.45,
     description:
-      "Vlajková loď Rixos v zálivu Nabq s jedním z největších aquaparků v Egyptě a dlouhým molem nad korálovým útesem. Ultra all inclusive zahrnuje řadu à la carte restaurací, dětský Rixy klub i večerní koncerty. Špičková volba pro rodiny, které chtějí vše na jednom místě.",
+      "Vlajková loď značky Rixos v zálivu Nabq: velký aquapark a dlouhé molo, které vede přes korálový útes. Ultra all inclusive s řadou à la carte restaurací, dětským klubem Rixy a večerními koncerty. Pro rodiny, které chtějí mít všechno pohromadě – a letiště je jen 9 km daleko.",
   },
   {
     id: "eg-coral-sea-sensatori",
@@ -643,7 +643,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach pier reef diving spa fitness kids kidspool anim alacarte bar",
     price: 1.15,
     description:
-      "Moderní resort v Nabq Bay s lagunovými bazény, pokoji swim-up a vlastním molem k bohatému korálovému útesu. Šnorchlování přímo od hotelu patří k nejlepším v oblasti. Ocenitelné jsou i tiché zóny pro dospělé a pestrá nabídka restaurací.",
+      "Na šnorchlování nemusíte nikam jezdit: hotelové molo vede přímo k bohatému korálovému útesu. Moderní hotel v Nabq Bay má lagunové bazény, pokoje swim-up, tiché zóny pro dospělé a pestrý výběr restaurací.",
   },
   {
     id: "eg-shores-aloha",
@@ -662,7 +662,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach pier reef fitness kidspool anim bar",
     price: 0.85,
     description:
-      "Příjemný čtyřhvězdičkový hotel v zálivu Nabq s vlastní pláží a molem k útesu. Nabízí jednoduché, čisté pokoje, několik bazénů a večerní animace – výborný poměr ceny a výkonu pro aktivní dovolenou u Rudého moře.",
+      "Čtyři hvězdy bez přikrášlování: jednoduché, čisté pokoje, několik bazénů a večerní animace. Vlastní pláž v zálivu Nabq, molo k útesu a letiště 7 km od hotelu. Pro aktivní dovolenou u Rudého moře s maskou a šnorchlem.",
   },
   {
     id: "eg-steigenberger-aldau",
@@ -682,7 +682,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool indoor beach pier spa fitness kids kidspool anim alacarte tennis bar",
     price: 1.2,
     description:
-      "Elegantní hotel v orientálním stylu na široké písečné pláži v Hurghadě s obřím lagunovým bazénem. Spa centrum se slanou vodou, kvalitní kuchyně a klidná atmosféra z něj dělají jednu z nejlépe hodnocených adres v oblasti.",
+      "Hotel v orientálním stylu na široké písečné pláži, s obřím lagunovým bazénem. Spa se slanou vodou, kvalitní kuchyně a klidná atmosféra. Do centra Hurghady je to 8 km – ruch města zůstane za plotem, a přesto na dosah.",
   },
   {
     id: "eg-pickalbatros-aqua-park",
@@ -702,7 +702,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach pier fitness kids kidspool anim bar disco",
     price: 0.85,
     description:
-      "Rodinný hotel s jedním z největších aquaparků v Hurghadě – přes 40 tobogánů a skluzavek. Písečná pláž s molem, dětský klub a celodenní all inclusive za výhodnou cenu. Hit pro rodiny s dětmi školního věku.",
+      "Přes 40 tobogánů a skluzavek – den se tu měří počtem sjezdů. K tomu písečná pláž s molem, dětský klub a all inclusive od rána do večera. Trefa do černého pro rodiny se školáky.",
   },
   {
     id: "eg-baron-palace-sahl-hasheesh",
@@ -722,7 +722,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach pier reef diving spa fitness kids kidspool anim alacarte tennis bar",
     price: 1.3,
     description:
-      "Palácový resort v exkluzivní zátoce Sahl Hasheesh s mramorovou halou, rozlehlými bazény a dlouhým molem nad útesem. Ultra all inclusive s prémiovými nápoji a několika tematickými restauracemi. Skvělá volba pro páry i náročnější rodiny.",
+      "Mramorová hala, rozlehlé bazény a dlouhé molo nad útesem v klidné zátoce Sahl Hasheesh. Ultra all inclusive včetně prémiových nápojů a několik tematických restaurací. Pro páry i rodiny, které od hotelu čekají víc než postel a bufet.",
   },
   {
     id: "eg-jaz-makadi-star",
@@ -741,7 +741,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach pier reef diving spa fitness kids kidspool anim alacarte tennis bar",
     price: 1.05,
     description:
-      "Klidný resort v zátoce Makadi Bay, kde je moře chráněné před větrem a ideální pro šnorchlování. Velké spa, aquapark a široká pláž s jemným pískem – vše v dosahu z prostorných pokojů s balkonem.",
+      "Makadi Bay je zátoka chráněná před větrem, takže moře bývá klidné a na šnorchlování jako stvořené. Široká pláž s jemným pískem, velké spa, aquapark a prostorné pokoje s balkonem.",
   },
   {
     id: "eg-hilton-marsa-alam-nubian",
@@ -760,7 +760,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach pier reef diving spa fitness kids kidspool anim alacarte bar",
     price: 1.05,
     description:
-      "Resort v nubijském stylu nedaleko zátoky Abu Dabbab, kde se často objevují mořské želvy a dugongové. Hotelové molo vede k panenskému útesu, k dispozici je potápěčské centrum, aquapark i dětský klub. Ideální pro milovníky podmořského světa.",
+      "Nubijská architektura kousek od zátoky Abu Dabbab, proslulé mořskými želvami. Hotelové molo vede k útesu a nechybí potápěčské centrum, aquapark ani dětský klub. Pro ty, kdo jedou k Rudému moři hlavně kvůli tomu, co žije pod hladinou.",
   },
   {
     id: "eg-steigenberger-coraya",
@@ -778,7 +778,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.sea, R.sup],
     amenities: "pool beach reef diving spa fitness alacarte adults bar",
     description:
-      "Hotel pouze pro dospělé v chráněné zátoce Coraya s tichou písečnou pláží a útesem plným barevných ryb. Klidná atmosféra bez dětských animací, wellness a výborná kuchyně – vyhledávaný hlavně páry a potápěči.",
+      "Jen pro dospělé: tichá písečná pláž v chráněné zátoce Coraya a útes plný barevných ryb. Žádné dětské animace, zato wellness a výborná kuchyně. Jezdí sem hlavně páry a potápěči.",
   },
 
   // ------------------------------ Řecko ----------------------------------
@@ -799,7 +799,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids kidspool alacarte tennis yoga bar water",
     price: 1.8,
     description:
-      "Prémiový resort v Gerakini s konceptem Infinite Lifestyle – all inclusive zahrnuje i restaurace s michelinskými šéfkuchaři a výběrová vína. Zahrady s olivovníky sahají až k písečné pláži, k dispozici je dětský klub pro všechny věkové skupiny i Anne Semonin spa.",
+      "V Gerakini sahají olivové sady až k písečné pláži. Koncept Infinite Lifestyle znamená all inclusive, v němž jsou i výběrová vína a restaurace s menu od šéfkuchařů s michelinskými hvězdami. K tomu dětský klub pro každý věk a spa Anne Semonin.",
   },
   {
     id: "gr-atrium-prestige-rhodes",
@@ -818,7 +818,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool indoor beach spa fitness kids kidspool alacarte tennis bar",
     price: 1.25,
     description:
-      "Luxusní resort na jižním pobřeží Rhodu u pláže Kiotari s thalasso centrem a pokoji s vlastním bazénem. Klidná lokalita, stylová architektura a výborná kuchyně z něj dělají ideální místo pro páry i rodiny hledající pohodlí.",
+      "Jižní pobřeží Rhodu, pláž Kiotari a klid, jaký ve městě nenajdete. Thalasso centrum, stylová architektura, výborná kuchyně a pokoje s vlastním bazénem. Pro páry i rodiny, které chtějí pohodlí – jen počítejte s tím, že letiště je 72 km daleko.",
   },
   {
     id: "gr-mitsis-grand-rhodes",
@@ -837,7 +837,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.sea, R.fam],
     amenities: "pool indoor pebble spa fitness kidspool bar center",
     description:
-      "Velký hotel přímo na promenádě města Rhodos, jen pár kroků od pláže Elli a středověkého Starého města zapsaného na seznamu UNESCO. Skvělá volba pro ty, kdo chtějí kombinovat koupání s poznáváním a večerním životem.",
+      "Velký hotel na promenádě města Rhodos, pár kroků od pláže Elli i od středověkého Starého města zapsaného na seznam UNESCO. Pláž je oblázková, zato večer máte celé město za dveřmi. Pro ty, kdo chtějí koupání spojit s poznáváním.",
   },
   {
     id: "gr-stella-island-crete",
@@ -857,7 +857,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool spa fitness alacarte adults yoga bar",
     price: 1.35,
     description:
-      "Romantický resort pro dospělé v Analipsi, postavený kolem největší lagunové sítě bazénů na Krétě. Téměř všechny pokoje mají přímý vstup do vody, k dispozici je spa a gurmánská restaurace. Oblíbený cíl svatebních cest.",
+      "V Analipsi to funguje obráceně: hotel nestojí u bazénu, ale kolem bazénů. Z téměř všech pokojů vstoupíte rovnou do vody, k tomu spa a gurmánská restaurace. Jen pro dospělé a oblíbený cíl svatebních cest. K moři je to 400 metrů.",
   },
   {
     id: "gr-aldemar-knossos-royal",
@@ -876,7 +876,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.land, R.sea, R.fam, R.bung],
     amenities: "pool indoor aqua beach spa fitness kids kidspool anim alacarte tennis bar",
     description:
-      "Rodinný resort na písečné pláži v Hersonissosu s bungalovy v zelené zahradě a vodním parkem pro děti. Thalasso spa Royal, sportovní vyžití a pestrý program pro děti z něj dělají jistotu pro rodinnou dovolenou na Krétě.",
+      "Písečná pláž v Hersonissosu, bungalovy v zelené zahradě a vodní park pro děti. Thalasso spa Royal, sport a pestrý dětský program – rodinná Kréta, kde si své najdou malí i velcí. Do centra je to 1,5 km.",
   },
   {
     id: "gr-kipriotis-village-kos",
@@ -896,7 +896,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool indoor aqua spa fitness kids kidspool anim tennis bar shuttle",
     price: 0.9,
     description:
-      "Velký rodinný resort v Psalidi s několika bazény a tobogány, pár minut od pláže a 4 km od města Kos. Pravidelný autobus do centra a půjčovna kol umožňují snadno objevovat ostrov i mimo hotel.",
+      "Velký rodinný hotel v Psalidi: několik bazénů s tobogány, k pláži 200 metrů a do města Kos 4 km. Pravidelný autobus do centra a půjčovna kol – ostrov tak snadno prozkoumáte i na vlastní pěst.",
   },
   {
     id: "gr-marbella-corfu",
@@ -915,7 +915,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness alacarte adults bar water",
     price: 1.3,
     description:
-      "Elegantní resort ve svahu nad zátokou Agios Ioannis Peristeron s výhledy na moře a albánské hory. Nekonečný bazén, soukromá pláž a vynikající kuchyně v řadě restaurací. Klidné prostředí vyhledávané hlavně páry.",
+      "Hotel ve svahu nad zátokou Agios Ioannis Peristeron; z teras je vidět moře a za ním albánské hory. Infinity bazén, soukromá pláž a několik restaurací. Jen pro dospělé, a tak sem jezdí hlavně páry za klidem.",
   },
   {
     id: "gr-lesante-cape-zakynthos",
@@ -934,7 +934,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool spa fitness alacarte yoga bar shuttle",
     price: 1.5,
     description:
-      "Luxusní resort na útesech v Agios Nikolaos s výhledy na Jónské moře a vilami s vlastním bazénem. Kyvadlová doprava na pláž, výborné spa a blízkost Modrých jeskyní a slavné pláže Navagio.",
+      "Vily s vlastním bazénem na útesech v Agios Nikolaos, pod nimi Jónské moře, a k tomu výborné spa. Na pláž vzdálenou 1,5 km vás doveze kyvadlová doprava a k Modrým jeskyním i slavné pláži Navagio je to kousek.",
   },
 
   // ---------------------------- Bulharsko --------------------------------
@@ -955,7 +955,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.sea, R.fam],
     amenities: "pool indoor beach spa fitness kids kidspool anim bar",
     description:
-      "Moderní hotel přímo na pláži Slunečného pobřeží s velkým bazénem a širokou nabídkou all inclusive. Do starobylého Nesebaru je to jen pár kilometrů, centrum letoviska s restauracemi a zábavou je v docházkové vzdálenosti.",
+      "Moderní hotel přímo na pláži Slunečného pobřeží, s velkým bazénem a bohatým all inclusive. Do centra letoviska dojdete pěšky (1 km), do starobylého Nesebaru je to pár kilometrů.",
   },
   {
     id: "bg-melia-grand-hermitage",
@@ -974,7 +974,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool indoor beach spa fitness kids kidspool anim alacarte bar",
     price: 1.1,
     description:
-      "Nejluxusnější hotel Zlatých písků přímo na pláži s jemným pískem. Elegantní pokoje, prvotřídní spa a několik restaurací – ideální pro ty, kdo chtějí Černé moře v prémiové kvalitě.",
+      "Zlaté písky přímo pod hotelem a pokoje, které působí elegantně, ne okázale. Kvalitní spa, několik restaurací a na výběr all inclusive, nebo ultra all inclusive. Černé moře v pohodlí pěti hvězd.",
   },
   {
     id: "bg-sol-nessebar-palace",
@@ -994,7 +994,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach fitness kids kidspool anim bar",
     price: 0.9,
     description:
-      "Rozlehlý rodinný komplex u písečné pláže nedaleko Nesebaru s aquaparkem a několika bazény. Bohaté all inclusive a prostorné rodinné pokoje i apartmány – oblíbená volba českých rodin s dětmi.",
+      "Rozlehlý rodinný komplex u písečné pláže, 2 km od Nesebaru, s aquaparkem a několika bazény. Bohaté all inclusive, prostorné rodinné pokoje i apartmány – místa je tu dost pro děti i rodiče.",
   },
   {
     id: "bg-riu-helios-paradise",
@@ -1014,7 +1014,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach fitness kids kidspool anim bar",
     price: 0.95,
     description:
-      "Hotel řetězce RIU přímo na pláži Slunečného pobřeží s bazénem obklopeným zahradou. Spolehlivý standard, all inclusive a dětský RiuLand klub nabízejí bezstarostnou rodinnou dovolenou u moře.",
+      "Hotel řetězce RIU přímo na pláži Slunečného pobřeží, s bazénem uprostřed zahrady. Spolehlivý standard, all inclusive a dětský klub RiuLand – rodinná dovolená bez velkého přemýšlení.",
   },
 
   // -------------------------------- SAE ----------------------------------
@@ -1036,7 +1036,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach spa fitness kids kidspool alacarte bar water",
     price: 1.6,
     description:
-      "Ikonický resort na vrcholu ostrova Palm Jumeirah s neomezeným vstupem do aquaparku Aquaventure a akvária Lost Chambers. Soukromá pláž, restaurace slavných šéfkuchařů a pohled na panorama Dubaje – zážitek pro celou rodinu.",
+      "Ikona na samém konci ostrova Palm Jumeirah. Hosté mají neomezený vstup do aquaparku Aquaventure i do akvária Lost Chambers, k tomu soukromou pláž, restaurace slavných šéfkuchařů a panorama Dubaje na obzoru. Zábava pro celou rodinu – a z ostrova přitom nemusíte ani vyjet.",
   },
   {
     id: "ae-rixos-the-palm",
@@ -1056,7 +1056,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa hamam fitness kids kidspool anim alacarte bar",
     price: 1.15,
     description:
-      "Jeden z mála hotelů v Dubaji s all inclusive, na východní straně ostrova Palm Jumeirah s výhledem na mrakodrapy Dubai Marina. Soukromá pláž, turecké lázně a dětský klub – pohodlný základ pro poznávání Dubaje.",
+      "All inclusive je v Dubaji vzácnost – tady ho máte, a k tomu výhled na mrakodrapy Dubai Marina. Hotel stojí na východní straně Palm Jumeirah, má soukromou pláž, turecké lázně a dětský klub. Pohodlná základna pro poznávání Dubaje.",
   },
   {
     id: "ae-jumeirah-beach-hotel",
@@ -1076,7 +1076,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool aqua beach spa fitness kids kidspool alacarte tennis bar water",
     price: 1.35,
     description:
-      "Hotel ve tvaru vlny s výhledem na Burj Al Arab a vstupem zdarma do aquaparku Wild Wadi. Dlouhá soukromá pláž, přes 20 restaurací a barů a skvělý dětský klub – klasika dubajské rodinné dovolené.",
+      "Hotel ve tvaru vlny s výhledem na Burj Al Arab; do aquaparku Wild Wadi mají hosté vstup zdarma. Dlouhá soukromá pláž, přes 20 restaurací a barů a dětský klub. Klasika rodinné dovolené v Dubaji.",
   },
   {
     id: "ae-rixos-bab-al-bahr",
@@ -1094,7 +1094,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.dlx, R.dlxsea, R.fam, R.jun],
     amenities: "pool beach spa hamam fitness kids kidspool anim alacarte tennis bar water",
     description:
-      "Ultra all inclusive resort na ostrově Al Marjan s dlouhou písečnou pláží a klidným mořem. Do Dubaje dojedete za hodinu, přitom si užijete pohodu mimo ruch velkoměsta. Výhodná alternativa k dubajským hotelům.",
+      "Ostrov Al Marjan, dlouhá písečná pláž, klidné moře a ultra all inclusive. Do Dubaje je to hodina cesty: dost blízko na výlet a dost daleko, aby sem nedolehl ruch velkoměsta. Klidnější alternativa k dubajským hotelům.",
   },
   {
     id: "ae-fujairah-rotana",
@@ -1113,7 +1113,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach reef diving spa fitness kids kidspool alacarte bar water",
     price: 0.95,
     description:
-      "Resort na pobřeží Ománského zálivu v Al Aqah pod horami Hajar s výborným šnorchlováním u Snoopy Island. Klidná pláž, potápěčské centrum a spa – pro ty, kdo hledají přírodu a moře místo nákupních center.",
+      "Druhá tvář Emirátů: pobřeží Ománského zálivu v Al Aqah a za zády pohoří Hadžar. U Snoopy Island se výborně šnorchluje, hotel má potápěčské centrum, spa a klidnou pláž. Pro ty, kdo chtějí přírodu místo nákupních center – od letiště je to ovšem 110 km.",
   },
 
   // ----------------------------- Maledivy --------------------------------
@@ -1133,7 +1133,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: ["Beach Studio", "Sky Studio", "Beach Villa s bazénem", "Aqua Villa s bazénem"],
     amenities: "pool beach reef diving spa fitness kids alacarte yoga bar water",
     description:
-      "Lifestylový resort na tříkilometrovém ostrově s nejdelší lagunou na Maledivách. Přelet hydroplánem nebo vnitrostátní let a lodí, 12 restaurací a barů, dětský klub i velké sportovní vyžití. Ideální úvod do Malediv pro rodiny i páry.",
+      "Ostrov dlouhý 3 km s rozlehlou lagunou. Dostanete se sem hydroplánem, nebo vnitrostátním letem a lodí. Na ostrově je 12 restaurací a barů, dětský klub i spousta sportu – dobrá volba, pokud jedete na Maledivy poprvé, s dětmi i ve dvou.",
   },
   {
     id: "mv-sun-siyam-iru-fushi",
@@ -1152,7 +1152,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach reef diving spa fitness kids alacarte yoga bar seaplane butler",
     price: 1.25,
     description:
-      "Luxusní ostrov v severním atolu Noonu, kam se dostanete 45minutovým přeletem hydroplánem. Vily na pláži i nad vodou, oceňované spa a 15 restaurací. Jeden z nejlépe hodnocených resortů na Maledivách.",
+      "Do severního atolu Noonu vás přenese 45minutový let hydroplánem. Vily na pláži i nad vodou, oceňované spa, služby butlera a 15 restaurací – za týden nestihnete vyzkoušet všechny.",
   },
   {
     id: "mv-kurumba",
@@ -1171,7 +1171,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach reef diving spa fitness kids alacarte tennis bar water",
     price: 1.05,
     description:
-      "První resort na Maledivách, pouhých 10 minut lodí od letiště v Male – žádný dlouhý transfer. Bujná tropická zahrada, osm restaurací a domácí útes kolem ostrova. Skvělá volba pro rodiny s dětmi.",
+      "První hotelový ostrov na Maledivách a z letiště v Male jen 10 minut lodí – žádný hydroplán, žádný dlouhý transfer. Bujná tropická zahrada, 8 restaurací a domácí útes kolem celého ostrova. Dobrá volba pro rodiny s dětmi.",
   },
   {
     id: "mv-meeru",
@@ -1190,7 +1190,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach reef diving spa fitness tennis golf bar water",
     price: 0.85,
     description:
-      "Velký ostrov s nekonečnými plážemi a průzračnou lagunou, 55 minut rychlolodí od Male. Vodní vily, golfové hřiště a výborná all inclusive nabídka za rozumnou cenu – oblíbený cíl Čechů na Maledivách.",
+      "Velký ostrov s dlouhými plážemi a průzračnou lagunou, 55 minut rychlolodí od Male. Vily nad vodou, golfové hřiště a bohaté all inclusive za rozumnou cenu. Maledivy pro ty, kdo nechtějí jen ležet – je kde se projít i co dělat.",
   },
   {
     id: "mv-centara-grand",
@@ -1208,7 +1208,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: ["Beach Villa", "Ocean Front Beach Villa", "Water Villa", "Water Villa s bazénem"],
     amenities: "pool beach reef diving spa fitness kids alacarte bar seaplane water",
     description:
-      "Rodinný resort v atolu Jižní Ari s all inclusive, kam se dostanete hydroplánem. Okolní vody jsou proslulé setkáními s žraloky velrybími a mantami, děti ocení klub a zábavu na pláži.",
+      "Hydroplánem do atolu Jižní Ari, kde se s trochou štěstí potkáte se žralokem velrybím i s mantou. Rodinný hotel s all inclusive, dětským klubem a zábavou na pláži.",
   },
 
   // ----------------------------- Vietnam ---------------------------------
@@ -1229,7 +1229,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.dlx, R.dlxsea, R.fam, R.villa],
     amenities: "pool aqua beach spa fitness kids kidspool alacarte tennis bar",
     description:
-      "Resort na ostrově Hon Tre spojený s pevninou lanovkou nad mořem. Hosté mají vstup do zábavního parku VinWonders s aquaparkem, k dispozici je soukromá písečná pláž a velký bazén s výhledem do zálivu.",
+      "Ostrov Hon Tre naproti Nha Trangu: soukromá písečná pláž, velký bazén s výhledem do zálivu a vstup do zábavního parku VinWonders s aquaparkem. Pro rodiny, které chtějí moře i atrakce na jednom ostrově.",
   },
   {
     id: "vn-intercontinental-danang",
@@ -1249,7 +1249,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids alacarte yoga bar butler",
     price: 1.8,
     description:
-      "Architektonický skvost od Billa Bensleyho na svazích poloostrova Son Tra nad soukromou zátokou. Restaurace La Maison 1888, prvotřídní spa a vily s vlastním bazénem patří k nejlepším v jihovýchodní Asii.",
+      "Architekt Bill Bensley rozložil hotel po svazích poloostrova Son Tra nad soukromou zátokou. Restaurace La Maison 1888, výborné spa a vily s vlastním bazénem. Tenhle hotel je sám o sobě cílem cesty.",
   },
   {
     id: "vn-salinda-phu-quoc",
@@ -1269,7 +1269,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness alacarte yoga bar",
     price: 1.1,
     description:
-      "Elegantní resort na Long Beach na ostrově Phu Quoc se západy slunce nad Thajským zálivem. Přírodní materiály, krásné spa a klidná pláž – ideální místo pro odpočinek po poznávání Vietnamu.",
+      "Long Beach na ostrově Phu Quoc, kde slunce zapadá do Thajského zálivu. Přírodní materiály, krásné spa, klidná pláž a letiště jen 7 km daleko. Místo, kde si po poznávání Vietnamu odpočinete.",
   },
   {
     id: "vn-seahorse-mui-ne",
@@ -1289,7 +1289,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kidspool bar water",
     price: 0.85,
     description:
-      "Útulný resort s bungalovy v tropické zahradě přímo na pláži Mui Ne, vyhlášeném centru kitesurfingu. V okolí najdete červené a bílé písečné duny i rybářskou vesnici s tržištěm.",
+      "Bungalovy v tropické zahradě přímo na pláži Mui Ne – vítr, který jinde kazí koupání, sem přitahuje kitesurfaře. V okolí jsou červené a bílé písečné duny i rybářská vesnice s tržištěm. Počítejte s delší cestou: letiště je 200 km daleko.",
   },
 
   // ---------------------------- Španělsko --------------------------------
@@ -1310,7 +1310,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.sea, R.sup],
     amenities: "pool spa fitness adults bar center",
     description:
-      "Moderní hotel pouze pro dospělé přímo na promenádě Playa de Palma naproti dlouhé písečné pláži. Do historického centra Palmy s katedrálou se dostanete autobusem za 20 minut, letiště je kousek. Ideální kombinace moře a města.",
+      "Jen pro dospělé, přímo na promenádě Playa de Palma, naproti dlouhé písečné pláži. Letiště je 7 km daleko a autobusem jste za 20 minut v historickém centru Palmy u katedrály. Moře i město v jednom pobytu.",
   },
   {
     id: "es-secrets-mallorca-villamil",
@@ -1330,7 +1330,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness alacarte adults bar",
     price: 1.35,
     description:
-      "Resort pouze pro dospělé v Paguera na jihozápadě Mallorky s vlastní pláží a výhledem na Středozemní moře. Koncept Unlimited-Luxury zahrnuje prémiové nápoje i à la carte restaurace bez rezervací.",
+      "Jen pro dospělé, v Pagueře na jihozápadě Mallorky – s vlastní pláží a výhledem na Středozemní moře. Koncept Unlimited-Luxury zahrnuje prémiové nápoje i à la carte restaurace bez rezervací.",
   },
   {
     id: "es-hard-rock-tenerife",
@@ -1351,7 +1351,7 @@ export const HOTELS: HotelSeed[] = [
     allYear: true,
     price: 1.2,
     description:
-      "Designový resort na Costa Adeje s ikonickým bazénem s pláží a hudebním programem. Na Kanárských ostrovech je příjemně i v zimě, takže jde o oblíbený tip na slunce od listopadu do března.",
+      "Kanárské ostrovy hřejí i v zimě, a tak je tenhle designový hotel na Costa Adeje oblíbený tip na slunce od listopadu do března. Ikonický bazén s pláží, hudební program a k moři 300 metrů.",
   },
   {
     id: "es-lopesan-costa-meloneras",
@@ -1371,7 +1371,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool spa fitness kids kidspool anim alacarte bar",
     allYear: true,
     description:
-      "Rozlehlý resort na promenádě Meloneras s obřími bazény, tropickou zahradou a jedním z největších spa v Evropě. K dunám Maspalomas dojdete procházkou po pobřeží – sluneční jistota po celý rok.",
+      "Obří bazény, tropická zahrada a rozlehlé spa na promenádě Meloneras. K dunám Maspalomas dojdete procházkou podél pobřeží. Na Gran Canarii svítí slunce celý rok, takže se sem vyplatí jet i mimo léto.",
   },
   {
     id: "es-h10-salou-princess",
@@ -1390,7 +1390,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.sea, R.fam],
     amenities: "pool fitness kidspool bar center",
     description:
-      "Hotel v srdci Salou jen pár kroků od pláže Llevant. Z hotelu je to kousek do zábavního parku PortAventura a vlakem se snadno dostanete do Barcelony.",
+      "V centru Salou, pár kroků od pláže Llevant. Do zábavního parku PortAventura je to kousek a vlakem se snadno dostanete do Barcelony. Dobrá základna, když chcete moře i výlety.",
   },
   {
     id: "es-gran-hotel-bali-benidorm",
@@ -1410,7 +1410,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool spa fitness kids kidspool anim bar",
     price: 0.85,
     description:
-      "Nejvyšší hotel Evropy s 52 patry a výhledy na celé Benidorm a záliv Costa Blanca. Bazény, animační programy a blízkost pláže Poniente – výhodná volba pro rodiny.",
+      "Hotel s 52 patry, ze kterého je vidět celý Benidorm i pobřeží Costa Blanca. Bazény, animační programy a k pláži Poniente 600 metrů. Rodinná volba pro ty, kdo dají přednost výhledu z výšky před pokojem u písku.",
   },
 
   // ------------------------ Dominikánská republika -----------------------
@@ -1431,7 +1431,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids kidspool anim alacarte tennis golf bar water",
     price: 1.15,
     description:
-      "Resort na pláži Bávaro s bílým pískem a kokosovými palmami, sousedící s golfovým hřištěm P.B. Dye. Prémiové all inclusive, vynikající spa a Star Camp klub pro děti i teenagery.",
+      "Bílý písek a kokosové palmy pláže Bávaro, hned vedle golfové hřiště od P. B. Dye. Prémiové all inclusive, výborné spa a Star Camp pro děti i teenagery.",
   },
   {
     id: "do-hard-rock-punta-cana",
@@ -1450,7 +1450,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids kidspool anim alacarte golf disco bar water",
     price: 1.2,
     description:
-      "Velkolepý resort na pláži Macao s 13 bazény, golfovým hřištěm Jacka Nicklause a kasinem. Neomezené all inclusive včetně à la carte restaurací – energie a zábava ve dne i v noci.",
+      "Pláž Macao, 13 bazénů, golfové hřiště Jacka Nicklause a kasino. All inclusive bez omezení včetně à la carte restaurací. Tady se něco děje ve dne i v noci.",
   },
   {
     id: "do-barcelo-bavaro-palace",
@@ -1468,7 +1468,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.dlx, R.dlxsea, R.fam, R.club],
     amenities: "pool beach spa fitness kids kidspool anim alacarte tennis golf bar disco",
     description:
-      "Obrovský resort na jedné z nejkrásnějších pláží Karibiku s několika bazény, golfem a zábavním centrem. Široký výběr restaurací v ceně a kluby pro děti i teenagery.",
+      "Obrovský areál na pláži Bávaro s několika bazény, golfem a zábavním centrem. Široký výběr restaurací je v ceně a vlastní kluby mají děti i teenageři. Každý večer můžete večeřet jinde.",
   },
   {
     id: "do-viva-dominicus-beach",
@@ -1487,7 +1487,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach reef diving fitness kids kidspool anim alacarte tennis bar water",
     price: 0.9,
     description:
-      "Uvolněný resort v Bayahibe s tyrkysovou mělkou lagunou, odkud vyrážejí výlety na ostrov Saona. Ubytování v hlavní budově i bungalovech, all inclusive a vlastní potápěčské centrum.",
+      "Bayahibe a mělká tyrkysová laguna, odkud vyrážejí výlety na ostrov Saona. Ubytování v hlavní budově i v bungalovech, all inclusive a vlastní potápěčské centrum. Karibik bez spěchu.",
   },
 
   // ------------------------------ Itálie ---------------------------------
@@ -1508,7 +1508,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids kidspool alacarte tennis bar water",
     price: 1.9,
     description:
-      "Legendární resort na jižním pobřeží Sardinie s osmi hotely, 21 restauracemi a thalasso spa v 47 hektarech zahrad. Pláže s jemným pískem a průzračným mořem srovnatelné s Karibikem.",
+      "Na 47 hektarech zahrad na jihu Sardinie stojí 8 hotelů, 21 restaurací a thalasso spa. Pláže s jemným pískem a průzračným mořem. Je to celé městečko – za týden ho nestihnete projít.",
   },
   {
     id: "it-marinedda-thalasso",
@@ -1526,7 +1526,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.sea, R.fam],
     amenities: "pool spa fitness kids kidspool anim tennis bar",
     description:
-      "Hotel v sardinském stylu na severu ostrova u pláže Marinedda s jemným bílým pískem. Thalasso centrum s mořskou vodou, sportovní vyžití a výlety na souostroví La Maddalena.",
+      "Sardinský styl na severu ostrova, 300 metrů od pláže Marinedda s jemným bílým pískem. Thalasso centrum s mořskou vodou, sport a výlety na souostroví La Maddalena. Jen počítejte s tím, že letiště je 85 km daleko.",
   },
   {
     id: "it-baia-taormina",
@@ -1545,7 +1545,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.std, R.sea, R.jun],
     amenities: "pool pebble spa fitness alacarte bar shuttle",
     description:
-      "Hotel na skalnatém pobřeží mezi Taorminou a Messinou s terasami nad mořem a malou oblázkovou pláží. Výlety na Etnu a do antického divadla v Taormině jsou zde samozřejmostí.",
+      "Terasy nad mořem na skalnatém pobřeží mezi Taorminou a Messinou, pod nimi malá oblázková pláž. Na Etnu i do antického divadla v Taormině se odsud snadno vypravíte na výlet.",
   },
   {
     id: "it-capovaticano-resort",
@@ -1565,7 +1565,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids kidspool anim tennis bar",
     price: 0.9,
     description:
-      "Rodinný resort nad písečnými plážemi Capo Vaticano s tyrkysovým mořem, nedaleko malebného městečka Tropea. Bungalovy v zahradě, thalasso a dětský klub.",
+      "Nad písečnými plážemi Capo Vaticano s tyrkysovým mořem, kousek od malebné Tropey. Bungalovy v zahradě, thalasso a dětský klub – rodinná dovolená na jihu Itálie.",
   },
 
   // ----------------------------- Indonésie -------------------------------
@@ -1586,7 +1586,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids alacarte yoga bar butler",
     price: 1.5,
     description:
-      "Velkolepý resort na pláži Geger v Nusa Dua s řadou bazénů a vyhlášenými restauracemi včetně snídaně v The Café. Elegantní pokoje, butler servis a prvotřídní spa – Bali v luxusu.",
+      "Pláž Geger v Nusa Dua, řada bazénů a vyhlášené restaurace – snídaně v The Café je kapitola sama pro sebe. Elegantní pokoje, služby butlera a výborné spa.",
   },
   {
     id: "id-ayana-resort-bali",
@@ -1605,7 +1605,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids alacarte yoga bar",
     price: 1.3,
     description:
-      "Resort na útesech nad Jimbaranem s legendárním Rock Barem nad oceánem a soukromou pláží Kubu. Dvanáct bazénů, vodní terapie v Thermes Marins a západy slunce, na které se nezapomíná.",
+      "Útesy nad Jimbaranem, Rock Bar těsně nad oceánem a pod nimi soukromá pláž Kubu. K tomu 12 bazénů, vodní terapie v Thermes Marins a západy slunce, kvůli kterým se večer nikam jinam nechodí.",
   },
   {
     id: "id-padma-legian",
@@ -1624,7 +1624,7 @@ export const HOTELS: HotelSeed[] = [
     rooms: [R.dlx, R.fam, R.jun, R.bung],
     amenities: "pool beach spa fitness kids kidspool alacarte yoga bar center",
     description:
-      "Rodinný resort na pláži Legian s balijskými zahradami a velkým lagunovým bazénem. Dětský klub, pestrý program a blízkost restaurací a obchodů Seminyaku.",
+      "Balijské zahrady, velký lagunový bazén a za nimi pláž Legian. Dětský klub s pestrým programem a restaurace i obchody Seminyaku kousek odsud. Rodinné Bali s městem na dosah.",
   },
   {
     id: "id-holiday-inn-benoa",
@@ -1643,7 +1643,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids kidspool bar water",
     price: 0.85,
     description:
-      "Rodinný hotel na poloostrově Tanjung Benoa, centru vodních sportů na Bali. Pláž s klidným mořem, dětský klub a možnost all inclusive – pohodlný základ pro výlety po ostrově.",
+      "Tanjung Benoa je centrum vodních sportů na Bali a tenhle rodinný hotel stojí přímo na pláži s klidným mořem. Dětský klub, možnost all inclusive a pohodlná základna pro výlety po ostrově.",
   },
 
   // ------------------------------ Zanzibar -------------------------------
@@ -1664,7 +1664,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness alacarte adults bar water",
     price: 1.1,
     description:
-      "Resort pouze pro dospělé na severním cípu Zanzibaru v Nungwi, kde je moře průzračné při přílivu i odlivu. 24hodinové all inclusive, nekonečné bazény a západy slunce nad Indickým oceánem.",
+      "Jen pro dospělé, na severním cípu Zanzibaru v Nungwi, kde je moře průzračné při přílivu i odlivu. All inclusive 24 hodin denně, infinity bazény a slunce, které zapadá do Indického oceánu.",
   },
   {
     id: "tz-melia-zanzibar",
@@ -1683,7 +1683,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach reef spa fitness kids kidspool alacarte tennis bar water",
     price: 1.15,
     description:
-      "Resort na 40 hektarech tropické zahrady na východním pobřeží s privátní pláží a molem nad lagunou. Vily s vlastním bazénem, dětský klub a vynikající spa.",
+      "Tropická zahrada na 40 hektarech na východním pobřeží, soukromá pláž a molo nad lagunou. Vily s vlastním bazénem, dětský klub a výborné spa.",
   },
   {
     id: "tz-gold-zanzibar",
@@ -1702,7 +1702,7 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness alacarte yoga bar water",
     price: 1.15,
     description:
-      "Stylový resort na pláži Kendwa, jedné z mála na Zanzibaru, kde odliv téměř nepřerušuje koupání. Nekonečný bazén, vyhlášené spa a romantické večeře na pláži.",
+      "Kendwa patří k několika málo plážím na Zanzibaru, kde odliv koupání téměř nepřeruší. Stylový hotel s infinity bazénem, vyhlášeným spa a romantickými večeřemi na pláži.",
   },
   {
     id: "tz-riu-jambo",
@@ -1721,6 +1721,6 @@ export const HOTELS: HotelSeed[] = [
     amenities: "pool beach spa fitness kids kidspool anim bar water",
     price: 0.9,
     description:
-      "Rodinný hotel RIU na pláži v Nungwi s velkým bazénem, animacemi a dětským klubem. All inclusive 24 hodin a výlety na Prison Island nebo do Stone Town přímo z hotelu.",
+      "Rodinný hotel RIU na pláži v Nungwi: velký bazén, animace, dětský klub a all inclusive 24 hodin denně. Na výlety na Prison Island nebo do Stone Townu se vyráží přímo od hotelu.",
   },
 ];

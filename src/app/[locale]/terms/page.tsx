@@ -18,22 +18,24 @@ import { languageAlternates, routes } from "@/i18n/routes";
  * TODO(client): mediating travel insurance may require registration with ČNB as a (doplňkový)
  *               pojišťovací zprostředkovatel — lawyer to confirm.
  * TODO(client): confirm the effective date below.
+ * TODO(client): the EU online dispute resolution (ODR) platform mentioned in the "adr" section was
+ *               discontinued in July 2025 (Regulation (EU) 2024/3228) — lawyer to confirm and update.
  */
 
 type L = Record<Locale, string>;
 
-const EFFECTIVE = { uk: "Редакція від 22.10.2026", cs: "Účinné od 22. 10. 2026" };
+const EFFECTIVE = { uk: "Діє з 22.10.2026", cs: "Účinné od 22. 10. 2026" };
 
 const meta = {
   title: { uk: "Умови надання послуг", cs: "Obchodní podmínky" },
   description: {
-    uk: "Умови посередництва турагенції Ananas Tour у продажу турів чеських туроператорів.",
-    cs: "Obchodní podmínky cestovní agentury Ananas Tour pro zprostředkování zájezdů českých cestovních kanceláří.",
+    uk: "Як працює турагенція Ananas Tour: шлях від запиту до договору з чеським туроператором, оплата, страхування від банкрутства, зміни, скасування й скарги.",
+    cs: "Jak funguje cestovní agentura Ananas Tour: cesta od poptávky ke smlouvě s českou CK, platby, pojištění proti úpadku, změny, storno a reklamace.",
   },
   toc: { uk: "Зміст", cs: "Obsah" },
   intro: {
-    uk: "Коротко: Ananas Tour — турагенція. Ми допомагаємо обрати тур і оформити його, а договір про тур ви укладаєте безпосередньо з туроператором (cestovní kancelář, CK), який застрахований на випадок банкрутства.",
-    cs: "Stručně: Ananas Tour je cestovní agentura. Pomůžeme vám vybrat zájezd a vyřídit objednávku, smlouvu o zájezdu však uzavíráte přímo s cestovní kanceláří (CK), která je pojištěna pro případ úpadku.",
+    uk: "Коротко: Ananas Tour — турагенція, а не туроператор. Ми допомагаємо обрати тур і оформити бронювання, а договір про тур ви укладаєте безпосередньо з чеським туроператором (cestovní kancelář, CK), який за законом має бути застрахований від банкрутства. На сайті ви нічого не платите.",
+    cs: "Ve zkratce: Ananas Tour je cestovní agentura, ne cestovní kancelář. Pomůžeme vám vybrat zájezd a vyřídit rezervaci, smlouvu o zájezdu ale uzavíráte přímo s českou cestovní kanceláří (CK), která musí být ze zákona pojištěná proti úpadku. Na webu nic neplatíte.",
   },
 };
 
@@ -43,107 +45,107 @@ function sections(): LegalSource[] {
   return [
     {
       id: "intro",
-      heading: { uk: "Вступні положення", cs: "Úvodní ustanovení" },
+      heading: { uk: "Загальні положення", cs: "Úvodní ustanovení" },
       paragraphs: [
         {
-          uk: `Ці умови регулюють відносини між ${c.legalName}, IČO: ${c.ico}, з місцезнаходженням ${c.registeredOffice} (далі — «агенція» або «Ananas Tour»), і клієнтом під час посередництва в продажу турів та інших туристичних послуг.`,
-          cs: `Tyto obchodní podmínky upravují vztah mezi společností ${c.legalName}, IČO: ${c.ico}, se sídlem ${c.registeredOffice} (dále jen „agentura“ nebo „Ananas Tour“) a zákazníkem při zprostředkování zájezdů a dalších služeb cestovního ruchu.`,
+          uk: `Ці умови регулюють відносини між компанією ${c.legalName}, IČO: ${c.ico}, з місцезнаходженням ${c.registeredOffice} (далі — «агенція» або «Ananas Tour»), і клієнтом (далі — «ви») під час посередництва в продажу турів та інших туристичних послуг.`,
+          cs: `Tyto obchodní podmínky upravují vztah mezi společností ${c.legalName}, IČO: ${c.ico}, se sídlem ${c.registeredOffice} (dále jen „agentura“ nebo „Ananas Tour“), a zákazníkem (dále jen „vy“) při zprostředkování zájezdů a dalších služeb cestovního ruchu.`,
         },
         {
-          uk: "Агенція провадить діяльність турагенції відповідно до закону № 159/1999 Sb. про деякі умови підприємницької діяльності у сфері туризму та положень Цивільного кодексу (zákon č. 89/2012 Sb.) про договір про тур.",
-          cs: "Agentura provozuje činnost cestovní agentury podle zákona č. 159/1999 Sb., o některých podmínkách podnikání a o výkonu některých činností v oblasti cestovního ruchu, a ustanovení občanského zákoníku (zákon č. 89/2012 Sb.) o zájezdu.",
+          uk: "Агенція провадить діяльність турагенції відповідно до закону № 159/1999 Sb. про деякі умови підприємницької діяльності та здійснення окремих видів діяльності у сфері туризму, а також положень Цивільного кодексу (zákon č. 89/2012 Sb.) щодо договору про тур.",
+          cs: "Agentura vykonává činnost cestovní agentury podle zákona č. 159/1999 Sb., o některých podmínkách podnikání a o výkonu některých činností v oblasti cestovního ruchu, a podle ustanovení občanského zákoníku (zákon č. 89/2012 Sb.) o zájezdu.",
         },
       ],
     },
     {
       id: "role",
-      heading: { uk: "Роль агенції та туроператора", cs: "Postavení agentury a cestovní kanceláře" },
+      heading: { uk: "Хто за що відповідає", cs: "Kdo za co odpovídá" },
       list: [
         {
-          uk: "Агенція є посередником: пропонує та продає тури від імені й на рахунок туроператорів (cestovní kanceláře, CK), що мають концесію на провадження туристичної діяльності в Чехії.",
-          cs: "Agentura je zprostředkovatelem: nabízí a prodává zájezdy jménem a na účet cestovních kanceláří (CK), které mají koncesi k provozování cestovní kanceláře v České republice.",
+          uk: "Агенція — посередник: пропонує й продає тури від імені та за рахунок туроператорів (cestovní kanceláře, CK), які мають концесію на провадження діяльності туроператора в Чехії.",
+          cs: "Agentura jedná jako zprostředkovatel: nabízí a prodává zájezdy jménem a na účet cestovních kanceláří (CK), které mají koncesi k provozování cestovní kanceláře v České republice.",
         },
         {
-          uk: "Договір про тур (smlouva o zájezdu) укладається між вами та туроператором. Туроператор відповідає за належне надання всіх послуг туру.",
-          cs: "Smlouva o zájezdu se uzavírá mezi vámi a cestovní kanceláří. Za řádné poskytnutí všech služeb zájezdu odpovídá cestovní kancelář.",
+          uk: "Договір про тур (smlouva o zájezdu) ви укладаєте з туроператором. Саме туроператор відповідає за належне надання всіх послуг туру.",
+          cs: "Smlouvu o zájezdu uzavíráte s cestovní kanceláří. Právě ta odpovídá za řádné poskytnutí všech služeb zájezdu.",
         },
         {
-          uk: "На договір поширюються загальні умови відповідного туроператора, з якими ми ознайомимо вас до бронювання.",
-          cs: "Smlouva se řídí všeobecnými smluvními podmínkami příslušné CK, se kterými vás seznámíme před rezervací.",
+          uk: "На договір поширюються загальні договірні умови відповідного туроператора — ми ознайомимо вас із ними ще до бронювання.",
+          cs: "Smlouva se řídí všeobecnými smluvními podmínkami příslušné CK; seznámíme vás s nimi ještě před rezervací.",
         },
         {
-          uk: "Перед укладенням договору ви отримаєте передбачений законом формуляр з інформацією про тур і сертифікат страхування туроператора.",
-          cs: "Před uzavřením smlouvy obdržíte zákonem předepsaný formulář s informacemi o zájezdu a doklad o pojištění cestovní kanceláře.",
+          uk: "Перед укладенням договору ви отримаєте передбачений законом формуляр з інформацією про тур і документ про страхування туроператора від банкрутства.",
+          cs: "Před uzavřením smlouvy obdržíte zákonem předepsaný formulář s informacemi o zájezdu a doklad o pojištění cestovní kanceláře pro případ úpadku.",
         },
       ],
     },
     {
       id: "booking",
-      heading: { uk: "Як відбувається замовлення", cs: "Jak probíhá objednávka" },
+      heading: { uk: "Від запиту до договору", cs: "Od poptávky ke smlouvě" },
       list: [
         {
-          uk: "Ви надсилаєте запит у Telegram, телефоном, e-mail або через форму на сайті.",
-          cs: "Pošlete poptávku přes Telegram, telefonicky, e-mailem nebo formulářem na webu.",
+          uk: "Ви надсилаєте запит — у Telegram, телефоном, електронною поштою або через форму на сайті.",
+          cs: "Pošlete nám poptávku – přes Telegram, telefonicky, e-mailem nebo formulářem na webu.",
         },
         {
-          uk: "Ми підбираємо варіанти й перевіряємо актуальну ціну та наявність у туроператора. Ціни на сайті орієнтовні, доки їх не підтвердить туроператор.",
-          cs: "Připravíme varianty a ověříme aktuální cenu a dostupnost u CK. Ceny na webu jsou orientační, dokud je CK nepotvrdí.",
+          uk: "Ми підбираємо варіанти й перевіряємо в туроператора актуальну ціну та вільні місця. Ціни на сайті орієнтовні, доки їх не підтвердить туроператор.",
+          cs: "Vybereme pro vás vhodné varianty a u CK ověříme aktuální cenu a volná místa. Ceny na webu jsou orientační, dokud je CK nepotvrdí.",
         },
         {
-          uk: "Після вашого підтвердження ми бронюємо тур, а туроператор підтверджує бронювання та надсилає договір про тур.",
-          cs: "Po vašem potvrzení zájezd rezervujeme, CK rezervaci potvrdí a vystaví smlouvu o zájezdu.",
+          uk: "Щойно ви підтвердите вибір, ми бронюємо тур; туроператор підтверджує бронювання й оформлює договір про тур.",
+          cs: "Jakmile svůj výběr potvrdíte, zájezd zarezervujeme; CK rezervaci potvrdí a vystaví smlouvu o zájezdu.",
         },
         {
-          uk: "Договір вважається укладеним після його підтвердження туроператором згідно з його умовами.",
-          cs: "Smlouva je uzavřena okamžikem jejího potvrzení cestovní kanceláří podle jejích podmínek.",
+          uk: "Договір вважається укладеним з моменту, коли його підтвердить туроператор згідно зі своїми умовами.",
+          cs: "Smlouva je uzavřena okamžikem, kdy ji cestovní kancelář potvrdí podle svých podmínek.",
         },
       ],
     },
     {
       id: "payment",
-      heading: { uk: "Ціни та оплата", cs: "Ceny a platby" },
+      heading: { uk: "Ціни та оплата", cs: "Ceny a platby" },
       paragraphs: [
         {
-          uk: "Ціни вказуються в чеських кронах (CZK). Розмір і строки передоплати та доплати визначають умови туроператора; зазвичай передоплата становить частину ціни, а решта сплачується до виїзду.",
-          cs: "Ceny jsou uváděny v českých korunách (Kč). Výši a splatnost zálohy a doplatku určují podmínky CK; obvykle se platí záloha a doplatek před odjezdem.",
+          uk: "Ціни вказано в чеських кронах (Kč). Розмір і строки сплати завдатку (záloha) та доплати визначають умови туроператора: зазвичай спершу ви сплачуєте завдаток, а решту — до виїзду.",
+          cs: "Ceny jsou uvedeny v českých korunách (Kč). Výši a splatnost zálohy a doplatku určují podmínky CK; obvykle nejprve zaplatíte zálohu a zbytek ceny před odjezdem.",
         },
         {
-          uk: "Оплата здійснюється на рахунок туроператора або на рахунок агенції, яка приймає кошти від імені туроператора. Спосіб оплати буде вказано в підтвердженні бронювання.",
-          cs: "Platba se provádí na účet CK, nebo na účet agentury, která platbu přijímá jménem CK. Způsob platby bude uveden v potvrzení rezervace.",
+          uk: "Ви платите на рахунок туроператора або на рахунок агенції, яка приймає кошти від імені туроператора. Спосіб оплати буде вказано в підтвердженні бронювання.",
+          cs: "Platíte buď na účet CK, nebo na účet agentury, která platbu přijímá jménem CK. Způsob platby bude uveden v potvrzení rezervace.",
         },
       ],
     },
     {
       id: "insolvency",
-      heading: { uk: "Страхування на випадок банкрутства туроператора", cs: "Pojištění pro případ úpadku CK" },
+      heading: { uk: "Страхування туроператора від банкрутства", cs: "Pojištění CK proti úpadku" },
       paragraphs: [
         {
-          uk: "Ми пропонуємо тури лише тих туроператорів, які мають обов’язкове страхування на випадок банкрутства. Якщо туроператор не зможе виконати зобов’язання через банкрутство, страховик забезпечить повернення на батьківщину та відшкодування сплачених коштів відповідно до закону № 159/1999 Sb.",
-          cs: "Nabízíme pouze zájezdy cestovních kanceláří, které mají povinné pojištění záruky pro případ úpadku. Nesplní-li CK své závazky z důvodu úpadku, pojišťovna zajistí repatriaci a vrácení zaplacených částek podle zákona č. 159/1999 Sb.",
+          uk: "Ми пропонуємо тури лише тих туроператорів, які мають обов’язкове страхування від банкрутства. Якщо через банкрутство туроператор не виконає своїх зобов’язань, страховик відповідно до закону № 159/1999 Sb. забезпечить вам перевезення назад до місця виїзду (репатріацію) і повернення сплачених коштів.",
+          cs: "Nabízíme pouze zájezdy cestovních kanceláří, které mají povinné pojištění záruky pro případ úpadku. Pokud CK v důsledku úpadku nesplní své závazky, pojišťovna podle zákona č. 159/1999 Sb. zajistí dopravu zpět do místa odjezdu (repatriaci) a vrácení zaplacených částek.",
         },
       ],
     },
     {
       id: "changes",
-      heading: { uk: "Зміни та скасування", cs: "Změny a zrušení" },
+      heading: { uk: "Зміни та відмова від договору", cs: "Změny a odstoupení od smlouvy" },
       paragraphs: [
         {
-          uk: "Ви можете відмовитися від договору про тур до його початку. Туроператор має право стягнути відступні (storno poplatek) відповідно до своїх умов. Зміни в бронюванні також регулюються умовами туроператора.",
-          cs: "Od smlouvy o zájezdu můžete odstoupit před zahájením zájezdu. CK je oprávněna účtovat odstupné (stornopoplatek) podle svých podmínek. Změny rezervace se rovněž řídí podmínkami CK.",
+          uk: "Ви можете відмовитися від договору про тур до початку туру. Туроператор має право стягнути відступне (stornopoplatek) згідно зі своїми умовами. Зміни бронювання так само регулюють умови туроператора.",
+          cs: "Od smlouvy o zájezdu můžete odstoupit před zahájením zájezdu. CK má právo požadovat odstupné (stornopoplatek) podle svých podmínek. Změny rezervace se rovněž řídí podmínkami CK.",
         },
         {
-          uk: "Рекомендуємо оформити страхування від невиїзду, яке покриває відступні у разі хвороби чи інших поважних причин.",
-          cs: "Doporučujeme sjednat pojištění storna zájezdu, které kryje stornopoplatky v případě nemoci či jiných závažných důvodů.",
+          uk: "Радимо оформити страхування від невиїзду (storno): воно покриває відступне, якщо поїхати завадить хвороба чи інша поважна причина.",
+          cs: "Doporučujeme sjednat si pojištění storna zájezdu: kryje stornopoplatky, pokud vám v odjezdu zabrání nemoc nebo jiný závažný důvod.",
         },
       ],
     },
     {
       id: "services",
-      heading: { uk: "Інші послуги", cs: "Další služby" },
+      heading: { uk: "Окремі послуги", cs: "Samostatné služby" },
       paragraphs: [
         {
-          uk: "Під час посередництва в окремих послугах (авіаквитки, проживання, трансфер, страхування, екскурсії) договір укладається з постачальником послуги, і застосовуються його умови. Перед оплатою ми повідомимо, чи йдеться про тур, пов’язані туристичні послуги чи окрему послугу.",
-          cs: "Při zprostředkování samostatných služeb (letenky, ubytování, transfer, pojištění, výlety) se smlouva uzavírá s poskytovatelem služby a platí jeho podmínky. Před platbou vás upozorníme, zda jde o zájezd, spojené cestovní služby, nebo samostatnou službu.",
+          uk: "Коли ми посередничаємо в продажу окремих послуг (авіаквитки, проживання, трансфер, страхування, екскурсії), договір ви укладаєте з постачальником послуги, і діють його умови. Ще до оплати ми повідомимо, про що саме йдеться: про тур, пов’язані туристичні послуги (spojené cestovní služby) чи окрему послугу.",
+          cs: "Při zprostředkování samostatných služeb (letenky, ubytování, transfer, pojištění, výlety) uzavíráte smlouvu s poskytovatelem služby a platí jeho podmínky. Ještě před platbou vás upozorníme, zda jde o zájezd, spojené cestovní služby, nebo samostatnou službu.",
         },
       ],
     },
@@ -152,22 +154,22 @@ function sections(): LegalSource[] {
       heading: { uk: "Документи для подорожі", cs: "Cestovní doklady" },
       paragraphs: [
         {
-          uk: "Клієнт відповідає за дійсний закордонний паспорт, візи та виконання умов в’їзду. Ми надаємо загальну інформацію з урахуванням українського громадянства та статусу перебування в Чехії (зокрема тимчасового захисту), але остаточні вимоги встановлюють органи країни призначення.",
-          cs: "Zákazník odpovídá za platný cestovní doklad, víza a splnění podmínek vstupu. Poskytneme obecné informace s ohledem na ukrajinské občanství a pobytový status v Česku (včetně dočasné ochrany), konečné požadavky však stanovují orgány cílové země.",
+          uk: "За дійсний закордонний паспорт чи інший проїзний документ, візи та виконання умов в’їзду відповідаєте ви. Ми надамо загальну інформацію з урахуванням українського громадянства та статусу перебування в Чехії (зокрема тимчасового захисту), проте остаточні вимоги встановлюють органи країни призначення.",
+          cs: "Za platný cestovní doklad, víza a splnění podmínek vstupu odpovídáte vy. Poskytneme vám obecné informace s ohledem na ukrajinské občanství a pobytový status v Česku (včetně dočasné ochrany), konečné požadavky však stanovují orgány cílové země.",
         },
       ],
     },
     {
       id: "complaints",
-      heading: { uk: "Скарги на тур", cs: "Reklamace" },
+      heading: { uk: "Рекламації та скарги", cs: "Reklamace a stížnosti" },
       paragraphs: [
         {
-          uk: "Недоліки туру слід повідомити туроператору (або його представнику на місці) без зайвої затримки. Агенція допоможе зі складанням і передачею скарги туроператору.",
-          cs: "Vady zájezdu je třeba vytknout cestovní kanceláři (nebo jejímu delegátovi na místě) bez zbytečného odkladu. Agentura vám pomůže reklamaci sepsat a předat ji CK.",
+          uk: "Про недоліки туру потрібно без зайвої затримки повідомити туроператора (або його представника на місці). Агенція допоможе скласти рекламацію й передати її туроператору.",
+          cs: "Vady zájezdu je třeba bez zbytečného odkladu vytknout cestovní kanceláři (nebo jejímu delegátovi na místě). Agentura vám pomůže reklamaci sepsat a předat ji CK.",
         },
         {
-          uk: `Скарги щодо послуг самої агенції надсилайте на ${ct.email} або в Telegram @${ct.telegramUsername}.`,
-          cs: `Stížnosti na služby samotné agentury zasílejte na ${ct.email} nebo přes Telegram @${ct.telegramUsername}.`,
+          uk: `Скарги на послуги самої агенції надсилайте на ${ct.email} або в Telegram @${ct.telegramUsername}.`,
+          cs: `Stížnosti na služby samotné agentury posílejte na ${ct.email} nebo přes Telegram @${ct.telegramUsername}.`,
         },
       ],
     },
@@ -176,18 +178,18 @@ function sections(): LegalSource[] {
       heading: { uk: "Позасудове вирішення спорів", cs: "Mimosoudní řešení sporů" },
       paragraphs: [
         {
-          uk: "Для позасудового вирішення споживчих спорів компетентна Česká obchodní inspekce (www.coi.cz, adr.coi.cz). Також можна скористатися платформою ЄС для онлайн-вирішення спорів.",
-          cs: "K mimosoudnímu řešení spotřebitelských sporů je příslušná Česká obchodní inspekce (www.coi.cz, adr.coi.cz). Využít lze také platformu EU pro řešení sporů online.",
+          uk: "Органом, уповноваженим позасудово вирішувати споживчі спори, є Чеська торговельна інспекція (Česká obchodní inspekce; www.coi.cz, adr.coi.cz). Також можна скористатися платформою ЄС для онлайн-\u2060вирішення спорів.",
+          cs: "K mimosoudnímu řešení spotřebitelských sporů je příslušná Česká obchodní inspekce (www.coi.cz, adr.coi.cz). Využít lze také platformu EU pro řešení sporů online.",
         },
       ],
     },
     {
       id: "final",
-      heading: { uk: "Заключні положення", cs: "Závěrečná ustanovení" },
+      heading: { uk: "Прикінцеві положення", cs: "Závěrečná ustanovení" },
       paragraphs: [
         {
-          uk: "Відносини регулюються правом Чеської Республіки. Обробку персональних даних описано в Політиці конфіденційності. Обов’язковою є чеська версія умов; український переклад має інформаційний характер.",
-          cs: "Vztahy se řídí právním řádem České republiky. Zpracování osobních údajů popisují Zásady ochrany osobních údajů. Rozhodující je české znění podmínek; ukrajinský překlad má informativní charakter.",
+          uk: "Відносини сторін регулює право Чеської Республіки. Як ми обробляємо персональні дані, описано на сторінці «Захист даних». Переважну силу має чеська версія умов; український переклад наведено для довідки.",
+          cs: "Vztahy smluvních stran se řídí právním řádem České republiky. Jak zpracováváme osobní údaje, popisuje stránka „Ochrana osobních údajů“. Rozhodující je české znění podmínek; ukrajinský překlad slouží pouze pro informaci.",
         },
       ],
     },

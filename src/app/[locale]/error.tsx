@@ -8,13 +8,13 @@ import { defaultLocale, isLocale, t, type Locale } from "@/i18n/config";
 import { telegramLink } from "@/lib/contact/telegram";
 
 const copy = {
-  title: { uk: "Щось пішло не так", cs: "Něco se pokazilo" },
+  title: { uk: "Затримка рейсу", cs: "Zpoždění letu" },
   text: {
-    uk: "Сторінка тимчасово не працює. Спробуйте ще раз — або напишіть Альоні в Telegram, вона допоможе підібрати тур і без сайту.",
-    cs: "Stránka dočasně nefunguje. Zkuste to prosím znovu — nebo napište Aljoně na Telegram, zájezd vám vybere i bez webu.",
+    uk: "Сторінка не завантажилася. Спробуйте ще раз — або напишіть Альоні: вона не затримується.",
+    cs: "Stránka se nenačetla. Zkuste to znovu, nebo napište Aljoně – ta zpoždění nemá.",
   },
   retry: { uk: "Спробувати ще раз", cs: "Zkusit znovu" },
-  telegram: { uk: "Написати в Telegram", cs: "Napsat na Telegram" },
+  telegram: { uk: "Написати Альоні", cs: "Napsat Aljoně" },
 };
 
 /**

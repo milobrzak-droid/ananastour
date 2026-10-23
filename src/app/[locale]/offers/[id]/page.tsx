@@ -9,7 +9,9 @@ import { ArrowIcon, ButtonLink, Container, Notch, Pill } from "@/components/ui";
 import { AvailabilityCheck } from "@/components/tours/availability-check";
 import { BookingForm } from "@/components/tours/booking-form";
 import { HotelLocation, HotelRating, Stars } from "@/components/tours/hotel-bits";
-import { airportLabel, boardLabel, countryName, transportLabel } from "@/components/tours/labels";
+import { airportLabel, boardLabel, countryName, dateRangeLabel, transportLabel } from "@/components/tours/labels";
+import { glue } from "@/components/home/typo";
+import { displayLeading } from "@/components/tours/display";
 import { offerTelegramMessage } from "@/components/tours/offer-card";
 import { isLocale, t, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
@@ -23,45 +25,50 @@ type Props = { params: Promise<{ locale: string; id: string }> };
 const getOffer = cache((id: string) => tours().getOffer(id));
 
 const tx = {
-  hotel: { uk: "Про готель і всі дати →", cs: "O hotelu a všechny termíny →" },
+  hotel: { uk: "Про готель та інші дати →", cs: "O hotelu a další termíny →" },
   dates: { uk: "Дати", cs: "Termín" },
-  nights: { uk: "Тривалість", cs: "Délka" },
+  nights: { uk: "Тривалість", cs: "Délka pobytu" },
   transport: { uk: "Транспорт", cs: "Doprava" },
   board: { uk: "Харчування", cs: "Strava" },
   room: { uk: "Номер", cs: "Pokoj" },
   operator: { uk: "Туроператор", cs: "Cestovní kancelář" },
   priceTitle: { uk: "Вартість туру", cs: "Cena zájezdu" },
   total: { uk: "Разом за всіх", cs: "Celkem za všechny" },
-  included: { uk: "У вартість входить", cs: "V ceně je" },
-  extra: { uk: "Оплачується окремо", cs: "Za příplatek" },
-  order: { uk: "Замовити тур", cs: "Objednat zájezd" },
-  ask: { uk: "Запитати в Telegram", cs: "Zeptat se na Telegramu" },
-  noPay: { uk: "Нічого не платите на сайті", cs: "Na webu nic neplatíte" },
+  included: { uk: "Що входить у ціну", cs: "Co je v ceně" },
+  extra: { uk: "Що оплачується окремо", cs: "Co v ceně není" },
+  order: { uk: "Хочу цей тур", cs: "Chci tenhle zájezd" },
+  ask: { uk: "Запитати Альону", cs: "Zeptat se Aljony" },
+  noPay: {
+    uk: "На сайті нічого не платите · чеські CK застраховані від банкрутства",
+    cs: "Na webu nic neplatíte · české CK jsou pojištěné proti úpadku",
+  },
+  lastMinute: { uk: "Гарячий тур", cs: "Last minute" },
+  verified: { uk: "✓ Ціну перевірено", cs: "✓ Cena ověřena" },
 };
 
 function included(o: OfferWithHotel, locale: Locale): string[] {
   // TODO(anchoice): take the real "included / extra" lists from the Search API offer detail.
   return [
     o.transport === "flight"
-      ? t({ uk: `Авіапереліт туди й назад${o.departureAirport ? ` з ${o.departureAirport}` : ""}`, cs: `Letenka tam i zpět${o.departureAirport ? ` z ${o.departureAirport}` : ""}` }, locale)
+      ? t({ uk: `Переліт туди й назад${o.departureAirport ? ` (${o.departureAirport})` : ""}`, cs: `Zpáteční letenka${o.departureAirport ? ` (${o.departureAirport})` : ""}` }, locale)
       : o.transport === "bus"
-        ? t({ uk: "Проїзд автобусом", cs: "Doprava autobusem" }, locale)
+        ? t({ uk: "Автобус туди й назад", cs: "Doprava autobusem tam i zpět" }, locale)
         : "",
-    o.transport === "flight" ? t({ uk: "Аеропортові та паливні збори", cs: "Letištní a palivové poplatky" }, locale) : "",
-    o.transport !== "own" ? t({ uk: "Трансфер аеропорт — готель — аеропорт", cs: "Transfer letiště — hotel — letiště" }, locale) : "",
-    t({ uk: `Проживання ${o.nights} ночей, ${o.roomType}`, cs: `Ubytování ${o.nights} nocí, ${o.roomType}` }, locale),
+    o.transport === "flight" ? t({ uk: "Аеропортові й паливні збори", cs: "Letištní a palivové poplatky" }, locale) : "",
+    o.transport !== "own" ? t({ uk: "Трансфер до готелю й назад", cs: "Transfer do hotelu a zpět" }, locale) : "",
+    t({ uk: `Проживання: ${o.nights} ночей, ${o.roomType}`, cs: `Ubytování: ${o.nights} nocí, ${o.roomType}` }, locale),
     `${t({ uk: "Харчування", cs: "Strava" }, locale)}: ${boardLabel(o.board, locale)}`,
-    t({ uk: "Супровід представника туроператора", cs: "Delegát cestovní kanceláře" }, locale),
-    t({ uk: "Страхування від банкрутства туроператора", cs: "Pojištění CK proti úpadku" }, locale),
+    t({ uk: "Представник туроператора на місці", cs: "Delegát CK na místě" }, locale),
+    t({ uk: "Страхування туроператора від банкрутства (за законом)", cs: "Pojištění CK proti úpadku (ze zákona)" }, locale),
   ].filter(Boolean);
 }
 
 function extras(locale: Locale): string[] {
   return [
-    t({ uk: "Комплексне туристичне страхування (рекомендуємо)", cs: "Komplexní cestovní pojištění (doporučujeme)" }, locale),
-    t({ uk: "Екскурсії та курортний збір на місці", cs: "Výlety a pobytová taxa na místě" }, locale),
-    t({ uk: "Віза, якщо потрібна", cs: "Vízum, pokud je potřeba" }, locale),
-    t({ uk: "Бронювання місць у літаку, додатковий багаж", cs: "Rezervace míst v letadle, další zavazadlo" }, locale),
+    t({ uk: "Туристична страховка — дуже раджу", cs: "Cestovní pojištění – vřele doporučuju" }, locale),
+    t({ uk: "Екскурсії й курортний збір (оплата на місці)", cs: "Výlety a pobytová taxa (platíte na místě)" }, locale),
+    t({ uk: "Віза, якщо потрібна, — перевірю ще до бронювання", cs: "Vízum, pokud je potřeba – ověřím ještě před rezervací" }, locale),
+    t({ uk: "Сусідні місця в літаку й додатковий багаж", cs: "Místa vedle sebe v letadle a zavazadlo navíc" }, locale),
   ];
 }
 
@@ -85,8 +92,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${o.hotel.name} ${o.hotel.stars}* · ${formatDate(o.departureDate, locale)}, ${o.nights} ${getDictionary(locale).common.nights}`,
     description: t(
       {
-        uk: `${o.hotel.name}, ${countryName(o.hotel.countrySlug, locale, o.hotel.country)}: ${when}, ${boardLabel(o.board, locale)}, від ${formatMoney(o.pricePerPerson, locale)} за особу. Перевірка наявності онлайн, замовлення або питання в Telegram.`,
-        cs: `${o.hotel.name}, ${countryName(o.hotel.countrySlug, locale, o.hotel.country)}: ${when}, ${boardLabel(o.board, locale)}, od ${formatMoney(o.pricePerPerson, locale)} za osobu. Ověření dostupnosti online, objednávka nebo dotaz na Telegramu.`,
+        uk: `${o.hotel.name}, ${countryName(o.hotel.countrySlug, locale, o.hotel.country)}: ${when}, ${boardLabel(o.board, locale)}, від ${formatMoney(o.pricePerPerson, locale)} за особу. Надішліть запит — Альона перевірить місця й ціну в туроператора. На сайті нічого не платите.`,
+        cs: `${o.hotel.name}, ${countryName(o.hotel.countrySlug, locale, o.hotel.country)}: ${when}, ${boardLabel(o.board, locale)}, od ${formatMoney(o.pricePerPerson, locale)} za osobu. Pošlete žádost a Aljona ověří volná místa i cenu u CK. Na webu nic neplatíte.`,
       },
       locale,
     ),
@@ -110,7 +117,7 @@ export default async function OfferPage({ params }: Props) {
   const summary = `${hotel.name} ${hotel.stars}*, ${formatDateRange(offer.departureDate, offer.returnDate, locale)}, ${offer.nights} ${dict.common.nights}, ${offer.board}`;
 
   const facts: Array<[string, string]> = [
-    [t(tx.dates, locale), formatDateRange(offer.departureDate, offer.returnDate, locale)],
+    [t(tx.dates, locale), dateRangeLabel(offer.departureDate, offer.returnDate, locale)],
     [t(tx.nights, locale), `${offer.nights} ${dict.common.nights}`],
     [
       t(tx.transport, locale),
@@ -128,8 +135,8 @@ export default async function OfferPage({ params }: Props) {
           <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] bg-grey sm:col-span-2 sm:aspect-[16/10] sm:rounded-[2.5rem]">
             <Image src={hotel.images[0]} alt={hotel.name} fill priority sizes="(min-width: 640px) 66vw, 100vw" className="object-cover" />
             <div className="absolute left-4 top-4 flex gap-2">
-              {offer.isLastMinute && <Pill tone="red">Last minute</Pill>}
-              {offer.verified && <Pill tone="white">✓ online</Pill>}
+              {offer.isLastMinute && <Pill tone="red">{t(tx.lastMinute, locale)}</Pill>}
+              {offer.verified && <Pill tone="white">{t(tx.verified, locale)}</Pill>}
             </div>
             <Notch radius="1.75rem" className="pr-2.5 pt-2.5 sm:pr-3 sm:pt-3">
               <a
@@ -158,7 +165,7 @@ export default async function OfferPage({ params }: Props) {
           <p className="eyebrow text-ink/75">
             <HotelLocation hotel={hotel} locale={locale} />
           </p>
-          <h1 className="mt-2 font-display text-[clamp(1.9rem,4.4vw,3.6rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
+          <h1 className={`mt-2 text-balance font-display text-[clamp(1.9rem,4.4vw,3.6rem)] font-black uppercase ${displayLeading(hotel.name)} tracking-[-0.03em]`}>
             {hotel.name} <span className="align-middle text-[0.42em]"><Stars n={hotel.stars} locale={locale} /></span>
           </h1>
           <div className="mt-4 flex flex-wrap items-center gap-4">
@@ -170,8 +177,9 @@ export default async function OfferPage({ params }: Props) {
 
           <dl className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
             {facts.map(([k, v], i) => (
-              <div key={k} className={`rounded-[1.5rem] px-5 py-4 ${i === 0 ? "bg-yellow" : i === 3 ? "bg-ice" : "bg-grey"}`}>
-                <dt className="eyebrow text-ink/80">{k}</dt>
+              <div key={k} className={`min-w-0 rounded-[1.5rem] px-4 py-4 sm:px-5 ${i === 0 ? "bg-yellow" : i === 3 ? "bg-ice" : "bg-grey"}`}>
+                {/* Tighter tracking than the global eyebrow: ТУРОПЕРАТОР is one word and must fit a half-width tile. */}
+                <dt className="eyebrow tracking-[0.12em] text-ink/80">{k}</dt>
                 <dd className="mt-1.5 font-semibold leading-snug">{v}</dd>
               </div>
             ))}
@@ -180,7 +188,12 @@ export default async function OfferPage({ params }: Props) {
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="relative overflow-hidden rounded-[2rem] bg-ink p-6 text-paper sm:rounded-[2.5rem] sm:p-8">
-            <PineapplePattern preset="sparse" opacity={0.35} />
+            {/* Faded out behind the price block so no slice sits under the figures. */}
+            <PineapplePattern
+              preset="sparse"
+              opacity={0.3}
+              className="[mask-image:linear-gradient(to_bottom,transparent_45%,black_80%)]"
+            />
             <div className="relative">
               <p className="eyebrow text-paper/80">{t(tx.priceTitle, locale)}</p>
               {offer.originalPrice && <p className="mt-3 text-paper/75 line-through">{formatMoney(offer.originalPrice, locale)}</p>}
@@ -197,7 +210,7 @@ export default async function OfferPage({ params }: Props) {
                   {t(tx.order, locale)}
                 </ButtonLink>
                 <TelegramButton locale={locale} source="offer-price" message={tgMessage} label={t(tx.ask, locale)} className="w-full" />
-                <p className="text-center text-xs text-paper/80">{t(tx.noPay, locale)}</p>
+                <p className="text-balance text-center text-xs text-paper/80">{glue(t(tx.noPay, locale))}</p>
               </div>
             </div>
           </div>
@@ -223,7 +236,7 @@ export default async function OfferPage({ params }: Props) {
                 {included(offer, locale).map((item) => (
                   <li key={item} className="flex gap-2.5 text-[0.95rem]">
                     <span aria-hidden className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-yellow ring-2 ring-ink" />
-                    {item}
+                    <span className="min-w-0 text-pretty">{glue(item)}</span>
                   </li>
                 ))}
               </ul>
@@ -235,15 +248,16 @@ export default async function OfferPage({ params }: Props) {
                   {extras(locale).map((item) => (
                     <li key={item} className="flex gap-2.5 text-[0.95rem]">
                       <span aria-hidden className="font-bold">+</span>
-                      {item}
+                      <span className="min-w-0 text-pretty">{glue(item)}</span>
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="flex items-start gap-3 rounded-[1.5rem] bg-grey p-5">
                 <span aria-hidden className="mt-1.5 h-3 w-3 shrink-0 rounded-full bg-red" />
-                <p className="text-sm">
-                  <strong>{t(tx.noPay, locale)}.</strong> {t(tx.total, locale)}: <strong>{formatMoney(offer.totalPrice, locale)}</strong>
+                <p className="text-pretty text-sm">
+                  <strong>{glue(t(tx.noPay, locale))}.</strong> {t(tx.total, locale)}:{" "}
+                  <strong className="whitespace-nowrap">{formatMoney(offer.totalPrice, locale)}</strong>
                 </p>
               </div>
             </div>

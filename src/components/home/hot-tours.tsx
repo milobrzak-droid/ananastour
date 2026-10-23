@@ -8,24 +8,29 @@ import { getDictionary } from "@/i18n/dictionary";
 import { routes } from "@/i18n/routes";
 import { formatDate, formatMoney } from "@/lib/format";
 import type { OfferWithHotel } from "@/lib/tours/types";
+import { glue, leadingFor } from "./typo";
 
 const C = {
-  kicker: { uk: "Last minute", cs: "Last minute" },
-  title: { uk: "Гарячі тури: встигніть схопити!", cs: "Last minute: stihněte to!" },
+  kicker: { uk: "Гарячі тури з Чехії", cs: "Last minute z Česka" },
+  title: { uk: "Ще гаряче", cs: "Ještě žhavé" },
   lead: {
-    uk: "Найближчі вильоти з Чехії за неймовірними цінами. Валіза вже зібрана?",
-    cs: "Nejbližší odlety z Česka za neuvěřitelné ceny. Kufr už je sbalený?",
+    uk: "Найближчі вильоти. Такі ціни живуть недовго, тож кожну я перевіряю в туроператора ще до бронювання.",
+    cs: "Odlety v nejbližších dnech. Takové ceny dlouho nevydrží, proto každou ještě před rezervací ověřím u CK.",
   },
-  discount: { uk: "Знижки до", cs: "Slevy až" },
-  discountNote: { uk: "на популярні напрямки", cs: "na oblíbené destinace" },
+  // Stamp reads as one sentence: "Suitcase / in one evening / and off to the sea". No percentages here.
+  stampTop: { uk: "LAST MINUTE • З ЧЕХІЇ", cs: "LAST MINUTE • Z ČESKA" },
+  discount: { uk: "Валіза", cs: "Kufr" },
+  stampWord: { uk: "ЗА ВЕЧІР", cs: "ZA VEČER" },
+  discountNote: { uk: "і на море", cs: "a k moři" },
   all: { uk: "Усі гарячі тури", cs: "Všechny last minute" },
   nearest: { uk: "Найближчі вильоти", cs: "Nejbližší odlety" },
-  verified: { uk: "Ціна перевірена", cs: "Cena ověřena" },
-  few: { uk: "Мало місць", cs: "Poslední místa" },
-  open: { uk: "Відкрити", cs: "Otevřít" },
+  verified: { uk: "Ціну перевірено", cs: "Cena ověřena" },
+  // Shown when the price is not verified yet — an honest status, not a scarcity claim.
+  few: { uk: "Ціну перевірю", cs: "Cenu ověřím" },
+  open: { uk: "Деталі туру", cs: "Detail zájezdu" },
   empty: {
-    uk: "Зараз підбираємо нові гарячі пропозиції — напишіть, і я надішлю актуальні.",
-    cs: "Právě vybíráme nové nabídky — napište mi a pošlu aktuální.",
+    uk: "Гарячі тури розібрали швидше, ніж сайт устиг їх показати. Напишіть — я надішлю свіжі.",
+    cs: "Žhavé nabídky zmizely dřív, než je web stihl ukázat. Napište mi a pošlu vám čerstvé.",
   },
 };
 
@@ -38,33 +43,42 @@ function NearestTable({ offers, locale }: { offers: OfferWithHotel[]; locale: Lo
         <h3 className="font-display text-2xl font-extrabold uppercase sm:text-3xl">{t(C.nearest, locale)}</h3>
         <span className="text-sm text-ink/75">{dict.common.perPerson.replace(/^\/\s*/, "")}</span>
       </div>
+      {/* One table row from lg; below that (tablets too) each offer stacks, so names and dates keep their room. */}
       <ul className="divide-y divide-ink/10">
         {offers.map((o) => (
           <li
             key={o.id}
-            className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 px-3 py-4 sm:px-2 md:grid-cols-[minmax(0,2.2fr)_9rem_minmax(0,1.1fr)_8rem_auto] md:py-5"
+            className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 px-3 py-4 sm:px-2 lg:grid-cols-[minmax(0,2fr)_auto_minmax(9rem,1.1fr)_minmax(8.5rem,auto)_auto] lg:py-5"
           >
             <Link href={routes.offer(locale, o.id)} className="min-w-0 hover:underline">
-              <span className="block truncate font-display text-base font-bold sm:text-lg">{o.hotel.name}</span>
+              <span className="block text-balance font-display text-base font-bold sm:text-lg lg:truncate lg:text-base xl:text-lg">{o.hotel.name}</span>
               <span className="block truncate text-sm text-ink/75">
                 {countryName(o.hotel.countrySlug, locale, o.hotel.country)} · {o.hotel.region}
               </span>
             </Link>
-            <span className="row-span-3 self-center md:order-last md:row-span-1">
+            <span className="row-span-3 self-center lg:order-last lg:row-span-1">
               <ArrowButton href={routes.offer(locale, o.id)} label={`${t(C.open, locale)}: ${o.hotel.name}`} size={48} />
             </span>
             <span>
               {o.verified ? <Pill tone="ice">{t(C.verified, locale)}</Pill> : <Pill tone="red">{t(C.few, locale)}</Pill>}
             </span>
-            <span className="text-sm font-semibold">
-              {formatDate(o.departureDate, locale)}
+            {/* Date, nights and airport each stay whole; the line may only break after a "· ". */}
+            <span className="min-w-0 text-sm font-semibold">
+              <span className="whitespace-nowrap">{formatDate(o.departureDate, locale)}</span>
               <span className="font-normal text-ink/75">
-                {" "}
-                · {o.nights} {dict.common.nights}
-                {o.departureAirport ? ` · ${o.departureAirport}` : ""}
+                {"\u00A0· "}
+                <span className="whitespace-nowrap">
+                  {o.nights} {dict.common.nights}
+                </span>
+                {o.departureAirport ? (
+                  <>
+                    {"\u00A0· "}
+                    <span className="whitespace-nowrap">{o.departureAirport}</span>
+                  </>
+                ) : null}
               </span>
             </span>
-            <span className="font-display text-lg font-extrabold md:text-right">{formatMoney(o.pricePerPerson, locale)}</span>
+            <span className="whitespace-nowrap font-display text-lg font-extrabold lg:text-right">{formatMoney(o.pricePerPerson, locale)}</span>
           </li>
         ))}
       </ul>
@@ -81,18 +95,18 @@ export function HotTours({ offers, locale }: { offers: OfferWithHotel[]; locale:
         <div className="rounded-[2rem] bg-grey px-3 py-8 sm:rounded-[2.75rem] sm:px-8 sm:py-12 lg:px-12">
           <div className="mb-10 grid gap-6 px-2 lg:grid-cols-[1fr_auto] lg:items-center">
             <div className="max-w-3xl">
-              <Eyebrow>🔥 {t(C.kicker, locale)}</Eyebrow>
-              <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.6rem)] font-black uppercase leading-[0.95] tracking-[-0.03em]">
+              <Eyebrow>{t(C.kicker, locale)}</Eyebrow>
+              <h2 className={`mt-3 text-balance font-display text-[clamp(2rem,4.4vw,3.6rem)] font-black uppercase tracking-[-0.03em] ${leadingFor(t(C.title, locale))}`}>
                 {t(C.title, locale)}
               </h2>
-              <p className="mt-4 text-ink/75">{t(C.lead, locale)}</p>
+              <p className="mt-4 text-pretty text-ink/75">{glue(t(C.lead, locale))}</p>
             </div>
             <Stamp
               size={190}
-              top="LAST MINUTE • HOT TOURS"
+              top={t(C.stampTop, locale)}
               bottom="ANANAS TOUR"
               above={[t(C.discount, locale).toUpperCase()]}
-              word="−40%"
+              word={t(C.stampWord, locale)}
               below={[t(C.discountNote, locale).toUpperCase()]}
               className="hidden -rotate-6 sm:block"
             />

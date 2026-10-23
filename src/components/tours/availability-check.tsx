@@ -10,18 +10,19 @@ import type { AvailabilityCheck as Check, Money } from "@/lib/tours/types";
 type State = { kind: "checking" } | { kind: "done"; check: Check } | { kind: "error" };
 
 const tx = {
-  checking: { uk: "Перевіряємо ціну та наявність у туроператора…", cs: "Ověřujeme cenu a dostupnost u cestovní kanceláře…" },
-  ok: { uk: "Місця є — ціну перевірено онлайн", cs: "Volná místa — cena ověřena online" },
-  at: { uk: "о", cs: "v" },
-  changed: { uk: "Актуальна ціна за всіх:", cs: "Aktuální cena za všechny:" },
+  checking: { uk: "Перевіряємо місця й актуальну ціну…", cs: "Ověřujeme volná místa a aktuální cenu…" },
+  // Renders as "{ok} {at} {time}"; `at` stays empty so the time follows the colon ("…: 14:32").
+  ok: { uk: "Місця є · ціну перевірено:", cs: "Volná místa · cena ověřena:" },
+  at: { uk: "", cs: "" },
+  changed: { uk: "Ціна змінилася. Тепер за всіх:", cs: "Cena se mezitím změnila. Nová cena za všechny:" },
   unavailable: {
-    uk: "Цей термін щойно розпродали. Альона знайде схожий варіант — напишіть їй.",
-    cs: "Tento termín se právě vyprodal. Aljona najde podobnou variantu — napište jí.",
+    uk: "Цей термін щойно розібрали. Знайду схожий — за ціною й готелем.",
+    cs: "Tenhle termín se právě vyprodal. Najdu podobný – cenou i hotelem.",
   },
-  alt: { uk: "Знайти альтернативу", cs: "Najít alternativu" },
+  alt: { uk: "Знайти схожий", cs: "Najít podobný" },
   error: {
-    uk: "Зараз не вдалося перевірити онлайн — Альона підтвердить наявність вручну.",
-    cs: "Teď se nepodařilo ověřit online — Aljona dostupnost potvrdí ručně.",
+    uk: "Не вдалося перевірити ціну онлайн. Альона перевірить її вручну — напишіть їй.",
+    cs: "Cenu se nepodařilo ověřit online. Aljona ji ověří ručně – napište jí.",
   },
 };
 

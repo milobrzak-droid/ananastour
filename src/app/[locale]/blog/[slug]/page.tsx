@@ -16,14 +16,14 @@ import { formatDate } from "@/lib/format";
 type Params = Promise<{ locale: string; slug: string }>;
 
 const copy = {
-  back: { uk: "Усі статті", cs: "Všechny články" },
+  back: { uk: "Усі поради", cs: "Všechny tipy" },
   minutes: { uk: "хв читання", cs: "min čtení" },
-  related: { uk: "Корисно для країн", cs: "Hodí se pro destinace" },
-  more: { uk: "Читайте також", cs: "Přečtěte si také" },
-  ctaTitle: { uk: "Залишилися питання?", cs: "Máte další otázky?" },
+  related: { uk: "Де це знадобиться", cs: "Kde se to hodí" },
+  more: { uk: "Що ще варто знати", cs: "Co ještě vědět" },
+  ctaTitle: { uk: "Куди? Коли? Скільки вас?", cs: "Kam? Kdy? Kolik vás?" },
   ctaText: {
-    uk: "Напишіть Альоні в Telegram — вона пояснить усе на прикладі вашої поїздки й підбере тур.",
-    cs: "Napište Aljoně na Telegram — vysvětlí vše na příkladu vaší cesty a vybere vám zájezd.",
+    uk: "Три відповіді в Telegram — і я почну шукати. А питання про вашу ситуацію просто допишіть у повідомлення.",
+    cs: "Tři odpovědi na Telegram a začnu hledat. Řešíte něco konkrétního? Rovnou to připište do zprávy.",
   },
 };
 
@@ -91,7 +91,7 @@ export default async function PostPage({ params }: { params: Params }) {
                   {post.readingMinutes} {t(copy.minutes, locale)}
                 </span>
               </div>
-              <h1 className="mt-4 font-display text-[clamp(1.9rem,4vw,3.4rem)] font-black uppercase leading-[1] tracking-[-0.03em]">{title}</h1>
+              <h1 className="mt-4 text-balance font-display text-[clamp(1.9rem,4vw,3.4rem)] font-black uppercase leading-[1.08] tracking-[-0.03em]">{title}</h1>
               <p className="mt-5 text-lg text-ink/80">{t(post.excerpt, locale)}</p>
             </div>
             <div className="relative mx-auto aspect-[4/3] w-full max-w-[34rem] overflow-hidden rounded-[2rem] bg-white">

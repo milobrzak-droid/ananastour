@@ -12,7 +12,7 @@ import { routes } from "@/i18n/routes";
 const tx = {
   menu: { uk: "Меню", cs: "Menu" },
   closeMenu: { uk: "Закрити меню", cs: "Zavřít menu" },
-  search: { uk: "Пошук турів", cs: "Hledat zájezdy" },
+  search: { uk: "Знайти тур", cs: "Najít zájezd" },
   main: { uk: "Головна навігація", cs: "Hlavní navigace" },
   mobile: { uk: "Мобільна навігація", cs: "Mobilní navigace" },
   lang: { uk: "Мова", cs: "Jazyk" },

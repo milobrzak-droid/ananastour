@@ -10,13 +10,19 @@ import { phoneLink } from "@/lib/contact/telegram";
 
 const copy = {
   about: {
-    uk: "Ваш надійний партнер у світі подорожей. Від першого повідомлення до щасливого повернення додому.",
-    cs: "Váš spolehlivý partner pro cestování. Od první zprávy až po šťastný návrat domů.",
+    uk: "Тури з Чехії, які підбирає людина, а не алгоритм. Солодке — вам, колюче — нам, кисле — нікому.",
+    cs: "Zájezdy z Česka, které vybírá člověk, ne algoritmus. Sladké vám, pichlavé nám, kyselé nikomu.",
   },
   nav: { uk: "Навігація", cs: "Navigace" },
   contacts: { uk: "Контакти", cs: "Kontakty" },
-  privacy: { uk: "Конфіденційність", cs: "Ochrana osobních údajů" },
-  terms: { uk: "Умови", cs: "Obchodní podmínky" },
+  privacy: { uk: "Захист даних", cs: "Ochrana osobních údajů" },
+  terms: { uk: "Умови надання послуг", cs: "Obchodní podmínky" },
+  // Closing seal echoes the hero: "Ananas Tour • agency / your sea / from Czechia / on the road since 2011".
+  // The seal is a fixed 150px element: arcs stay short so the ring type keeps the hero's size.
+  stampTop: { uk: "ANANAS TOUR • АГЕНЦІЯ", cs: "ANANAS TOUR • AGENTURA" },
+  stampAbove: { uk: ["ВАШЕ", "МОРЕ"], cs: ["VAŠE", "MOŘE"] },
+  stampWord: { uk: "З ЧЕХІЇ", cs: "Z ČESKA" },
+  stampSince: { uk: "У ТУРИЗМІ З", cs: "NA CESTÁCH OD" },
 };
 
 export function Footer({ locale }: { locale: Locale }) {
@@ -33,20 +39,20 @@ export function Footer({ locale }: { locale: Locale }) {
   return (
     <footer className="px-1.5 pb-1.5 pt-10 sm:px-3 sm:pb-3 sm:pt-16">
       <div className="relative isolate overflow-hidden rounded-[1.5rem] bg-ice px-5 pb-8 pt-10 text-ink sm:rounded-[2.25rem] sm:px-10 sm:pt-12">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr] lg:grid-cols-[auto_1.3fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[minmax(15.5rem,1.3fr)_1fr_1fr] lg:grid-cols-[auto_minmax(15.5rem,1.3fr)_1fr_1fr]">
           <Stamp
             size={150}
-            top="ANANAS TOUR • TRAVEL"
-            bottom={`SINCE ${site.owner.since}`}
-            above={["FINEST", "HOLIDAYS"]}
-            word="ANANAS"
-            below={["FROM", "CZECHIA"]}
+            top={t(copy.stampTop, locale)}
+            bottom={`${t(copy.stampSince, locale)} ${site.owner.since}`}
+            above={t(copy.stampAbove, locale)}
+            word={t(copy.stampWord, locale)}
+            below={[]}
             className="hidden lg:block"
           />
           <div>
             <Logo locale={locale} />
             <p className="mt-4 max-w-sm text-sm text-ink/80">{t(copy.about, locale)}</p>
-            <TelegramButton locale={locale} source="footer" size="md" className="mt-5" />
+            <TelegramButton locale={locale} source="footer" size="md" className="mt-5 whitespace-nowrap" />
           </div>
           <nav aria-label={t(copy.nav, locale)}>
             <p className="eyebrow text-ink/75">{t(copy.nav, locale)}</p>
@@ -78,7 +84,8 @@ export function Footer({ locale }: { locale: Locale }) {
             </ul>
           </div>
         </div>
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-ink/15 pt-5 text-xs text-ink/80">
+        {/* md:pr-20 keeps the legal links clear of the floating Telegram button (fixed, bottom right). */}
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-ink/15 pt-5 text-xs text-ink/80 md:pr-20">
           <p>
             © 2011–{new Date().getFullYear()} {site.name} · {site.company.legalName} · IČO {site.company.ico}
           </p>

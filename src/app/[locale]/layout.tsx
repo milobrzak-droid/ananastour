@@ -37,12 +37,21 @@ const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
 const meta = {
   title: {
-    uk: "Ananas Tour — турагенція в Чехії | Тури з Праги",
-    cs: "Ananas Tour — cestovní agentura | Zájezdy z Prahy",
+    uk: "Ananas Tour — тури з Чехії українською",
+    cs: "Ananas Tour – zájezdy z Česka, česky i ukrajinsky",
   },
   description: {
-    uk: "Підбір турів від перевірених чеських туроператорів. Пишіть Альоні в Telegram — 3 найкращі варіанти за 15 хвилин.",
-    cs: "Zájezdy od ověřených cestovních kanceláří. Napište Aljoně na Telegram — 3 nejlepší varianty do 15 minut.",
+    uk: "Тури чеських туроператорів, застрахованих від банкрутства: Туреччина, Єгипет, Греція й ще 9 країн. Альона підбере в Telegram 3 готелі під ваші побажання.",
+    cs: "Zájezdy českých CK pojištěných proti úpadku: Turecko, Egypt, Řecko a dalších 9 zemí. Aljona vám na Telegramu vybere 3 hotely podle vašich přání.",
+  },
+  // Share preview (Telegram groups are where recommendations travel): position + big idea.
+  ogTitle: {
+    uk: "Ваше море з Чехії — Ananas Tour",
+    cs: "Vaše moře z Česka – Ananas Tour",
+  },
+  ogDescription: {
+    uk: "Вам — море, а на нас — решта: порівняти пропозиції чеських туроператорів, перевірити готель і документи. Пишіть Альоні в Telegram.",
+    cs: "Vám moře – a na nás zbytek: porovnat nabídky českých CK, prověřit hotel i doklady. Napište Aljoně na Telegram.",
   },
 };
 
@@ -60,8 +69,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: "website",
       siteName: site.name,
       locale: locale === "uk" ? "uk_UA" : "cs_CZ",
-      title: t(meta.title, locale),
-      description: t(meta.description, locale),
+      title: t(meta.ogTitle, locale),
+      description: t(meta.ogDescription, locale),
       images: [{ url: "/img/ananas/hero-tropical-beach.jpg", width: 1920, height: 1283, alt: site.name }],
     },
     twitter: { card: "summary_large_image" },

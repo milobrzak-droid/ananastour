@@ -72,11 +72,11 @@ export function HotelDistances({ hotel, locale }: { hotel: Hotel; locale: Locale
   const firstLine = t({ uk: "перша лінія", cs: "první linie" }, locale);
   const rows: Array<[string, string | undefined]> = [
     [
-      t({ uk: "До пляжу", cs: "K pláži" }, locale),
+      t({ uk: "До пляжу", cs: "Pláž" }, locale),
       d.beach === undefined ? undefined : d.beach === 0 ? firstLine : formatDistance(d.beach, locale),
     ],
-    [t({ uk: "До центру", cs: "Do centra" }, locale), d.centre === undefined ? undefined : formatDistance(d.centre, locale)],
-    [t({ uk: "До аеропорту", cs: "Na letiště" }, locale), d.airport === undefined ? undefined : formatDistance(d.airport, locale)],
+    [t({ uk: "До центру", cs: "Centrum" }, locale), d.centre === undefined ? undefined : formatDistance(d.centre, locale)],
+    [t({ uk: "До аеропорту", cs: "Letiště" }, locale), d.airport === undefined ? undefined : formatDistance(d.airport, locale)],
   ];
   return (
     <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 text-sm">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -22,50 +23,50 @@ type Params = Promise<{ locale: string; slug: string }>;
 const copy = {
   facts: {
     flight: { uk: "Переліт", cs: "Let" },
-    season: { uk: "Найкращий сезон", cs: "Nejlepší sezóna" },
-    airports: { uk: "Виліт з", cs: "Odlet z" },
+    season: { uk: "Сезон", cs: "Sezóna" },
+    airports: { uk: "Вильоти", cs: "Odlety" },
     currency: { uk: "Валюта", cs: "Měna" },
     entry: { uk: "В’їзд", cs: "Vstup" },
   },
-  regionsTitle: { uk: "Куди саме поїхати", cs: "Kam přesně jet" },
-  departuresTitle: { uk: "Найближчі виїзди", cs: "Nejbližší odjezdy" },
+  regionsTitle: { uk: "Куди саме", cs: "Kam přesně" },
+  departuresTitle: { uk: "Вильоти з Чехії", cs: "Odlety z Česka" },
   departuresLead: {
-    uk: "Ціна за особу при розміщенні двох дорослих. Точну ціну на ваші дати Альона перевірить онлайн.",
-    cs: "Cena za osobu při ubytování dvou dospělých. Přesnou cenu na vaše termíny Aljona ověří online.",
+    uk: "Ціна — за одну особу, якщо в номері двоє дорослих. Ціну й вільні місця на ваші дати перевірю в туроператора ще до бронювання.",
+    cs: "Ceny jsou za osobu při obsazení pokoje dvěma dospělými. Cenu i volná místa na váš termín ověřím u CK ještě před rezervací.",
   },
-  allTours: { uk: "Усі тури", cs: "Všechny zájezdy" },
+  allTours: { uk: "Усі тури", cs: "Zájezdy" },
   th: {
     hotel: { uk: "Готель", cs: "Hotel" },
     date: { uk: "Виліт", cs: "Odlet" },
     nights: { uk: "Ночей", cs: "Nocí" },
     board: { uk: "Харчування", cs: "Strava" },
     from: { uk: "Звідки", cs: "Odkud" },
-    price: { uk: "Ціна / особа", cs: "Cena / osoba" },
+    price: { uk: "Ціна за особу", cs: "Cena za osobu" },
   },
   openOffer: { uk: "Деталі туру", cs: "Detail zájezdu" },
   noDepartures: {
-    uk: "Зараз у пошуку немає вільних виїздів — напишіть Альоні, вона перевірить усіх туроператорів вручну.",
-    cs: "Ve vyhledávání teď nejsou volné termíny — napište Aljoně, prověří ručně všechny cestovní kanceláře.",
+    uk: "Онлайн-пошук зараз не бачить вильотів. Але бачить він не все — напишіть, і я перевірю в туроператорів вручну.",
+    cs: "Online vyhledávání teď žádné odlety nevidí. Jenže nevidí všechno – napište mi a ověřím to přímo u CK.",
   },
-  moneyTitle: { uk: "Гроші та оплата", cs: "Peníze a placení" },
+  moneyTitle: { uk: "Гроші на місці", cs: "Peníze na místě" },
   payNote: {
-    uk: "Сам тур ви оплачуєте нам у кронах (CZK) або євро — переказом чи карткою.",
-    cs: "Samotný zájezd platíte u nás v korunách (CZK) nebo eurech — převodem či kartou.",
+    uk: "Ціни турів — у кронах, а на сайті ви нічого не платите. Спершу я підтверджу тур у туроператора, застрахованого від банкрутства, — і лише тоді договір та оплата.",
+    cs: "Ceny jsou v korunách a na webu nic neplatíte. Zájezd nejdřív potvrdím u CK pojištěné proti úpadku – teprve potom přijde na řadu smlouva a platba.",
   },
-  tipsTitle: { uk: "Поради від Ananas Tour", cs: "Tipy od Ananas Tour" },
-  faqTitle: { uk: "Часті питання", cs: "Časté otázky" },
-  ctaTitle: { uk: "Хочете {to}? Напишіть Альоні", cs: "Chcete jet {to}? Napište Aljoně" },
+  tipsTitle: { uk: "Поради Альони", cs: "Aljoniny tipy" },
+  faqTitle: { uk: "Що зазвичай питають", cs: "Na co se ptáte" },
+  ctaTitle: { uk: "Хочете {to}?", cs: "Chcete {to}?" },
   ctaText: {
-    uk: "Скажіть дати, кількість людей і бюджет — за 15 хвилин отримаєте 3 найкращі варіанти від перевірених чеських туроператорів.",
-    cs: "Napište termín, počet osob a rozpočet — do 15 minut dostanete 3 nejlepší nabídky od ověřených českých cestovních kanceláří.",
+    uk: "Скажіть дати, скільки вас і бюджет — я надішлю 3 готелі. З 9:00 до 21:00 зазвичай відповідаю за 15 хвилин.",
+    cs: "Napište termín, kolik vás je a rozpočet – pošlu vám 3 hotely. Od 9 do 21 h odpovídám obvykle do 15 minut.",
   },
   ctaMessage: {
-    uk: "Добрий день, Альоно! Мене цікавить відпочинок {in}. Підберіть, будь ласка, варіанти.",
-    cs: "Dobrý den, Aljono! Mám zájem o dovolenou {in}. Můžete mi prosím poslat nabídky?",
+    uk: "Добрий день, Альоно! Хочу {to}.\nКоли: …\nСкільки нас (вік дітей): …\nБюджет: …",
+    cs: "Dobrý den, Aljono! Chci {to}.\nKdy: …\nKolik nás je (věk dětí): …\nRozpočet: …",
   },
-  heroCta: { uk: "Підібрати тур {to}", cs: "Vybrat zájezd {to}" },
-  showTours: { uk: "Дивитися ціни", cs: "Zobrazit ceny" },
-  other: { uk: "Інші країни", cs: "Další destinace" },
+  heroCta: { uk: "Хочу {to}", cs: "Chci {to}" },
+  showTours: { uk: "Ціни та дати", cs: "Ceny a termíny" },
+  other: { uk: "А може, інше море?", cs: "Nebo jiné moře?" },
 };
 
 const boardLabels: Record<Board, { uk: string; cs: string }> = {
@@ -73,8 +74,8 @@ const boardLabels: Record<Board, { uk: string; cs: string }> = {
   BB: { uk: "Сніданки", cs: "Snídaně" },
   HB: { uk: "Напівпансіон", cs: "Polopenze" },
   FB: { uk: "Повний пансіон", cs: "Plná penze" },
-  AI: { uk: "All inclusive", cs: "All inclusive" },
-  UAI: { uk: "Ultra all inclusive", cs: "Ultra all inclusive" },
+  AI: { uk: "Все включено", cs: "All inclusive" },
+  UAI: { uk: "Ультра все включено", cs: "Ultra all inclusive" },
 };
 
 const airportLabels: Record<string, { uk: string; cs: string }> = {
@@ -145,7 +146,8 @@ export default async function DestinationPage({ params }: { params: Params }) {
   ];
 
   const regionShapes = ["shape-card", "shape-card-r", "shape-card-tl"];
-  const longestWord = Math.max(...name.split(/\s+/).map((w) => w.length));
+  const longestOf = (s: string) => Math.max(...s.split(/\s+/).map((w) => w.length));
+  const longestWord = longestOf(name);
 
   return (
     <>
@@ -156,27 +158,31 @@ export default async function DestinationPage({ params }: { params: Params }) {
         <Container>
           <div className="relative flex min-h-[540px] flex-col justify-end overflow-hidden shape-card bg-ink text-paper sm:min-h-[640px]">
             <Image src={d.heroImage} alt={name} fill priority sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/65 via-55% to-ink/20 sm:via-ink/35 sm:via-50% sm:to-ink/10" />
             <div className="absolute right-5 top-5 hidden sm:block">
               <CircleBadge size={150} color="var(--c-paper)" text={`${name.toUpperCase()} • ANANAS TOUR • `} center={<span className="text-5xl">{d.flag}</span>} />
             </div>
             <div className="relative px-6 pb-10 sm:px-12 sm:pb-14">
               <Pill tone="yellow">{t(d.tagline, locale)}</Pill>
               <h1
-                className="mt-4 font-display font-black uppercase leading-[0.88] tracking-[-0.04em]"
-                // Size to the longest word so it never breaks mid-word (Unbounded is wide).
-                style={{ fontSize: `clamp(2rem, calc((min(100vw, 84rem) - 9rem) / ${(longestWord * 0.98).toFixed(2)}), 9.5rem)` }}
+                // Sized to the longest word so it never breaks mid-word: --hk = letters × 0.98 em (widest Unbounded caps,
+                // МАЛЬДІВИ, measure 0.90 em). The subtracted rem is the real chrome (frame + container + card padding)
+                // at each breakpoint: 6rem phones, 11rem sm–md, 13rem from lg; the 1.4rem floor fits ДОМІНІКАНА at 320 px.
+                className="mt-4 text-balance font-display font-black uppercase leading-[0.88] tracking-[-0.04em] [text-shadow:0_2px_18px_rgb(0_0_0/0.3)] text-[length:clamp(1.4rem,calc((100vw_-_6rem)/var(--hk)),9.5rem)] sm:text-[length:clamp(1.4rem,calc((100vw_-_11rem)/var(--hk)),9.5rem)] lg:text-[length:clamp(1.4rem,calc((min(100vw,86rem)_-_13rem)/var(--hk)),9.5rem)]"
+                style={{ "--hk": (longestWord * 0.98).toFixed(2) } as CSSProperties}
               >
                 {name}
               </h1>
-              <p className="mt-5 max-w-2xl text-lg text-paper/85">{t(d.teaser, locale)}</p>
-              <div className="mt-7 flex flex-wrap gap-3">
+              <p className="mt-5 max-w-2xl text-pretty text-lg text-paper [text-shadow:0_1px_12px_rgb(0_0_0/0.35)] sm:text-paper/85">{t(d.teaser, locale)}</p>
+              <div className="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap">
                 <TelegramButton
                   locale={locale}
                   source={`destination-hero-${slug}`}
                   message={telegramMessage}
                   label={fill(t(copy.heroCta, locale), d, locale)}
                   size="lg"
+                  // Phones get md metrics so "Хочу до Домінікани" stays on one line down to 320 px.
+                  className="max-sm:min-h-12 max-sm:gap-2 max-sm:pl-2 max-sm:pr-5 max-sm:text-[clamp(0.875rem,4.3vw,1rem)]"
                 />
                 <ButtonLink href={toursHref} variant="light" className="py-4">
                   {t(copy.showTours, locale)}
@@ -186,14 +192,18 @@ export default async function DestinationPage({ params }: { params: Params }) {
           </div>
 
           {/* Key facts */}
-          <dl className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
+          {/* 5 in a row only from xl: at 1024 a fifth of the row is too narrow for "листопад–квітень" or "громадянства". */}
+          <dl className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
             {facts.map((f, i) => (
               <div
                 key={i}
-                className={`rounded-[1.5rem] p-5 ${i === 0 ? "bg-yellow" : i === 3 ? "bg-ice" : "bg-grey"} ${i === facts.length - 1 ? "col-span-2 md:col-span-1" : ""}`}
+                className={`min-w-0 rounded-[1.5rem] p-4 sm:p-5 ${i === 0 ? "bg-yellow" : i === 3 ? "bg-ice" : "bg-grey"} ${i === facts.length - 1 ? "col-span-2 md:col-span-1" : ""}`}
               >
                 <dt className="text-xs font-semibold uppercase tracking-wider text-ink/75">{t(f.label, locale)}</dt>
-                <dd className="mt-1.5 text-[1.05rem] font-bold leading-snug">{f.value}</dd>
+                {/* Longest unbreakable value ≈ 8 em ("танзанійський", "(з пересадкою"): scaled with vw on phones so it fits a half-width card. */}
+                <dd className="mt-1.5 text-pretty text-[clamp(0.92rem,3.9vw,1.05rem)] font-bold leading-snug [overflow-wrap:break-word]">
+                  {f.value}
+                </dd>
               </div>
             ))}
           </dl>
@@ -219,10 +229,14 @@ export default async function DestinationPage({ params }: { params: Params }) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent" />
               <div className="relative p-6 sm:p-8">
-                <h3 className={`font-display font-extrabold ${i === 0 ? "text-3xl sm:text-4xl" : "text-2xl"}`}>
+                <h3
+                  className={`text-balance font-display font-extrabold ${i === 0 ? "leading-[1.12]" : "text-2xl"}`}
+                  // Big tile: sized to its longest word (≈0.77 em per letter), so "Острови-резорти" stays on one line on phones.
+                  style={i === 0 ? { fontSize: `clamp(1.45rem, calc((100vw - 6rem) / ${(longestOf(t(r.title, locale)) * 0.77).toFixed(2)}), 2.25rem)` } : undefined}
+                >
                   {t(r.title, locale)}
                 </h3>
-                <p className="mt-2 max-w-xl text-sm leading-relaxed text-paper/85 sm:text-base">{t(r.text, locale)}</p>
+                <p className="mt-2 max-w-xl text-pretty text-sm leading-relaxed text-paper/85 sm:text-base">{t(r.text, locale)}</p>
               </div>
             </article>
           ))}
@@ -306,13 +320,13 @@ export default async function DestinationPage({ params }: { params: Params }) {
           {d.money.map((m, i) => (
             <div key={i} className={`${i % 2 ? "shape-card-r" : "shape-card"} bg-grey p-7`}>
               <h3 className="font-display text-xl font-bold">{t(m.title, locale)}</h3>
-              <p className="mt-2 leading-relaxed text-ink/75">{t(m.text, locale)}</p>
+              <p className="mt-2 text-pretty leading-relaxed text-ink/75">{t(m.text, locale)}</p>
             </div>
           ))}
           <div className="relative overflow-hidden shape-card-tl bg-yellow p-7">
             <PineappleSlice kind="half" size={140} rotate={200} className="absolute -bottom-10 -right-8 opacity-40" color="var(--c-paper)" />
-            <p className="relative font-display text-xl font-bold">CZK / EUR</p>
-            <p className="relative mt-2 leading-relaxed">{t(copy.payNote, locale)}</p>
+            <p className="relative font-display text-xl font-bold">Kč</p>
+            <p className="relative mt-2 text-pretty leading-relaxed">{t(copy.payNote, locale)}</p>
           </div>
         </div>
       </Section>
@@ -328,7 +342,7 @@ export default async function DestinationPage({ params }: { params: Params }) {
                 <PineappleSlice kind="wedge" size={40} seed={i + 2} className="shrink-0" />
                 <div>
                   <h3 className="font-display text-lg font-bold text-yellow-light">{t(tip.title, locale)}</h3>
-                  <p className="mt-1 leading-relaxed text-paper/80">{t(tip.text, locale)}</p>
+                  <p className="mt-1 text-pretty leading-relaxed text-paper/80">{t(tip.text, locale)}</p>
                 </div>
               </li>
             ))}

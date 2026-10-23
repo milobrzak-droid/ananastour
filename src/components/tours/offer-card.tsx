@@ -10,11 +10,11 @@ import { formatDateRange, formatMoney } from "@/lib/format";
 import type { OfferWithHotel } from "@/lib/tours/types";
 import { site } from "@/config/site";
 import { t } from "@/i18n/config";
-import { boardLabel, countryName } from "@/components/tours/labels";
+import { boardLabel, countryName, dateRangeLabel } from "@/components/tours/labels";
 
 const pills = {
   lastMinute: { uk: "Гарячий тур", cs: "Last minute" },
-  verified: { uk: "✓ ціна перевірена", cs: "✓ cena ověřena" },
+  verified: { uk: "✓ Ціну перевірено", cs: "✓ Cena ověřena" },
 };
 
 /** Pre-filled Telegram message describing one offer. */
@@ -60,16 +60,24 @@ export function OfferCard({ offer, locale, source = "offer-card" }: { offer: Off
           </Link>{" "}
           <Stars n={offer.hotel.stars} locale={locale} />
         </h3>
+        {/* Breaks only after a " · " separator: the date, "10 nocí" and the board label stay whole. */}
         <p className="text-sm text-ink/75">
-          {formatDateRange(offer.departureDate, offer.returnDate, locale)} · {offer.nights} {dict.common.nights} · {boardLabel(offer.board, locale)}
+          {dateRangeLabel(offer.departureDate, offer.returnDate, locale)}
+          {" · "}
+          <span className="whitespace-nowrap">
+            {offer.nights} {dict.common.nights}
+          </span>
+          {" · "}
+          <span className="whitespace-nowrap">{boardLabel(offer.board, locale)}</span>
         </p>
         <div className="mt-auto flex items-end justify-between gap-3 pt-3">
-          <p className="font-display text-2xl font-extrabold leading-none">
+          {/* "/ за особу" drops under the price when a narrow card can't fit both on one line. */}
+          <p className="flex min-w-0 flex-wrap items-baseline gap-x-1.5 gap-y-1 font-display text-2xl font-extrabold leading-none">
             {offer.originalPrice && (
-              <span className="mb-1 block text-sm font-semibold text-ink/70 line-through">{formatMoney(offer.originalPrice, locale)}</span>
+              <span className="mb-1 basis-full text-sm font-semibold text-ink/70 line-through">{formatMoney(offer.originalPrice, locale)}</span>
             )}
-            {formatMoney(offer.pricePerPerson, locale)}
-            <span className="ml-1 whitespace-nowrap font-sans text-sm font-medium text-ink/75">{dict.common.perPerson}</span>
+            <span className="whitespace-nowrap">{formatMoney(offer.pricePerPerson, locale)}</span>
+            <span className="whitespace-nowrap font-sans text-sm font-medium text-ink/75">{dict.common.perPerson}</span>
           </p>
         </div>
         <TelegramButton

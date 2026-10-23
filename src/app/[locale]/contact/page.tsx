@@ -16,42 +16,53 @@ import { phoneLink, telegramLink } from "@/lib/contact/telegram";
 type L = Record<Locale, string>;
 
 const copy = {
-  metaTitle: { uk: "Контакти — напишіть Альоні в Telegram", cs: "Kontakt — napište Aljoně na Telegram" },
+  metaTitle: { uk: "Контакти: Альона в Telegram і за телефоном", cs: "Kontakt – Aljona na Telegramu i po telefonu" },
   metaDescription: {
-    uk: "Найшвидший зв’язок — Telegram: відповідь протягом 15 хвилин. Також телефон, e-mail та Instagram турагенції Ananas Tour у Чехії.",
-    cs: "Nejrychlejší kontakt je Telegram: odpověď do 15 minut. Dále telefon, e-mail a Instagram cestovní agentury Ananas Tour.",
+    uk: "Найшвидше — Telegram @Ananas_tours: з 9:00 до 21:00 Альона зазвичай відповідає за 15 хвилин, українською чи чеською. Або подзвоніть чи напишіть на e-mail.",
+    cs: "Nejrychleji přes Telegram @Ananas_tours: od 9 do 21 h Aljona odpoví obvykle do 15 minut, česky i ukrajinsky. Nebo zavolejte či pošlete e-mail.",
   },
-  eyebrow: { uk: "Контакти", cs: "Kontakt" },
-  title: { uk: "Давайте сплануємо вашу відпустку", cs: "Pojďme naplánovat vaši dovolenou" },
+  eyebrow: { uk: "Контакти", cs: "Kontakty" },
+  title: { uk: "Пишіть, я тут", cs: "Pište, jsem tu" },
   lead: {
-    uk: "Найшвидше — написати в Telegram. Альона особисто відповідає на кожне повідомлення.",
-    cs: "Nejrychleji to půjde přes Telegram. Aljona osobně odpovídá na každou zprávu.",
+    uk: "Найшвидше — Telegram: щодня з 9:00 до 21:00 зазвичай відповідаю за 15 хвилин. Пізно ввечері? Відповім зранку, за першою кавою.",
+    cs: "Nejrychleji přes Telegram: denně od 9 do 21 h odpovídám obvykle do 15 minut. Pozdě večer? Ozvu se ráno u první kávy.",
   },
-  tgTitle: { uk: "Напишіть Альоні в Telegram", cs: "Napište Aljoně na Telegram" },
-  tgReply: { uk: "Відповідь протягом 15 хвилин", cs: "Odpověď do 15 minut" },
+  // Telegram card: a person instead of a call-centre queue.
+  tgTitle: { uk: "Чат замість черги", cs: "Chat místo fronty" },
+  tgReply: { uk: "Зазвичай за 15 хв · 9:00–21:00", cs: "Obvykle do 15 min · 9–21 h" },
   tgText: {
-    uk: "Напишіть, куди, коли й скільки вас — і отримаєте 3 найкращі варіанти від перевірених чеських туроператорів.",
-    cs: "Napište, kam, kdy a kolik vás pojede — a dostanete 3 nejlepší varianty od prověřených českých cestovních kanceláří.",
+    uk: "Без кол-центру й «ваш дзвінок дуже важливий для нас». Напишіть, куди, коли й скільки вас, — відповім особисто, українською чи чеською.",
+    cs: "Žádné call centrum, žádné „váš hovor je pro nás důležitý“. Napište kam, kdy a kolik vás je – odpovím osobně, česky i ukrajinsky.",
   },
   tgOpen: { uk: "Відкрити чат", cs: "Otevřít chat" },
-  qrCaption: { uk: "Наведіть камеру телефону", cs: "Namiřte fotoaparát telefonu" },
-  qrLabel: { uk: "QR-код: чат з Альоною в Telegram", cs: "QR kód: chat s Aljonou na Telegramu" },
-  contactsTitle: { uk: "Наші контакти", cs: "Naše kontakty" },
+  qrCaption: { uk: "Наведіть камеру — і ви в чаті", cs: "Namiřte mobil a jste v chatu" },
+  qrLabel: { uk: "QR-код: чат з Альоною в Telegram", cs: "QR kód: chat s Aljonou na Telegramu" },
+  contactsTitle: { uk: "Де мене знайти", cs: "Kde mě najdete" },
   phone: { uk: "Телефон", cs: "Telefon" },
   email: { uk: "E-mail", cs: "E-mail" },
-  hours: { uk: "Години роботи", cs: "Otevírací doba" },
+  hours: { uk: "Коли відповідаю", cs: "Kdy odpovídám" },
   address: { uk: "Адреса", cs: "Adresa" },
+  // TODO(client): personal meetings (where, whether at all) — confirm before promising them here.
   addressNote: {
-    uk: "Зустрічі — за попередньою домовленістю",
-    cs: "Schůzky po předchozí domluvě",
+    uk: "У Чехії немає моря. Зате є Альона.",
+    cs: "Česko nemá moře. Má Aljonu.",
   },
-  formTitle: { uk: "Або залиште повідомлення", cs: "Nebo nám nechte zprávu" },
+  formTitle: { uk: "Або залиште повідомлення", cs: "Nebo mi nechte vzkaz" },
   formLead: {
-    uk: "Заявка миттєво надійде Альоні, і вона зв’яжеться з вами.",
-    cs: "Zpráva okamžitě dorazí Aljoně a ona se vám ozve.",
+    uk: "Повідомлення одразу прийде Альоні.",
+    cs: "Zpráva dorazí rovnou Aljoně.",
   },
-  social: { uk: "Ми в соцмережах", cs: "Najdete nás" },
+  social: { uk: "Як вам зручніше?", cs: "Co vám sedí víc?" },
 } satisfies Record<string, L>;
+
+// Airmail stamp on the form: "Letter · AIRMAIL · for Aljona — usually within 15 min, 9–21".
+const stamp = {
+  top: { uk: "ANANAS TOUR • З ЧЕХІЇ", cs: "ANANAS TOUR • Z ČESKA" },
+  above: { uk: ["ЛИСТ"], cs: ["DOPIS"] },
+  word: { uk: "АВІА", cs: "LETECKY" },
+  below: { uk: ["ДЛЯ АЛЬОНИ"], cs: ["PRO ALJONU"] },
+  bottom: { uk: "ЗАЗВИЧАЙ ЗА 15 ХВ • 9–21", cs: "OBVYKLE DO 15 MIN • 9–21 H" },
+};
 
 function InstagramIcon({ size = 20 }: { size?: number }) {
   return (
@@ -154,7 +165,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 </span>
                 {t(copy.tgReply, locale)}
               </span>
-              <h2 className="mt-5 font-display text-[clamp(2rem,5vw,4rem)] font-black uppercase leading-[0.95] tracking-[-0.03em]">{t(copy.tgTitle, locale)}</h2>
+              <h2 className="mt-5 font-display text-[clamp(2rem,5vw,4rem)] font-black uppercase leading-[1.08] tracking-[-0.03em]">{t(copy.tgTitle, locale)}</h2>
               <div className="mt-5 flex items-center gap-4">
                 <AljonaAvatar size={60} ring="white" />
                 <a
@@ -230,7 +241,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
           <div className="relative [&>form]:h-full">
             <div className="pointer-events-none absolute -right-3 -top-3 z-10 hidden sm:block">
-              <Stamp size={120} top="ANANAS TOUR • CONTACT" bottom="REPLY IN 15 MIN" above={["WRITE", "TO"]} word="ALJONA" below={["UA", "CZ"]} className="rotate-12 drop-shadow-lg" />
+              <Stamp size={120} top={t(stamp.top, locale)} bottom={t(stamp.bottom, locale)} above={t(stamp.above, locale)} word={t(stamp.word, locale)} below={t(stamp.below, locale)} className="rotate-12 drop-shadow-lg" />
             </div>
             <InquiryForm
               locale={locale}

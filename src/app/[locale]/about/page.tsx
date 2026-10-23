@@ -13,118 +13,133 @@ import { languageAlternates, routes } from "@/i18n/routes";
 type L = Record<Locale, string>;
 
 const copy = {
-  metaTitle: { uk: "Про нас — Альона та Ananas Tour", cs: "O nás — Aljona a Ananas Tour" },
+  metaTitle: { uk: "Про мене: Альона, 22 країни на власні очі", cs: "O mně: Aljona, 22 zemí na vlastní oči" },
   metaDescription: {
-    uk: "Альона в туризмі з 2011 року, відвідала 22 країни й особисто перевіряє готелі. Тепер — турагенція для українців у Чехії.",
-    cs: "Aljona působí v cestovním ruchu od roku 2011, navštívila 22 zemí a hotely prověřuje osobně. Nyní cestovní agentura v Česku.",
+    uk: "Альона веде Ananas Tour особисто: з 2011 року в туризмі, 22 країни на власні очі, готелі регулярно перевіряє наживо. Напишіть їй у Telegram.",
+    cs: "Ananas Tour vede Aljona osobně: v cestovním ruchu od roku 2011, 22 zemí na vlastní oči a hotely pravidelně kontroluje přímo na místě. Napište jí na Telegram.",
   },
-  eyebrow: { uk: "Про нас", cs: "O nás" },
-  title: { uk: "Привіт! Я — Альона", cs: "Dobrý den, jsem Aljona" },
+  eyebrow: { uk: "Про мене", cs: "O mně" },
+  title: { uk: "Привіт, я Альона", cs: "Těší mě, jsem Aljona" },
   lead: {
-    uk: "Директорка Ananas Tour. Моє життя пов’язане з туризмом з 2011 року — а тепер я допомагаю українцям у Чехії відпочивати так, як вони на це заслуговують.",
-    cs: "Ředitelka Ananas Tour. Cestovnímu ruchu se věnuji od roku 2011 — a teď pomáhám Ukrajincům v Česku vyrazit na dovolenou, jakou si zaslouží.",
+    uk: "Веду Ananas Tour особисто: з 2011 року в туризмі, 22 країни на власні очі. Раніше — Київ, тепер — Чехія. У Telegram відповідаю сама, без кол-\u2060центру.",
+    cs: "V cestovním ruchu pracuju od roku 2011 a 22 zemí jsem viděla na vlastní oči. Dřív Kyjev, teď Česko. Ananas Tour vedu osobně, takže na Telegramu odpovídám já, ne call centrum.",
   },
   cta: { uk: "Написати Альоні", cs: "Napsat Aljoně" },
-  prefill: { uk: "Добрий день, Альоно! Прочитав(-ла) про вас на сайті й хочу підібрати тур.", cs: "Dobrý den, Aljono! Četl(a) jsem o vás na webu a chci vybrat zájezd." },
-  services: { uk: "Наші послуги", cs: "Naše služby" },
-  photoAlt: { uk: "Альона, директорка Ananas Tour", cs: "Aljona, ředitelka Ananas Tour" },
-  eventAlt: { uk: "Альона на заході туроператора Join UP!", cs: "Aljona na akci cestovní kanceláře Join UP!" },
-  statYears: { uk: "років у туризмі", cs: "let v cestovním ruchu" },
-  statCountries: { uk: "країни відвідано особисто", cs: "zemí navštíveno osobně" },
-  statReply: { uk: "хвилин — типова відповідь у Telegram", cs: "minut — obvyklá odpověď na Telegramu" },
-  storyTitle: { uk: "Туризм — це не професія, а стиль життя", cs: "Cestování není jen práce, je to životní styl" },
-  values: { uk: "Наші цінності", cs: "Naše hodnoty" },
-  valuesLead: { uk: "Нагороди — це результат незмінних принципів.", cs: "Ocenění jsou výsledkem neměnných zásad." },
-  awardsTitle: { uk: "Нагороди та визнання", cs: "Ocenění a uznání" },
-  awardsLead: {
-    uk: "Нашу експертність визнають не лише клієнти, а й провідні туроператори.",
-    cs: "Naši odbornost oceňují nejen klienti, ale i přední cestovní kanceláře.",
+  prefill: {
+    uk: "Добрий день, Альоно! Хочу на море.\nКуди: …\nКоли: …\nСкільки нас (вік дітей): …\nБюджет: …",
+    cs: "Dobrý den, Aljono! Chci k moři.\nKam: …\nKdy: …\nKolik nás je (věk dětí): …\nRozpočet: …",
   },
-  whyTitle: { uk: "Чому нас обирають", cs: "Proč si nás vybírají" },
-  finalTitle: { uk: "Ваша ідеальна відпустка — це наша репутація", cs: "Vaše vysněná dovolená je naše vizitka" },
+  services: { uk: "Усі послуги", cs: "Všechny služby" },
+  photoAlt: { uk: "Альона, директорка Ananas Tour", cs: "Aljona, která vede Ananas Tour" },
+  eventAlt: { uk: "Альона на заході туроператора Join UP!", cs: "Aljona na akci cestovní kanceláře Join UP!" },
+  statYears: { uk: "років у туризмі — з 2011-го", cs: "let v oboru – od roku 2011" },
+  statCountries: { uk: "країни на власні очі", cs: "zemí na vlastní oči" },
+  statReply: { uk: "хвилин зазвичай чекаєте на відповідь (9:00–\u206021:00)", cs: "minut obvykle čekáte na odpověď (9–\u206021 h)" },
+  storyTitle: { uk: "Каталог мовчить. Я — ні.", cs: "Katalog mlčí. Já ne." },
+  values: { uk: "Мої правила", cs: "Moje pravidla" },
+  valuesLead: { uk: "Їх лише три, і жодне не написане дрібним шрифтом.", cs: "Jsou jen tři a ani jedno není psané drobným písmem." },
+  awardsTitle: { uk: "Визнання", cs: "Uznání" },
+  awardsLead: {
+    uk: "Мою роботу помітили й туроператори — ще в Україні.",
+    cs: "Mé práce si všimly i cestovní kanceláře – ještě na Ukrajině.",
+  },
+  whyTitle: { uk: "А що на нас?", cs: "A co je na nás?" },
+  finalTitle: { uk: "Ваша відпустка — моя візитівка", cs: "Vaše dovolená, moje vizitka" },
   finalText: {
-    uk: "Напишіть у Telegram, куди й коли хочете полетіти, — і отримаєте 3 найкращі варіанти від перевірених туроператорів.",
-    cs: "Napište na Telegram, kam a kdy chcete letět — a dostanete 3 nejlepší varianty od prověřených cestovních kanceláří.",
+    uk: "Напишіть, куди, коли й скільки вас, — я надішлю 3 готелі, які сама б обрала на вашому місці. З 9:00 до 21:00 зазвичай відповідаю за 15 хвилин.",
+    cs: "Napište mi kam, kdy a kolik vás je – pošlu 3 hotely, které bych na vašem místě vybrala sama. Od 9 do 21 h odpovídám obvykle do 15 minut.",
   },
 } satisfies Record<string, L>;
 
+// Portrait stamp, read top to bottom: "Ananas Tour · Aljona — 22 countries live, not from a catalogue — since 2011, now in Czechia".
+const stamp = {
+  top: { uk: "ANANAS TOUR • АЛЬОНА", cs: "ANANAS TOUR • ALJONA" },
+  above: { uk: ["22 КРАЇНИ"], cs: ["22 ZEMÍ"] },
+  word: { uk: "НАЖИВО", cs: "NAŽIVO" },
+  below: { uk: ["НЕ", "З КАТАЛОГУ"], cs: ["NE", "Z KATALOGU"] },
+  bottom: { uk: "З 2011 • ТЕПЕР У ЧЕХІЇ", cs: "OD 2011 • TEĎ V ČESKU" },
+};
+
+// Order matches the layout: [0] grey tile "01", [1] yellow tile "02", [2] text under storyTitle.
 const story: L[] = [
   {
-    uk: "Для мене туризм — це справжня пристрасть. За ці роки я особисто відвідала 22 країни, але ніколи не зупиняюся на досягнутому. Регулярно їжджу в професійні інформаційні тури, щоб на власні очі перевіряти готелі, вивчати нові курорти й знати ті важливі нюанси, про які ніколи не напишуть у каталогах.",
-    cs: "Cestování je pro mě skutečná vášeň. Za ta léta jsem osobně navštívila 22 zemí a pořád mě to táhne dál. Pravidelně jezdím na odborné inspekční cesty, abych hotely viděla na vlastní oči, poznávala nová letoviska a znala detaily, které v katalogu nikdy nenajdete.",
+    uk: "22 країни навчили мене читати готельні фото: ширококутний об’єктив, вигідний ракурс і «5 хвилин до моря», якщо бігти. А де не була сама — так і скажу.",
+    cs: "22 zemí mě naučilo číst hotelové fotky: širokoúhlý objektiv, lichotivý úhel a „5 minut k moři“ – když poběžíte. A kde jsem sama nebyla, to vám řeknu na rovinu.",
   },
   {
-    uk: "Наша агенція стала знаком якості та надійності на туристичному ринку України. Тепер ми працюємо в Чехії — для українців, які тут живуть: тури з вильотом із Праги, Брна, Острави та Пардубиць, ціни в кронах, спілкування рідною мовою.",
-    cs: "Naše agentura se stala na ukrajinském trhu synonymem kvality a spolehlivosti. Nyní působíme v Česku — pro Ukrajince, kteří zde žijí: zájezdy s odletem z Prahy, Brna, Ostravy a Pardubic, ceny v korunách a komunikace v rodném jazyce.",
+    uk: "Тепер я живу в Чехії, як і ви, — і так само рахую дні до відпустки. Тож знаю, як тут усе влаштовано: ціни в кронах, договір чеською, а пояснення від мене — українською.",
+    cs: "Teď žiju v Česku, stejně jako vy, a taky odpočítávám dny do dovolené. Vím, jak to tu chodí: ceny v korunách, smlouva o zájezdu, stornopodmínky. Všechno vám vysvětlím lidsky – česky i ukrajinsky.",
   },
   {
-    uk: "Довірте свій відпочинок професіоналам — і ми організуємо подорож, яка залишить найтепліший слід у вашому серці.",
-    cs: "Svěřte svou dovolenou profesionálům — a připravíme vám cestu, na kterou budete s úsměvem vzpomínat.",
+    uk: "Я регулярно їжджу перевіряти готелі — не на рендерах, а наживо: де тінь біля басейну, скільки насправді йти до моря й чи заслужені зірки. Як ананас, я колюча до готелів — щоб вам було солодко.",
+    cs: "Pravidelně jezdím na inspekční cesty, protože hotely nesoudím podle vizualizací. Na místě zjišťuju, kde je u bazénu stín, kolik je to doopravdy k moři a jestli si hotel ty hvězdy zaslouží. Jako ananas: na hotely jsem pichlavá – abyste to vy měli sladké.",
   },
 ];
 
 const values: Array<{ title: L; text: L }> = [
   {
-    title: { uk: "Чесний підбір турів", cs: "Poctivý výběr" },
+    title: { uk: "Чесно", cs: "Poctivě" },
     text: {
-      uk: "Рекомендуємо лише ті готелі, у яких впевнені на 100 %.",
-      cs: "Doporučujeme jen hotely, za kterými si stoprocentně stojíme.",
+      uk: "Якщо готель не вартий своїх грошей, так і скажу, — навіть якщо його легше продати.",
+      cs: "Když hotel za ty peníze nestojí, řeknu vám to na rovinu. I kdyby se prodával sám.",
     },
   },
   {
-    title: { uk: "Глибока експертність", cs: "Hluboká odbornost" },
+    title: { uk: "Особисто", cs: "Osobně" },
     text: {
-      uk: "Наші знання базуються на реальних подорожах і постійному навчанні.",
-      cs: "Naše znalosti stojí na skutečných cestách a neustálém vzdělávání.",
+      uk: "Ви пишете мені, а не в кол-\u2060центр. Ваш тур веду сама — від першого повідомлення.",
+      cs: "Píšete mně, ne call centru. O váš zájezd se starám sama, od první zprávy.",
     },
   },
   {
-    title: { uk: "Тотальна турбота", cs: "Péče od A do Z" },
+    title: { uk: "До повернення", cs: "Až do návratu" },
     text: {
-      uk: "Супроводжуємо вас від першого повідомлення до щасливого повернення додому.",
-      cs: "Provázíme vás od první zprávy až po šťastný návrat domů.",
+      uk: "Щось пішло не так на відпочинку? Пишіть у той самий чат — розберемося разом із туроператором.",
+      cs: "Něco se na dovolené pokazilo? Napište do stejného chatu, s CK to spolu vyřešíme.",
     },
   },
 ];
 
 // TODO(client): confirm award years and add logos/certificate photos.
+// Worded exactly: participant (not winner), repeatedly in the TOP — both still in Ukraine.
 const awards: Array<{ title: L; text: L }> = [
   {
     title: { uk: "Starway від Coral Travel", cs: "Starway od Coral Travel" },
     text: {
-      uk: "Почесні учасники престижної щорічної премії туроператора Coral Travel.",
-      cs: "Čestní účastníci prestižního každoročního ocenění cestovní kanceláře Coral Travel.",
+      uk: "Учасниця премії Starway туроператора Coral Travel.",
+      cs: "Účastnice ocenění Starway, které uděluje cestovní kancelář Coral Travel.",
     },
   },
   {
-    title: { uk: "ТОП-агенція Join UP!", cs: "TOP agentura Join UP!" },
+    title: { uk: "ТОП Join UP!", cs: "TOP Join UP!" },
     text: {
-      uk: "Стабільно входимо до числа агентств-лідерів із продажів туроператора Join UP!.",
-      cs: "Dlouhodobě patříme mezi nejprodávanější agentury cestovní kanceláře Join UP!.",
+      uk: "Неодноразово серед ТОП-\u2060агенцій за продажами в туроператора Join\u00A0UP!",
+      cs: "Opakovaně mezi TOP prodejními agenturami cestovní kanceláře Join\u00A0UP!",
     },
   },
 ];
 
+// "A·NA·NÁS": what exactly is on me — money, price, documents.
 const why: Array<{ title: L; text: L }> = [
   {
-    title: { uk: "Надійність", cs: "Spolehlivost" },
+    title: { uk: "Гроші під захистом", cs: "Peníze v suchu" },
     text: {
-      uk: "Працюємо лише з ліцензованими чеськими туроператорами, застрахованими від банкрутства. Ваші кошти та відпочинок у безпеці.",
-      cs: "Spolupracujeme jen s licencovanými českými cestovními kancelářemi pojištěnými proti úpadku. Vaše peníze i dovolená jsou v bezpečí.",
+      uk: "Продаю тури лише чеських туроператорів, а кожен із них обов’язково застрахований від банкрутства. Це закон, а не моя обіцянка.",
+      cs: "Prodávám jen zájezdy českých CK – a každá musí být ze zákona pojištěná proti úpadku. To není můj slib, to je zákon.",
     },
   },
   {
-    title: { uk: "Підтримка 24/7", cs: "Podpora 24/7" },
+    title: { uk: "Спершу перевірка", cs: "Nejdřív ověření" },
     text: {
-      uk: "Ми завжди на зв’язку в Telegram — від вильоту з аеропорту до повернення додому.",
-      cs: "Jsme stále k zastižení na Telegramu — od odletu až po návrat domů.",
+      uk: "На сайті ви нічого не платите. Ціну й вільні місця я перевіряю в туроператора — і лише тоді ми переходимо до договору й оплати.",
+      cs: "Na webu nic neplatíte. Cenu a volná místa si nejdřív ověřím u CK a teprve pak přijde na řadu smlouva a platba.",
     },
   },
   {
-    title: { uk: "Експертність", cs: "Odbornost" },
+    title: { uk: "Документи наперед", cs: "Doklady předem" },
     text: {
-      uk: "Особисто інспектуємо курорти й жили в більшості готелів, які пропонуємо.",
-      cs: "Letoviska osobně prověřujeme a ve většině nabízených hotelů jsme sami bydleli.",
+      uk: "Документи й умови в’їзду перевірю ще до бронювання — щоб ви спокійно полетіли й так само спокійно повернулися.",
+      cs: "Doklady a podmínky vstupu ověřím ještě před rezervací – abyste v klidu odletěli a v klidu se i vrátili.",
     },
   },
 ];
@@ -160,7 +175,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <Container className="relative grid items-center gap-12 lg:grid-cols-2">
           <div>
             <p className="eyebrow mb-4 inline-flex items-center gap-2 text-ink/75"><span aria-hidden className="h-2 w-2 rounded-full bg-yellow" />{t(copy.eyebrow, locale)}</p>
-            <h1 className="font-display text-[clamp(2.3rem,5.6vw,4.6rem)] font-black uppercase leading-[0.95] tracking-[-0.035em]">{t(copy.title, locale)}</h1>
+            {/* Sized so "JSEM ALJONA" / "Я АЛЬОНА" stays on one line: full width below lg, half column from lg. */}
+            <h1 className="text-balance font-display text-[clamp(2.1rem,9.2vw,4.6rem)] font-black uppercase leading-[1.08] tracking-[-0.035em] lg:text-[clamp(2.6rem,4.4vw,4rem)]">{t(copy.title, locale)}</h1>
             <p className="mt-5 max-w-xl text-lg text-ink/80">{t(copy.lead, locale)}</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <TelegramButton locale={locale} source="about-hero" message={prefill} label={t(copy.cta, locale)} size="lg" />
@@ -189,7 +205,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               ))}
             </div>
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2">
-              <Stamp size={140} top="ANANAS TOUR • ALJONA" bottom={`SINCE ${site.owner.since} • ${site.owner.countriesVisited} COUNTRIES`} above={["FINEST", "HOLIDAYS"]} word="ANANAS" below={["FROM", "CZECHIA"]} className="drop-shadow-xl" />
+              <Stamp size={140} top={t(stamp.top, locale)} bottom={t(stamp.bottom, locale)} above={t(stamp.above, locale)} word={t(stamp.word, locale)} below={t(stamp.below, locale)} className="drop-shadow-xl" />
             </div>
           </div>
         </Container>
@@ -232,11 +248,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               <Image src={PHOTOS.travelMap} alt="" fill sizes="33vw" className="object-cover" />
             </div>
             <div className="relative overflow-hidden rounded-[2rem] bg-charcoal p-7 text-white sm:rounded-[2.5rem] sm:p-10 md:col-span-2">
-              <PineappleSlice kind="quarter" size={180} rotate={160} seed={17} className="absolute -right-10 -top-10" />
-              <h2 className="relative max-w-2xl font-display text-[clamp(1.8rem,3.6vw,3rem)] font-black uppercase leading-[1] tracking-[-0.03em]">
+              {/* The slice keeps to the top-right corner; h2 and text reserve that corner (pr-*) so white type never sits on yellow. */}
+              <PineappleSlice kind="quarter" size={180} rotate={160} seed={17} className="absolute -right-10 -top-10 h-28 w-28 sm:h-[180px] sm:w-[180px]" />
+              <h2 className="relative max-w-2xl text-balance pr-12 font-display text-[clamp(1.5rem,13.9vw_-_1.3rem,2.25rem)] font-black uppercase leading-[1.08] tracking-[-0.03em] sm:pr-28 sm:text-[clamp(1.8rem,3.6vw,3rem)]">
                 {t(copy.storyTitle, locale)}
               </h2>
-              <p className="relative mt-5 max-w-2xl text-white/85">{t(story[2], locale)}</p>
+              <p className="relative mt-5 max-w-2xl text-white/85 sm:pr-28">{t(story[2], locale)}</p>
             </div>
             <div className="rounded-[2rem] bg-yellow p-6 sm:rounded-[2.5rem] sm:p-8">
               <span className="font-display text-sm font-extrabold">02</span>
@@ -248,12 +265,13 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       {/* Values */}
       <Section title={t(copy.values, locale)} lead={t(copy.valuesLead, locale)} className="pt-0">
-        <div className="grid gap-6 md:grid-cols-3">
+        {/* 3 columns only from lg: at md a third of the width is too narrow for "До повернення". */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {values.map((v, i) => (
-            <div key={v.title.uk} className={`relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] bg-white p-8 ring-1 ring-ink/5`}>
-              <PineappleSlice kind={(["wedge", "quarter", "half"] as const)[i]} size={90} seed={i + 4} rotate={i * 60} className="absolute -right-4 -top-4 opacity-70" />
+            <div key={v.title.uk} className={`relative min-w-0 overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] bg-white p-8 ring-1 ring-ink/5 sm:last:col-span-2 lg:last:col-span-1`}>
+              <PineappleSlice kind={(["wedge", "quarter", "half"] as const)[i]} size={90} seed={i + 4} rotate={i * 60} className="absolute -right-6 -top-6 opacity-70" />
               <span className="font-display text-sm font-bold text-red">0{i + 1}</span>
-              <h3 className="mt-2 font-display text-2xl font-extrabold">{t(v.title, locale)}</h3>
+              <h3 className="mt-2 text-balance font-display text-2xl font-extrabold lg:text-[clamp(1.3rem,2.1vw,1.5rem)]">{t(v.title, locale)}</h3>
               <p className="mt-3 text-ink/70">{t(v.text, locale)}</p>
             </div>
           ))}
@@ -274,13 +292,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
               </div>
             </div>
             <div>
-              <h2 className="font-display text-3xl font-black uppercase leading-[1] sm:text-4xl">{t(copy.awardsTitle, locale)}</h2>
+              <h2 className="font-display text-3xl font-black uppercase leading-[1.08] sm:text-4xl">{t(copy.awardsTitle, locale)}</h2>
               <p className="mt-3 text-paper/70">{t(copy.awardsLead, locale)}</p>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {/* Stacked at md, where the photo column leaves ~260px for both cards. */}
+              <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
                 {awards.map((a) => (
-                  <div key={a.title.uk} className="rounded-[2rem] sm:rounded-[2.5rem] bg-paper/10 p-6">
-                    <h3 className="font-display text-xl font-bold text-yellow">{t(a.title, locale)}</h3>
-                    <p className="mt-2 text-sm text-paper/80">{t(a.text, locale)}</p>
+                  <div key={a.title.uk} className="min-w-0 rounded-[2rem] sm:rounded-[2.5rem] bg-paper/10 p-6">
+                    <h3 className="text-balance font-display text-xl font-bold text-yellow">{t(a.title, locale)}</h3>
+                    <p className="mt-2 hyphens-auto text-sm text-paper/80">{t(a.text, locale)}</p>
                   </div>
                 ))}
               </div>
@@ -306,7 +325,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <div className="relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] bg-yellow p-8 sm:p-14">
           <PineappleSlice kind="ring" size={260} color="var(--c-yellow-light)" seed={21} className="absolute -bottom-20 -right-16" />
           <div className="relative max-w-2xl">
-            <h2 className="font-display text-3xl font-black uppercase leading-[1] sm:text-4xl">{t(copy.finalTitle, locale)}</h2>
+            {/* Phone size keeps "МОЯ ВІЗИТІВКА" / "MOJE VIZITKA" together on the last line. */}
+            <h2 className="text-balance font-display text-[clamp(1.2rem,9.2vw_-_0.7rem,2.25rem)] font-black uppercase leading-[1.08] sm:text-4xl">{t(copy.finalTitle, locale)}</h2>
             <p className="mt-3 text-ink/80">{t(copy.finalText, locale)}</p>
             <TelegramButton locale={locale} source="about-final" message={prefill} size="lg" className="mt-7" />
           </div>

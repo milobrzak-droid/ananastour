@@ -45,23 +45,36 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
             );
           }
           case "table":
+            // Phones: every row becomes a small card and each cell carries its column name (data-label),
+            // so the last column is never cut at the card edge. From sm up it is a regular table that fits
+            // the article column (no min-width, no hidden scroll). Explicit roles keep the table semantics
+            // that some browsers drop once table parts are display:block.
             return (
-              <div key={i} className="overflow-x-auto rounded-[2rem] bg-white p-2">
-                <table className="w-full min-w-[480px] text-left text-sm">
-                  <thead className="text-xs uppercase tracking-wider text-ink/75">
-                    <tr>
+              <div key={i} className="rounded-[2rem] bg-white p-2 sm:overflow-x-auto">
+                <table role="table" className="w-full text-left text-sm max-sm:block">
+                  <thead role="rowgroup" className="text-xs uppercase tracking-wider text-ink/75 max-sm:sr-only">
+                    <tr role="row">
                       {b.head.map((h, j) => (
-                        <th key={j} className="px-5 py-3 font-semibold">
+                        <th key={j} role="columnheader" scope="col" className="px-5 py-3 align-bottom font-semibold">
                           {h}
                         </th>
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-ink/5">
+                  <tbody role="rowgroup" className="divide-y divide-ink/5 max-sm:block">
                     {b.rows.map((row, j) => (
-                      <tr key={j}>
+                      <tr key={j} role="row" className="max-sm:block max-sm:px-4 max-sm:py-3.5">
                         {row.map((cell, k) => (
-                          <td key={k} className={`px-5 py-3 ${k === 0 ? "font-semibold text-ink" : ""}`}>
+                          <td
+                            key={k}
+                            role="cell"
+                            data-label={b.head[k]}
+                            className={`px-5 py-3 align-top max-sm:block max-sm:px-0 ${
+                              k === 0
+                                ? "font-semibold text-ink max-sm:pb-1.5 max-sm:pt-0 max-sm:font-display max-sm:text-base max-sm:font-bold"
+                                : "max-sm:py-1 max-sm:before:block max-sm:before:text-[0.7rem] max-sm:before:font-semibold max-sm:before:uppercase max-sm:before:tracking-wider max-sm:before:text-ink/70 max-sm:before:content-[attr(data-label)]"
+                            }`}
+                          >
                             {cell}
                           </td>
                         ))}
@@ -74,7 +87,9 @@ export function Blocks({ blocks }: { blocks: Block[] }) {
           case "note":
             return (
               <div key={i} role="note" className="relative overflow-hidden rounded-[2rem] bg-yellow p-6 sm:p-8">
-                <PineappleSlice kind="half" size={120} rotate={160} className="absolute -right-6 -top-8" color="var(--c-yellow-light)" />
+                <PineappleSlice kind="half" size={96} rotate={160} className="absolute -right-8 -top-10" color="var(--c-yellow-light)" />
+                {/* Float keeps the first line(s) clear of the light slice in the corner; lines below run full width. */}
+                <span aria-hidden className="float-right h-8 w-10 sm:h-6 sm:w-8" />
                 {b.title && <p className="relative font-display text-lg font-bold text-ink">{b.title}</p>}
                 <p className="relative mt-1 text-ink/85">{b.text}</p>
               </div>

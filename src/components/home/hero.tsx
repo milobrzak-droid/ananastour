@@ -5,19 +5,29 @@ import { TelegramButton } from "@/components/contact/telegram";
 import { SearchBox } from "@/components/tours/search-box";
 import { ArrowIcon, Container, Notch } from "@/components/ui";
 import { t, type Locale } from "@/i18n/config";
+import { glue } from "./typo";
 
 const C = {
-  kicker: { uk: "Турагенція для українців у Чехії", cs: "Cestovní agentura pro Ukrajince v Česku" },
+  kicker: { uk: "Альона · тури українською", cs: "Aljona · česky i ukrajinsky" },
   line1: { uk: "Ваше море", cs: "Vaše moře" },
-  line2: { uk: "з Праги", cs: "z Prahy" },
+  line2: { uk: "з Чехії", cs: "z Česka" },
   lead: {
-    uk: "Тури від перевірених чеських туроператорів з вильотом із Праги, Брна, Острави та Пардубиць. Напишіть Альоні — 3 найкращі варіанти за 15 хвилин.",
-    cs: "Zájezdy od ověřených českých cestovních kanceláří s odletem z Prahy, Brna, Ostravy a Pardubic. Napište Aljoně — 3 nejlepší varianty do 15 minut.",
+    uk: "Вам — море, а на нас — решта. Тури застрахованих чеських туроператорів, 3 готелі під ваші побажання й відповідь у Telegram зазвичай за 15 хвилин.",
+    cs: "Vám moře – a na nás zbytek. Porovnám nabídky pojištěných českých CK, vyberu 3 hotely, které vám sednou, a na Telegramu odpovídám obvykle do 15 minut.",
   },
-  cta: { uk: "Підберіть мені тур", cs: "Vyberte mi zájezd" },
+  cta: { uk: "Хочу на море", cs: "Chci k moři" },
   search: { uk: "Знайти тур", cs: "Najít zájezd" },
-  replies: { uk: "Відповідаю українською та чеською", cs: "Odpovídám ukrajinsky i česky" },
-  photoAlt: { uk: "Пляж і море", cs: "Pláž a moře" },
+  replies: {
+    uk: "На сайті нічого не платите · чеські CK застраховані від банкрутства",
+    cs: "Na webu nic neplatíte · české CK jsou pojištěné proti úpadku",
+  },
+  photoAlt: { uk: "Море на заході сонця", cs: "Moře při západu slunce" },
+  // Stamp: one sentence read top to bottom — "Ananas Tour from Czechia · checked by the pineapple · since 2011 · 22 countries in person".
+  stampTop: { uk: "ANANAS TOUR • З ЧЕХІЇ", cs: "ANANAS TOUR • Z ČESKA" },
+  stampAbove: { uk: ["ПЕРЕВІРЕНО"], cs: ["PROVĚŘENO"] },
+  stampWord: { uk: "АНАНАСОМ", cs: "ANANASEM" },
+  stampBelow: { uk: ["З 2011"], cs: ["OD 2011"] },
+  stampBottom: { uk: "22 КРАЇНИ ОСОБИСТО", cs: "22 ZEMÍ OSOBNĚ" },
 };
 
 export function Hero({ locale }: { locale: Locale }) {
@@ -38,17 +48,20 @@ export function Hero({ locale }: { locale: Locale }) {
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/60 via-ink/15 to-ink/60" />
 
           <div className="flex min-h-[38rem] flex-col p-5 pb-24 sm:min-h-[40rem] sm:p-8 sm:pb-32 lg:min-h-[44rem] lg:p-10">
-            <p className="inline-flex w-fit items-center gap-2 shape-pill bg-white/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em] backdrop-blur-md sm:text-sm sm:normal-case sm:tracking-normal">
+            <p className="inline-flex w-fit max-w-full items-center gap-2 whitespace-nowrap shape-pill bg-white/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em] backdrop-blur-md max-[380px]:px-3 max-[380px]:text-[0.68rem] max-[380px]:tracking-[0.06em] sm:text-sm sm:normal-case sm:tracking-normal">
               <PineappleSlice kind="ring" size={18} texture={false} seed={2} />
-              {t(C.kicker, locale)}
+              {glue(t(C.kicker, locale))}
             </p>
 
             {/* Giant headline, Reference 1: tight, uppercase, second line bleeding to the edges.
-                Czech "Z PRAHY" sets wider than "З ПРАГИ", so it gets a smaller clamp. */}
-            <h1 className="mt-6 font-display font-black uppercase leading-[0.86] tracking-[-0.045em] drop-shadow-[0_4px_30px_rgba(30,34,53,0.35)]">
-              <span className="block text-[clamp(2.6rem,8.2vw,7.6rem)]">{t(C.line1, locale)}</span>
+                Czech "Z ČESKA" (háčky) sets wider than "З ЧЕХІЇ", so it gets a smaller clamp.
+                Accented caps (Č Ř Š, Ї) rise ~1em above the baseline in Unbounded: the second, bigger line
+                keeps a tight leading but gets its own top padding so the accents clear the line above.
+                On small phones line 1 wraps ("VAŠE / MOŘE"), so it needs a full 1.06 leading there. */}
+            <h1 className="mt-6 font-display font-black uppercase leading-[0.96] tracking-[-0.035em] drop-shadow-[0_4px_30px_rgba(30,34,53,0.35)]">
+              <span className="block text-[clamp(2.6rem,8.2vw,7.6rem)] max-sm:leading-[1.06]">{t(C.line1, locale)}</span>
               <span
-                className={`-ml-[0.04em] block whitespace-nowrap ${
+                className={`-ml-[0.04em] block whitespace-nowrap pt-[0.2em] leading-[0.84] ${
                   locale === "cs"
                     ? "text-[clamp(2.4rem,13.2vw,12rem)] max-sm:text-[11.8vw]"
                     : "text-[clamp(2.6rem,15.4vw,14.6rem)] max-sm:text-[13.4vw]"
@@ -61,7 +74,7 @@ export function Hero({ locale }: { locale: Locale }) {
             <div className="mt-auto flex flex-col items-start gap-4 pt-8 lg:ml-auto lg:max-w-md">
               <TelegramButton locale={locale} source="home-hero" size="md" label={t(C.cta, locale)} tone="white" className="sm:hidden" />
               <p className="rounded-3xl bg-ink/45 p-4 text-[0.95rem] leading-relaxed text-white backdrop-blur-md sm:text-base lg:p-5">
-                {t(C.lead, locale)}
+                {glue(t(C.lead, locale))}
               </p>
             </div>
           </div>
@@ -87,11 +100,11 @@ export function Hero({ locale }: { locale: Locale }) {
           <div className="absolute right-10 top-10 hidden xl:block">
             <Stamp
               size={150}
-              top="ANANAS TOUR • TRAVEL"
-              bottom="SINCE 2011 • 22 COUNTRIES"
-              above={["FINEST", "HOLIDAYS"]}
-              word="ANANAS"
-              below={["FROM", "PRAGUE"]}
+              top={t(C.stampTop, locale)}
+              bottom={t(C.stampBottom, locale)}
+              above={t(C.stampAbove, locale)}
+              word={t(C.stampWord, locale)}
+              below={t(C.stampBelow, locale)}
               className="drop-shadow-xl"
             />
           </div>

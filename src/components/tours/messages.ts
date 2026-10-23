@@ -7,7 +7,7 @@ import { toQueryString } from "@/lib/tours/query";
 import type { Hotel, SearchParams } from "@/lib/tours/types";
 import { countryName, travellersLabel } from "./labels";
 
-/** One-line human summary of a search: "Єгипет · 1 лист. – 30 лист. · 7–10 ночей · 2 дорос." */
+/** One-line human summary of a search: "Єгипет · 1 лист. – 30 лист. · 7–10 ночей · 2 дорослих" */
 export function searchSummary(p: SearchParams, locale: Locale): string {
   const dict = getDictionary(locale);
   const parts: string[] = [];
@@ -28,7 +28,7 @@ export function searchSummary(p: SearchParams, locale: Locale): string {
 /** Pre-filled Telegram message for a search (results page, empty state). */
 export function searchTelegramMessage(p: SearchParams, locale: Locale): string {
   return [
-    t({ uk: "Добрий день, Альоно! Шукаю тур:", cs: "Dobrý den, Aljono! Hledám zájezd:" }, locale),
+    t({ uk: "Добрий день, Альоно! Шукаю тур, ось параметри:", cs: "Dobrý den, Aljono! Hledám zájezd s těmito parametry:" }, locale),
     searchSummary(p, locale),
     `${site.url}${routes.tours(locale, toQueryString({ ...p, page: undefined }))}`,
   ].join("\n");
@@ -37,7 +37,7 @@ export function searchTelegramMessage(p: SearchParams, locale: Locale): string {
 /** Pre-filled Telegram message for a hotel detail. */
 export function hotelTelegramMessage(hotel: Hotel, locale: Locale): string {
   return [
-    t({ uk: "Добрий день, Альоно! Цікавить готель:", cs: "Dobrý den, Aljono! Mám zájem o hotel:" }, locale),
+    t({ uk: "Добрий день, Альоно! Цікавить готель:", cs: "Dobrý den, Aljono! Zajímá mě hotel:" }, locale),
     `${hotel.name} ${"★".repeat(hotel.stars)}, ${hotel.region}, ${countryName(hotel.countrySlug, locale, hotel.country)}`,
     `${site.url}${routes.hotel(locale, hotel.id)}`,
   ].join("\n");

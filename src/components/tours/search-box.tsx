@@ -10,22 +10,22 @@ import type { SearchParams } from "@/lib/tours/types";
 
 const L = {
   destination: { uk: "Куди", cs: "Kam" },
-  anyDestination: { uk: "Будь-яка країна", cs: "Kamkoli" },
+  anyDestination: { uk: "Куди завгодно", cs: "Kamkoli" },
   dateFrom: { uk: "Виліт від", cs: "Odlet od" },
   dateTo: { uk: "Виліт до", cs: "Odlet do" },
   nights: { uk: "Ночей", cs: "Nocí" },
-  anyNights: { uk: "Будь-скільки", cs: "Libovolně" },
+  anyNights: { uk: "Не важливо", cs: "Nezáleží" },
   travellers: { uk: "Хто їде", cs: "Kdo jede" },
   adults: { uk: "Дорослі", cs: "Dospělí" },
   adultsHint: { uk: "від 18 років", cs: "od 18 let" },
   children: { uk: "Діти", cs: "Děti" },
-  childrenHint: { uk: "до 17 років", cs: "do 17 let" },
+  childrenHint: { uk: "0–17 років", cs: "0–17 let" },
   childAge: { uk: "Вік дитини", cs: "Věk dítěte" },
   years: { uk: "р.", cs: "let" },
   done: { uk: "Готово", cs: "Hotovo" },
   submit: { uk: "Знайти тур", cs: "Najít zájezd" },
-  less: { uk: "Менше", cs: "Méně" },
-  more: { uk: "Більше", cs: "Více" },
+  less: { uk: "Прибрати", cs: "Ubrat" },
+  more: { uk: "Додати", cs: "Přidat" },
 };
 
 const NIGHT_RANGES: Array<[number, number]> = [

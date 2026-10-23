@@ -10,15 +10,19 @@ import { trackContact } from "@/lib/analytics";
 import { site } from "@/config/site";
 
 const tx = {
-  newTab: { uk: "(відкриється в новому вікні)", cs: "(otevře se v novém okně)" },
+  newTab: { uk: "(відкриється в новій вкладці)", cs: "(otevře se v nové záložce)" },
   offHoursLead: {
-    uk: "Напишіть зараз — Альона відповість зранку з 9:00",
-    cs: "Napište hned — Aljona odpoví ráno od 9:00",
+    uk: "Напишіть зараз — Альона відповість зранку, з 9:00",
+    cs: "Napište klidně teď – Aljona se ozve ráno od 9:00",
   },
-  offHoursTitle: { uk: "Залиште повідомлення — відповім зранку", cs: "Nechte mi zprávu — odpovím ráno" },
+  // Top strip below lg: the same promise in a few words, so phones never get half a sentence.
+  stripShort: { uk: "Альона зазвичай відповідає за 15 хв", cs: "Aljona obvykle odpoví do 15 min" },
+  stripShortOff: { uk: "Альона відповість зранку, з 9:00", cs: "Aljona se ozve ráno od 9:00" },
+  // Off-hours bubble title; the shared bubble text (dict.contact.floatingText) explains the hours.
+  offHoursTitle: { uk: "Пізно? Морю байдуже.", cs: "Pozdě? Moři je to jedno." },
   close: { uk: "Закрити", cs: "Zavřít" },
-  region: { uk: "Контакт", cs: "Kontakt" },
-  stripRegion: { uk: "Швидкий контакт", cs: "Rychlý kontakt" },
+  region: { uk: "Написати Альоні", cs: "Napsat Aljoně" },
+  stripRegion: { uk: "Швидкий зв’язок з Альоною", cs: "Rychlý kontakt na Aljonu" },
 };
 
 /** Aljona's working hours (site.contact.hours): 9:00–21:00 Europe/Prague, every day. */
@@ -172,7 +176,10 @@ export function ContactStrip({ locale }: { locale: Locale }) {
       <div className="mx-auto flex max-w-[1680px] items-center justify-between gap-3 px-4 py-2 text-sm sm:px-6 lg:px-8">
         <p className="flex min-w-0 items-center gap-2.5 font-medium">
           <StatusDot on={inHours} />
-          <span className="truncate">{inHours ? dict.contact.telegramLead : t(tx.offHoursLead, locale)}</span>
+          <span className="min-w-0 text-pretty max-sm:text-xs max-sm:leading-tight lg:hidden">
+            {t(inHours ? tx.stripShort : tx.stripShortOff, locale)}
+          </span>
+          <span className="hidden min-w-0 text-pretty lg:inline">{inHours ? dict.contact.telegramLead : t(tx.offHoursLead, locale)}</span>
         </p>
         <div className="flex shrink-0 items-center gap-1 sm:gap-3">
           <a

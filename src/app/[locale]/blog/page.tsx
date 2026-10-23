@@ -11,20 +11,24 @@ import { languageAlternates, routes } from "@/i18n/routes";
 import { formatDate } from "@/lib/format";
 
 const copy = {
-  title: { uk: "Блог", cs: "Blog" },
-  metaTitle: { uk: "Блог — корисне перед поїздкою", cs: "Blog — užitečné rady před cestou" },
+  // H1 is fluid (≈12.5vw, max 6rem). NBSP keeps «до моря» / „z cest“ together, so no short word hangs alone on a line.
+  title: { uk: "Знати до моря", cs: "Tipy z cest" },
+  metaTitle: { uk: "Знати до моря: візи, страховка, Tax Free", cs: "Tipy z cest: víza, pojištění, tax free" },
   lead: {
-    uk: "Візи, страховка, Tax Free та позначки готелів — коротко й по суті, з урахуванням того, що ви живете в Чехії.",
-    cs: "Víza, pojištění, tax free a značky hotelů — stručně a k věci, pro ty, kdo žijí v Česku.",
+    uk: "Що я знаю з поїздок і про що питають мої туристи: документи, страховка, готелі, гроші. Без води — і з поправкою на те, що ви живете в Чехії.",
+    cs: "Co vím z cest a na co se ptají moji klienti: doklady, pojištění, hotely, peníze. Bez vaty – a s ohledem na to, že žijete v Česku.",
   },
   minutes: { uk: "хв читання", cs: "min čtení" },
-  read: { uk: "Читати", cs: "Číst" },
-  ctaTitle: { uk: "Не знайшли відповідь?", cs: "Nenašli jste odpověď?" },
+  read: { uk: "Читати далі", cs: "Číst dál" },
+  ctaTitle: { uk: "Куди? Коли? Скільки вас?", cs: "Kam? Kdy? Kolik vás?" },
   ctaText: {
-    uk: "Запитайте Альону в Telegram — вона відповість особисто, зазвичай протягом 15 хвилин.",
-    cs: "Zeptejte se Aljony na Telegramu — odpoví osobně, obvykle do 15 minut.",
+    uk: "Три відповіді в Telegram — і я почну шукати. З 9:00 до 21:00 зазвичай відповідаю за 15 хвилин.",
+    cs: "Tři odpovědi na Telegram a začnu hledat. Od 9 do 21 h odpovídám obvykle do 15 minut.",
   },
-  ctaMessage: { uk: "Добрий день, Альоно! У мене питання щодо поїздки: ", cs: "Dobrý den, Aljono! Mám dotaz k cestě: " },
+  ctaMessage: {
+    uk: "Добрий день, Альоно! Хочу на море.\nКуди: …\nКоли: …\nСкільки нас (вік дітей): …",
+    cs: "Dobrý den, Aljono! Chci k moři.\nKam: …\nKdy: …\nKolik nás je (věk dětí): …",
+  },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -49,7 +53,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       <section className="relative overflow-hidden py-14 sm:py-20">
         <PineapplePattern preset="sparse" opacity={0.7} />
         <Container className="relative">
-          <h1 className="font-display text-6xl font-extrabold uppercase leading-none sm:text-8xl">{t(copy.title, locale)}</h1>
+          <h1 className="text-balance font-display text-[clamp(2.4rem,12.5vw,6rem)] font-extrabold uppercase leading-none">{t(copy.title, locale)}</h1>
           <p className="mt-5 max-w-2xl text-lg text-ink/75">{t(copy.lead, locale)}</p>
         </Container>
       </section>
@@ -73,7 +77,13 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
               <p className="text-paper/80">{t(first.excerpt, locale)}</p>
               <div className="flex items-center gap-3 pt-2 font-semibold">
                 <ArrowButton label={t(copy.read, locale)} />
-                {t(copy.read, locale)} · {first.readingMinutes} {t(copy.minutes, locale)}
+                {/* Reading time wraps as one unit under the CTA instead of splitting "4 хв / читання". */}
+                <span className="flex min-w-0 flex-wrap items-baseline gap-x-2.5">
+                  <span>{t(copy.read, locale)}</span>
+                  <span className="whitespace-nowrap font-medium text-paper/70">
+                    {first.readingMinutes} {t(copy.minutes, locale)}
+                  </span>
+                </span>
               </div>
             </div>
           </Link>

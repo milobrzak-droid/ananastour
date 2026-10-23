@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ananasPhotos } from "@/content/ananas-photos";
 import { Stamp } from "@/components/brand/pineapple";
+import { glue } from "@/components/home/typo";
+import { displayLeading } from "@/components/tours/display";
 import { TelegramButton } from "@/components/contact/telegram";
 import { Container, Section } from "@/components/ui";
 import { NoResults, PickForMeCard } from "@/components/tours/help-cards";
@@ -20,41 +22,43 @@ type Props = {
 
 // Source copy: content-source/main_hot_tours.txt (adapted: Czech operators, CZK, departures from CZ).
 const tx = {
-  metaTitle: { uk: "Гарячі тури з Чехії — last minute", cs: "Last minute zájezdy z Česka" },
+  metaTitle: { uk: "Гарячі тури з Чехії", cs: "Last minute zájezdy z Česka" },
   metaDescription: {
-    uk: "Гарячі тури з Праги, Брна, Острави та Пардубиць зі знижкою до 40 %. Єгипет, Туреччина, Греція та екзотика. Бронюйте в Telegram.",
-    cs: "Last minute zájezdy z Prahy, Brna, Ostravy a Pardubic se slevou až 40 %. Egypt, Turecko, Řecko i exotika. Rezervace přes Telegram.",
+    uk: "Гарячі тури з Чехії: вильоти найближчими днями, ціни в кронах, чеські туроператори. Напишіть Альоні — вона перевірить ціну ще до бронювання.",
+    cs: "Last minute zájezdy z Česka: odlety v nejbližších dnech, ceny v korunách a české CK. Napište Aljoně – každou cenu ověří ještě před rezervací.",
   },
-  h1: { uk: "Гарячі тури — відпочивайте за найкращими цінами!", cs: "Last minute — dovolená za nejlepší ceny!" },
+  kicker: { uk: "Вильоти найближчими днями", cs: "Odlety v nejbližších dnech" },
+  h1: { uk: "Гарячі тури з Чехії", cs: "Last minute z Česka" },
   lead: {
-    uk: "Гарячі тури — ваш шанс заощадити до 40 % від початкової вартості туру без жодних компромісів щодо якості відпочинку. Ми щодня моніторимо пропозиції провідних чеських туроператорів, щоб першими перехоплювати для вас найсмачніші варіанти.",
-    cs: "Last minute je vaše šance ušetřit až 40 % z původní ceny zájezdu bez kompromisů v kvalitě dovolené. Každý den sledujeme nabídky předních českých cestovních kanceláří, abychom pro vás jako první ulovili ty nejchutnější varianty.",
+    uk: "Коли туроператору треба заповнити літак, ціна падає. Я стежу за такими моментами й перевіряю кожну ціну до бронювання — щоб «гаряче» не охололо.",
+    cs: "Když cestovka potřebuje zaplnit letadlo, cena jde dolů. Hlídám tyhle chvíle a každou cenu před rezervací ověřím, aby žhavá nabídka nevychladla.",
   },
   lead2: {
-    uk: "Єгипет, Туреччина, Європа та екзотика — преміальний сервіс і чудовий готель за мінімальну ціну. Але пам’ятайте: справді вигідні тури розбирають за лічені години, тож не зволікайте!",
-    cs: "Egypt, Turecko, Evropa i exotika — prvotřídní servis a skvělý hotel za minimální cenu. Ale pozor: opravdu výhodné zájezdy mizí během pár hodin, tak neváhejte!",
+    uk: "Аеропорти — у Чехії, ціни — в кронах, туроператори — чеські й застраховані від банкрутства. Вам залишається тільки обрати море.",
+    cs: "Letiště v Česku, ceny v korunách a české CK pojištěné proti úpadku. Vám zbývá jen vybrat moře.",
   },
   cta: { uk: "Хочу гарячий тур", cs: "Chci last minute" },
+  // Sent as "{prefill} ({country})." — the country lands on the last line, so it ends without punctuation.
   prefill: {
-    uk: "Добрий день, Альоно! Цікавлять гарячі тури",
-    cs: "Dobrý den, Aljono! Mám zájem o last minute",
+    uk: "Добрий день, Альоно!\nКоли можу вилетіти: …\nСкільки нас: …\nХочу гарячий тур",
+    cs: "Dobrý den, Aljono!\nKdy můžu letět: …\nKolik nás je: …\nChci last minute",
   },
   all: { uk: "Усі країни", cs: "Všechny země" },
   filterLabel: { uk: "Країна", cs: "Země" },
-  listTitle: { uk: "Найближчі вильоти зі знижкою", cs: "Nejbližší odlety se slevou" },
+  listTitle: { uk: "Найближчі вильоти", cs: "Nejbližší odlety" },
   listLead: {
-    uk: "Ціни оновлюються щодня. Перед бронюванням перевіряємо наявність онлайн у туроператора.",
-    cs: "Ceny aktualizujeme denně. Před rezervací ověříme dostupnost online u cestovní kanceláře.",
+    uk: "Ціни в кронах за одну особу. Відкрийте тур, щоб побачити, що входить у ціну, і надіслати запит — на сайті ви нічого не платите.",
+    cs: "Ceny jsou za osobu v korunách. V detailu zájezdu najdete, co je v ceně, a můžete rovnou poslat žádost – na webu nic neplatíte.",
   },
   notifyTitle: {
-    uk: "Хочете отримувати гарячі тури першими?",
-    cs: "Chcete dostávat last minute jako první?",
+    uk: "Чекаєте на ціну?",
+    cs: "Čekáte na cenu?",
   },
   notifyText: {
-    uk: "Напишіть Альоні, куди й на скільки хочете полетіти, — вона надішле пропозицію, щойно з’явиться ціна, що вам підходить.",
-    cs: "Napište Aljoně, kam a na jak dlouho chcete letět — pošle vám nabídku, jakmile se objeví cena, která vám sedí.",
+    uk: "Напишіть, куди, коли й за скільки, — дам знати, щойно з’явиться ваш варіант.",
+    cs: "Napište kam, kdy a za kolik – ozvu se, jakmile se objeví ta vaše nabídka.",
   },
-  notifyCta: { uk: "Підписатися в Telegram", cs: "Odebírat na Telegramu" },
+  notifyCta: { uk: "Стежити за ціною", cs: "Hlídat cenu" },
 };
 
 // Tour data comes from tours(): regenerate every 30 min instead of per request,
@@ -100,30 +104,36 @@ export default async function HotToursPage({ params, searchParams }: Props) {
       <Container className="pt-2 sm:pt-4">
         <section className="relative isolate overflow-hidden rounded-[2rem] bg-ink px-5 py-10 text-white sm:rounded-[2.5rem] sm:px-10 sm:py-14 lg:px-14">
           <Image src={ananasPhotos.banner.beachUmbrella} alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/30" />
+          {/* Below lg the copy runs the full width, so the scrim stays dark top to bottom instead of fading out on the right. */}
+          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/80 to-ink/75 lg:bg-gradient-to-r lg:from-ink/90 lg:via-ink/70 lg:to-ink/30" />
           <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
             <div className="max-w-3xl">
-              <p className="inline-flex shape-pill bg-red px-4 py-1.5 text-sm font-bold text-white">🔥 Last minute · −40 %</p>
-              <h1 className="mt-5 font-display text-[clamp(2.1rem,5.4vw,4.4rem)] font-black uppercase leading-[0.95] tracking-[-0.035em]">{t(tx.h1, locale)}</h1>
-              <p className="mt-6 text-lg text-white">{t(tx.lead, locale)}</p>
-              <p className="mt-3 text-white/85">{t(tx.lead2, locale)}</p>
+              <p className="inline-flex shape-pill bg-red px-4 py-1.5 text-sm font-bold text-white">{t(tx.kicker, locale)}</p>
+              {/* Greedy wrap on purpose (overrides the global h1 balance): with "з Чехії" glued it breaks as
+                  "ГАРЯЧІ ТУРИ / З ЧЕХІЇ" and "LAST MINUTE / Z ČESKA", like the hero's "ВАШЕ МОРЕ / З ЧЕХІЇ";
+                  balance would split the term into "ГАРЯЧІ / ТУРИ З ЧЕХІЇ". */}
+              <h1 className={`mt-5 text-wrap! font-display text-[clamp(2rem,5.4vw,4.4rem)] font-black uppercase ${displayLeading(t(tx.h1, locale))} tracking-[-0.035em]`}>
+                {glue(t(tx.h1, locale))}
+              </h1>
+              <p className="mt-6 text-pretty text-lg text-white">{glue(t(tx.lead, locale))}</p>
+              <p className="mt-3 text-pretty text-white">{glue(t(tx.lead2, locale))}</p>
               <TelegramButton locale={locale} source="hot-hero" size="lg" message={prefill} label={t(tx.cta, locale)} className="mt-8" />
             </div>
             <Stamp
               size={220}
               tone="yellow"
-              top="LAST MINUTE • HOT TOURS"
-              bottom="ANANAS TOUR"
-              above={[locale === "uk" ? "ЗНИЖКИ ДО" : "SLEVY AŽ"]}
-              word="−40%"
-              below={[locale === "uk" ? "ЩОДНЯ НОВІ" : "KAŽDÝ DEN NOVÉ"]}
+              top={locale === "uk" ? "LAST MINUTE • З ЧЕХІЇ" : "LAST MINUTE • Z ČESKA"}
+              bottom={locale === "uk" ? "ВИЛІТ НА ДНЯХ" : "ODLET ZA PÁR DNÍ"}
+              above={[locale === "uk" ? "ВАЛІЗА" : "KUFR"]}
+              word={locale === "uk" ? "ЗА ВЕЧІР" : "ZA VEČER"}
+              below={[]}
               className="hidden -rotate-6 lg:block"
             />
           </div>
         </section>
       </Container>
 
-      <Section title={t(tx.listTitle, locale)} lead={t(tx.listLead, locale)}>
+      <Section title={t(tx.listTitle, locale)} lead={glue(t(tx.listLead, locale))}>
         {countries.length > 1 && (
           <nav aria-label={t(tx.filterLabel, locale)} className="-mt-2 mb-8">
             <ul className="flex flex-wrap gap-2">
@@ -159,7 +169,7 @@ export default async function HotToursPage({ params, searchParams }: Props) {
           <div className="flex flex-col items-start gap-4 rounded-[2rem] bg-yellow p-6 sm:flex-row sm:items-center sm:justify-between sm:rounded-[2.5rem] sm:p-10">
             <div className="max-w-2xl">
               <h2 className="font-display text-2xl font-black uppercase sm:text-3xl">{t(tx.notifyTitle, locale)}</h2>
-              <p className="mt-2 text-ink/75">{t(tx.notifyText, locale)}</p>
+              <p className="mt-2 text-pretty text-ink/75">{glue(t(tx.notifyText, locale))}</p>
             </div>
             <TelegramButton locale={locale} source="hot-notify" size="lg" message={prefill} label={t(tx.notifyCta, locale)} />
           </div>

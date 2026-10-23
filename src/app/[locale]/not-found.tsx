@@ -9,17 +9,19 @@ import { defaultLocale, isLocale, t, type Locale } from "@/i18n/config";
 import { routes } from "@/i18n/routes";
 
 const copy = {
-  title: { uk: "Ой, цієї сторінки немає", cs: "Jejda, tahle stránka neexistuje" },
+  title: { uk: "Тут моря немає", cs: "Tady moře není" },
   text: {
-    uk: "Схоже, вона полетіла у відпустку без нас. Але ваш ідеальний тур нікуди не дівся — напишіть Альоні, і за 15 хвилин отримаєте 3 найкращі варіанти.",
-    cs: "Vypadá to, že odletěla na dovolenou bez nás. Váš vysněný zájezd ale nikam nezmizel — napište Aljoně a do 15 minut máte 3 nejlepší varianty.",
+    uk: "Як і в усій Чехії. Зате Альона знає, де воно є: поверніться на головну або напишіть їй.",
+    cs: "Jako v celém Česku. Aljona ale ví, kde ho najít: vraťte se na úvod, nebo jí rovnou napište.",
   },
   prefill: {
-    uk: "Добрий день, Альоно! Не знайшов(-ла) потрібну сторінку на сайті — допоможіть підібрати тур.",
-    cs: "Dobrý den, Aljono! Nenašel(a) jsem na webu, co jsem hledal(a) — pomůžete mi vybrat zájezd?",
+    uk: "Добрий день, Альоно! Пишу з сайту — допоможете з туром?",
+    cs: "Dobrý den, Aljono! Píšu z webu – pomůžete mi se zájezdem?",
   },
-  home: { uk: "На головну", cs: "Na úvodní stránku" },
-  tours: { uk: "Шукати тур", cs: "Hledat zájezd" },
+  home: { uk: "На головну", cs: "Zpět na úvod" },
+  tours: { uk: "Знайти тур", cs: "Najít zájezd" },
+  // The badge states the plain fact; the headline carries the joke.
+  badge: { uk: "404 • СТОРІНКУ НЕ ЗНАЙДЕНО • ", cs: "404 • STRÁNKA NENALEZENA • " },
 };
 
 /** Friendly 404 inside the [locale] segment. Locale comes from the URL (not-found gets no params). */
@@ -31,9 +33,10 @@ export default function NotFound() {
     <section className="relative overflow-hidden py-16 sm:py-24">
       <PineapplePattern preset="hero" opacity={0.5} />
       <Container className="relative grid items-center gap-12 lg:grid-cols-[auto_1fr]">
-        <div className="relative mx-auto grid place-items-center">
-          <CircleBadge size={260} text="404 • PAGE NOT FOUND • ANANAS TOUR • " center={<LogoMark size={110} />} />
-          <span className="absolute -bottom-2 shape-pill bg-ink px-5 py-1 font-display text-3xl font-extrabold text-paper">404</span>
+        <div className="relative mx-auto mb-8 grid place-items-center">
+          <CircleBadge size={260} text={t(copy.badge, locale)} center={<LogoMark size={110} />} />
+          {/* Hangs below the ring like a luggage tag: the badge spins, so anything on the ring would hide its letters. */}
+          <span className="absolute top-full -mt-2 shape-pill bg-ink px-5 py-1 font-display text-3xl font-extrabold text-paper">404</span>
         </div>
         <div className="max-w-2xl">
           <h1 className="font-display text-[clamp(2.1rem,5vw,4rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">{t(copy.title, locale)}</h1>

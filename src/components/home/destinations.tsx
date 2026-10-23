@@ -6,13 +6,14 @@ import { t, type Locale } from "@/i18n/config";
 import { routes } from "@/i18n/routes";
 
 const C = {
-  kicker: { uk: "12 країн", cs: "12 zemí" },
-  title: { uk: "Що на вас чекає", cs: "Co vás čeká" },
+  kicker: { uk: "12 країн, 1 чат", cs: "12 zemí, 1 chat" },
+  // The component appends "?" itself.
+  title: { uk: "Куди летимо", cs: "Kam to bude" },
   lead: {
-    uk: "Від Туреччини за 3 години льоту до Мальдів і Занзібару. Вильоти з Праги, Брна, Острави та Пардубиць.",
-    cs: "Od Turecka 3 hodiny letu až po Maledivy a Zanzibar. Odlety z Prahy, Brna, Ostravy a Pardubic.",
+    uk: "Від Болгарії, куди можна й автобусом, до Мальдів і Занзібару. Підкажу, де зараз сезон, а де купатися ще рано.",
+    cs: "Od Bulharska, kam se dá jet i autobusem, po Maledivy a Zanzibar. Poradím, kde je teď sezóna a kde je na koupání ještě brzo.",
   },
-  all: { uk: "Усі країни", cs: "Všechny destinace" },
+  all: { uk: "Усі 12 країн", cs: "Všech 12 zemí" },
 };
 
 /** 12 destinations as tall pill columns with a round ↘ button (Reference 1). */

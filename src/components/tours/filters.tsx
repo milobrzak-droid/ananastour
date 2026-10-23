@@ -15,12 +15,12 @@ const tx = {
   board: { uk: "Харчування", cs: "Strava" },
   stars: { uk: "Зірковість", cs: "Hvězdičky" },
   transport: { uk: "Транспорт", cs: "Doprava" },
-  airports: { uk: "Виліт з", cs: "Odlet z" },
-  price: { uk: "Ціна за всіх до (Kč)", cs: "Cena za všechny do (Kč)" },
-  apply: { uk: "Застосувати", cs: "Použít" },
+  airports: { uk: "Звідки летите", cs: "Odkud letíte" },
+  price: { uk: "Бюджет на всіх, Kč", cs: "Celkový rozpočet, Kč" },
+  apply: { uk: "Показати", cs: "Zobrazit" },
   operators: { uk: "Туроператор", cs: "Cestovní kancelář" },
   reset: { uk: "Скинути фільтри", cs: "Zrušit filtry" },
-  any: { uk: "Будь-яка", cs: "Libovolná" },
+  any: { uk: "Будь-яка", cs: "Jakákoli" },
 };
 
 const toggle = <T,>(list: T[] | undefined, v: T): T[] =>
@@ -54,7 +54,7 @@ export function activeFilterCount(p: SearchParams): number {
 function Group({ title, children }: { title: string; children: ReactNode }) {
   return (
     <fieldset className="border-t border-ink/10 py-4 first:border-t-0 first:pt-0">
-      <legend className="mb-2 font-display text-sm font-bold uppercase tracking-wider text-ink/70">{title}</legend>
+      <legend className="mb-2 pr-3 font-display text-sm font-bold uppercase tracking-wider text-ink/70">{title}</legend>
       <ul className="flex flex-col gap-1">{children}</ul>
     </fieldset>
   );
@@ -156,7 +156,7 @@ export function Filters({
       </Group>
 
       <fieldset className="border-t border-ink/10 py-4">
-        <legend className="mb-2 font-display text-sm font-bold uppercase tracking-wider text-ink/70">
+        <legend className="mb-2 text-balance pr-3 font-display text-sm font-bold uppercase tracking-wider text-ink/70">
           {t(tx.price, locale)}
         </legend>
         <form action={routes.tours(locale)} method="get" className="flex gap-2">

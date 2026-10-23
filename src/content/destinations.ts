@@ -45,13 +45,13 @@ const img = (slug: string, i: number) => destinationGallery(slug)[i - 1] ?? dest
 
 // TODO(client): verify entry rules for Ukrainian citizens with temporary protection / residence permit in CZ.
 const ENTRY_SCHENGEN = tx(
-  "Шенген: біометричний паспорт + чинний документ про перебування в ЧР",
-  "Schengen: biometrický pas + platný doklad o pobytu v ČR",
+  "Шенген: біометричний паспорт + чинний документ про перебування в Чехії. Перевірю саме для вашої ситуації.",
+  "Schengen: biometrický pas + platný doklad o pobytu v Česku. Ověřím pro vaši situaci.",
 );
 // TODO(client): verify — rules for non-Schengen countries depend on citizenship.
 const ENTRY_CHECK = tx(
-  "Залежить від громадянства — перевіримо умови перед бронюванням",
-  "Záleží na občanství — podmínky ověříme před rezervací",
+  "Залежить від громадянства. Перевірю саме для вашої ситуації.",
+  "Záleží na občanství. Ověřím pro vaši situaci.",
 );
 
 const ALL_CZ = ["PRG", "BRQ", "OSR", "PED"];
@@ -62,45 +62,45 @@ export const destinations: Destination[] = [
     slug: "turkey",
     name: tx("Туреччина", "Turecko"),
     nameTo: tx("до Туреччини", "do Turecka"),
-    nameIn: tx("у Туреччині", "v Turecku"),
+    nameIn: tx("у Туреччині", "v Turecku"),
     flag: "🇹🇷",
     heroImage: hero("turkey"),
-    tagline: tx("Східна казка з сервісом all inclusive", "Orientální pohádka se servisem all inclusive"),
+    tagline: tx("Батьківщина all inclusive", "Domovina all inclusive"),
     teaser: tx(
-      "Анталія, Белек і Бодрум — найпопулярніший пляжний напрямок з Праги, Брна та Острави.",
-      "Antalya, Belek a Bodrum — nejoblíbenější letní destinace s odlety z Prahy, Brna i Ostravy.",
+      "Анталія, Кемер, Бодрум: сосни аж до пляжу, басейни з гірками й готелі на будь-який гаманець.",
+      "Antalya, Kemer, Bodrum: borovice až k pláži, bazény s tobogány a hotely pro každou peněženku.",
     ),
     intro: tx(
-      "Туреччина — країна, де розкішний сервіс зустрічається з тисячолітньою історією. Від золотих пляжів Анталії до скель Каппадокії кожен куточок тут створений для ідеального відпочинку. Чартери з Чехії літають сюди щодня, а готелі на all inclusive — одні з найкращих у світі за співвідношенням ціни та якості. Ananas Tour обирає для вас лише перевірені готелі, які ми знаємо особисто або за відгуками наших туристів.",
-      "Turecko je země, kde se luxusní servis potkává s tisíciletou historií. Od zlatých pláží Antalye po skály Kappadokie je tu všechno připravené na dokonalou dovolenou. Charterové lety z Česka sem v sezóně létají denně a hotely s all inclusive patří poměrem ceny a kvality ke světové špičce. Ananas Tour vybírá jen prověřené hotely, které známe osobně nebo z recenzí našich klientů.",
+      "Готелів тут тисячі, і на фото в усіх однаково блакитний басейн. Я підкажу, де справді пологий вхід у море, де анімація до ночі, а де тиша й сосни.",
+      "Hotelů jsou tu tisíce a na fotkách mají všechny stejně modrý bazén. Řeknu vám, kde je opravdu pozvolný vstup do moře, kde jede animace do noci a kde je jen klid a borovice.",
     ),
-    bestSeason: tx("травень – жовтень", "květen – říjen"),
-    flightTime: tx("≈ 3 год з Праги", "cca 3 h z Prahy"), // TODO(client): verify
+    bestSeason: tx("травень–жовтень", "květen–říjen"),
+    flightTime: tx("≈ 3 год з Праги", "cca 3 h z Prahy"), // TODO(client): verify
     airports: ALL_CZ, // TODO(client): verify seasonal departures
     currency: tx("турецька ліра (TRY)", "turecká lira (TRY)"),
     entry: ENTRY_CHECK,
     regions: [
       {
-        title: tx("Анталія та Белек", "Antalya a Belek"),
+        title: tx("Анталія та Белек", "Antalya a Belek"),
         text: tx(
-          "Центр елітного відпочинку. Белек славиться сосновими лісами, гольф-полями та VIP-готелями. Анталія — це поєднання шопінгу, розваг і пляжного релаксу.",
-          "Centrum luxusní dovolené. Belek je známý borovými lesy, golfovými hřišti a VIP hotely. Antalya spojuje nákupy, zábavu i odpočinek na pláži.",
+          "Белек — це сосни, гольф і великі готелі з власними аквапарками. Анталія — старе місто Калеїчі, шопінг і пляжі просто в місті.",
+          "Belek, to jsou borovice, golf a velké hotely s vlastními aquaparky. V Antalyi čeká staré město Kaleiçi, nákupy a pláže přímo ve městě.",
         ),
         image: img("turkey", 1),
       },
       {
-        title: tx("Кемер та Фетхіє", "Kemer a Fethiye"),
+        title: tx("Кемер і Фетхіє", "Kemer a Fethiye"),
         text: tx(
-          "Для тих, хто любить гори та сосни. Кемер вражає прозорою водою, а Фетхіє — «турецькі Мальдіви» з бухтою Олюденіз.",
-          "Pro milovníky hor a borovic. Kemer okouzlí průzračnou vodou, Fethiye jsou „turecké Maledivy“ se zátokou Ölüdeniz.",
+          "Гори спускаються до самого моря, а вода тут прозора. У Фетхіє — лагуна Олюденіз, яку недарма називають «турецькими Мальдівами».",
+          "Hory tu sahají až do moře a voda je jako sklo. U Fethiye leží laguna Ölüdeniz, které se ne náhodou říká „turecké Maledivy“.",
         ),
         image: img("turkey", 2),
       },
       {
-        title: tx("Бодрум та Мармарис", "Bodrum a Marmaris"),
+        title: tx("Бодрум і Мармарис", "Bodrum a Marmaris"),
         text: tx(
-          "Егейське узбережжя з європейським шармом. Бодрум — нічне життя та білосніжна архітектура, Мармарис — зелене місто в затишній бухті.",
-          "Egejské pobřeží s evropským šarmem. Bodrum láká nočním životem a bílou architekturou, Marmaris je zelené město v klidné zátoce.",
+          "Егейське узбережжя: білі будиночки, марини з яхтами й вечори, які не закінчуються о десятій. Мармарис — зелена бухта, де ліс підступає до самої води.",
+          "Egejské pobřeží: bílé domky, přístavy plné jachet a večery, které v deset zdaleka nekončí. Marmaris je zelená zátoka, kde les sahá až k vodě.",
         ),
         image: img("turkey", 3),
       },
@@ -109,104 +109,104 @@ export const destinations: Destination[] = [
       {
         title: tx("Ліри чи євро?", "Liry, nebo eura?"),
         text: tx(
-          "Національна валюта — турецька ліра. У готелях і великих магазинах охоче беруть євро, тож із Чехії найзручніше везти євро (крони в Туреччині міняють невигідно). Для дрібних витрат, долмушів і базарів майте трохи лір.",
-          "Měnou je turecká lira. V hotelech a větších obchodech rádi vezmou eura, proto je nejpraktičtější vézt si z Česka eura (koruny se v Turecku mění nevýhodně). Na drobné výdaje, dolmuše a bazary mějte pár lir.",
+          "Платять у лірах, але готелі й великі магазини охоче беруть євро. Тож везіть із Чехії євро (крони тут міняють невигідно), а на долмуші й базари — трохи лір.",
+          "Platí se lirami, ale hotely a obchody rády vezmou i eura. Vezte si je z Česka – koruny se tu mění nevýhodně. Na dolmuše a bazary stačí pár lir.",
         ),
       },
       {
         title: tx("Де міняти гроші?", "Kde měnit peníze?"),
         text: tx(
-          "Найкращий курс в офіційних обмінниках (Döviz) у містах. В аеропорту курс зазвичай гірший, на ресепшені готелю — трохи нижчий, ніж у місті.",
-          "Nejlepší kurz nabízejí oficiální směnárny (Döviz) ve městech. Na letišti bývá kurz horší, na recepci hotelu o něco nižší než ve městě.",
+          "Найкращий курс — в офіційних обмінниках Döviz у місті. В аеропорту він зазвичай найгірший, на ресепшені готелю — трохи кращий, але до міського не дотягує.",
+          "Nejlepší kurz mají oficiální směnárny Döviz ve městě. Na letišti bývá nejhorší, na recepci hotelu o něco lepší, ale na městské směnárny nemá.",
         ),
       },
       {
         title: tx("Банківські картки", "Platební karty"),
         text: tx(
-          "Visa та Mastercard (зокрема картки чеських банків) працюють майже скрізь. Якщо термінал пропонує оплату в кронах або євро — обирайте місцеву валюту, так курс буде чеснішим.",
-          "Visa i Mastercard (včetně karet českých bank) fungují téměř všude. Když terminál nabídne platbu v korunách nebo eurech, zvolte místní měnu — kurz bude férovější.",
+          "Visa й Mastercard чеських банків працюють майже скрізь. Термінал пропонує оплату в кронах чи євро? Обирайте ліри — курс буде чеснішим.",
+          "Karty Visa i Mastercard od českých bank fungují skoro všude. Terminál nabízí platbu v korunách nebo eurech? Zvolte liry, vyjde to levněji.",
         ),
       },
     ],
     tips: [
       {
-        title: tx("Транспорт", "Doprava"),
+        title: tx("Долмуші", "Dolmuše"),
         text: tx(
-          "Найзручніше їздити на долмушах (маршрутках). Платять готівкою або картками AntalyaKart / MuğlaKart з терміналів.",
-          "Nejpohodlnější jsou dolmuše (minibusy). Platí se hotově nebo kartou AntalyaKart / MuğlaKart z automatů.",
+          "Маршрутки-долмуші — найпростіший спосіб дістатися до міста. Платять готівкою або транспортною карткою AntalyaKart чи MuğlaKart з автомата.",
+          "Dolmuš, tedy minibus, je nejjednodušší cesta do města. Platí se hotově nebo kartou AntalyaKart či MuğlaKart, kterou koupíte v automatu.",
         ),
       },
       {
         title: tx("Розетки", "Zásuvky"),
         text: tx(
-          "Такі самі, як у Чехії (тип F, 230 V) — перехідник не потрібен.",
-          "Stejné jako v Česku (typ F, 230 V) — adaptér nepotřebujete.",
+          "Як у Чехії: тип F, 230 В. Перехідник можна спокійно лишити вдома.",
+          "Stejné jako v Česku: typ F, 230 V. Adaptér klidně nechte doma.",
         ),
       },
       {
         title: tx("Дрес-код", "Oblékání"),
         text: tx(
-          "Поза готелем, особливо в мечетях, закривайте плечі й коліна. Хустки жінкам видають на вході безкоштовно.",
-          "Mimo hotel, hlavně v mešitách, mějte zakrytá ramena a kolena. Šátky ženám půjčí u vchodu zdarma.",
+          "Поза готелем, а надто в мечеті, закривайте плечі й коліна. Хустку жінкам безкоштовно видадуть просто біля входу.",
+          "Mimo hotel, a hlavně v mešitě, mějte zakrytá ramena a kolena. Šátek ženám zdarma půjčí přímo u vchodu.",
         ),
       },
       {
-        title: tx("Медицина", "Zdraví"),
+        title: tx("Якщо занедужали", "Když vám není dobře"),
         text: tx(
-          "Якщо нездужаєте, спершу дзвоніть в асистанс за номером у страховому полісі — там скажуть, у яку клініку їхати, щоб не платити самим.",
-          "Když vám není dobře, volejte nejdřív asistenční službu z pojistky — poradí, na kterou kliniku jet, abyste nic neplatili sami.",
+          "Спершу телефонуйте в асистанс-службу за номером зі страхового поліса: там скажуть, до якої клініки їхати, щоб не платити зі своєї кишені.",
+          "Nejdřív volejte asistenční službu – číslo najdete na pojistce. Řeknou vám, na kterou kliniku jet, abyste nic neplatili ze svého.",
         ),
       },
     ],
     faq: [
       {
-        q: tx("Чим Ultra All Inclusive відрізняється від All Inclusive?", "Jaký je rozdíl mezi Ultra All Inclusive a All Inclusive?"),
+        q: tx("Чим «ультра все включено» відрізняється від звичайного?", "Čím se liší ultra all inclusive od obyčejného?"),
         a: tx(
-          "Ultra All Inclusive зазвичай включає імпортний алкоголь, цілодобове харчування та безкоштовне відвідування à la carte ресторану. Звичайний All Inclusive обмежений місцевими напоями та розкладом головного ресторану.",
-          "Ultra All Inclusive obvykle zahrnuje dovážený alkohol, jídlo 24 hodin denně a návštěvu à la carte restaurace zdarma. Klasické All Inclusive je omezené na místní nápoje a otevírací dobu hlavní restaurace.",
+          "Зазвичай — імпортним алкоголем, їжею майже весь день і ресторанами à la carte без доплати. Звичайне «все включено» — це місцеві напої й основний ресторан за розкладом. Чи варто доплачувати саме у вашому готелі, скажу чесно.",
+          "Obvykle dováženým alkoholem, jídlem skoro celý den a à la carte restauracemi bez příplatku. Obyčejné all inclusive znamená místní nápoje a hlavní restauraci podle rozpisu. Jestli se ve vašem hotelu vyplatí připlatit, řeknu vám na rovinu.",
         ),
       },
       {
-        q: tx("Ми прилетіли вранці, а заселення о 14:00. Що робити?", "Přiletíme ráno, ale ubytování je až od 14:00. Co dělat?"),
+        q: tx("Прилітаємо вранці, а заселення з 14:00. Що робити?", "Přiletíme ráno, ale pokoj je až od 14:00. Co s tím?"),
         a: tx(
-          "Залиште валізи в камері схову, отримайте браслети й одразу користуйтеся послугами готелю: сніданок, басейн, пляж. Ми завжди просимо готель про раннє заселення, якщо є вільні номери.",
-          "Nechte kufry v úschovně, vezměte si náramky a hned můžete využívat služby hotelu: snídani, bazén, pláž. Pokud jsou volné pokoje, vždy hotel požádáme o dřívější ubytování.",
+          "Не чекати в лобі. Залиште валізи в камері схову, візьміть браслети — і на сніданок, до басейну чи на пляж. Про раннє заселення я попрошу готель заздалегідь, але все залежатиме від того, чи будуть вільні номери.",
+          "V lobby rozhodně nečekejte. Kufry nechte v úschovně, vezměte si náramky a jděte na snídani, k bazénu nebo rovnou na pláž. O dřívější ubytování hotel předem požádám, záleží ale na tom, jestli bude volný pokoj.",
         ),
       },
       {
-        q: tx("Що таке готелі Adults Only і чи пустять туди з підлітком?", "Co jsou hotely Adults Only a pustí nás tam s teenagerem?"),
+        q: tx("Чи пустять у готель Adults Only з підлітком?", "Pustí nás do hotelu Adults Only s teenagerem?"),
         a: tx(
-          "Це готелі «тільки для дорослих» (зазвичай 16+ або 18+). Навіть якщо дитині майже 16, готель може відмовити в поселенні, тому ми завжди перевіряємо вікові обмеження.",
-          "Jsou to hotely „jen pro dospělé“ (obvykle 16+ nebo 18+). I když je dítěti skoro 16, hotel ho může odmítnout, proto věková omezení vždy předem ověřujeme.",
+          "Зазвичай ні. Такі готелі приймають гостей від 16 або від 18 років, і навіть дитині, якій «майже 16», можуть відмовити. Тому вікові обмеження я перевіряю ще до бронювання.",
+          "Většinou ne. Tyhle hotely berou hosty od 16 nebo od 18 let a odmítnout můžou i dítě, kterému je „skoro 16“. Věková omezení proto ověřuji ještě před rezervací.",
         ),
       },
       {
-        q: tx("Чи безпечно залишати цінні речі в номері?", "Je bezpečné nechávat cennosti na pokoji?"),
+        q: tx("Чи безпечно лишати цінні речі в номері?", "Můžu nechat cennosti na pokoji?"),
         a: tx(
-          "Паспорти, документи про перебування в ЧР, готівку та прикраси тримайте в сейфі. У готелях 5* сейф зазвичай безкоштовний, у бюджетніших може коштувати кілька євро на добу.",
-          "Pasy, doklady o pobytu v ČR, hotovost a šperky mějte v trezoru. V hotelech 5* bývá trezor zdarma, v levnějších může stát pár eur na den.",
+          "Лише в сейфі. Кладіть туди паспорти, документ про перебування в Чехії, готівку й прикраси. У готелях 5★ сейф зазвичай безкоштовний, у простіших може коштувати кілька євро на добу.",
+          "Jen v trezoru. Patří do něj pasy, doklad o pobytu v Česku, hotovost a šperky. V hotelech 5* bývá trezor zdarma, v jednodušších může stát pár eur na den.",
         ),
       },
       {
-        q: tx("Брати ліки з собою чи купити на місці?", "Brát léky s sebou, nebo je koupit na místě?"),
+        q: tx("Брати ліки із собою чи купити на місці?", "Brát léky s sebou, nebo je koupit na místě?"),
         a: tx(
-          "У Туреччині суворий контроль якості ліків і невисокі ціни, але ліки, які ви приймаєте постійно, краще взяти з дому. Аптеки позначені червоною літерою «E» (Eczane).",
-          "V Turecku je přísná kontrola léků a nízké ceny, ale léky, které berete pravidelně, si vezměte z domova. Lékárny poznáte podle červeného písmene „E“ (Eczane).",
+          "Ті, що приймаєте постійно, беріть із собою. Решту легко знайти в аптеках: шукайте червону літеру «E» і напис Eczane.",
+          "Ty, které berete pravidelně, si vezměte s sebou. Zbytek seženete v lékárnách – hledejte červené „E“ a nápis Eczane.",
         ),
       },
       {
-        q: tx("Як порозумітися без турецької та англійської?", "Jak se domluvit bez turečtiny a angličtiny?"),
+        q: tx("Як порозумітися без турецької й англійської?", "Jak se domluvit bez turečtiny a angličtiny?"),
         a: tx(
-          "У популярних курортах персонал часто розуміє російську, дедалі частіше — українську. Для поїздок містом вистачить базової англійської або перекладача в телефоні.",
-          "V oblíbených letoviscích personál často rozumí rusky, stále častěji i ukrajinsky. Na výlety stačí základní angličtina nebo překladač v telefonu.",
+          "Легше, ніж здається. У курортних готелях персонал часто розуміє російську, а дехто — й українську. У місті вистачить базової англійської або перекладача в телефоні.",
+          "Snáz, než se zdá. V letoviscích personál často rozumí rusky, někdo i ukrajinsky. Ve městě vystačíte se základní angličtinou nebo překladačem v telefonu.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури до Туреччини з Праги — ціни в CZK", "Zájezdy do Turecka z Prahy"),
+      title: tx("Тури до Туреччини з Чехії — ціни в кронах", "Zájezdy do Turecka z Česka – ceny v Kč"),
       description: tx(
-        "Відпочинок у Туреччині з вильотом з Праги, Брна, Острави. Анталія, Белек, Кемер, Бодрум. Альона підбере тур у Telegram за 15 хвилин.",
-        "Dovolená v Turecku s odletem z Prahy, Brna a Ostravy. Antalya, Belek, Kemer, Bodrum. Aljona vám zájezd vybere na Telegramu do 15 minut.",
+        "Тури до Туреччини з Чехії: Анталія, Белек, Кемер, Бодрум. Ціни в кронах, туроператори застраховані від банкрутства. Альона підбере вам 3 готелі.",
+        "Zájezdy do Turecka z Česka: Antalya, Belek, Kemer, Bodrum. Ceny v Kč, české CK pojištěné proti úpadku. Aljona vám na Telegramu vybere 3 hotely.",
       ),
     },
   },
@@ -215,45 +215,45 @@ export const destinations: Destination[] = [
     slug: "egypt",
     name: tx("Єгипет", "Egypt"),
     nameTo: tx("до Єгипту", "do Egypta"),
-    nameIn: tx("в Єгипті", "v Egyptě"),
+    nameIn: tx("в Єгипті", "v Egyptě"),
     flag: "🇪🇬",
     heroImage: hero("egypt"),
-    tagline: tx("Червоне море та велич пірамід", "Rudé moře a majestát pyramid"),
+    tagline: tx("Літо, яке працює взимку", "Léto, které maká i v zimě"),
     teaser: tx(
-      "Вічне літо, коралові рифи та готелі світового рівня — тепло навіть у листопаді й лютому.",
-      "Věčné léto, korálové útesy a hotely světové úrovně — teplo i v listopadu a únoru.",
+      "Хургада, Шарм, Марса-\u2060Алам: коралові рифи просто біля пляжу й тепло навіть у листопаді та лютому.",
+      "Hurghada, Sharm, Marsa Alam: korálové útesy hned u pláže a teplo i v listopadu a v únoru.",
     ),
     intro: tx(
-      "Єгипет — країна вічного літа, де тепле Червоне море зустрічається з величчю давніх пірамід. Цей напрямок закохує з першого занурення на кораловий риф і дарує справжній релакс у готелях світового рівня. З Чехії сюди летять цілий рік, тому Єгипет — улюблений вибір для зимової відпустки. Ananas Tour підбере резорт під ваш формат: сімейний, романтичний чи дайверський.",
-      "Egypt je zemí věčného léta, kde se teplé Rudé moře potkává s majestátem starověkých pyramid. Zamilujete si ho při prvním ponoru na korálový útes a odpočinete si v hotelech světové úrovně. Z Česka se sem létá celý rok, proto je Egypt oblíbenou volbou na zimní dovolenou. Ananas Tour vybere resort přesně pro vás: rodinný, romantický i potápěčský.",
+      "Коли в Чехії сіро й мокро, Червоне море лишається теплим, а рейси сюди є цілий рік. Головне — обрати правильну бухту: підкажу, де взимку менше вітру, а де найкращий риф.",
+      "Když je v Česku šedivo a mokro, Rudé moře je pořád teplé – a létá se sem celý rok. Jde jen o to vybrat správnou zátoku: poradím, kde v zimě tolik nefouká a kde je nejhezčí útes.",
     ),
-    bestSeason: tx("цілий рік; найкомфортніше жовтень – травень", "celoročně; nejpříjemněji říjen – květen"),
-    flightTime: tx("≈ 4,5 год з Праги", "cca 4,5 h z Prahy"), // TODO(client): verify
+    bestSeason: tx("цілий рік, найкраще — жовтень–травень", "celoročně, nejlépe říjen–květen"),
+    flightTime: tx("≈ 4,5 год з Праги", "cca 4,5 h z Prahy"), // TODO(client): verify
     airports: ALL_CZ, // TODO(client): verify seasonal departures
     currency: tx("єгипетський фунт (EGP)", "egyptská libra (EGP)"),
     entry: ENTRY_CHECK,
     regions: [
       {
-        title: tx("Шарм-ель-Шейх", "Šarm aš-Šajch"),
+        title: tx("Шарм-ель-Шейх", "Sharm El Sheikh"),
         text: tx(
-          "Рай для дайвінгу та снорклінгу. Курорт захищений горами від вітрів, тому ідеальний взимку. Тут найрозкішніші готелі та активне нічне життя.",
-          "Ráj pro potápění a šnorchlování. Letovisko je chráněné horami, takže je ideální i v zimě. Najdete tu nejluxusnější hotely a živý noční život.",
+          "Столиця снорклінгу й дайвінгу: рифи починаються одразу від понтона. Гори прикривають курорт від вітру, тож узимку тут затишніше.",
+          "Mekka šnorchlařů i potápěčů: útes začíná hned za pontonem. Hory chrání letovisko před větrem, takže je tu v zimě příjemněji.",
         ),
         image: img("egypt", 1),
       },
       {
         title: tx("Хургада", "Hurghada"),
         text: tx(
-          "Найкращий вибір для родин завдяки пологим піщаним пляжам. Багато аквапарків, а до Луксора й Каїра — рукою подати.",
-          "Nejlepší volba pro rodiny díky pozvolným písečným plážím. Spousta aquaparků a do Luxoru či Káhiry je to kousek.",
+          "Пологі піщані пляжі, аквапарки й анімація — добрий вибір для родин. А звідси найближче до храмів Луксора.",
+          "Pozvolné písečné pláže, aquaparky a animace – dobrá volba pro rodiny. A odtud je to nejblíž k chrámům v Luxoru.",
         ),
         image: img("egypt", 2),
       },
       {
         title: tx("Марса-Алам", "Marsa Alam"),
         text: tx(
-          "Спокійний курорт для тих, хто шукає усамітнення. Тут можна побачити дюгонів і морських черепах у природному середовищі.",
-          "Klidné letovisko pro ty, kdo hledají soukromí. Můžete tu potkat dugongy a mořské želvy v jejich přirozeném prostředí.",
+          "Тихий південь для тих, хто їде заради моря, а не дискотек. Тут можна поплавати поруч із черепахами, а якщо пощастить — і з дюгонем.",
+          "Klidný jih pro ty, kdo jedou za mořem, ne za diskotékami. Můžete tu plavat se želvami, a když budete mít štěstí, i s dugongem.",
         ),
         image: img("egypt", 3),
       },
@@ -262,15 +262,15 @@ export const destinations: Destination[] = [
       {
         title: tx("Долари чи євро?", "Dolary, nebo eura?"),
         text: tx(
-          "Офіційна валюта — єгипетський фунт, але в туристичних зонах приймають долари та євро. Із Чехії зручно везти євро або долари дрібними купюрами нового зразка — для чайових і сувенірів.",
-          "Oficiální měnou je egyptská libra, v turistických oblastech ale vezmou dolary i eura. Z Česka si vezměte eura nebo dolary v drobných a nových bankovkách — na spropitné a suvenýry.",
+          "Офіційна валюта — єгипетський фунт, але в туристичних зонах беруть долари й євро. Із Чехії везіть дрібні купюри нового зразка — на чайові й сувеніри.",
+          "Oficiální měnou je egyptská libra, v turistických oblastech ale berou i dolary a eura. Z Česka si vezte drobné bankovky, ideálně nové – na spropitné a suvenýry.",
         ),
       },
       {
-        title: tx("Обмін і розрахунки", "Směna a placení"),
+        title: tx("Обмін і розрахунки", "Směna a placení"),
         text: tx(
-          "Невелику суму вигідно поміняти на фунти для супермаркетів, де ціни в місцевій валюті — так отримаєте решту без втрат на курсі.",
-          "Menší částku se vyplatí vyměnit na libry do supermarketů, kde jsou ceny v místní měně — dostanete vrácené bez ztráty na kurzu.",
+          "Невелику суму поміняйте на фунти: у супермаркетах ціни в місцевій валюті, тож на решті ви не втратите через курс.",
+          "Menší částku si vyměňte na libry. V supermarketech jsou ceny v místní měně, takže při placení netratíte na kurzu.",
         ),
       },
     ],
@@ -279,81 +279,81 @@ export const destinations: Destination[] = [
         // TODO(client): verify current visa rules for Ukrainian citizens / holders of CZ residence documents.
         title: tx("Віза", "Vízum"),
         text: tx(
-          "Для багатьох туристів віза оформлюється після прильоту, а для Шарм-ель-Шейху існує спеціальний штамп «Sinai Only». Умови залежать від громадянства — ми перевіримо їх для вашого паспорта перед бронюванням.",
-          "Pro mnoho turistů se vízum vyřizuje po příletu a pro Šarm aš-Šajch existuje speciální razítko „Sinai Only“. Podmínky závisí na občanství — pro váš pas je ověříme před rezervací.",
+          "Багатьом туристам візу оформлюють в аеропорту після прильоту, а для Шарму є штамп Sinai Only. Умови залежать від громадянства — перевірю ще до бронювання.",
+          "Řada turistů dostane vízum po příletu na letišti a na samotný Sharm stačí razítko Sinai Only. Podmínky závisí na občanství – ověřím je ještě před rezervací.",
         ),
       },
       {
-        title: tx("Безпека на морі", "Bezpečí v moři"),
+        title: tx("Корали — лише очима", "Korály jen očima"),
         text: tx(
-          "Червоне море — заповідник. Не торкайтеся коралів і риб руками: це небезпечно і за це штрафують.",
-          "Rudé moře je přírodní rezervace. Korálů a ryb se nedotýkejte — je to nebezpečné a hrozí pokuta.",
+          "Червоне море — заповідник. Не торкайтеся коралів і риб: можна поранитися, а ще за це штрафують.",
+          "Rudé moře je přírodní rezervace. Korálů ani ryb se nedotýkejte: můžete se zranit a navíc hrozí pokuta.",
         ),
       },
       {
         title: tx("Вода", "Voda"),
         text: tx(
-          "Воду з-під крана не пийте. Навіть зуби краще чистити бутильованою водою, яку готель дає безкоштовно.",
-          "Vodu z kohoutku nepijte. I zuby si raději čistěte balenou vodou, kterou hotel dává zdarma.",
+          "Воду з-під крана не пийте, і навіть зуби краще чистіть бутильованою — готелі зазвичай дають її безкоштовно.",
+          "Vodu z kohoutku nepijte a i zuby si radši čistěte balenou – hotely ji obvykle dávají zdarma.",
         ),
       },
       {
         title: tx("Аптечка", "Lékárnička"),
         text: tx(
-          "Візьміть базовий набір: засоби від сонця та для травлення. Решту легко купити в місцевих аптеках.",
-          "Přibalte si základ: opalovací krém a léky na trávení. Ostatní koupíte v místních lékárnách.",
+          "Мінімум — сонцезахисний крем і щось для шлунка. Решту купите в місцевій аптеці.",
+          "Minimum: opalovací krém a něco na žaludek. Zbytek koupíte v místní lékárně.",
         ),
       },
     ],
     faq: [
       {
-        q: tx("Коли летіти в Єгипет, щоб не було сильного вітру?", "Kdy letět do Egypta, aby moc nefoukalo?"),
+        q: tx("Коли летіти до Єгипту, щоб не було сильного вітру?", "Kdy letět do Egypta, aby moc nefoukalo?"),
         a: tx(
-          "З грудня по березень у Єгипті сезон вітрів. Взимку радимо готелі в захищених бухтах Шарм-ель-Шейху (Наама-Бей, Шарм-ель-Майя). У Хургаді в цей час вітряно майже всюди — ідеально для кайтсерфінгу.",
-          "Od prosince do března je v Egyptě větrná sezóna. V zimě doporučujeme hotely v chráněných zátokách Šarm aš-Šajchu (Naama Bay, Sharm El Maya). V Hurghadě tou dobou fouká skoro všude — ideální pro kitesurfing.",
+          "Найспокійніше — поза груднем–березнем: тоді в Єгипті сезон вітрів. Якщо летите взимку, раджу Шарм-ель-Шейх із захищеними бухтами Наама-Бей чи Шарм-ель-Майя. У Хургаді взимку дме майже всюди — зате кайтсерферам там роздолля.",
+          "Mimo prosinec až březen, kdy je v Egyptě větrná sezóna. Pokud letíte v zimě, doporučuji Sharm El Sheikh a jeho chráněné zátoky Naama Bay nebo Sharm El Maya. V Hurghadě v zimě fouká skoro všude – zato si tam přijdou na své kitesurfaři.",
         ),
       },
       {
-        q: tx("Що таке вхід з понтону і чи потрібні коралки?", "Co je vstup z pontonu a potřebujeme boty do vody?"),
+        q: tx("Що таке вхід із понтона і чи потрібні коралки?", "Co je vstup z pontonu? A potřebujeme boty do vody?"),
         a: tx(
-          "У багатьох готелях Шарму в море заходять з понтону одразу на глибину над рифом. Спеціальне взуття обов’язкове, щоб не поранитися об корали чи морських їжаків.",
-          "V mnoha hotelech v Šarmu se do moře vstupuje z pontonu rovnou do hloubky nad útesem. Boty do vody jsou nutnost, abyste se neporanili o korály nebo ježovky.",
+          "Це місток, з якого заходять у море одразу на глибину над рифом, — так влаштовано в багатьох готелях Шарму. А коралки потрібні: вони захищають ноги від коралів і морських їжаків.",
+          "Ponton je molo, ze kterého se jde do moře rovnou do hloubky nad útesem – tak to má spousta hotelů v Sharmu. A boty do vody ano: chrání nohy před korály i ježovkami.",
         ),
       },
       {
         q: tx("Чи варто купувати місцеву SIM-картку?", "Vyplatí se místní SIM karta?"),
         a: tx(
-          "Так. Готельний Wi-Fi часто працює лише в лобі. Картку Orange або Vodafone можна купити прямо в аеропорту — великий пакет інтернету коштує близько 10–15 $.",
-          "Ano. Hotelová Wi-Fi často funguje jen v lobby. Kartu Orange nebo Vodafone koupíte přímo na letišti — velký datový balíček stojí kolem 10–15 $.",
+          "Так. Готельний Wi-Fi часто ловить лише в лобі. Картку Orange чи Vodafone купите просто в аеропорту, великий пакет інтернету коштує приблизно 10–15 $.",
+          "Ano. Hotelová Wi-Fi často funguje jen v lobby. Kartu Orange nebo Vodafone koupíte přímo na letišti, velký datový balíček stojí zhruba 10–15 $.",
         ),
       },
       {
-        q: tx("Чи безпечно купатися в Червоному морі?", "Je koupání v Rudém moři bezpečné?"),
+        q: tx("Чи безпечно купатися в Червоному морі?", "Je koupání v Rudém moři bezpečné?"),
         a: tx(
-          "Популярні готелі мають рятувальників і захисні сітки. Головні правила: не купатися на світанку й після заходу сонця, не відпливати далеко від рифу і не годувати риб.",
-          "Oblíbené hotely mají plavčíky a ochranné sítě. Hlavní pravidla: nekoupat se za svítání a po setmění, neodplouvat daleko od útesu a nekrmit ryby.",
+          "Так, якщо дотримуватися простих правил. Не купайтеся на світанку й після заходу сонця, не запливайте далеко від рифу й не годуйте риб. У популярних готелях пляж стережуть рятувальники.",
+          "Ano, když dodržíte pár jednoduchých pravidel. Nekoupejte se za svítání a po setmění, neplavte daleko od útesu a nekrmte ryby. V oblíbených hotelech pláž hlídají plavčíci.",
         ),
       },
       {
-        q: tx("Луксор чи піраміди — що обрати?", "Luxor, nebo pyramidy — co vybrat?"),
+        q: tx("Луксор чи піраміди — що обрати?", "Luxor, nebo pyramidy – co vybrat?"),
         a: tx(
-          "Луксор — це храми та гробниці фараонів (ближче з Хургади). Піраміди Гізи — біля Каїра (ближче з Шарму або літаком). Обидві поїздки займають цілий день, тож плануйте їх заздалегідь.",
-          "Luxor jsou chrámy a hrobky faraonů (blíž z Hurghady). Pyramidy v Gíze jsou u Káhiry (blíž ze Šarmu nebo letadlem). Oba výlety zaberou celý den, plánujte je dopředu.",
+          "Залежить від того, де ваш готель. Луксор — це храми й гробниці фараонів, і найближче до нього з Хургади. Піраміди Гізи стоять біля Каїра, туди їдуть автобусом або летять літаком. Обидві поїздки забирають цілий день, тож плануйте їх заздалегідь.",
+          "Záleží na tom, kde bydlíte. Luxor, to jsou chrámy a hrobky faraonů, a nejblíž to tam máte z Hurghady. Pyramidy v Gíze stojí u Káhiry, dostanete se k nim autobusem nebo letadlem. Oba výlety zaberou celý den, tak je plánujte dopředu.",
         ),
       },
       {
-        q: tx("Чи можна купити алкоголь у звичайному магазині?", "Dá se koupit alkohol v běžném obchodě?"),
+        q: tx("Чи продають алкоголь у звичайних магазинах?", "Dá se koupit alkohol v běžném obchodě?"),
         a: tx(
-          "У супермаркетах алкоголь зазвичай не продають. Імпортні напої можна купити в Duty Free протягом кількох днів після прильоту (з паспортом). На all inclusive подають місцеві напої.",
-          "V supermarketech se alkohol většinou neprodává. Dovážený alkohol koupíte v Duty Free několik dní po příletu (s pasem). V rámci all inclusive se podávají místní nápoje.",
+          "Зазвичай ні. Імпортні напої можна купити в Duty Free протягом кількох днів після прильоту, з паспортом. На «все включено» наливають місцеві напої.",
+          "Většinou ne. Dovážený alkohol koupíte v Duty Free na pas, a to jen během pár dní po příletu. V rámci all inclusive se nalévají místní nápoje.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури до Єгипту з Праги — Хургада, Шарм", "Zájezdy do Egypta — Hurghada, Šarm"),
+      title: tx("Тури до Єгипту з Чехії — ціни в кронах", "Zájezdy do Egypta z Česka – ceny v Kč"),
       description: tx(
-        "Відпочинок в Єгипті цілий рік з вильотом з Чехії. Хургада, Шарм-ель-Шейх, Марса-Алам. Ціни в CZK, підбір туру в Telegram.",
-        "Dovolená v Egyptě celý rok s odletem z Česka. Hurghada, Šarm aš-Šajch, Marsa Alam. Ceny v CZK, výběr zájezdu přes Telegram.",
+        "Тури до Єгипту з Чехії цілий рік: Хургада, Шарм-ель-Шейх, Марса-Алам. Ціни в кронах, застраховані чеські туроператори. Альона підбере 3 готелі.",
+        "Zájezdy do Egypta z Česka po celý rok: Hurghada, Sharm El Sheikh, Marsa Alam. Ceny v Kč, pojištěné české CK. Aljona vám vybere 3 hotely na míru.",
       ),
     },
   },
@@ -362,20 +362,20 @@ export const destinations: Destination[] = [
     slug: "greece",
     name: tx("Греція", "Řecko"),
     nameTo: tx("до Греції", "do Řecka"),
-    nameIn: tx("у Греції", "v Řecku"),
+    nameIn: tx("у Греції", "v Řecku"),
     flag: "🇬🇷",
     heroImage: hero("greece"),
-    tagline: tx("Тисяча островів і найчистіше море Європи", "Tisíc ostrovů a nejčistší moře Evropy"),
+    tagline: tx("Острови, оливки, тиша", "Ostrovy, olivy, klid"),
     teaser: tx(
-      "Крит, Халкідікі, Родос і Санторіні — таверни, оливки та море кольору бірюзи.",
-      "Kréta, Chalkidiki, Rhodos a Santorini — taverny, olivy a tyrkysové moře.",
+      "Крит, Халкідікі, Родос, Санторіні: таверна біля води, фета з оливковою олією й море, прозоре до самого дна.",
+      "Kréta, Chalkidiki, Rhodos, Santorini: taverna u vody, feta s olivovým olejem a moře průzračné až na dno.",
     ),
     intro: tx(
-      "Греція — колиска європейської цивілізації, країна тисячі островів і неймовірно чистого моря. Тут оживають міфи, а кожен вечір пахне свіжими оливками та звучить сіртакі. З Праги до грецьких островів летіти менше трьох годин, а Греція — частина Шенгену, тож подорож максимально проста. Ananas Tour допоможе обрати острів і готель саме під ваш формат відпочинку.",
-      "Řecko je kolébkou evropské civilizace, zemí tisíce ostrovů a neuvěřitelně čistého moře. Mýty tu ožívají a každý večer voní čerstvými olivami a zní sirtaki. Z Prahy na řecké ostrovy letíte necelé tři hodiny a Řecko je součástí Schengenu, takže je cesta maximálně jednoduchá. Ananas Tour vám pomůže vybrat ostrov i hotel přesně podle vašich představ.",
+      "Греція — це щонайменше чотири різні відпустки: Крит, коли хочеться всього одразу, Халкідікі для сімей, Родос для історії, Санторіні для заходів сонця. Скажіть, яка з них ваша, — і я підберу готель.",
+      "Řecko, to jsou nejmíň čtyři dovolené: Kréta, když chcete všechno najednou, Chalkidiki pro rodiny, Rhodos pro historii a Santorini pro západy slunce. Řekněte, která je ta vaše, a já k ní najdu hotel.",
     ),
-    bestSeason: tx("травень – жовтень", "květen – říjen"),
-    flightTime: tx("≈ 2,5–3 год з Праги", "cca 2,5–3 h z Prahy"), // TODO(client): verify
+    bestSeason: tx("травень–жовтень", "květen–říjen"),
+    flightTime: tx("≈ 2,5–3 год з Праги", "cca 2,5–3 h z Prahy"), // TODO(client): verify
     airports: ALL_CZ, // TODO(client): verify seasonal departures
     currency: tx("євро (EUR)", "euro (EUR)"),
     entry: ENTRY_SCHENGEN,
@@ -383,41 +383,41 @@ export const destinations: Destination[] = [
       {
         title: tx("Крит", "Kréta"),
         text: tx(
-          "Найбільший острів Греції: руїни Кносського палацу, рожеві піски Елафонісі, чудова кухня та безкінечні пляжі.",
-          "Největší řecký ostrov: ruiny paláce v Knóssu, růžový písek na Elafonisi, skvělá kuchyně a nekonečné pláže.",
+          "Найбільший острів Греції: Кносський палац, рожевий пісок Елафонісі й пляжі на будь-який смак — від міських до зовсім диких.",
+          "Největší řecký ostrov: palác v Knóssu, růžový písek na Elafonisi a pláže pro každého – od městských po úplně divoké.",
         ),
         image: img("greece", 1),
       },
       {
         title: tx("Халкідікі", "Chalkidiki"),
         text: tx(
-          "Півострів у формі тризуба Посейдона: соснові ліси, золотий пісок і спокійне море — ідеально для родин.",
-          "Poloostrov ve tvaru Poseidonova trojzubce: borové lesy, zlatý písek a klidné moře — ideální pro rodiny.",
+          "Півострів у формі тризуба: сосни до самої води, золотий пісок і спокійне море. Для сімей із дітьми — один із найкращих варіантів.",
+          "Poloostrov ve tvaru trojzubce: borovice až k vodě, zlatý písek a klidné moře. Pro rodiny s dětmi jedna z nejjistějších sázek.",
         ),
         image: img("greece", 2),
       },
       {
-        title: tx("Родос і Санторіні", "Rhodos a Santorini"),
+        title: tx("Родос і Санторіні", "Rhodos a Santorini"),
         text: tx(
-          "Родос — острів лицарів і сонця. Санторіні — найфотогенічніший острів світу з білими будиночками на скелях і легендарними заходами сонця.",
-          "Rhodos je ostrov rytířů a slunce. Santorini je nejfotogeničtější ostrov světa s bílými domky na útesech a legendárními západy slunce.",
+          "Родос — середньовічне місто лицарів і пляжі на два моря. Санторіні — білі будиночки на скелях і захід сонця, на який збирається пів острова.",
+          "Rhodos: středověké město rytířů a pláže u dvou moří. Santorini: bílé domky na útesech a západ slunce, na který se schází půl ostrova.",
         ),
         image: img("greece", 3),
       },
     ],
     money: [
       {
-        title: tx("Готівка чи картка?", "Hotovost, nebo karta?"),
+        title: tx("Готівка чи картка?", "Hotově, nebo kartou?"),
         text: tx(
-          "Валюта — євро. У готелях і супермаркетах картки приймають без проблем, але в маленьких тавернах на островах краще мати готівку. Перед поїздкою зручно поміняти кілька сотень крон на євро ще в Чехії.",
-          "Platí se eurem. V hotelech a supermarketech karty berou bez problémů, v malých tavernách na ostrovech se ale hodí hotovost. Pár stovek korun na eura si pohodlně vyměníte ještě v Česku.",
+          "У готелях і супермаркетах картку беруть без питань, а в маленьких тавернах на островах краще мати готівку. Трохи євро зручно взяти ще з Чехії.",
+          "V hotelech a supermarketech berou karty bez řečí, v malých tavernách na ostrovech se ale hodí hotovost. Pár eur si klidně vezměte už z Česka.",
         ),
       },
       {
-        title: tx("Чайові в тавернах", "Spropitné v tavernách"),
+        title: tx("Чайові в тавернах", "Dýško v taverně"),
         text: tx(
-          "Традиційно залишають близько 10 % від рахунку, якщо обслуговування не включене в чек.",
-          "Obvykle se nechává kolem 10 % z účtu, pokud obsluha není zahrnutá v ceně.",
+          "Зазвичай близько 10 % суми, якщо обслуговування не включено в рахунок.",
+          "Obvykle kolem 10 %, pokud obsluha není započítaná v účtu.",
         ),
       },
     ],
@@ -426,75 +426,75 @@ export const destinations: Destination[] = [
         // TODO(client): verify travel rules for temporary-protection holders.
         title: tx("В’їзд", "Vstup"),
         text: tx(
-          "Греція — у Шенгені. Зазвичай достатньо біометричного паспорта та чинного документа про перебування в Чехії. Ми підкажемо, що взяти саме у вашій ситуації.",
-          "Řecko je ve Schengenu. Obvykle stačí biometrický pas a platný doklad o pobytu v Česku. Poradíme, co si vzít právě ve vaší situaci.",
+          "Греція — у Шенгені: зазвичай досить біометричного паспорта й чинного документа про перебування в Чехії. Перевірю саме для вашої ситуації.",
+          "Řecko je ve Schengenu: obvykle stačí biometrický pas a platný doklad o pobytu v Česku. Ověřím pro vaši situaci.",
         ),
       },
       {
         title: tx("Сієста", "Siesta"),
         text: tx(
-          "З 14:00 до 17:00 багато магазинів і лавок зачинені — саме час для холодного фраппе.",
-          "Mezi 14. a 17. hodinou je řada obchodů zavřená — ideální čas na ledové frappé.",
+          "З 14:00 до 17:00 багато крамниць зачинено. Саме час для холодного фраппе — так роблять і самі греки.",
+          "Mezi 14. a 17. hodinou má spousta obchodů zavřeno. Ideální čas na ledové frappé – přesně tak to dělají i Řekové.",
         ),
       },
       {
-        title: tx("Транспорт", "Doprava"),
+        title: tx("Пороми й авто", "Trajekty a auto"),
         text: tx(
-          "Оренда авто — найкращий спосіб побачити дикі пляжі. Між островами курсують пороми та швидкісні катамарани.",
-          "Půjčené auto je nejlepší cesta k divokým plážím. Mezi ostrovy jezdí trajekty a rychlé katamarány.",
+          "До диких пляжів найпростіше дістатися орендованим авто. Між островами ходять пороми й швидкісні катамарани.",
+          "K divokým plážím se nejsnáz dostanete půjčeným autem. Mezi ostrovy pendlují trajekty a rychlé katamarány.",
         ),
       },
       {
-        title: tx("Кухня", "Kuchyně"),
+        title: tx("Що скуштувати", "Co ochutnat"),
         text: tx(
-          "Спробуйте справжній грецький салат (хоріатікі), мусаку та свіжі морепродукти.",
-          "Ochutnejte pravý řecký salát (choriatiki), musaku a čerstvé plody moře.",
+          "Справжній грецький салат хоріатікі, мусаку й свіжі морепродукти в портовій таверні.",
+          "Opravdový řecký salát choriatiki, musaku a čerstvé plody moře v taverně u přístavu.",
         ),
       },
     ],
     faq: [
       {
-        q: tx("Пляжі в Греції платні?", "Jsou pláže v Řecku placené?"),
+        q: tx("Пляжі в Греції платні?", "Jsou pláže v Řecku placené?"),
         a: tx(
-          "Усі пляжі належать державі, вхід вільний. Платити треба за шезлонги та парасольки (близько 10–15 € за комплект). Деякі готелі включають їх у ціну — ми уточнимо це при бронюванні.",
-          "Všechny pláže jsou státní a vstup je volný. Platí se za lehátka a slunečníky (zhruba 10–15 € za set). Některé hotely je mají v ceně — ověříme to při rezervaci.",
+          "Ні, вхід на пляж вільний: усі пляжі належать державі. Платите лише за шезлонги й парасольку — приблизно 10–15 € за комплект. У деяких готелях вони вже в ціні, це я уточню під час бронювання.",
+          "Ne. Všechny pláže jsou státní a vstup je volný. Platí se jen lehátka a slunečník, zhruba 10–15 € za dvě lehátka se slunečníkem. Některé hotely je mají v ceně – to ověřím při rezervaci.",
         ),
       },
       {
         q: tx("Як подорожувати між островами?", "Jak cestovat mezi ostrovy?"),
         a: tx(
-          "Найпопулярніше — пороми та катамарани. Квитки в липні–серпні краще купувати заздалегідь. Можна також замовити одноденну екскурсію з трансфером від готелю.",
-          "Nejoblíbenější jsou trajekty a katamarány. V červenci a srpnu kupujte lístky předem. Můžete si také objednat jednodenní výlet s transferem z hotelu.",
+          "Поромами або катамаранами. У липні й серпні квитки краще купувати заздалегідь. Простіший варіант — одноденна екскурсія з трансфером від готелю.",
+          "Trajektem nebo katamaránem. V červenci a srpnu kupujte lístky předem. Nejjednodušší je jednodenní výlet s transferem z hotelu.",
         ),
       },
       {
         // TODO(client): verify driving licence rules for Ukrainian vs. exchanged Czech licences.
-        q: tx("Чи потрібні міжнародні права для оренди авто?", "Potřebuji k půjčení auta mezinárodní řidičák?"),
+        q: tx("Чи потрібні міжнародні права для оренди авто?", "Potřebuju na půjčení auta mezinárodní řidičák?"),
         a: tx(
-          "Залежить від вашого посвідчення: чеські права діють у всьому ЄС, для українських вимоги прокатних компаній різняться. Водієві зазвичай має бути від 21–23 років і мати стаж 1–2 роки. Ми перевіримо умови конкретного прокату.",
-          "Záleží na vašem průkazu: český řidičák platí v celé EU, u ukrajinského se požadavky půjčoven liší. Řidiči musí být obvykle aspoň 21–23 let a mít praxi 1–2 roky. Podmínky konkrétní půjčovny ověříme.",
+          "Залежить від посвідчення. Чеські права діють у всьому ЄС, а для українських вимоги прокатів різняться. Зазвичай водієві має бути щонайменше 21–23 роки, а стаж — від 1–2 років. Умови конкретного прокату перевірю.",
+          "Záleží na průkazu. Český řidičák platí v celé EU, u ukrajinského se požadavky půjčoven liší. Řidiči musí být obvykle aspoň 21–23 let a mít 1–2 roky praxe. Podmínky konkrétní půjčovny ověřím.",
         ),
       },
       {
-        q: tx("Яке море найтепліше?", "Kde je nejteplejší moře?"),
+        q: tx("Де море найтепліше?", "Kde je nejteplejší moře?"),
         a: tx(
-          "Егейське (Крит, Родос) прогрівається трохи швидше, але вітряніше. Іонічне (Корфу, Закінф) — спокійніше. На скелястих ділянках бувають морські їжаки, тож візьміть коралки.",
-          "Egejské moře (Kréta, Rhodos) se ohřeje o něco dřív, ale víc fouká. Jónské (Korfu, Zakynthos) je klidnější. Na skalnatých místech bývají ježovky, vezměte si boty do vody.",
+          "Егейське (Крит, Родос) прогрівається трохи раніше, але там вітряніше. Іонічне (Корфу, Закінф) — спокійніше. На скелястих ділянках бувають морські їжаки, тож коралки не завадять.",
+          "Egejské moře (Kréta, Rhodos) se ohřeje o něco dřív, zato víc fouká. Jónské (Korfu, Zakynthos) je klidnější. Na skalnatých místech bývají ježovky, takže se hodí boty do vody.",
         ),
       },
       {
-        q: tx("Що привезти з Греції?", "Co si přivézt z Řecka?"),
+        q: tx("Що привезти з Греції?", "Co si přivézt z Řecka?"),
         a: tx(
-          "Оливкову олію Extra Virgin, мед із чебрецю, сир фета та косметику з мастикою. Ми підкажемо ринки, де купують самі греки.",
-          "Olivový olej extra virgin, tymiánový med, sýr fetu a kosmetiku s mastichou. Poradíme vám trhy, kde nakupují sami Řekové.",
+          "Оливкову олію extra virgin, чебрецевий мед, фету й косметику з мастикою. А де купують самі греки, підкажу перед поїздкою.",
+          "Olivový olej extra virgin, tymiánový med, fetu a kosmetiku s mastichou. A kde nakupují sami Řekové, prozradím před cestou.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури до Греції з Праги — Крит, Родос", "Zájezdy do Řecka — Kréta, Rhodos"),
+      title: tx("Тури до Греції з Чехії — ціни в кронах", "Zájezdy do Řecka z Česka – ceny v Kč"),
       description: tx(
-        "Відпочинок у Греції з вильотом із Праги, Брна, Острави, Пардубиць. Крит, Халкідікі, Родос, Санторіні. Підбір туру в Telegram.",
-        "Dovolená v Řecku s odletem z Prahy, Brna, Ostravy a Pardubic. Kréta, Chalkidiki, Rhodos, Santorini. Výběr zájezdu přes Telegram.",
+        "Тури до Греції з Чехії: Крит, Халкідікі, Родос, Санторіні. Ціни в кронах, вильоти з чотирьох аеропортів. Альона підбере вам острів і 3 готелі.",
+        "Zájezdy do Řecka z Česka: Kréta, Chalkidiki, Rhodos, Santorini. Ceny v Kč, odlety ze čtyř letišť. Aljona vám vybere ostrov i 3 hotely na míru.",
       ),
     },
   },
@@ -503,20 +503,20 @@ export const destinations: Destination[] = [
     slug: "bulgaria",
     name: tx("Болгарія", "Bulharsko"),
     nameTo: tx("до Болгарії", "do Bulharska"),
-    nameIn: tx("у Болгарії", "v Bulharsku"),
+    nameIn: tx("у Болгарії", "v Bulharsku"),
     flag: "🇧🇬",
     heroImage: hero("bulgaria"),
-    tagline: tx("Золоті пляжі Чорного моря поруч", "Zlaté pláže Černého moře kousek od domova"),
+    tagline: tx("Близько. Навіть автобусом", "Blízko. I autobusem"),
     teaser: tx(
-      "Сонячний Берег, Золоті Піски, Несебр — доступне море для всієї родини, літаком або автобусом.",
-      "Slunečné pobřeží, Zlaté písky, Nesebar — dostupné moře pro celou rodinu, letadlem i autobusem.",
+      "Сонячний Берег, Золоті Піски, Несебр: пологий вхід у море для дітей і дорога хоч літаком, хоч автобусом.",
+      "Slunečné pobřeží, Zlaté písky, Nesebar: pozvolný vstup do moře, jaký mají děti rády, a cesta letadlem, nebo klidně autobusem.",
     ),
     intro: tx(
-      "Болгарія — це сонячне узбережжя з безкраїми золотими пляжами, гори та затишні старовинні містечка. Тут кожен знайде свій формат: від активного молодіжного відпочинку до спокійної сімейної відпустки. Літак із Праги долітає до Бургаса чи Варни приблизно за дві години, а для економних є автобусні тури. Ananas Tour відкриє для вас найкращі курорти Чорноморського узбережжя.",
-      "Bulharsko je slunečné pobřeží s nekonečnými zlatými plážemi, hory a útulná historická městečka. Každý si tu najde to své: od dovolené plné zábavy po klidný rodinný odpočinek. Letadlo z Prahy doletí do Burgasu nebo Varny zhruba za dvě hodiny a pro ty, kdo chtějí ušetřit, jsou tu autobusové zájezdy. Ananas Tour vám ukáže nejlepší letoviska černomořského pobřeží.",
+      "Найближче море, до якого з Чехії можна й долетіти, і доїхати автобусом. Літаком до Бургаса чи Варни — близько двох годин, а на місці — ситна кухня й помірні ціни.",
+      "Nejbližší moře, kam se z Česka dá letět i dojet autobusem. Do Burgasu nebo Varny letíte zhruba dvě hodiny a na místě čeká vydatná kuchyně a příjemné ceny.",
     ),
-    bestSeason: tx("червень – вересень", "červen – září"),
-    flightTime: tx("≈ 2 год з Праги", "cca 2 h z Prahy"), // TODO(client): verify
+    bestSeason: tx("червень–вересень", "červen–září"),
+    flightTime: tx("≈ 2 год з Праги", "cca 2 h z Prahy"), // TODO(client): verify
     airports: ALL_CZ, // TODO(client): verify seasonal departures
     // TODO(client): verify — Bulgaria adopted the euro on 1 Jan 2026.
     currency: tx("євро (EUR)", "euro (EUR)"),
@@ -525,24 +525,24 @@ export const destinations: Destination[] = [
       {
         title: tx("Золоті Піски", "Zlaté písky"),
         text: tx(
-          "Перлина болгарської Рив’єри з широкими пляжами та розвиненою інфраструктурою — для любителів нічного життя та водних розваг.",
-          "Perla bulharské riviéry se širokými plážemi a skvělým zázemím — pro milovníky nočního života a vodních sportů.",
+          "Широкі пляжі, водні розваги й вечори, які плавно переходять у ніч. Для тих, хто приїхав не висипатися.",
+          "Široké pláže, vodní radovánky a večery, které plynule přecházejí v noc. Pro ty, kdo sem nepřijeli spát.",
         ),
         image: img("bulgaria", 1),
       },
       {
         title: tx("Сонячний Берег", "Slunečné pobřeží"),
         text: tx(
-          "Найбільший курорт країни з дюнами та чистим морем. Пологий вхід у воду й аквапарки — ідеально для родин із дітьми.",
-          "Největší letovisko v zemi s dunami a čistým mořem. Pozvolný vstup do vody a aquaparky — ideální pro rodiny s dětmi.",
+          "Найбільший курорт країни: дюни, чисте море, пологий вхід і аквапарки. Із дітьми — саме сюди.",
+          "Největší letovisko v zemi: duny, čisté moře, pozvolný vstup a aquaparky. S dětmi rovnou sem.",
         ),
         image: img("bulgaria", 2),
       },
       {
         title: tx("Старий Несебр", "Starý Nesebar"),
         text: tx(
-          "Місто-музей під відкритим небом зі списку ЮНЕСКО: середньовічна архітектура та затишні рибні ресторанчики.",
-          "Město-muzeum pod širým nebem zapsané na seznamu UNESCO: středověká architektura a útulné rybí restaurace.",
+          "Місто-музей під охороною ЮНЕСКО: бруківка, середньовічні церкви й рибні ресторанчики біля самої води.",
+          "Město-muzeum pod ochranou UNESCO: dlážděné uličky, středověké kostely a rybí restaurace přímo u vody.",
         ),
         image: img("bulgaria", 3),
       },
@@ -552,15 +552,15 @@ export const destinations: Destination[] = [
         // TODO(client): verify — euro since 1 Jan 2026; lev may still appear on some price tags.
         title: tx("Валюта", "Měna"),
         text: tx(
-          "З 2026 року Болгарія розраховується в євро, тож брати з собою зручно саме євро. Крони тут не міняють вигідно — поміняйте гроші ще в Чехії або платіть карткою.",
-          "Od roku 2026 se v Bulharsku platí eurem, takže si berte eura. Koruny se tu výhodně nevymění — směňte je ještě v Česku nebo plaťte kartou.",
+          "З 2026 року в Болгарії платять в євро. Крони тут міняють невигідно, тож беріть євро з Чехії або платіть карткою.",
+          "Od roku 2026 se v Bulharsku platí eurem. Koruny se tu mění nevýhodně, takže si eura vezměte z Česka, nebo plaťte kartou.",
         ),
       },
       {
-        title: tx("Ціни та розрахунки", "Ceny a placení"),
+        title: tx("Картка чи готівка?", "Kartou, nebo hotově?"),
         text: tx(
-          "Болгарія — одна з найдоступніших країн Європи. Картою можна платити майже всюди, але для ринків і дрібних лавок майте трохи готівки.",
-          "Bulharsko patří k nejlevnějším zemím Evropy. Kartou zaplatíte skoro všude, na trhy a v malých stáncích se ale hodí hotovost.",
+          "Болгарія — одна з найдоступніших країн Європи. Карткою платять майже скрізь, а на ринок і до маленьких яток візьміть трохи готівки.",
+          "Bulharsko patří k nejlevnějším zemím Evropy. Kartou zaplatíte skoro všude, na trhy a ke stánkům si ale vezměte trochu hotovosti.",
         ),
       },
     ],
@@ -569,75 +569,75 @@ export const destinations: Destination[] = [
         // TODO(client): verify travel rules for temporary-protection holders.
         title: tx("В’їзд", "Vstup"),
         text: tx(
-          "Болгарія входить до Шенгенської зони. Зазвичай достатньо біометричного паспорта та чинного документа про перебування в ЧР — уточніть у нас свою ситуацію.",
-          "Bulharsko je součástí Schengenu. Obvykle stačí biometrický pas a platný doklad o pobytu v ČR — svou situaci s námi raději proberte.",
+          "Болгарія — у Шенгені: зазвичай досить біометричного паспорта й чинного документа про перебування в Чехії. Перевірю саме для вашої ситуації.",
+          "Bulharsko je ve Schengenu: obvykle stačí biometrický pas a platný doklad o pobytu v Česku. Ověřím pro vaši situaci.",
         ),
       },
       {
-        title: tx("Жести", "Gesta"),
+        title: tx("Кивок означає «ні»", "Kývnutí znamená ne"),
         text: tx(
-          "Кивок головою в Болгарії часто означає «ні», а похитування в боки — «так». Краще перепитуйте словами «да» чи «не».",
-          "Kývnutí hlavou v Bulharsku často znamená „ne“ a vrtění „ano“. Raději se ptejte slovy „da“ a „ne“.",
+          "Болгари часто кивають, коли кажуть «ні», і хитають головою, коли «так». Щоб не заплутатися, перепитуйте словами: «да» чи «не».",
+          "Kývnutí tu často znamená „ne“ a vrtění hlavou „ano“. Abyste se nezamotali, nechte si odpovědět slovy: „da“, nebo „ne“.",
         ),
       },
       {
-        title: tx("Мінеральні джерела", "Minerální prameny"),
+        title: tx("Термальні басейни", "Termální bazény"),
         text: tx(
-          "Поєднайте море з оздоровленням: у Св. Костянтині та Олені термальна вода надходить прямо в басейни готелів.",
-          "Spojte moře s wellness: ve Sv. Konstantinu a Eleně teče termální voda přímo do hotelových bazénů.",
+          "Море можна поєднати з оздоровленням: на курорті Святі Костянтин і Олена термальна вода надходить просто в готельні басейни.",
+          "K moři si můžete přibalit i lázně: v letovisku Sv. Konstantin a Elena teče termální voda přímo do hotelových bazénů.",
         ),
       },
       {
         title: tx("Смаки Болгарії", "Chutě Bulharska"),
         text: tx(
-          "Спробуйте шопський салат, баніцу з бринзою, каварму та місцеві вина — кухня ситна й дуже близька нам за смаком.",
-          "Ochutnejte šopský salát, banicu s balkánským sýrem, kavarmu a místní víno — kuchyně je vydatná a chutná jako domácí.",
+          "Шопський салат, баніца з бринзою, каварма й місцеве вино. Ситно, недорого — і дуже схоже на домашнє.",
+          "Šopský salát, banica se sýrem, kavarma a místní víno. Vydatné, levné a skoro jako od mámy.",
         ),
       },
     ],
     faq: [
       {
         // TODO(client): verify bus tour duration and availability from CZ.
-        q: tx("Скільки їхати автобусом із Чехії?", "Jak dlouho se jede autobusem z Česka?"),
+        q: tx("Скільки їхати автобусом із Чехії?", "Jak dlouho se jede autobusem z Česka?"),
         a: tx(
-          "Дорога з Праги чи Брна триває приблизно добу. Це найбюджетніший спосіб дістатися моря, але якщо цінуєте час — ми підберемо авіатур із вильотом із найближчого до вас аеропорту.",
-          "Cesta z Prahy nebo Brna trvá zhruba den. Je to nejlevnější způsob, jak se dostat k moři, ale pokud vám záleží na čase, vybereme letecký zájezd z letiště nejblíž vám.",
+          "Близько доби. Це найбюджетніший спосіб дістатися моря, але якщо шкода часу, підберу авіатур із найближчого до вас аеропорту.",
+          "Zhruba 24 hodin. Je to nejlevnější cesta k moři, ale pokud je vám líto času, vyberu letecký zájezd z letiště, které máte nejblíž.",
         ),
       },
       {
-        q: tx("Чи можна прийти на пляж зі своєю парасолькою?", "Můžu na pláž s vlastním slunečníkem?"),
+        q: tx("Можна на пляж зі своєю парасолькою?", "Můžu na pláž s vlastním slunečníkem?"),
         a: tx(
-          "Так. Пляжі поділені на платні зони з шезлонгами та вільні зони, де можна відпочивати зі своїм рушником і парасолькою безкоштовно.",
-          "Ano. Pláže jsou rozdělené na placené zóny s lehátky a volné zóny, kde můžete být zdarma s vlastním ručníkem a slunečníkem.",
+          "Так. На пляжах є платні зони з шезлонгами й вільні, де можна безкоштовно розкластися зі своїм рушником і парасолькою.",
+          "Ano. Pláže se dělí na placené zóny s lehátky a volné, kde se zdarma rozložíte s vlastním ručníkem i slunečníkem.",
         ),
       },
       {
-        q: tx("Брати «все включено» чи харчуватися в тавернах?", "Vzít all inclusive, nebo jíst v tavernách?"),
+        q: tx("Брати «все включено» чи харчуватися в місті?", "Vzít all inclusive, nebo jíst ve městě?"),
         a: tx(
-          "Болгарія — одна з небагатьох країн, де вигідно брати лише сніданки: у місцевих механах ціни демократичні, а порції величезні.",
-          "Bulharsko je jedna z mála zemí, kde se vyplatí jen snídaně: v místních mechanách jsou ceny příznivé a porce obrovské.",
+          "Часто вигідніше брати лише сніданки. У механах — болгарських корчмах — ціни помірні, а порції такі, що вечеря легко замінить і обід.",
+          "Často se vyplatí vzít jen snídaně. V mehanách, bulharských hospůdkách, jsou ceny příznivé a porce tak velké, že vám večeře klidně nahradí i oběd.",
         ),
       },
       {
-        q: tx("Де знайти гарячі джерела біля моря?", "Kde najdu termální prameny u moře?"),
+        q: tx("Де знайти термальні джерела біля моря?", "Kde najdu termální prameny u moře?"),
         a: tx(
-          "Найкращий вибір — курорт Св. Костянтин і Олена або Сонячний День. Термальна вода там надходить прямо в басейни готелів.",
-          "Nejlepší volba je letovisko Sv. Konstantin a Elena nebo Sunny Day. Termální voda tam teče přímo do hotelových bazénů.",
+          "На курортах Святі Костянтин і Олена та Сонячний День: там багато готелів наповнює басейни термальною водою.",
+          "V letoviscích Sunny Day a Sv. Konstantin a Elena. Spousta hotelů tam napouští bazény termální vodou.",
         ),
       },
       {
-        q: tx("Чи приймають у Болгарії крони?", "Berou v Bulharsku koruny?"),
+        q: tx("Чи приймають у Болгарії крони?", "Berou v Bulharsku koruny?"),
         a: tx(
-          "Ні, розрахунки в євро. Найзручніше платити карткою чеського банку або взяти готівкові євро з дому.",
-          "Ne, platí se eurem. Nejpohodlnější je platit kartou české banky nebo si vzít hotovost v eurech z domova.",
+          "Ні, тут платять в євро. Найпростіше — картка чеського банку або готівкові євро, які ви взяли з Чехії.",
+          "Ne, platí se eurem. Nejjednodušší je karta české banky nebo hotovost v eurech, kterou si přivezete z Česka.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури до Болгарії з Чехії — літак і автобус", "Zájezdy do Bulharska — letecky i autobusem"),
+      title: tx("Тури до Болгарії з Чехії літаком і автобусом", "Zájezdy do Bulharska z Česka – i autobusem"),
       description: tx(
-        "Відпочинок у Болгарії з Праги, Брна, Острави. Сонячний Берег, Золоті Піски, Несебр. Ціни в CZK, підбір туру в Telegram.",
-        "Dovolená v Bulharsku z Prahy, Brna a Ostravy. Slunečné pobřeží, Zlaté písky, Nesebar. Ceny v CZK, výběr zájezdu přes Telegram.",
+        "Тури до Болгарії з Чехії літаком або автобусом: Сонячний Берег, Золоті Піски, Несебр. Ціни в кронах. Альона підбере 3 готелі для вашої родини.",
+        "Zájezdy do Bulharska z Česka letecky i autobusem: Slunečné pobřeží, Zlaté písky, Nesebar. Ceny v Kč. Aljona vám vybere 3 hotely pro celou rodinu.",
       ),
     },
   },
@@ -646,20 +646,20 @@ export const destinations: Destination[] = [
     slug: "uae",
     name: tx("ОАЕ", "SAE"),
     nameTo: tx("до ОАЕ", "do SAE"),
-    nameIn: tx("в ОАЕ", "v SAE"),
+    nameIn: tx("в ОАЕ", "v SAE"),
     flag: "🇦🇪",
     heroImage: hero("uae"),
-    tagline: tx("Пустеля, хмарочоси й сонце взимку", "Poušť, mrakodrapy a slunce i v zimě"),
+    tagline: tx("Пляж зранку, Дубай увечері", "Ráno pláž, večer mrakodrapy"),
     teaser: tx(
-      "Дубай, Абу-Дабі та Рас-ель-Хайма — розкішні пляжі, шопінг і розваги світового рівня.",
-      "Dubaj, Abú Dhabí a Ras al-Chajma — luxusní pláže, nákupy a zábava světové úrovně.",
+      "Дубай, Абу-\u2060Дабі, Рас-\u2060ель-\u2060Хайма: зимове сонце, пляжі просто в місті й хмарочоси, на які дивитеся з басейну.",
+      "Dubaj, Abú Dhabí, Ras Al Khaimah: zimní slunce, pláže přímo ve městě a mrakodrapy, na které koukáte z bazénu.",
     ),
     intro: tx(
-      "Об’єднані Арабські Емірати — країна, де пустеля зустрічається з футуристичними містами, а традиції Сходу — з технологіями майбутнього. Штучні острови, найвищі хмарочоси світу та тепла Перська затока з жовтня до квітня. З Праги до Дубая — прямий переліт, тож Емірати ідеальні для зимової відпустки. Ananas Tour підбере готель у Дубаї, спокійному аристократичному Абу-Дабі чи на пляжах Рас-ель-Хайми.",
-      "Spojené arabské emiráty jsou zemí, kde se poušť potkává s futuristickými městy a tradice Orientu s technologiemi budoucnosti. Umělé ostrovy, nejvyšší mrakodrapy světa a teplý Perský záliv od října do dubna. Z Prahy do Dubaje se létá přímo, takže jsou Emiráty ideální na zimní dovolenou. Ananas Tour vybere hotel v Dubaji, v klidném a noblesním Abú Dhabí nebo na plážích Ras al-Chajmy.",
+      "Емірати — найкоротший шлях від чеського листопада до літа: прямий переліт, а з жовтня до квітня — тепло без сорокаградусної спеки. Підкажу, де жити: у Дубаї, спокійному Абу-Дабі чи в Рас-ель-Хаймі.",
+      "Emiráty jsou nejkratší cesta z českého listopadu do léta: přímý let a od října do dubna teplo bez čtyřicetistupňových veder. Poradím, kde bydlet: v Dubaji, v klidném Abú Dhabí, nebo v Ras Al Khaimah.",
     ),
-    bestSeason: tx("жовтень – квітень", "říjen – duben"),
-    flightTime: tx("≈ 6 год з Праги", "cca 6 h z Prahy"), // TODO(client): verify
+    bestSeason: tx("жовтень–квітень", "říjen–duben"),
+    flightTime: tx("≈ 6 год з Праги", "cca 6 h z Prahy"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("дирхам ОАЕ (AED)", "dirham SAE (AED)"),
     entry: ENTRY_CHECK,
@@ -667,41 +667,41 @@ export const destinations: Destination[] = [
       {
         title: tx("Дубай", "Dubaj"),
         text: tx(
-          "Бурдж-Халіфа, Пальма Джумейра, гігантські моли та пляжі в самому місті — для тих, хто хоче побачити все й одразу.",
-          "Burdž Chalífa, Palma Džumeira, obří nákupní centra a pláže přímo ve městě — pro ty, kdo chtějí vidět všechno najednou.",
+          "Бурдж-Халіфа, Пальма Джумейра, величезні моли й пляжі посеред міста. Для тих, хто хоче побачити все й одразу — і ще встигнути на захід сонця.",
+          "Burj Khalifa, Palm Jumeirah, obří nákupní centra a pláže uprostřed města. Pro ty, kdo chtějí vidět všechno najednou – a ještě stihnout západ slunce.",
         ),
         image: img("uae", 1),
       },
       {
         title: tx("Абу-Дабі", "Abú Dhabí"),
         text: tx(
-          "Велична столиця: мечеть Шейха Заїда, Лувр Абу-Дабі та острів Яс із Ferrari World, трасою Формули-1 та аквапарками.",
-          "Majestátní hlavní město: mešita šejcha Zajída, Louvre Abú Dhabí a ostrov Yas s Ferrari World, okruhem F1 a aquaparky.",
+          "Столиця, спокійніша й величніша за Дубай: мечеть шейха Заїда, Лувр Абу-Дабі та острів Яс із Ferrari World, трасою Формули-1 й аквапарками.",
+          "Hlavní město, klidnější a vznešenější než Dubaj: mešita šejcha Zajída, Louvre Abú Dhabí a ostrov Yas s Ferrari World, okruhem F1 a aquaparky.",
         ),
         image: img("uae", 2),
       },
       {
-        title: tx("Рас-ель-Хайма", "Ras al-Chajma"),
+        title: tx("Рас-ель-Хайма", "Ras Al Khaimah"),
         text: tx(
-          "Спокійніший емірат із широкими пляжами, горами Хаджар і чудовими all inclusive — часто вигідніше за Дубай.",
-          "Klidnější emirát se širokými plážemi, pohořím Hadžar a skvělými all inclusive hotely — často výhodnější než Dubaj.",
+          "Широкі пляжі, гори Хаджар і готелі «все включено» — часто вигідніше, ніж у Дубаї. Сюди їдуть відпочивати, а не бігати.",
+          "Široké pláže, pohoří Hadžar a hotely s all inclusive, často výhodněji než v Dubaji. Sem se jezdí odpočívat, ne běhat po památkách.",
         ),
         image: img("uae", 3),
       },
     ],
     money: [
       {
-        title: tx("Готівка чи картка?", "Hotovost, nebo karta?"),
+        title: tx("Готівка чи картка?", "Hotově, nebo kartou?"),
         text: tx(
-          "Дирхам прив’язаний до долара, тож курс стабільний. Картки приймають майже скрізь — від бутиків до таксі. Для чайових і традиційних ринків (суків) майте трохи готівки.",
-          "Dirham je navázaný na dolar, takže je kurz stabilní. Karty berou skoro všude — od butiků po taxi. Na spropitné a tradiční trhy (súky) mějte trochu hotovosti.",
+          "Дирхам прив’язаний до долара, тож курс стабільний. Картки беруть майже скрізь — від бутиків до таксі, а готівка знадобиться на чайові й традиційні ринки.",
+          "Dirham je navázaný na dolar, takže je kurz stabilní. Karty berou skoro všude, od butiků po taxi, hotovost se hodí na spropitné a tradiční trhy (súky).",
         ),
       },
       {
-        title: tx("Валютний обмін", "Směna"),
+        title: tx("Де міняти гроші?", "Kde měnit peníze?"),
         text: tx(
-          "Євро чи долари вигідніше міняти в обмінниках (Exchange) у торгових центрах, ніж у готелі чи аеропорту.",
-          "Eura nebo dolary se vyplatí měnit ve směnárnách (Exchange) v nákupních centrech, ne v hotelu nebo na letišti.",
+          "Євро й долари вигідніше міняти в обмінниках (Exchange) у торгових центрах, ніж у готелі чи в аеропорту.",
+          "Eura a dolary se vyplatí měnit ve směnárnách (Exchange) v nákupních centrech, ne v hotelu ani na letišti.",
         ),
       },
     ],
@@ -709,82 +709,82 @@ export const destinations: Destination[] = [
       {
         title: tx("Дрес-код", "Oblékání"),
         text: tx(
-          "Емірати — мусульманська країна. У торгових центрах і держустановах обирайте закритий одяг; у готелях і на пляжах правила вільніші.",
-          "Emiráty jsou muslimská země. V nákupních centrech a na úřadech volte zakryté oblečení, v hotelech a na plážích jsou pravidla volnější.",
+          "Емірати — мусульманська країна. У молах і держустановах обирайте закритий одяг; у готелі та на пляжі правила вільніші.",
+          "Emiráty jsou muslimská země. Do nákupních center a na úřady volte zakryté oblečení, v hotelu a na pláži jsou pravidla volnější.",
         ),
       },
       {
         title: tx("Транспорт", "Doprava"),
         text: tx(
-          "Найзручніше — офіційні таксі з лічильником, метро в Дубаї або оренда авто. Між Абу-Дабі та Дубаєм ходять комфортні автобуси.",
-          "Nejpohodlnější jsou oficiální taxíky s taxametrem, metro v Dubaji nebo půjčené auto. Mezi Abú Dhabí a Dubají jezdí pohodlné autobusy.",
+          "Офіційні таксі з лічильником, метро в Дубаї або авто напрокат. Між Абу-Дабі й Дубаєм ходять зручні автобуси.",
+          "Oficiální taxi s taxametrem, metro v Dubaji nebo půjčené auto. Mezi Abú Dhabí a Dubají jezdí pohodlné autobusy.",
         ),
       },
       {
-        title: tx("Кухня", "Kuchyně"),
+        title: tx("Що скуштувати", "Co ochutnat"),
         text: tx(
-          "Скуштуйте арабську каву з кардамоном і фініками, хумус і морепродукти за місцевими рецептами.",
-          "Ochutnejte arabskou kávu s kardamomem a datlemi, hummus a mořské plody podle místních receptů.",
+          "Арабську каву з кардамоном і фініки до неї, хумус і морепродукти за місцевими рецептами.",
+          "Arabskou kávu s kardamomem a k ní datle, hummus a mořské plody na místní způsob.",
         ),
       },
       {
-        title: tx("Сезон", "Sezóna"),
+        title: tx("А влітку?", "A v létě?"),
         text: tx(
-          "Ідеальний час — з жовтня до квітня. Влітку спека понад 40 °C, зате ціни на готелі помітно нижчі.",
-          "Ideální doba je od října do dubna. V létě bývá přes 40 °C, ceny hotelů jsou ale výrazně nižší.",
+          "Влітку понад 40 °C, зате готелі помітно дешевші. Якщо басейн і кондиціонер вам миліші за прогулянки — чому б і ні.",
+          "V létě bývá přes 40 °C, zato jsou hotely znatelně levnější. Pokud máte radši bazén a klimatizaci než procházky, proč ne.",
         ),
       },
     ],
     faq: [
       {
         // TODO(client): verify current tourism fee amounts per emirate.
-        q: tx("Що таке туристичний збір (Tourism Dirham)?", "Co je turistický poplatek (Tourism Dirham)?"),
+        q: tx("Що таке туристичний збір Tourism Dirham?", "Co je turistický poplatek Tourism Dirham?"),
         a: tx(
-          "У готелях ОАЕ стягують обов’язковий збір за номер за ніч — його розмір залежить від емірату та категорії готелю. Сплачується на місці при заселенні чи виїзді, готівкою або карткою.",
-          "Hotely v SAE vybírají povinný poplatek za pokoj a noc — výše závisí na emirátu a kategorii hotelu. Platí se na místě při příjezdu nebo odjezdu, hotově nebo kartou.",
+          "Це обов’язковий збір за кожну ніч у номері. Його розмір залежить від емірату й категорії готелю, а сплачують його на місці — під час заселення чи виїзду, готівкою або карткою.",
+          "Je to povinný poplatek za každou noc a pokoj. Výše závisí na emirátu a kategorii hotelu, platí se na místě při příjezdu nebo odjezdu, hotově nebo kartou.",
         ),
       },
       {
         q: tx("Де можна купити алкоголь?", "Kde se dá koupit alkohol?"),
         a: tx(
-          "Алкоголь подають у ресторанах і барах готелів з ліцензією. Вживати його в громадських місцях — на вулиці чи пляжі — суворо заборонено.",
-          "Alkohol se podává v hotelových restauracích a barech s licencí. Pít na veřejnosti — na ulici nebo pláži — je přísně zakázané.",
+          "У ресторанах і барах готелів із ліцензією. Пити на вулиці чи на пляжі суворо заборонено.",
+          "V hotelových restauracích a barech s licencí. Pít na ulici nebo na pláži je přísně zakázané.",
         ),
       },
       {
-        q: tx("Чи вигідні комбіновані квитки в парки острова Яс?", "Vyplatí se kombinované vstupenky do parků na Yas?"),
+        q: tx("Чи вигідні комбіновані квитки до парків на острові Яс?", "Vyplatí se kombinované vstupenky do parků na ostrově Yas?"),
         a: tx(
-          "Так. Якщо плануєте Ferrari World, Warner Bros. World чи Yas Waterworld, беріть Multi-Park Ticket на 2–3 дні. Ми допоможемо забронювати квитки заздалегідь.",
-          "Ano. Pokud plánujete Ferrari World, Warner Bros. World nebo Yas Waterworld, vezměte si Multi-Park Ticket na 2–3 dny. Vstupenky vám pomůžeme zarezervovat předem.",
+          "Так, якщо плануєте відвідати кілька парків. Для Ferrari World, Warner Bros. World і Yas Waterworld беріть Multi-Park Ticket на 2–3 дні. Квитки допоможу забронювати заздалегідь.",
+          "Ano, pokud plánujete víc než jeden park. Na Ferrari World, Warner Bros. World a Yas Waterworld si vezměte Multi-Park Ticket na 2–3 dny. Vstupenky vám pomůžu rezervovat předem.",
         ),
       },
       {
-        q: tx("Як одягатися жінкам у місті?", "Jak se mají ženy oblékat ve městě?"),
+        q: tx("Як одягатися жінкам у місті?", "Jak se mají ženy oblékat ve městě?"),
         a: tx(
-          "У готелі — як завгодно. Для моллів і набережної обирайте одяг, що закриває плечі й коліна. У Великій мечеті Шейха Заїда видають абаю.",
-          "V hotelu jakkoli. Do obchodních center a na nábřeží volte oblečení zakrývající ramena a kolena. Ve Velké mešitě šejcha Zajída vám půjčí abáju.",
+          "У молах і на набережній — так, щоб плечі й коліна були закриті. У готелі — як завгодно. У Великій мечеті шейха Заїда абаю видадуть просто біля входу.",
+          "V obchodních centrech a na nábřeží tak, aby byla zakrytá ramena a kolena. V hotelu jak chcete. Ve Velké mešitě šejcha Zajída vám abáju půjčí přímo u vchodu.",
         ),
       },
       {
         q: tx("Чи варто летіти під час Рамадану?", "Vyplatí se letět během ramadánu?"),
         a: tx(
-          "Це особливий досвід: ціни на готелі часто нижчі, вечори дуже атмосферні з вечерями-іфтарами. Вдень їсти й пити в громадських місцях не можна, частина ресторанів поза готелями зачинена.",
-          "Je to zvláštní zážitek: ceny hotelů bývají nižší a večery s iftarem jsou velmi atmosférické. Přes den se na veřejnosti nesmí jíst ani pít a část restaurací mimo hotely je zavřená.",
+          "Так, якщо вас не бентежить інший ритм. Готелі часто дешевші, а вечори з іфтарами мають свою атмосферу. Удень на людях не можна їсти й пити, і частина ресторанів поза готелями зачинена.",
+          "Ano, pokud vám nevadí jiný rytmus. Hotely bývají levnější a večery s iftarem mají svou atmosféru. Přes den se na veřejnosti nesmí jíst ani pít a část restaurací mimo hotely je zavřená.",
         ),
       },
       {
-        q: tx("Чому готель просить депозит при заселенні?", "Proč hotel chce při příjezdu zálohu?"),
+        q: tx("Чому готель просить депозит під час заселення?", "Proč po mně hotel při příjezdu chce kauci?"),
         a: tx(
-          "Більшість готелів 5* блокують депозит на картці або беруть готівку на випадок додаткових послуг. Ми можемо заздалегідь попросити прибрати міні-бар, щоб депозит був меншим.",
-          "Většina hotelů 5* blokuje zálohu na kartě nebo vybírá hotovost pro případ dalších služeb. Můžeme předem požádat o vyklizení minibaru, aby byla záloha nižší.",
+          "Так готель страхується на випадок додаткових витрат. Більшість готелів 5★ блокує суму на картці або бере готівку. Можу заздалегідь попросити прибрати міні-бар, щоб депозит був меншим.",
+          "Hotel se tak jistí pro případ, že využijete placené služby. Většina hotelů 5* zablokuje částku na kartě nebo vybere hotovost. Můžu předem požádat o vyklizení minibaru, kauce pak bývá nižší.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури в ОАЕ з Праги — Дубай, Абу-Дабі", "Zájezdy do SAE — Dubaj, Abú Dhabí"),
+      title: tx("Тури до ОАЕ з Чехії — ціни в кронах", "Zájezdy do SAE z Česka – ceny v Kč"),
       description: tx(
-        "Відпочинок в Еміратах із прямим перельотом з Праги. Дубай, Абу-Дабі, Рас-ель-Хайма. Ціни в CZK, підбір туру в Telegram.",
-        "Dovolená v Emirátech s přímým letem z Prahy. Dubaj, Abú Dhabí, Ras al-Chajma. Ceny v CZK, výběr zájezdu přes Telegram.",
+        "Тури до ОАЕ з Чехії прямим рейсом: Дубай, Абу-Дабі, Рас-ель-Хайма. Ціни в кронах, тури чеських туроператорів. Альона підбере 3 готелі для вас.",
+        "Zájezdy do SAE z Česka s přímým letem: Dubaj, Abú Dhabí, Ras Al Khaimah. Ceny v Kč, pojištěné české CK. Aljona vám na Telegramu vybere 3 hotely.",
       ),
     },
   },
@@ -796,60 +796,60 @@ export const destinations: Destination[] = [
     nameIn: tx("на Мальдівах", "na Maledivách"),
     flag: "🇲🇻",
     heroImage: hero("maldives"),
-    tagline: tx("Острів, де зупиняється час", "Ostrov, kde se zastaví čas"),
+    tagline: tx("Вілла над водою — і все", "Vila nad vodou. Víc netřeba"),
     teaser: tx(
-      "Вілли над водою, коралові рифи та бірюзовий океан — медовий місяць мрії чи тиха втеча від усього.",
-      "Vily nad vodou, korálové útesy a tyrkysový oceán — vysněné líbánky nebo klidný únik od všeho.",
+      "Риф просто під сходами вашої вілли й тиша, у якій чути лише океан. Для медового місяця — або щоб нарешті вимкнути телефон.",
+      "Útes hned pod schůdky vaší vily a ticho, ve kterém je slyšet jen oceán. Na líbánky – nebo abyste konečně vypnuli telefon.",
     ),
     intro: tx(
-      "Мальдіви — понад тисяча коралових островів, загублених в Індійському океані. Тут єдиний шум — шелест пальм і легкий прибій. Один острів — один готель: повна приватність і бездоганний сервіс. Ananas Tour допоможе обрати резорт під ваш бюджет — від затишних гестхаусів на локальних островах до вілл над водою — і продумає зручний переліт із Праги.",
-      "Maledivy jsou víc než tisíc korálových ostrovů ztracených v Indickém oceánu. Jediný zvuk je tu šumění palem a jemný příboj. Jeden ostrov — jeden hotel: naprosté soukromí a bezchybný servis. Ananas Tour vám pomůže vybrat resort podle rozpočtu — od útulných guesthousů na místních ostrovech po vily nad vodou — a vymyslí pohodlný let z Prahy.",
+      "Тут один острів — один готель, тож від вибору острова залежить усе: риф, пляж, трансфер і ціна вечері. Я порівняю резорти й гестхауси в межах вашого бюджету й продумаю зручний переліт.",
+      "Tady platí: jeden ostrov, jeden hotel. Na výběru ostrova proto závisí všechno – útes, pláž, transfer i cena večeře. Porovnám hotely i menší penziony podle vašeho rozpočtu a vymyslím pohodlný let.",
     ),
-    bestSeason: tx("листопад – квітень", "listopad – duben"),
-    flightTime: tx("≈ 10–12 год (з пересадкою або чартером)", "cca 10–12 h (s přestupem nebo charterem)"), // TODO(client): verify
+    bestSeason: tx("листопад–квітень", "listopad–duben"),
+    flightTime: tx("≈ 10–12 год (з пересадкою або чартером)", "cca 10–12 h (s přestupem nebo charterem)"), // TODO(client): verify
     airports: ["PRG"],
-    currency: tx("руфія (MVR), на курортах — USD", "rupie (MVR), v resortech USD"),
+    currency: tx("руфія (MVR), на курортах — USD", "maledivská rupie (MVR), v hotelech USD"),
     entry: ENTRY_CHECK,
     regions: [
       {
-        title: tx("Острови-резорти", "Ostrovní resorty"),
+        title: tx("Острови-резорти", "Hotelové ostrovy"),
         text: tx(
-          "Класичний мальдівський формат: один острів — один готель. Приватність, бездоганний сервіс і легендарні бунгало над водою.",
-          "Klasické Maledivy: jeden ostrov — jeden hotel. Soukromí, bezchybný servis a legendární bungalovy nad vodou.",
+          "Класичні Мальдіви: на острові лише ваш готель, бунгало над водою й часто власний риф за кілька кроків від номера.",
+          "Klasické Maledivy: na ostrově jen váš hotel, bungalovy nad vodou a často vlastní útes pár kroků od pokoje.",
         ),
         image: img("maldives", 1),
       },
       {
         title: tx("Локальні острови", "Místní ostrovy"),
         text: tx(
-          "Доступніший варіант: гестхауси на Маафуші, Тулусду чи Тодду. Ви побачите справжнє життя мальдівців.",
-          "Dostupnější varianta: guesthousy na Maafushi, Thulusdhoo nebo Thoddoo. Poznáte skutečný život Maledivanů.",
+          "Гестхауси на Маафуші, Тулусду чи Тодду: дешевше, простіше й ближче до справжнього мальдівського життя.",
+          "Penziony na Maafushi, Thulusdhoo nebo Thoddoo: levněji, jednodušeji a blíž opravdovému maledivskému životu.",
         ),
         image: img("maldives", 2),
       },
       {
-        title: tx("Дайвінг і снорклінг", "Potápění a šnorchlování"),
+        title: tx("Під водою", "Pod hladinou"),
         text: tx(
-          "Коралові сади, манти, китові акули та мільйони яскравих рибок — просто біля берега готелю.",
-          "Korálové zahrady, manty, žraloci velrybí a miliony barevných rybek — přímo u břehu hotelu.",
+          "Коралові сади, манти, китові акули й зграї яскравих риб — часто просто біля берега готелю.",
+          "Korálové zahrady, manty, žraloci velrybí a hejna barevných ryb – často přímo u břehu hotelu.",
         ),
         image: img("maldives", 3),
       },
     ],
     money: [
       {
-        title: tx("Долари та картки", "Dolary a karty"),
+        title: tx("Долари й картки", "Dolary a karty"),
         text: tx(
-          "На курортах основна валюта — долар США та міжнародні картки. Руфія вам майже не знадобиться. Візьміть дрібні долари для чайових.",
-          "V resortech se platí americkým dolarem a mezinárodními kartami, rupie skoro nebudete potřebovat. Vezměte si drobné dolary na spropitné.",
+          "На курортах платять доларами або міжнародною карткою, руфія майже не знадобиться. На чайові візьміть дрібні купюри.",
+          "V hotelech se platí dolary nebo kartou, rupie skoro nebudete potřebovat. Na spropitné si vezměte drobné bankovky.",
         ),
       },
       {
         // TODO(client): verify current TGST rate.
-        title: tx("Система розрахунків", "Jak se platí"),
+        title: tx("Як тут рахують", "Jak se tu platí"),
         text: tx(
-          "Зазвичай усі витрати записують на номер, а рахунок оплачують при виїзді. До цін часто додають податок (TGST) і сервісний збір — позначка «++» у меню.",
-          "Obvykle se vše píše na pokoj a účet se platí při odjezdu. K cenám se často připočítává daň (TGST) a servisní poplatek — v menu je to značka „++“.",
+          "Усе записують на номер, а рахунок оплачують перед виїздом. До цін у меню часто додають податок TGST і сервісний збір — це позначка «++».",
+          "Všechno se píše na pokoj a účet se platí před odjezdem. K cenám v menu se často připočítává daň TGST a servisní poplatek – to je ta značka „++“.",
         ),
       },
     ],
@@ -857,81 +857,81 @@ export const destinations: Destination[] = [
       {
         title: tx("Трансфер", "Transfer"),
         text: tx(
-          "До острова добираються швидкісним катером, гідролітаком або внутрішнім рейсом. Гідролітак — окрема екскурсія з неймовірними краєвидами!",
-          "Na ostrov se dostanete rychlým člunem, hydroplánem nebo vnitrostátním letem. Hydroplán je sám o sobě výlet s úžasnými výhledy!",
+          "До острова — швидкісним катером, гідролітаком або внутрішнім рейсом. А переліт гідролітаком — це ще й маленька екскурсія з видом на атоли.",
+          "Na ostrov vás doveze rychlý člun, hydroplán nebo vnitrostátní let. Let hydroplánem je malý výlet sám o sobě – s výhledem na atoly.",
         ),
       },
       {
         title: tx("Культура", "Kultura"),
         text: tx(
-          "Мальдіви — мусульманська країна. Алкоголь дозволений лише на островах-резортах; на локальних островах дотримуйтеся дрес-коду поза «бікіні-пляжами».",
-          "Maledivy jsou muslimská země. Alkohol je povolený jen v resortech, na místních ostrovech dodržujte mimo „bikini pláže“ dress code.",
+          "Мальдіви — мусульманська країна. Алкоголь — лише на островах-резортах, а на локальних островах поза «бікіні-пляжами» діє дрес-код.",
+          "Maledivy jsou muslimská země. Alkohol dostanete jen na hotelových ostrovech a na místních ostrovech platí mimo „bikini pláže“ pravidla oblékání.",
         ),
       },
       {
-        title: tx("Захист природи", "Ochrana přírody"),
+        title: tx("Мушлі — не сувенір", "Mušle nejsou suvenýr"),
         text: tx(
-          "Вивозити корали, мушлі та пісок суворо заборонено. Бережіть цей крихкий рай.",
-          "Vyvážet korály, mušle a písek je přísně zakázané. Chraňte tenhle křehký ráj.",
+          "Вивозити корали, мушлі й пісок суворо заборонено. Сфотографуйте — і нехай лишаються там, де вони вдома.",
+          "Vyvážet korály, mušle a písek je přísně zakázané. Vyfoťte si je a nechte je tam, kde jsou doma.",
         ),
       },
       {
         title: tx("Коли їхати", "Kdy jet"),
         text: tx(
-          "Найкращий сезон — з листопада по квітень. Літо чудове для серфінгу та спокійного відпочинку за вигіднішими цінами.",
-          "Nejlepší sezóna je od listopadu do dubna. Léto je skvělé na surfování a klidnou dovolenou za nižší ceny.",
+          "Найкраще — з листопада до квітня. Улітку — серфінг і спокійний відпочинок за нижчими цінами.",
+          "Nejlépe od listopadu do dubna. Léto patří surfařům a těm, kdo chtějí klid za nižší ceny.",
         ),
       },
     ],
     faq: [
       {
-        q: tx("Чи можна привезти алкоголь із Duty Free?", "Můžu si přivézt alkohol z Duty Free?"),
+        q: tx("Можна привезти алкоголь із Duty Free?", "Můžu si přivézt alkohol z Duty Free?"),
         a: tx(
-          "Ні. Ввезення алкоголю заборонене — пляшки вилучать на митниці й повернуть лише при вильоті. На островах-резортах алкоголь вільно продається в барах.",
-          "Ne. Dovoz alkoholu je zakázaný — lahve vám na celnici zabaví a vrátí až při odletu. V resortech se alkohol běžně prodává v barech.",
+          "Ні. Ввозити алкоголь заборонено: пляшки заберуть на митниці й повернуть лише перед вильотом. На островах-резортах алкоголь продають у барах.",
+          "Ne. Dovoz alkoholu je zakázaný: lahve vám na celnici zabaví a vrátí až při odletu. Na hotelových ostrovech se alkohol prodává v barech.",
         ),
       },
       {
-        q: tx("Що, як рейс прилітає пізно ввечері?", "Co když přiletíme pozdě večer?"),
+        q: tx("Що робити, якщо рейс прилітає пізно ввечері?", "Co když přiletíme pozdě večer?"),
         a: tx(
-          "Гідролітаки літають лише у світлий час доби. Якщо рейс прибуває пізно, доведеться переночувати біля аеропорту Мале. Швидкісні катери ходять і ввечері — залежить від віддаленості острова.",
-          "Hydroplány létají jen za světla. Pokud přiletíte pozdě, přespíte u letiště v Male. Rychlé čluny jezdí i večer — záleží na vzdálenosti ostrova.",
+          "Залежить від трансферу. Гідролітаки літають лише вдень, тож із пізнім рейсом доведеться переночувати біля аеропорту Мале. Катери ходять і ввечері — якщо острів недалеко. Це я врахую ще під час вибору рейсу.",
+          "Záleží na transferu. Hydroplány létají jen za světla, takže s pozdním letem přespíte u letiště v Malé. Čluny jezdí i večer, pokud ostrov není daleko. S tím počítám už při výběru letu.",
         ),
       },
       {
-        q: tx("Що означає «++» у рахунках?", "Co znamená „++“ na účtech?"),
+        q: tx("Що означає «++» у рахунку?", "Co znamená „++“ na účtu?"),
         a: tx(
-          "Те, що до ціни додадуть державний податок TGST і 10 % сервісного збору. Тому ми зазвичай радимо All Inclusive — ці витрати вже враховані.",
-          "Že se k ceně přičte státní daň TGST a 10% servisní poplatek. Proto obvykle doporučujeme All Inclusive — tyhle náklady už jsou v ceně.",
+          "Це означає, що до ціни додадуть податок TGST і 10 % сервісного збору. Тому я часто раджу «все включено»: ці витрати там уже враховані.",
+          "Že se k ceně přičte daň TGST a 10% servisní poplatek. Proto často doporučuji all inclusive – tyhle náklady už jsou v ceně.",
         ),
       },
       {
-        q: tx("Чи дорого харчуватися, якщо лише сніданки?", "Je drahé stravovat se, když máme jen snídaně?"),
+        q: tx("Чи дорого харчуватися, якщо в нас лише сніданки?", "Vyjde jídlo draho, když máme jen snídaně?"),
         a: tx(
-          "Так, усі продукти імпортні, обід може коштувати 50–100 $ на людину. Радимо повний пансіон або All Inclusive, щоб бюджет був під контролем.",
-          "Ano, všechny potraviny se dovážejí a oběd může stát 50–100 $ na osobu. Doporučujeme plnou penzi nebo All Inclusive, ať máte rozpočet pod kontrolou.",
+          "Так. Продукти тут привізні, тож обід може коштувати 50–100 $ на людину. Щоб бюджет не розповзався, раджу повний пансіон або «все включено».",
+          "Ano. Potraviny se sem dovážejí, takže oběd může stát 50–100 $ na osobu. Aby se rozpočet nerozutekl, doporučuji plnou penzi nebo all inclusive.",
         ),
       },
       {
         q: tx("Чи безпечно плавати на домашньому рифі?", "Je bezpečné šnorchlovat na domácím útesu?"),
         a: tx(
-          "Загалом так, але стежте за течіями й не запливайте за риф наодинці. Рифові акули безпечні для людей; головна небезпека — гострі корали та екваторіальне сонце.",
-          "Obecně ano, ale sledujte proudy a za útes sami neplavte. Útesoví žraloci jsou pro lidi neškodní, hlavní nebezpečí jsou ostré korály a rovníkové slunce.",
+          "Загалом так, але стежте за течіями й не запливайте за риф наодинці. Рифові акули для людей безпечні; головна небезпека — гострі корали й екваторіальне сонце.",
+          "Obecně ano, ale sledujte proudy a za útes sami neplavte. Útesoví žraloci jsou pro lidi neškodní, hlavním nebezpečím jsou ostré korály a rovníkové slunce.",
         ),
       },
       {
-        q: tx("Чи можна взяти дрон?", "Můžu si vzít dron?"),
+        q: tx("Можна взяти із собою дрон?", "Můžu si vzít dron?"),
         a: tx(
-          "Більшість преміум-резортів забороняють дрони заради приватності гостей. Якщо плануєте зйомку, ми заздалегідь перевіримо правила обраного готелю.",
-          "Většina prémiových resortů drony kvůli soukromí hostů zakazuje. Pokud plánujete natáčet, pravidla vybraného hotelu předem ověříme.",
+          "Не всюди. Більшість преміальних резортів забороняє дрони, щоб берегти приватність гостей, тож правила вашого готелю я перевірю заздалегідь.",
+          "Ne všude. Většina dražších hotelů drony kvůli soukromí hostů zakazuje, pravidla toho vašeho proto ověřím předem.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури на Мальдіви з Праги — резорти та вілли", "Zájezdy na Maledivy z Prahy"),
+      title: tx("Тури на Мальдіви з Чехії — ціни в кронах", "Zájezdy na Maledivy z Česka – ceny v Kč"),
       description: tx(
-        "Мальдіви з вильотом із Праги: острови-резорти, вілли над водою, локальні острови. Ціни в CZK, підбір у Telegram.",
-        "Maledivy s odletem z Prahy: ostrovní resorty, vily nad vodou, místní ostrovy. Ceny v CZK, výběr přes Telegram.",
+        "Тури на Мальдіви з Чехії: острови-резорти, вілли над водою, локальні острови. Ціни в кронах, зручний переліт. Альона підбере 3 готелі на ваш бюджет.",
+        "Zájezdy na Maledivy z Česka: vily nad vodou, hotelové i levnější místní ostrovy. Ceny v Kč, pohodlný let. Aljona vám vybere 3 hotely podle rozpočtu.",
       ),
     },
   },
@@ -940,45 +940,45 @@ export const destinations: Destination[] = [
     slug: "vietnam",
     name: tx("В’єтнам", "Vietnam"),
     nameTo: tx("до В’єтнаму", "do Vietnamu"),
-    nameIn: tx("у В’єтнамі", "ve Vietnamu"),
+    nameIn: tx("у В’єтнамі", "ve Vietnamu"),
     flag: "🇻🇳",
     heroImage: hero("vietnam"),
-    tagline: tx("Екзотика, кухня і море Нячангу", "Exotika, kuchyně a moře v Nha Trangu"),
+    tagline: tx("Екзотика без поспіху", "Exotika bez spěchu"),
     teaser: tx(
-      "Білі пляжі, острів розваг Vinpearl, SPA та найсмачніший суп фо — Азія для першого знайомства.",
-      "Bílé pláže, zábavní ostrov Vinpearl, lázně a nejlepší polévka phở — Asie na první seznámení.",
+      "Нячанг: білий пісок, канатна дорога над морем до Vinpearl, грязьові ванни й фо, яке смакує інакше, ніж у Чехії.",
+      "Nha Trang: bílý písek, lanovka nad mořem na Vinpearl, bahenní koupele a phở, které chutná jinak než v Česku.",
     ),
     intro: tx(
-      "В’єтнам — країна контрастів, де гори зустрічаються з бірюзовим морем, а давні пагоди сусідять із хмарочосами. Він підкорює щирістю, кухнею та особливим спокоєм. До речі, у Чехії велика в’єтнамська громада — тож фо ви, напевно, вже куштували, але на батьківщині він ще смачніший. Ananas Tour запрошує до Нячангу — головної морської перлини країни.",
-      "Vietnam je země kontrastů, kde se hory potkávají s tyrkysovým mořem a staré pagody stojí vedle mrakodrapů. Okouzlí upřímností, kuchyní a zvláštním klidem. Phở jste v Česku jistě ochutnali, ale ve Vietnamu chutná ještě lépe. Ananas Tour vás zve do Nha Trangu — hlavní přímořské perly země.",
+      "Фо ви, найпевніше, вже куштували — в’єтнамська громада в Чехії велика. Але на батьківщині воно ще смачніше, а до нього — море Нячангу, пагоди й неспішний ритм, який швидко стає вашим.",
+      "Phở jste v Česku nejspíš už ochutnali – vietnamská komunita je tu velká. Ve Vietnamu ale chutná ještě líp a k tomu moře v Nha Trangu, pagody a pomalý rytmus, kterému rychle propadnete.",
     ),
-    bestSeason: tx("лютий – вересень (Нячанг)", "únor – září (Nha Trang)"),
-    flightTime: tx("≈ 12–15 год з пересадкою", "cca 12–15 h s přestupem"), // TODO(client): verify
+    bestSeason: tx("лютий–вересень (Нячанг)", "únor–září (Nha Trang)"),
+    flightTime: tx("≈ 12–15 год з пересадкою", "cca 12–15 h s přestupem"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("в’єтнамський донг (VND)", "vietnamský dong (VND)"),
     entry: ENTRY_CHECK,
     regions: [
       {
-        title: tx("Пляжі та Vinpearl", "Pláže a Vinpearl"),
+        title: tx("Пляжі й Vinpearl", "Pláže a Vinpearl"),
         text: tx(
-          "Кілометри набережної з білим піском і острів розваг Vinpearl, до якого веде одна з найдовших канатних доріг над морем.",
-          "Kilometry promenády s bílým pískem a zábavní ostrov Vinpearl, kam vede jedna z nejdelších lanovek nad mořem.",
+          "Кілометри білого піску вздовж набережної й острів розваг Vinpearl, куди веде одна з найдовших канатних доріг над морем.",
+          "Kilometry bílého písku podél promenády a zábavní ostrov Vinpearl, kam vede jedna z nejdelších lanovek nad mořem.",
         ),
         image: img("vietnam", 1),
       },
       {
-        title: tx("Оздоровлення та SPA", "Wellness a lázně"),
+        title: tx("Джерела й грязі", "Prameny a bahno"),
         text: tx(
-          "Термальні джерела та цілющі грязі — у Нячанзі чудово відновлюють сили.",
-          "Termální prameny a léčivé bahenní koupele — v Nha Trangu skvěle nabijete síly.",
+          "Термальні джерела й грязьові ванни: пів дня — і ви як після відпустки, хоча відпустка ще триває.",
+          "Termální prameny a bahenní koupele: půl dne a cítíte se jako po dovolené – přitom ta pořád běží.",
         ),
         image: img("vietnam", 2),
       },
       {
-        title: tx("Гастрономічний рай", "Gastronomický ráj"),
+        title: tx("Що на тарілці", "Co na talíři"),
         text: tx(
-          "Столиця морепродуктів: лобстери на грилі, суп фо та в’єтнамська кава зі згущеним молоком.",
-          "Hlavní město mořských plodů: humři z grilu, polévka phở a vietnamská káva s kondenzovaným mlékem.",
+          "Фо на сніданок, в’єтнамська кава зі згущеним молоком, а ввечері — лобстери на грилі. Для вас екзотика, для Нячангу — звичайний день.",
+          "Ráno phở, k tomu vietnamská káva s kondenzovaným mlékem a večer humři z grilu. Pro vás exotika, pro Nha Trang obyčejný den.",
         ),
         image: img("vietnam", 3),
       },
@@ -987,15 +987,15 @@ export const destinations: Destination[] = [
       {
         title: tx("Долари на донги", "Dolary na dongy"),
         text: tx(
-          "Найвигідніше міняти готівкові долари або євро в банках чи ювелірних крамницях. За нові купюри великого номіналу курс кращий.",
-          "Nejvýhodněji vyměníte hotovostní dolary nebo eura v bankách či zlatnictvích. Za nové bankovky vyšších hodnot je lepší kurz.",
+          "Готівкові долари чи євро найвигідніше міняти в банках або ювелірних крамницях. За нові купюри великого номіналу дають кращий курс.",
+          "Hotovostní dolary nebo eura nejvýhodněji vyměníte v bankách nebo zlatnictvích. Za nové bankovky vyšších hodnot dostanete lepší kurz.",
         ),
       },
       {
-        title: tx("Оплата та чайові", "Placení a spropitné"),
+        title: tx("Оплата й чайові", "Placení a spropitné"),
         text: tx(
-          "У готелях і ТЦ приймають картки, на ринках і у вуличних кафе потрібна готівка. Чайові необов’язкові, але завжди вітаються.",
-          "V hotelech a obchodních centrech berou karty, na trzích a v pouličních bistrech potřebujete hotovost. Spropitné není povinné, ale vždy potěší.",
+          "У готелях і торгових центрах беруть картки, на ринках та у вуличних кафе — лише готівку. Чайові необов’язкові, але завжди доречні.",
+          "V hotelech a obchodních centrech berou karty, na trzích a v pouličních bistrech jen hotovost. Spropitné není povinné, ale vždy potěší.",
         ),
       },
     ],
@@ -1004,74 +1004,74 @@ export const destinations: Destination[] = [
         // TODO(client): verify e-visa / visa-free rules by citizenship.
         title: tx("Віза", "Vízum"),
         text: tx(
-          "Для багатьох громадянств потрібна електронна віза, яку оформлюють заздалегідь. Ми перевіримо вимоги для вашого паспорта й допоможемо з деталями.",
-          "Pro řadu občanství je potřeba elektronické vízum, které se vyřizuje předem. Ověříme požadavky pro váš pas a pomůžeme s detaily.",
+          "Громадянам багатьох країн потрібна електронна віза, яку оформлюють заздалегідь. Перевірю вимоги для вашого паспорта й підкажу, як подати заяву.",
+          "Občané mnoha zemí potřebují elektronické vízum vyřízené předem. Ověřím, co platí pro váš pas, a poradím, jak o vízum požádat.",
         ),
       },
       {
-        title: tx("Транспорт", "Doprava"),
+        title: tx("Grab замість таксі", "Grab místo taxíku"),
         text: tx(
-          "Найпопулярніше — таксі через Grab. Переходячи дорогу, рухайтеся плавно та впевнено.",
-          "Nejoblíbenější je taxi přes aplikaci Grab. Silnici přecházejte plynule a s jistotou.",
+          "Викликайте авто через застосунок Grab: ціна відома наперед, і торгуватися не доведеться.",
+          "Auto si volejte přes aplikaci Grab: cenu znáte předem a nemusíte smlouvat.",
         ),
       },
       {
         title: tx("Храми", "Chrámy"),
         text: tx(
-          "Відвідайте вежі По Нагар і пагоду Лонг Шон. Плечі й коліна мають бути закриті.",
-          "Navštivte věže Po Nagar a pagodu Long Son. Ramena a kolena mějte zakrytá.",
+          "Варто побачити вежі По Нагар і пагоду Лонг Шон. Лише закрийте плечі й коліна.",
+          "Určitě se podívejte k věžím Po Nagar a do pagody Long Son. Jen mějte zakrytá ramena a kolena.",
         ),
       },
       {
         title: tx("Що привезти", "Co přivézt"),
         text: tx(
-          "В’єтнамську каву, шовк і перли, які вирощують прямо в бухті Нячангу.",
-          "Vietnamskou kávu, hedvábí a perly, které se pěstují přímo v zátoce Nha Trangu.",
+          "В’єтнамську каву, шовк і перли, які вирощують просто в бухті Нячангу.",
+          "Vietnamskou kávu, hedvábí a perly, které se pěstují přímo v zátoce Nha Trangu.",
         ),
       },
     ],
     faq: [
       {
-        q: tx("Коли в Нячанзі сезон дощів?", "Kdy je v Nha Trangu období dešťů?"),
+        q: tx("Коли в Нячанзі сезон дощів?", "Kdy je v Nha Trangu období dešťů?"),
         a: tx(
-          "З жовтня по грудень — море може штормити. Найкращий час для пляжу — з лютого по вересень.",
-          "Od října do prosince — moře bývá rozbouřené. Nejlepší doba na pláž je od února do září.",
+          "З жовтня до грудня: море тоді часто штормить. Для пляжу найкраще — з лютого до вересня.",
+          "Od října do prosince, moře je tehdy často rozbouřené. Na pláž je nejlepší jet od února do září.",
         ),
       },
       {
-        q: tx("Як перейти дорогу в потоці байків?", "Jak přejít silnici v proudu motorek?"),
+        q: tx("Як перейти дорогу в потоці мопедів?", "Jak přejít silnici v proudu motorek?"),
         a: tx(
-          "Рухайтеся повільно та передбачувано, не зупиняйтеся посеред дороги — водії самі об’їдуть. Можна підняти руку або йти поруч із місцевим.",
-          "Jděte pomalu a předvídatelně, uprostřed silnice nezastavujte — řidiči vás objedou. Můžete zvednout ruku nebo jít s místními.",
+          "Повільно й передбачувано. Не зупиняйтеся й не відступайте посеред дороги — водії самі вас об’їдуть. Можна підняти руку або перейти разом із місцевими.",
+          "Pomalu a předvídatelně. Uprostřed silnice nezastavujte ani necouvejte – řidiči vás objedou sami. Pomůže zvednutá ruka, nebo se přidejte k místním.",
         ),
       },
       {
-        q: tx("Чи безпечний лід у напоях?", "Je led v nápojích bezpečný?"),
+        q: tx("Чи безпечний лід у напоях?", "Je led v nápojích bezpečný?"),
         a: tx(
-          "У більших кафе лід фабричний (циліндрики з отвором) — він безпечний. Колотого вручну льоду в дрібних закладах краще уникати.",
-          "Ve větších kavárnách je led z továrny (válečky s dírkou) a je bezpečný. Ručně sekanému ledu v malých podnicích se raději vyhněte.",
+          "У більших кафе — так: там фабричний лід у вигляді циліндриків із дірочкою. Колотого вручну льоду в маленьких закладах краще уникати.",
+          "Ve větších kavárnách ano, dávají tam tovární led ve tvaru válečků s dírkou. Ručně sekanému ledu v malých podnicích se raději vyhněte.",
         ),
       },
       {
-        q: tx("Чи потрібна місцева SIM-картка?", "Potřebuji místní SIM kartu?"),
+        q: tx("Чи потрібна місцева SIM-картка?", "Potřebuju místní SIM kartu?"),
         a: tx(
-          "Так, для Grab (таксі та доставка їжі) — ціни там фіксовані й нижчі, ніж у вуличних таксистів. Картку Viettel чи Vinaphone купите в аеропорту Камрань.",
-          "Ano, kvůli Grabu (taxi a rozvoz jídla) — ceny jsou pevné a nižší než u pouličních taxikářů. Kartu Viettel nebo Vinaphone koupíte na letišti Cam Ranh.",
+          "Так, хоча б заради Grab — таксі й доставки їжі з фіксованими цінами. Картку Viettel чи Vinaphone купите в аеропорту Камрань.",
+          "Ano, už kvůli Grabu – taxi a rozvozu jídla za pevné ceny. Kartu Viettel nebo Vinaphone koupíte na letišti Cam Ranh.",
         ),
       },
       {
-        q: tx("Якою мовою спілкуватися?", "Jak se domluvit?"),
+        q: tx("Якою мовою там порозумітися?", "Jak se tam domluvím?"),
         a: tx(
-          "У великих готелях допоможе англійська. На ринках найпростіше — калькулятор у телефоні, де ви з продавцем набираєте ціну.",
-          "Ve velkých hotelech pomůže angličtina. Na trzích je nejjednodušší kalkulačka v telefonu, kam s prodejcem vyťukáte cenu.",
+          "У великих готелях — англійською. На ринку найпростіше набирати ціну на калькуляторі в телефоні: ви — свою, продавець — свою, і так до згоди.",
+          "Ve velkých hotelech anglicky. Na trhu je nejjednodušší ťukat cenu do kalkulačky v telefonu: vy svou, prodavač svou – a tak dokola, dokud se nedohodnete.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури до В’єтнаму з Праги — Нячанг", "Zájezdy do Vietnamu — Nha Trang"),
+      title: tx("Тури до В’єтнаму з Чехії — ціни в кронах", "Zájezdy do Vietnamu z Česka – ceny v Kč"),
       description: tx(
-        "Відпочинок у В’єтнамі з Праги: пляжі Нячангу, Vinpearl, SPA. Ціни в CZK, підбір туру в Telegram за 15 хвилин.",
-        "Dovolená ve Vietnamu z Prahy: pláže Nha Trangu, Vinpearl, lázně. Ceny v CZK, výběr zájezdu přes Telegram do 15 minut.",
+        "Тури до В’єтнаму з Чехії: пляжі Нячангу, Vinpearl, грязьові ванни й спа. Ціни в кронах, переліт із пересадкою. Альона підбере 3 готелі для вас.",
+        "Zájezdy do Vietnamu z Česka: pláže Nha Trangu, Vinpearl, bahenní koupele a termální prameny. Ceny v Kč, let s přestupem. Aljona vám vybere 3 hotely.",
       ),
     },
   },
@@ -1080,62 +1080,62 @@ export const destinations: Destination[] = [
     slug: "spain",
     name: tx("Іспанія", "Španělsko"),
     nameTo: tx("до Іспанії", "do Španělska"),
-    nameIn: tx("в Іспанії", "ve Španělsku"),
+    nameIn: tx("в Іспанії", "ve Španělsku"),
     flag: "🇪🇸",
     heroImage: hero("spain"),
-    tagline: tx("Сонце, фієста і Канари цілий рік", "Slunce, fiesta a Kanáry po celý rok"),
+    tagline: tx("Тапас, Гауді й Канари", "Tapas, Gaudí a Kanáry"),
     teaser: tx(
-      "Майорка, Тенеріфе, Коста-Брава та Барселона — пляжі, тапас і Гауді.",
-      "Mallorca, Tenerife, Costa Brava a Barcelona — pláže, tapas a Gaudí.",
+      "Майорка, Тенеріфе, Коста-\u2060Брава й Барселона: пляж до обіду, Гауді — після, а вечеря — не раніше дев’ятої.",
+      "Mallorca, Tenerife, Costa Brava a Barcelona: dopoledne pláž, odpoledne Gaudí a večeře ne dřív než v devět.",
     ),
     intro: tx(
-      "Іспанія — країна вічного сонця, пристрасного фламенко та неймовірної енергії. Архітектура Барселони й Мадрида тут поєднується з пляжами Коста-Дорадо та Балеарських островів, а Канари гріють навіть узимку. Із Праги до Майорки летіти приблизно 2,5 години. Ananas Tour запрошує відчути справжню іспанську фієсту.",
-      "Španělsko je země věčného slunce, vášnivého flamenka a neuvěřitelné energie. Architektura Barcelony a Madridu se tu snoubí s plážemi Costa Dorada a Baleárských ostrovů a Kanáry hřejí i v zimě. Z Prahy na Mallorku letíte zhruba 2,5 hodiny. Ananas Tour vás zve na pravou španělskou fiestu.",
+      "Іспанія — це дві відпустки в одній країні: літнє Середземномор’я з Барселоною й Майоркою та Канари, де тепло навіть у січні. Скажіть, що вам ближче, — і я підберу острів чи узбережжя.",
+      "Španělsko nabízí dvě dovolené v jedné zemi: letní Středomoří s Barcelonou a Mallorkou, nebo Kanáry, kde je teplo i v lednu. Řekněte, co je vám bližší, a já vyberu ostrov či pobřeží.",
     ),
-    bestSeason: tx("червень – вересень; Канари — цілий рік", "červen – září; Kanáry celoročně"),
-    flightTime: tx("≈ 2,5 год (Майорка), ≈ 5 год (Канари)", "cca 2,5 h (Mallorca), cca 5 h (Kanáry)"), // TODO(client): verify
+    bestSeason: tx("червень–вересень; Канари — цілий рік", "červen–září; Kanáry celoročně"),
+    flightTime: tx("≈ 2,5 год (Майорка), ≈ 5 год (Канари)", "cca 2,5 h (Mallorca), cca 5 h (Kanáry)"), // TODO(client): verify
     airports: ["PRG", "BRQ", "OSR"], // TODO(client): verify
     currency: tx("євро (EUR)", "euro (EUR)"),
     entry: ENTRY_SCHENGEN,
     regions: [
       {
-        title: tx("Барселона та Коста-Брава", "Barcelona a Costa Brava"),
+        title: tx("Барселона", "Barcelona"),
         text: tx(
-          "Шедеври Гауді, Готичний квартал і скелясті береги — поєднання екскурсій із відпочинком у затишних бухтах.",
-          "Gaudího skvosty, Gotická čtvrť a skalnaté pobřeží — spojení výletů s odpočinkem v klidných zátokách.",
+          "Шедеври Гауді й Готичний квартал, а поруч — скелясті бухти Коста-Брави. Екскурсія зранку, море після обіду.",
+          "Gaudího stavby a Gotická čtvrť, kousek odtud skalnaté zátoky Costa Brava. Ráno výlet, odpoledne moře.",
         ),
         image: img("spain", 1),
       },
       {
         title: tx("Коста-Дорада", "Costa Dorada"),
         text: tx(
-          "«Золоте узбережжя» з пологим входом у море та парком PortAventura — найкращий вибір для родин із дітьми.",
-          "„Zlaté pobřeží“ s pozvolným vstupem do moře a parkem PortAventura — nejlepší volba pro rodiny s dětmi.",
+          "«Золоте узбережжя»: пологий вхід у море й парк PortAventura поруч. З дітьми — чи не найзручніше місце в Іспанії.",
+          "„Zlaté pobřeží“: pozvolný vstup do moře a za humny zábavní park PortAventura. S dětmi snad nejpohodlnější místo ve Španělsku.",
         ),
         image: img("spain", 2),
       },
       {
-        title: tx("Майорка та Тенеріфе", "Mallorca a Tenerife"),
+        title: tx("Майорка й Тенеріфе", "Mallorca a Tenerife"),
         text: tx(
-          "Майорка — перлина Середземномор’я з розкішними бухтами. Тенеріфе — «острів вічної весни» з вулканом Тейде.",
-          "Mallorca je perla Středomoří s nádhernými zátokami. Tenerife je „ostrov věčného jara“ se sopkou Teide.",
+          "Майорка — бухти з водою кольору м’яти. Тенеріфе — «острів вічної весни» з вулканом Тейде, куди можна поїхати й у грудні.",
+          "Mallorca láká na zátoky s vodou barvy máty. Tenerife je „ostrov věčného jara“ se sopkou Teide – jet se tam dá i v prosinci.",
         ),
         image: img("spain", 3),
       },
     ],
     money: [
       {
-        title: tx("Безготівкова оплата", "Placení kartou"),
+        title: tx("Картка всюди", "Karta všude"),
         text: tx(
-          "Картки приймають майже скрізь — від кав’ярень до сувенірних лавок. Трохи готівки знадобиться для транспорту та чайових.",
-          "Kartou zaplatíte skoro všude — od kaváren po suvenýry. Trochu hotovosti se hodí na dopravu a spropitné.",
+          "Картки приймають майже скрізь — від кав’ярень до сувенірних крамничок. Трохи готівки знадобиться на транспорт і чайові.",
+          "Kartou zaplatíte skoro všude, od kaváren po stánky se suvenýry. Trochu hotovosti se hodí na dopravu a spropitné.",
         ),
       },
       {
-        title: tx("Банкомати та комісії", "Bankomaty a poplatky"),
+        title: tx("Банкомати", "Bankomaty"),
         text: tx(
-          "Банкомати (cajeros) є всюди. Зважайте на комісію місцевого банку та відмовляйтеся від конвертації в крони — обирайте зняття в євро.",
-          "Bankomaty (cajeros) jsou všude. Hlídejte poplatek místní banky a odmítněte převod na koruny — vybírejte v eurech.",
+          "Банкомати (cajeros) є всюди. Зважайте на комісію місцевого банку й відмовляйтеся від конвертації в крони: знімайте в євро.",
+          "Bankomaty (cajeros) najdete všude. Hlídejte poplatek místní banky a převod na koruny odmítněte: vybírejte v eurech.",
         ),
       },
     ],
@@ -1143,103 +1143,103 @@ export const destinations: Destination[] = [
       {
         title: tx("Сієста", "Siesta"),
         text: tx(
-          "Багато магазинів зачиняються з 14:00 до 17:00 — час для неспішного обіду.",
-          "Řada obchodů zavírá mezi 14. a 17. hodinou — čas na pomalý oběd.",
+          "З 14:00 до 17:00 багато крамниць зачиняється. Не боріться з цим — пообідайте так само неспішно, як іспанці.",
+          "Mezi 14. a 17. hodinou spousta obchodů zavírá. Nebojujte s tím – dejte si oběd stejně pomalu jako Španělé.",
         ),
       },
       {
-        title: tx("Гастрономія", "Gastronomie"),
+        title: tx("Що скуштувати", "Co ochutnat"),
         text: tx(
-          "Паелья, гаспачо, хамон і сангрія. Вечеря в Іспанії починається не раніше 20:00–21:00.",
-          "Paella, gazpacho, jamón a sangria. Večeře ve Španělsku začíná až po 20.–21. hodině.",
+          "Паелья, гаспачо, хамон і сангрія. І пам’ятайте: вечеря тут починається не раніше 20:00–21:00.",
+          "Paella, gazpacho, jamón a sangria. A počítejte s tím, že večeře tu začíná až mezi 20. a 21. hodinou.",
         ),
       },
       {
         title: tx("Транспорт", "Doprava"),
         text: tx(
-          "Потяги RENFE та автобуси працюють бездоганно, а орендоване авто відкриє дикі пляжі та затишні села.",
-          "Vlaky RENFE a autobusy fungují skvěle, půjčené auto vám ukáže divoké pláže a malebné vesnice.",
+          "Потяги RENFE й автобуси ходять точно, а авто напрокат довезе до диких пляжів і маленьких сіл.",
+          "Vlaky RENFE a autobusy jezdí na čas a půjčené auto vás doveze k divokým plážím a malým vesnicím.",
         ),
       },
       {
-        title: tx("Шопінг", "Nákupy"),
+        title: tx("Розпродажі", "Výprodeje"),
         text: tx(
-          "Найкращі розпродажі (rebajas) — у січні–лютому та липні–серпні.",
-          "Nejlepší výprodeje (rebajas) jsou v lednu–únoru a v červenci–srpnu.",
+          "Найкращі знижки (rebajas) — у січні–лютому та в липні–серпні.",
+          "Velké výprodeje (rebajas) bývají v lednu a únoru a pak v červenci a srpnu.",
         ),
       },
     ],
     faq: [
       {
-        q: tx("Чи потрібно платити туристичний збір?", "Platí se turistická daň?"),
+        q: tx("Чи треба платити туристичний збір?", "Platí se turistická daň?"),
         a: tx(
-          "Так, у багатьох регіонах (особливо в Каталонії та на Балеарах) — від 1 до 5 € з особи за ніч залежно від категорії готелю. Платять на місці.",
-          "Ano, v mnoha regionech (hlavně v Katalánsku a na Baleárech) — 1 až 5 € za osobu a noc podle kategorie hotelu. Platí se na místě.",
+          "Так, у багатьох регіонах — особливо в Каталонії й на Балеарах. Зазвичай це 1–5 € з людини за ніч залежно від категорії готелю, сплачують на місці.",
+          "Ano, v mnoha regionech, hlavně v Katalánsku a na Baleárech. Obvykle 1–5 € za osobu a noc podle kategorie hotelu, platí se na místě.",
         ),
       },
       {
         q: tx("Скільки коштують шезлонги?", "Kolik stojí lehátka?"),
         a: tx(
-          "Пляжі державні й безкоштовні. Комплект (парасолька + 2 шезлонги) — у середньому 15–20 € на день. На своєму рушнику можна лежати будь-де.",
-          "Pláže jsou státní a zdarma. Set (slunečník + 2 lehátka) stojí v průměru 15–20 € na den. Na vlastním ručníku můžete ležet kdekoli.",
+          "Зазвичай 15–20 € на день за парасольку й два шезлонги. Самі пляжі державні й безкоштовні — на своєму рушнику можна лежати будь-де.",
+          "Obvykle 15–20 € na den za slunečník a dvě lehátka. Samotné pláže jsou státní a zdarma, na vlastním ručníku můžete ležet kdekoli.",
         ),
       },
       {
-        q: tx("Чому ресторани зачинені о 18:00?", "Proč mají restaurace v 18:00 zavřeno?"),
+        q: tx("Чому о 18:00 ресторани ще зачинені?", "Proč mají restaurace v 18:00 ještě zavřeno?"),
         a: tx(
-          "Обід в Іспанії — з 13:30 до 16:00, вечеря — після 20:00. Якщо зголодніли раніше, шукайте тапас-бари.",
-          "Oběd je ve Španělsku od 13:30 do 16:00, večeře po 20:00. Když dostanete hlad dřív, zajděte do tapas baru.",
+          "Бо в Іспанії обідають з 13:30 до 16:00, а вечеряють після 20:00. Зголодніли раніше — шукайте тапас-бар.",
+          "Protože se ve Španělsku obědvá od 13:30 do 16:00 a večeří až po 20:00. Když dostanete hlad dřív, zajděte do tapas baru.",
         ),
       },
       {
-        q: tx("Як не стояти в чергах у PortAventura?", "Jak se vyhnout frontám v PortAventuře?"),
+        q: tx("Як не стояти в чергах у PortAventura?", "Jak se vyhnout frontám v PortAventuře?"),
         a: tx(
-          "Купуйте квитки онлайн заздалегідь, у сезон — з Express Pass. Вигідно жити в готелі парку: квитки вже включені.",
-          "Kupte vstupenky online předem, v sezóně s Express Passem. Výhodné je bydlet v hotelu přímo v parku — vstupenky jsou v ceně.",
+          "Купуйте квитки онлайн заздалегідь, а в сезон — з Express Pass. Ще простіше — оселитися в одному з готелів парку: квитки там уже в ціні.",
+          "Kupte si vstupenky online předem, v sezóně rovnou s Express Passem. Ještě jednodušší je bydlet v některém z hotelů parku – vstupenky tam máte v ceně.",
         ),
       },
       {
-        q: tx("Наскільки безпечно в туристичних центрах?", "Jak bezpečná jsou turistická centra?"),
+        q: tx("Наскільки безпечно в туристичних центрах?", "Jak bezpečná jsou turistická centra?"),
         a: tx(
-          "Іспанія безпечна, але в Барселоні та Мадриді активні кишенькові злодії. Не залишайте телефон на столику кафе й тримайте рюкзак перед собою.",
-          "Španělsko je bezpečné, ale v Barceloně a Madridu řádí kapsáři. Nenechávejte telefon na stolku a batoh noste před sebou.",
+          "Загалом безпечно, але в Барселоні та Мадриді орудують кишенькові злодії. Не лишайте телефон на столику кафе й носіть рюкзак перед собою.",
+          "Obecně bezpečná, ale v Barceloně a Madridu řádí kapsáři. Nenechávejte telefon na stolku v kavárně a batoh noste před sebou.",
         ),
       },
       {
-        q: tx("Чи можна пити воду з-під крана?", "Dá se pít voda z kohoutku?"),
+        q: tx("Можна пити воду з-під крана?", "Dá se pít voda z kohoutku?"),
         a: tx(
-          "Офіційно вона питна, але має специфічний присмак через мінерали. Бутильована вода в супермаркеті коштує копійки.",
-          "Oficiálně je pitná, ale kvůli minerálům má zvláštní chuť. Balená voda stojí v supermarketu pár centů.",
+          "Офіційно так, але через мінерали вона має своєрідний присмак. Бутильована вода в супермаркеті коштує копійки.",
+          "Oficiálně ano, kvůli minerálům ale má zvláštní chuť. Balená voda stojí v supermarketu pár centů.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури до Іспанії з Праги — Майорка, Канари", "Zájezdy do Španělska — Mallorca, Kanáry"),
+      title: tx("Тури до Іспанії з Чехії — ціни в кронах", "Zájezdy do Španělska z Česka – ceny v Kč"),
       description: tx(
-        "Відпочинок в Іспанії з вильотом із Праги, Брна, Острави. Майорка, Тенеріфе, Коста-Брава, Коста-Дорада. Підбір у Telegram.",
-        "Dovolená ve Španělsku s odletem z Prahy, Brna a Ostravy. Mallorca, Tenerife, Costa Brava, Costa Dorada. Výběr přes Telegram.",
+        "Тури до Іспанії з Чехії: Майорка, Тенеріфе, Коста-Брава, Коста-Дорада, а Канари — навіть узимку. Ціни в кронах. Альона підбере 3 готелі для вас.",
+        "Zájezdy do Španělska z Česka: Mallorca, Tenerife, Costa Brava, Costa Dorada a Kanáry i v zimě. Ceny v Kč. Aljona vám vybere 3 hotely na míru.",
       ),
     },
   },
   // ───────────────────────────── DOMINICAN REPUBLIC
   {
     slug: "dominicana",
-    name: tx("Домінікана", "Dominikánská republika"),
-    nameTo: tx("до Домінікани", "do Dominikánské republiky"),
-    nameIn: tx("у Домінікані", "v Dominikánské republice"),
+    name: tx("Домінікана", "Dominikána"),
+    nameTo: tx("до Домінікани", "do Dominikány"),
+    nameIn: tx("у Домінікані", "v Dominikáně"),
     flag: "🇩🇴",
     heroImage: hero("dominicana"),
-    tagline: tx("Карибський баунті-рай", "Karibský ráj jako z reklamy"),
+    tagline: tx("Карибське море наживо", "Karibik naživo"),
     teaser: tx(
-      "Пунта-Кана, білі пляжі під пальмами та ром — зимова втеча в справжнє літо.",
-      "Punta Cana, bílé pláže pod palmami a rum — zimní útěk do opravdového léta.",
+      "Пунта-\u2060Кана, пальми над білим піском і справжнє літо посеред чеської зими.",
+      "Punta Cana, palmy nad bílým pískem a opravdové léto uprostřed české zimy.",
     ),
     intro: tx(
-      "Домініканська Республіка — втілення мрії про баунті-відпочинок. Сонце світить тут 365 днів на рік, а повітря пахне кавою та морським бризом. Найкращі пляжі Атлантики й Карибського моря, готелі all inclusive преміального рівня та прямі чартери з Праги в зимовому сезоні. Ananas Tour підбере резорт для родини, медового місяця чи активного відпочинку.",
-      "Dominikánská republika je splněný sen o dovolené jako z reklamy na Bounty. Slunce tu svítí 365 dní v roce a vzduch voní kávou a mořem. Nejkrásnější pláže Atlantiku i Karibiku, prémiové all inclusive hotely a v zimní sezóně přímé chartery z Prahy. Ananas Tour vybere resort pro rodinu, líbánky i aktivní dovolenou.",
+      "Той самий краєвид, що на заставці робочого комп’ютера, — тільки наживо й з теплим морем. Підкажу, що вам ближче: хвилі Атлантики чи спокійне Карибське море, — і підберу резорт, де вам буде добре.",
+      "Přesně ta pláž, kterou máte na tapetě pracovního počítače – jen naživo a s teplým mořem. Poradím, co je vám bližší, jestli vlny Atlantiku, nebo klidné Karibské moře, a vyberu hotel, který vám sedne.",
     ),
-    bestSeason: tx("листопад – квітень", "listopad – duben"),
-    flightTime: tx("≈ 10–11 год з Праги (чартер)", "cca 10–11 h z Prahy (charter)"), // TODO(client): verify
+    bestSeason: tx("листопад–квітень", "listopad–duben"),
+    flightTime: tx("≈ 10–11 год з Праги (чартер)", "cca 10–11 h z Prahy (charter)"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("домініканське песо (DOP), USD", "dominikánské peso (DOP), USD"),
     entry: ENTRY_CHECK,
@@ -1247,24 +1247,24 @@ export const destinations: Destination[] = [
       {
         title: tx("Пунта-Кана", "Punta Cana"),
         text: tx(
-          "Найвідоміший курорт із нескінченними пляжами Баваро, розкішними all inclusive і найкращими дискотеками Карибів.",
-          "Nejznámější letovisko s nekonečnými plážemi Bávaro, luxusními all inclusive hotely a nejlepšími diskotékami v Karibiku.",
+          "Найвідоміший курорт: нескінченні пляжі Баваро, великі готелі «все включено» й нічне життя для тих, хто не втомився за день.",
+          "Nejznámější letovisko: nekonečné pláže Bávaro, velké all inclusive hotely a noční život pro ty, kterým den nestačil.",
         ),
         image: img("dominicana", 1),
       },
       {
-        title: tx("Ла-Романа та Байяїбе", "La Romana a Bayahibe"),
+        title: tx("Ла-Романа й Байяїбе", "La Romana a Bayahibe"),
         text: tx(
-          "Спокійне Карибське море з бірюзовою водою — для дайвінгу та романтики. Поруч «місто художників» Альтос-де-Чавон.",
-          "Klidné Karibské moře s tyrkysovou vodou — pro potápění i romantiku. Kousek odtud je „město umělců“ Altos de Chavón.",
+          "Спокійне бірюзове Карибське море — для снорклінгу й романтики. Поруч — «місто художників» Альтос-\u2060де-\u2060Чавон.",
+          "Klidné tyrkysové Karibské moře na šnorchlování i romantiku. Kousek odtud je „město umělců“ Altos de Chavón.",
         ),
         image: img("dominicana", 2),
       },
       {
-        title: tx("Пуерто-Плата та Самана", "Puerto Plata a Samaná"),
+        title: tx("Атлантичний берег", "Atlantské pobřeží"),
         text: tx(
-          "Атлантичне узбережжя для любителів природи: дикі пляжі, водоспади та горбаті кити з січня по березень.",
-          "Atlantické pobřeží pro milovníky přírody: divoké pláže, vodopády a keporkaci od ledna do března.",
+          "Пуерто-Плата й півострів Самана — для тих, хто любить природу: дикі пляжі, водоспади й горбаті кити з січня до березня.",
+          "Puerto Plata a poloostrov Samaná pro milovníky přírody: divoké pláže, vodopády a od ledna do března velryby keporkaci.",
         ),
         image: img("dominicana", 3),
       },
@@ -1273,15 +1273,15 @@ export const destinations: Destination[] = [
       {
         title: tx("Долари США", "Americké dolary"),
         text: tx(
-          "Долар приймають майже скрізь: у готелях, сувенірних лавках та екскурсійних бюро. Перед поїздкою поміняйте частину крон на долари дрібними купюрами.",
-          "Dolary berou skoro všude: v hotelech, obchůdcích se suvenýry i na výletech. Před cestou si část korun vyměňte na dolary v drobných bankovkách.",
+          "Долари беруть майже скрізь: у готелях, сувенірних крамничках і на екскурсіях. Частину крон поміняйте на долари дрібними купюрами ще в Чехії.",
+          "Dolary berou skoro všude: v hotelech, obchůdcích se suvenýry i na výletech. Část korun si vyměňte na drobné dolary ještě v Česku.",
         ),
       },
       {
         title: tx("Банківські картки", "Platební karty"),
         text: tx(
-          "У готелях і великих ТЦ картки працюють без проблем. Для ринків і маленьких кафе в місті краще мати готівкові песо.",
-          "V hotelech a velkých obchodních centrech karty fungují bez problémů. Na trhy a do malých kaváren ve městě se hodí hotovostní pesa.",
+          "У готелях і великих торгових центрах картки працюють без проблем. На ринок і до маленьких кафе в місті візьміть песо готівкою.",
+          "V hotelech a velkých obchodních centrech fungují karty bez problémů. Na trhy a do malých kaváren ve městě si vezměte pesa v hotovosti.",
         ),
       },
     ],
@@ -1290,29 +1290,29 @@ export const destinations: Destination[] = [
         // TODO(client): verify entry rules by citizenship; e-Ticket form is mandatory for all travellers.
         title: tx("В’їзд", "Vstup"),
         text: tx(
-          "Перед вильотом кожен турист заповнює безкоштовну електронну анкету e-Ticket. Візові умови залежать від громадянства — ми перевіримо їх для вас.",
-          "Před odletem každý cestující vyplní bezplatný elektronický formulář e-Ticket. Vízové podmínky závisí na občanství — ověříme je za vás.",
+          "Перед вильотом кожен заповнює безкоштовну електронну анкету e-\u2060Ticket. Візові умови залежать від громадянства — перевірю саме для вашої ситуації.",
+          "Před odletem každý vyplní bezplatný elektronický formulář e-\u2060Ticket. Vízové podmínky závisí na občanství. Ověřím pro vaši situaci.",
         ),
       },
       {
         title: tx("Що привезти", "Co přivézt"),
         text: tx(
-          "Карибський ром, каву, домініканські сигари та ларимар — камінь, який видобувають лише тут.",
-          "Karibský rum, kávu, dominikánské doutníky a larimar — kámen, který se těží jen tady.",
+          "Ром, каву, сигари й ларимар — блакитний камінь, який видобувають лише тут.",
+          "Rum, kávu, doutníky a larimar – modrý kámen, který se těží jen tady.",
         ),
       },
       {
         title: tx("Сонце", "Slunce"),
         text: tx(
-          "Сонце дуже підступне — навіть у хмарну погоду користуйтеся кремом SPF 50+.",
-          "Slunce je zrádné — i pod mraky používejte krém s SPF 50+.",
+          "Тут воно пече навіть крізь хмари. Крем SPF 50+ — щодня, а не лише першого дня.",
+          "Pálí i přes mraky. Krém s SPF 50+ mažte každý den, ne jen ten první.",
         ),
       },
       {
         title: tx("Вода", "Voda"),
         text: tx(
-          "Пийте лише бутильовану воду, навіть у готелях 5*.",
-          "Pijte jen balenou vodu, i v hotelech 5*.",
+          "Пийте лише бутильовану воду — навіть у готелях 5★.",
+          "Pijte jen balenou vodu, i v hotelech 5*.",
         ),
       },
     ],
@@ -1320,51 +1320,51 @@ export const destinations: Destination[] = [
       {
         q: tx("Атлантика чи Карибське море?", "Atlantik, nebo Karibské moře?"),
         a: tx(
-          "Пунта-Кана — Атлантика: вода трохи прохолодніша, хвилі вищі. Карибське море (Ла-Романа, Байяїбе) — спокійне, дуже тепле та яскраво-бірюзове.",
-          "Punta Cana leží u Atlantiku: voda je o něco chladnější a vlny vyšší. Karibské moře (La Romana, Bayahibe) je klidné, velmi teplé a jasně tyrkysové.",
+          "Залежить від того, що ви любите. Пунта-Кана — це Атлантика: вода трохи прохолодніша, хвилі вищі. Карибське море біля Ла-Романи й Байяїбе спокійне, дуже тепле й яскраво-бірюзове.",
+          "Záleží na tom, co máte rádi. Punta Cana leží u Atlantiku: voda je o něco chladnější a vlny vyšší. Karibské moře u La Romany a Bayahibe je klidné, velmi teplé a jasně tyrkysové.",
         ),
       },
       {
-        q: tx("Що таке сезон водоростей (саргасів)?", "Co je sezóna řas (sargasy)?"),
+        q: tx("Що таке сезон саргасових водоростей?", "Co je sezóna sargasových řas?"),
         a: tx(
-          "Періодично до берега прибиває бурі водорості — це природне явище. Хороші готелі щоранку чистять пляжі та ставлять сітки в океані.",
-          "Občas moře vyplaví hnědé řasy — je to přírodní jev. Dobré hotely každé ráno čistí pláže a instalují v oceánu sítě.",
+          "Це природне явище: часом море виносить на берег бурі водорості. Добрі готелі щоранку прибирають пляж і ставлять в океані загороджувальні сітки.",
+          "Je to přírodní jev: moře občas vyplaví na břeh hnědé řasy. Dobré hotely každé ráno čistí pláž a v oceánu mají zábrany.",
         ),
       },
       {
-        q: tx("Чи потрібен перехідник для розеток?", "Potřebuji adaptér do zásuvky?"),
+        q: tx("Чи потрібен перехідник для розеток?", "Potřebuju adaptér do zásuvky?"),
         a: tx(
-          "Так, розетки американського типу (плоскі штирі) і напруга 110 V. Купіть універсальний адаптер ще в Чехії.",
-          "Ano, zásuvky jsou americké (ploché kolíky) a napětí 110 V. Univerzální adaptér si kupte ještě v Česku.",
+          "Так. Розетки американського типу з пласкими штирями, напруга 110 В. Універсальний адаптер купіть ще в Чехії.",
+          "Ano. Zásuvky jsou americké s plochými kolíky a napětí 110 V. Univerzální adaptér si kupte ještě v Česku.",
         ),
       },
       {
         q: tx("Чи безпечно виходити за межі готелю?", "Je bezpečné chodit mimo hotel?"),
         a: tx(
-          "У курортних зонах — так. Увечері не гуляйте наодинці в нетуристичних кварталах; для поїздок беріть офіційне таксі або організовані екскурсії.",
-          "V turistických zónách ano. Večer nechoďte sami do neturistických čtvrtí, na výlety využijte oficiální taxi nebo organizované výlety.",
+          "У курортних зонах — так. Увечері не гуляйте самі в нетуристичних кварталах, а для поїздок обирайте офіційне таксі чи організовані екскурсії.",
+          "V turistických zónách ano. Večer nechoďte sami do neturistických čtvrtí a na přesuny volte oficiální taxi nebo organizované výlety.",
         ),
       },
       {
-        q: tx("Коли можна побачити китів на Самані?", "Kdy uvidíme velryby v zátoce Samaná?"),
+        q: tx("Коли можна побачити китів на Самані?", "Kdy se dají u Samaná vidět velryby?"),
         a: tx(
-          "З середини січня до кінця березня кити припливають у затоку Самана. Якщо ваша відпустка в ці дати — обов’язково замовте екскурсію.",
-          "Od poloviny ledna do konce března připlouvají velryby do zátoky Samaná. Pokud tam budete v tomto termínu, výlet si určitě objednejte.",
+          "З середини січня до кінця березня — тоді горбаті кити припливають у затоку Самана. Якщо ваша відпустка припадає на ці дати, екскурсію раджу не пропускати.",
+          "Od poloviny ledna do konce března, kdy do zátoky Samaná připlouvají keporkaci. Pokud tam budete v tomhle termínu, výlet si nenechte ujít.",
         ),
       },
       {
-        q: tx("Які чайові прийнятні на all inclusive?", "Jaké spropitné se dává na all inclusive?"),
+        q: tx("Скільки давати чайових на «все включено»?", "Kolik dávat spropitné při all inclusive?"),
         a: tx(
-          "Зазвичай 1–2 $ офіціанту, бармену чи покоївці. Невелика подяка помітно пришвидшує обслуговування.",
-          "Obvykle 1–2 $ číšníkovi, barmanovi nebo pokojské. Malá pozornost znatelně zrychlí obsluhu.",
+          "Зазвичай 1–2 $ офіціантові, барменові чи покоївці. Невелика подяка помітно пришвидшує сервіс.",
+          "Obvykle 1–2 $ číšníkovi, barmanovi nebo pokojské. Malá pozornost znatelně zrychlí obsluhu.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури до Домінікани з Праги — Пунта-Кана", "Zájezdy do Dominikánské republiky — Punta Cana"),
+      title: tx("Тури до Домінікани з Чехії — ціни в кронах", "Zájezdy do Dominikány z Česka – ceny v Kč"),
       description: tx(
-        "Домінікана з чартером із Праги: Пунта-Кана, Ла-Романа, Самана. All inclusive, ціни в CZK, підбір у Telegram.",
-        "Dominikánská republika s charterem z Prahy: Punta Cana, La Romana, Samaná. All inclusive, ceny v CZK, výběr přes Telegram.",
+        "Тури до Домінікани з Чехії: Пунта-Кана, Ла-Романа, Самана. Чартер у зимовий сезон, «все включено», ціни в кронах. Альона підбере 3 готелі для вас.",
+        "Zájezdy do Dominikány z Česka: Punta Cana, La Romana, Samaná. Charter v zimní sezóně, all inclusive, ceny v Kč. Aljona vám vybere 3 hotely na míru.",
       ),
     },
   },
@@ -1373,62 +1373,62 @@ export const destinations: Destination[] = [
     slug: "italy",
     name: tx("Італія", "Itálie"),
     nameTo: tx("до Італії", "do Itálie"),
-    nameIn: tx("в Італії", "v Itálii"),
+    nameIn: tx("в Італії", "v Itálii"),
     flag: "🇮🇹",
     heroImage: hero("italy"),
-    tagline: tx("La Dolce Vita за дві години від Праги", "La dolce vita dvě hodiny od Prahy"),
+    tagline: tx("Сардинія, Сицилія й паста", "Sardinie, Sicílie a pasta"),
     teaser: tx(
-      "Рим, Венеція, Амальфі, Сардинія та озера Півночі — мистецтво, море і найкраща кухня.",
-      "Řím, Benátky, Amalfi, Sardinie a severní jezera — umění, moře a nejlepší kuchyně.",
+      "Рим, Венеція, Амальфі, Сардинія, озера. Мистецтво зранку, море вдень, паста ввечері — і нікому не треба вибирати.",
+      "Řím, Benátky, Amalfi, Sardinie, jezera. Ráno umění, přes den moře, večer pasta – a nikdo nemusí vybírat.",
     ),
     intro: tx(
-      "Італія не потребує представлення: батьківщина великого мистецтва, моди та неперевершеної кухні. Від Альп до пляжів Сицилії й Сардинії вона дарує частинку свого вічного свята. Із Праги до Риму чи Кальярі — близько двох годин польоту, а до озера Гарда можна доїхати й власним авто. Ananas Tour пропонує відчути справжню La Dolce Vita.",
-      "Itálii není třeba představovat: je kolébkou umění, módy a skvělé kuchyně. Od Alp po pláže Sicílie a Sardinie vám dá kousek svého věčného svátku. Z Prahy do Říma nebo Cagliari letíte asi dvě hodiny a k Lago di Garda dojedete i autem. Ananas Tour vám nabízí pravou dolce vitu.",
+      "Італія зовсім поруч: літаком — до двох годин, а можна доїхати й автобусом. Скажіть, чого хочеться більше — моря, міст чи всього одразу, — і я складу таку відпустку.",
+      "Itálie je skoro za rohem: letadlem do dvou hodin a dojet se dá i autobusem. Řekněte, co vás táhne víc – moře, města, nebo všechno najednou – a já vám takovou dovolenou poskládám.",
     ),
-    bestSeason: tx("квітень – жовтень; море — червень – вересень", "duben – říjen; moře červen – září"),
-    flightTime: tx("≈ 1,5–2 год з Праги", "cca 1,5–2 h z Prahy"), // TODO(client): verify
+    bestSeason: tx("квітень–жовтень; море — червень–вересень", "duben–říjen; k moři červen–září"),
+    flightTime: tx("≈ 1,5–2 год з Праги", "cca 1,5–2 h z Prahy"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("євро (EUR)", "euro (EUR)"),
     entry: ENTRY_SCHENGEN,
     regions: [
       {
-        title: tx("Рим, Флоренція, Венеція", "Řím, Florencie, Benátky"),
+        title: tx("Класична Італія", "Klasická Itálie"),
         text: tx(
-          "Класичний трикутник мистецтва: Колізей, канали Венеції та архітектура Ренесансу — обов’язкова програма.",
-          "Klasický trojúhelník umění: Koloseum, benátské kanály a renesanční architektura — povinná výbava každého cestovatele.",
+          "Рим, Флоренція й Венеція: Колізей, Ренесанс і канали. Обов’язкова програма, після якої хочеться ще.",
+          "Řím, Florencie a Benátky: Koloseum, renesance a kanály. Povinná jízda, po které budete chtít přidat.",
         ),
         image: img("italy", 1),
       },
       {
-        title: tx("Амальфі, Сицилія та Сардинія", "Amalfi, Sicílie a Sardinie"),
+        title: tx("Південь і острови", "Jih a ostrovy"),
         text: tx(
-          "Кольорові будиночки Позітано, Етна на Сицилії та смарагдове море Сардинії — ідеальний фон для пляжного відпочинку.",
-          "Barevné domky Positana, Etna na Sicílii a smaragdové moře Sardinie — ideální kulisa pro dovolenou u moře.",
+          "Кольорові будиночки Позітано на Амальфі, Етна на Сицилії й смарагдове море Сардинії — для тих, хто їде передусім до моря.",
+          "Barevné domky v Positanu na Amalfi, Etna na Sicílii a smaragdové moře Sardinie – pro ty, kdo jedou hlavně k moři.",
         ),
         image: img("italy", 2),
       },
       {
-        title: tx("Мілан та озера", "Milán a jezera"),
+        title: tx("Мілан і озера", "Milán a jezera"),
         text: tx(
-          "Висока мода та спокій озер Комо й Гарда: розкішні вілли, прозора вода й атмосфера вишуканого відпочинку.",
-          "Vysoká móda a klid jezer Como a Garda: luxusní vily, průzračná voda a atmosféra vytříbeného odpočinku.",
+          "Мода Мілана й спокій озер Комо та Гарда: вілли, прозора вода й неспішні вечори на набережних.",
+          "Milánská móda a klid jezer Como a Garda: vily, průzračná voda a pomalé večery na nábřeží.",
         ),
         image: img("italy", 3),
       },
     ],
     money: [
       {
-        title: tx("Безготівкові розрахунки", "Platba kartou"),
+        title: tx("Картка чи готівка?", "Kartou, nebo hotově?"),
         text: tx(
-          "Картки приймають майже скрізь. Готівка знадобиться для ринків і туристичного податку в готелі.",
-          "Kartou zaplatíte skoro všude. Hotovost se hodí na trhy a na turistickou daň v hotelu.",
+          "Карткою можна платити майже скрізь. Готівка знадобиться на ринках і для туристичного податку в готелі.",
+          "Kartou zaplatíte skoro všude. Hotovost se hodí na trzích a na turistickou daň v hotelu.",
         ),
       },
       {
         title: tx("Банкомати", "Bankomaty"),
         text: tx(
-          "Знімайте готівку в банкоматах (Bancomat) великих банків. Вуличних обмінників у туристичних центрах краще уникати.",
-          "Hotovost vybírejte z bankomatů (Bancomat) velkých bank. Pouličním směnárnám v turistických centrech se vyhněte.",
+          "Знімайте готівку в банкоматах (Bancomat) великих банків, а вуличних обмінників у туристичних центрах краще уникати.",
+          "Hotovost vybírejte z bankomatů (Bancomat) velkých bank, pouličním směnárnám v turistických centrech se raději vyhněte.",
         ),
       },
     ],
@@ -1437,29 +1437,29 @@ export const destinations: Destination[] = [
         // TODO(client): verify travel rules for temporary-protection holders.
         title: tx("В’їзд", "Vstup"),
         text: tx(
-          "Італія — у Шенгені. Зазвичай достатньо біометричного паспорта та документа про перебування в ЧР.",
-          "Itálie je ve Schengenu. Obvykle stačí biometrický pas a doklad o pobytu v ČR.",
+          "Італія — у Шенгені: зазвичай досить біометричного паспорта й чинного документа про перебування в Чехії. Перевірю саме для вашої ситуації.",
+          "Itálie je ve Schengenu: obvykle stačí biometrický pas a platný doklad o pobytu v Česku. Ověřím pro vaši situaci.",
         ),
       },
       {
-        title: tx("Кава", "Káva"),
+        title: tx("Кава біля стійки", "Káva u baru"),
         text: tx(
-          "Еспресо п’ють швидко, стоячи біля барної стійки. За столиком кава дорожча.",
-          "Espresso se pije rychle u baru vestoje. U stolku je káva dražší.",
+          "Еспресо п’ють швидко й стоячи біля стійки. За столиком та сама кава коштує дорожче.",
+          "Espresso se pije rychle a vestoje u baru. U stolku stojí stejná káva víc.",
         ),
       },
       {
         title: tx("Riposo", "Riposo"),
         text: tx(
-          "Багато магазинів і невеликих ресторанів зачинені з 13:00 до 16:00.",
-          "Řada obchodů a malých restaurací má zavřeno mezi 13. a 16. hodinou.",
+          "З 13:00 до 16:00 багато крамниць і невеликих ресторанів зачинено. Італійці відпочивають — і вам раджу.",
+          "Mezi 13. a 16. hodinou má spousta obchodů a malých restaurací zavřeno. Italové odpočívají – a já vám radím totéž.",
         ),
       },
       {
-        title: tx("Дрес-код у храмах", "Oblékání v kostelech"),
+        title: tx("Дрес-код у храмах", "Oblékání v kostelech"),
         text: tx(
-          "У Ватикані та соборах плечі й коліна мають бути закриті.",
-          "Ve Vatikánu a katedrálách mějte zakrytá ramena a kolena.",
+          "У Ватикані та в соборах плечі й коліна мають бути закриті. Легкий шарф у сумці рятує завжди.",
+          "Ve Vatikánu a v katedrálách mějte zakrytá ramena i kolena. Lehký šátek v tašce vás vždycky zachrání.",
         ),
       },
     ],
@@ -1467,73 +1467,73 @@ export const destinations: Destination[] = [
       {
         q: tx("Що таке tassa di soggiorno?", "Co je tassa di soggiorno?"),
         a: tx(
-          "Міський туристичний податок, що не входить у ціну туру. У Римі та Венеції він найвищий — до кількох євро з особи за ніч. Сплачується в готелі.",
-          "Městská turistická daň, která není v ceně zájezdu. Nejvyšší je v Římě a Benátkách — až několik eur za osobu a noc. Platí se v hotelu.",
+          "Міський туристичний податок, який не входить у ціну туру. Найвищий він у Римі й Венеції — до кількох євро з людини за ніч. Сплачують у готелі.",
+          "Městská turistická daň, která není v ceně zájezdu. Nejvyšší je v Římě a Benátkách, až několik eur za osobu a noc. Platí se v hotelu.",
         ),
       },
       {
-        q: tx("Що означає coperto в рахунку?", "Co znamená coperto na účtu?"),
+        q: tx("Що означає coperto в рахунку?", "Co znamená coperto na účtu?"),
         a: tx(
-          "Плата за сервірування та хліб (зазвичай 1,5–3 € з особи). Це не чайові; 1–2 € зверху за гарний сервіс завжди вітаються.",
-          "Poplatek za prostření a chléb (obvykle 1,5–3 € na osobu). Není to spropitné; 1–2 € navíc za dobrou obsluhu vždy potěší.",
+          "Це плата за сервірування й хліб, зазвичай 1,5–3 € з людини. Чайових вона не замінює: 1–2 € зверху за добрий сервіс завжди доречні.",
+          "Poplatek za prostření a chléb, obvykle 1,5–3 € na osobu. Spropitné ale nenahrazuje: 1–2 € navíc za dobrou obsluhu vždy potěší.",
         ),
       },
       {
-        q: tx("Чи є безкоштовні пляжі?", "Jsou v Itálii pláže zdarma?"),
+        q: tx("Чи є в Італії безкоштовні пляжі?", "Jsou v Itálii pláže zdarma?"),
         a: tx(
-          "Більшість облаштованих пляжів (lido) платні — 20–50 € на день за парасольку й шезлонги. Але в кожному місті є spiaggia libera — вільні ділянки.",
-          "Většina vybavených pláží (lido) je placená — 20–50 € na den za slunečník a lehátka. V každém městě je ale i spiaggia libera — volná pláž.",
+          "Так, хоча більшість облаштованих пляжів (lido) платна: 20–50 € на день за парасольку й шезлонги. Але майже в кожному місті є spiaggia libera — вільні ділянки, де можна розкласти свій рушник.",
+          "Ano, i když většina vybavených pláží (lido) je placená – 20–50 € na den za slunečník a lehátka. Skoro v každém městě ale najdete i spiaggia libera, volnou pláž, kde si lehnete na vlastní ručník.",
         ),
       },
       {
         q: tx("Чи треба компостувати квитки?", "Musím si označit jízdenku?"),
         a: tx(
-          "Так! Паперові квитки на регіональні потяги та міський транспорт валідуйте перед посадкою, інакше штраф від 50 €.",
-          "Ano! Papírové jízdenky na regionální vlaky a MHD před nástupem označte, jinak hrozí pokuta od 50 €.",
+          "Так. Паперові квитки на регіональні потяги й міський транспорт компостуйте перед посадкою, інакше штраф — від 50 €.",
+          "Ano. Papírové jízdenky na regionální vlaky a MHD si před nástupem označte, jinak hrozí pokuta od 50 €.",
         ),
       },
       {
-        q: tx("Чи безпечно ввечері в туристичних центрах?", "Je večer v centrech bezpečno?"),
+        q: tx("Чи безпечно ввечері в туристичних центрах?", "Je večer v turistických centrech bezpečno?"),
         a: tx(
-          "Загалом так, але в Римі, Мілані та Неаполі багато кишенькових злодіїв. Не тримайте телефон у задній кишені й не вішайте сумку на спинку стільця.",
-          "Obecně ano, ale v Římě, Miláně a Neapoli je hodně kapsářů. Nenoste telefon v zadní kapse a kabelku nevěšte na opěradlo židle.",
+          "Загалом так, але в Римі, Мілані й Неаполі багато кишенькових злодіїв. Не тримайте телефон у задній кишені й не вішайте сумку на спинку стільця.",
+          "Obecně ano, ale v Římě, Miláně a Neapoli je hodně kapsářů. Nenoste telefon v zadní kapse a tašku nevěšte na opěradlo židle.",
         ),
       },
       {
-        q: tx("Чи можна пити з фонтанчиків у Римі?", "Dá se pít z fontánek v Římě?"),
+        q: tx("Можна пити з фонтанчиків у Римі?", "Dá se pít z fontánek v Římě?"),
         a: tx(
-          "Так, фонтанчики nasoni дають чисту холодну питну воду безкоштовно — наповнюйте пляшку сміливо.",
-          "Ano, fontánky nasoni nabízejí čistou studenou pitnou vodu zdarma — klidně si naplňte láhev.",
+          "Так. Фонтанчики nasoni дають чисту холодну питну воду безкоштовно — сміливо наповнюйте пляшку.",
+          "Ano. Z fontánek nasoni teče čistá studená pitná voda zdarma, láhev si klidně naplňte.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури до Італії з Праги — море та екскурсії", "Zájezdy do Itálie — moře i poznávání"),
+      title: tx("Тури до Італії з Чехії — ціни в кронах", "Zájezdy do Itálie z Česka – ceny v Kč"),
       description: tx(
-        "Італія з Праги: Рим, Венеція, Сардинія, Сицилія, озера. Пляжні та екскурсійні тури, ціни в CZK, підбір у Telegram.",
-        "Itálie z Prahy: Řím, Benátky, Sardinie, Sicílie, jezera. Pobytové i poznávací zájezdy, ceny v CZK, výběr přes Telegram.",
+        "Тури до Італії з Чехії літаком або автобусом: Рим, Венеція, Амальфі, Сардинія, Сицилія, озера. Ціни в кронах. Альона підбере 3 готелі на ваш смак.",
+        "Zájezdy do Itálie z Česka letecky i autobusem: Řím, Benátky, Amalfi, Sardinie, Sicílie, jezera. Ceny v Kč. Aljona vám vybere 3 hotely na míru.",
       ),
     },
   },
   // ───────────────────────────── INDONESIA
   {
     slug: "indonesia",
-    name: tx("Індонезія", "Indonésie"),
-    nameTo: tx("до Індонезії", "do Indonésie"),
-    nameIn: tx("в Індонезії", "v Indonésii"),
+    name: tx("Балі", "Bali"),
+    nameTo: tx("на Балі", "na Bali"),
+    nameIn: tx("на Балі", "na Bali"),
     flag: "🇮🇩",
     heroImage: hero("indonesia"),
-    tagline: tx("Балі — острів богів і SPA", "Bali — ostrov bohů a lázní"),
+    tagline: tx("Джунглі, серф, рисові тераси", "Džungle, surf a rýžová pole"),
     teaser: tx(
-      "Храми, рисові тераси, вулкани та океан — екзотика, яку запам’ятовують на все життя.",
-      "Chrámy, rýžové terasy, sopky a oceán — exotika, na kterou se nezapomíná.",
+      "Храми в джунглях, рисові тераси Убуду, вулкани й океан. Дорога довга, але перший же ранок усе пояснює.",
+      "Chrámy v džungli, rýžové terasy v Ubudu, sopky a oceán. Cesta je dlouhá, ale hned první ráno vám vysvětlí proč.",
     ),
     intro: tx(
-      "Індонезія — архіпелаг із понад 17 тисяч островів, де кожен знайде свій шматочок раю: давні храми, активні вулкани та найкращі у світі SPA-ритуали. Дорога з Праги довга, тому ми продумаємо зручну пересадку та, за бажанням, зупинку в Дубаї чи Сінгапурі. Ananas Tour запрошує від культурного Убуду до білосніжних пляжів Нуса-Дуа.",
-      "Indonésie je souostroví s více než 17 tisíci ostrovy, kde si každý najde svůj kousek ráje: staré chrámy, činné sopky a nejlepší lázeňské rituály na světě. Cesta z Prahy je dlouhá, proto vymyslíme pohodlný přestup a případně i zastávku v Dubaji nebo Singapuru. Ananas Tour vás zve od kulturního Ubudu po bílé pláže Nusa Dua.",
+      "Летіти сюди довго, тож я продумаю зручну пересадку — і, якщо хочете, зупинку в Дубаї чи Сінгапурі. А на місці підкажу, де оселитися: серед джунглів Убуду чи на пляжах Нуса-Дуа.",
+      "Letí se sem dlouho, proto vymyslím pohodlný přestup – a když budete chtít, i zastávku v Dubaji nebo Singapuru. Na místě pak poradím, kde bydlet: v džungli u Ubudu, nebo na plážích Nusa Dua.",
     ),
-    bestSeason: tx("квітень – жовтень (сухий сезон)", "duben – říjen (období sucha)"),
-    flightTime: tx("≈ 16–20 год з пересадкою", "cca 16–20 h s přestupem"), // TODO(client): verify
+    bestSeason: tx("квітень–жовтень (сухий сезон)", "duben–říjen (období sucha)"),
+    flightTime: tx("≈ 16–20 год з пересадкою", "cca 16–20 h s přestupem"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("індонезійська рупія (IDR)", "indonéská rupie (IDR)"),
     entry: ENTRY_CHECK,
@@ -1541,24 +1541,24 @@ export const destinations: Destination[] = [
       {
         title: tx("Балі", "Bali"),
         text: tx(
-          "Убуд — центр мистецтв і йоги серед джунглів. Нуса-Дуа та Семіньяк — розкішні готелі й ресторани на березі океану.",
-          "Ubud je centrem umění a jógy uprostřed džungle. Nusa Dua a Seminyak nabízejí luxusní hotely a restaurace u oceánu.",
+          "Убуд — мистецтво, йога й рисові тераси серед джунглів. Нуса-Дуа й Семіньяк — готелі та ресторани просто на березі океану.",
+          "V Ubudu umění, jóga a rýžové terasy uprostřed džungle, v Nusa Dua a Seminyaku hotely a restaurace přímo u oceánu.",
         ),
         image: img("indonesia", 1),
       },
       {
-        title: tx("Гілі та Ломбок", "Gili a Lombok"),
+        title: tx("Гілі та Ломбок", "Gili a Lombok"),
         text: tx(
-          "Повний релакс і кришталева вода. На островах Гілі немає машин, а поруч — рифи та морські черепахи.",
-          "Naprostý klid a křišťálová voda. Na ostrovech Gili nejezdí auta a kousek od břehu žijí mořské želvy.",
+          "Катером із Балі — у світ без машин: на островах Гілі їздять на велосипедах, а біля берега плавають морські черепахи.",
+          "Člunem z Bali do světa bez aut: na ostrovech Gili se jezdí na kole a u břehu plavou mořské želvy.",
         ),
         image: img("indonesia", 2),
       },
       {
-        title: tx("Комодо та Флорес", "Komodo a Flores"),
+        title: tx("Комодо та Флорес", "Komodo a Flores"),
         text: tx(
-          "Для шукачів пригод: комодські варани та пляжі з рожевим піском.",
-          "Pro dobrodruhy: varani komodští a pláže s růžovým pískem.",
+          "Для тих, кому мало пляжу: комодські варани й рожевий пісок. Із Балі — коротким внутрішнім рейсом.",
+          "Pro ty, kterým pláž nestačí: varani komodští a růžový písek. Z Bali krátkým vnitrostátním letem.",
         ),
         image: img("indonesia", 3),
       },
@@ -1567,15 +1567,15 @@ export const destinations: Destination[] = [
       {
         title: tx("Яку валюту брати?", "Jakou měnu si vzít?"),
         text: tx(
-          "Найкраще — долари або євро великими купюрами нового зразка без пошкоджень: курс на них вигідніший. Крони в Індонезії не поміняєте.",
-          "Nejlepší jsou dolary nebo eura ve vyšších, nových a nepoškozených bankovkách — mají lepší kurz. Koruny v Indonésii nevyměníte.",
+          "Долари або євро великими купюрами — нові й неушкоджені, за них дають кращий курс. Крони в Індонезії не поміняєте.",
+          "Dolary nebo eura ve vyšších hodnotách, nové a nepoškozené – za takové dostanete lepší kurz. Koruny v Indonésii nevyměníte.",
         ),
       },
       {
-        title: tx("Картки та банкомати", "Karty a bankomaty"),
+        title: tx("Картки й банкомати", "Karty a bankomaty"),
         text: tx(
-          "У туристичних зонах картки приймають майже скрізь, але на ринках, у варунгах і за вхід до храмів потрібна готівка.",
-          "V turistických oblastech karty berou skoro všude, na trzích, ve warunzích a na vstupné do chrámů ale potřebujete hotovost.",
+          "У туристичних зонах картки беруть майже всюди, але на ринках, у варунгах (місцевих їдальнях) і за вхід до храмів потрібна готівка.",
+          "V turistických oblastech berou karty skoro všude, na trzích, v místních jídelnách (warung) a na vstupné do chrámů ale budete potřebovat hotovost.",
         ),
       },
     ],
@@ -1584,29 +1584,29 @@ export const destinations: Destination[] = [
         // TODO(client): verify visa-on-arrival / e-VOA availability by citizenship.
         title: tx("Віза", "Vízum"),
         text: tx(
-          "Для багатьох країн діє віза по прильоту або електронна віза заздалегідь. Ми перевіримо умови для вашого громадянства.",
-          "Pro mnoho zemí platí vízum po příletu nebo elektronické vízum předem. Podmínky pro vaše občanství ověříme.",
+          "Громадянам багатьох країн підійде віза в аеропорту після прильоту або електронна, оформлена заздалегідь. Перевірю саме для вашої ситуації.",
+          "Občanům mnoha zemí stačí vízum po příletu na letišti nebo elektronické vízum vyřízené předem. Ověřím pro vaši situaci.",
         ),
       },
       {
-        title: tx("Етикет у храмах", "Etiketa v chrámech"),
+        title: tx("Етикет у храмах", "Etiketa v chrámech"),
         text: tx(
-          "Коліна прикривають саронгом, який часто можна взяти напрокат на вході.",
-          "Kolena se zakrývají sarongem, který si často půjčíte u vchodu.",
+          "Коліна прикривають саронгом — його часто дають напрокат просто біля входу.",
+          "Kolena se zakrývají sarongem, který si často půjčíte přímo u vchodu.",
         ),
       },
       {
         title: tx("Транспорт", "Doprava"),
         text: tx(
-          "Лівосторонній рух. Найзручніше — таксі Blue Bird, Grab або авто з водієм, яке ми можемо організувати.",
-          "Jezdí se vlevo. Nejpohodlnější je taxi Blue Bird, Grab nebo auto s řidičem, které vám zajistíme.",
+          "Рух лівосторонній. Найзручніше — таксі Blue Bird, Grab або авто з водієм, яке я можу організувати.",
+          "Jezdí se vlevo. Nejpohodlnější je taxi Blue Bird, Grab nebo auto s řidičem, které vám můžu zajistit.",
         ),
       },
       {
         title: tx("Вода", "Voda"),
         text: tx(
-          "Пийте лише бутильовану воду й уникайте льоду у вуличних кафе.",
-          "Pijte jen balenou vodu a v pouličních bistrech se vyhněte ledu.",
+          "Лише бутильована. І без льоду у вуличних кафе.",
+          "Jen balená. A v pouličních bistrech radši bez ledu.",
         ),
       },
     ],
@@ -1615,44 +1615,44 @@ export const destinations: Destination[] = [
         // TODO(client): verify current Bali levy amount.
         q: tx("Що таке туристичний збір Балі?", "Co je turistický poplatek na Bali?"),
         a: tx(
-          "З 2024 року кожен іноземний турист сплачує збір Балі (близько 150 000 IDR). Його зручно оплатити онлайн через офіційний портал Love Bali або в аеропорту.",
-          "Od roku 2024 platí každý zahraniční turista poplatek Bali (zhruba 150 000 IDR). Nejpohodlněji ho zaplatíte online přes oficiální portál Love Bali nebo na letišti.",
+          "Це збір, який із 2024 року сплачує кожен іноземний турист, — приблизно 150 000 IDR. Найзручніше оплатити його онлайн на офіційному порталі Love Bali або в аеропорту.",
+          "Poplatek, který od roku 2024 platí každý zahraniční turista – zhruba 150 000 IDR. Nejpohodlněji ho zaplatíte online na oficiálním portálu Love Bali nebo na letišti.",
         ),
       },
       {
-        q: tx("Чому іноді на пляжі не поплаваєш?", "Proč se někdy na pláži nedá plavat?"),
+        q: tx("Чому іноді на пляжі не поплаваєш?", "Proč se někdy nedá koupat?"),
         a: tx(
-          "Через сильні припливи й відпливи: у Нуса-Дуа вода може відходити на сотні метрів. Перевіряйте розклад у застосунку Tide Table або на ресепшені.",
-          "Kvůli silnému přílivu a odlivu: v Nusa Dua voda ustoupí i o stovky metrů. Rozpis sledujte v aplikaci Tide Table nebo na recepci.",
+          "Через сильні припливи й відпливи: у Нуса-Дуа вода може відступати на сотні метрів. Розклад дивіться в застосунку Tide Table або питайте на ресепшені.",
+          "Kvůli silnému přílivu a odlivu: v Nusa Dua voda ustoupí i o stovky metrů. Tabulku přílivů najdete v aplikaci Tide Table, nebo se zeptejte na recepci.",
         ),
       },
       {
-        q: tx("Як поводитися з мавпами?", "Jak se chovat k opicím?"),
+        q: tx("Як поводитися з мавпами?", "Jak se chovat k opicím?"),
         a: tx(
-          "Не тримайте в руках їжу, окуляри чи телефон, не дивіться мавпам в очі й не відбирайте вкрадене силою — покличте наглядача.",
-          "Nedržte v rukou jídlo, brýle ani telefon, nedívejte se opicím do očí a ukradené věci jim neberte silou — zavolejte strážce.",
+          "Як із кишеньковими злодіями — бо вони ними і є. Не тримайте в руках їжу, окуляри чи телефон, не дивіться мавпам в очі й не відбирайте вкрадене силою: покличте наглядача.",
+          "Jako ke kapsářům – protože jimi jsou. Nedržte v rukou jídlo, brýle ani telefon, nedívejte se opicím do očí a ukradené věci jim neberte silou: zavolejte strážce.",
         ),
       },
       {
-        q: tx("Чи багато комарів?", "Je tam hodně komárů?"),
+        q: tx("Чи багато там комарів?", "Je tam hodně komárů?"),
         a: tx(
-          "Це тропіки, тож комахи є, особливо в Убуді. Місцеві репеленти (наприклад, Soffell) працюють чудово; преміум-готелі регулярно обробляють територію.",
-          "Jsou to tropy, takže hmyz tu je, hlavně v Ubudu. Místní repelenty (např. Soffell) fungují skvěle a prémiové hotely areál pravidelně ošetřují.",
+          "Чимало, особливо в Убуді, — це ж тропіки. Місцеві репеленти (наприклад, Soffell) працюють добре, а преміум-готелі регулярно обробляють територію.",
+          "Dost, hlavně v Ubudu – jsou to přece tropy. Místní repelenty (třeba Soffell) fungují dobře a lepší hotely areál pravidelně ošetřují.",
         ),
       },
       {
-        q: tx("Дорогу перекрила церемонія — що робити?", "Silnici zablokoval průvod — co dělat?"),
+        q: tx("Дорогу перекрила церемонія. Що робити?", "Silnici zablokoval obřadní průvod. Co dělat?"),
         a: tx(
-          "Релігійні процесії мають пріоритет. Наберіться терпіння й насолодіться видовищем — балійці цінують повагу до своїх традицій.",
-          "Náboženské průvody mají přednost. Vydržte a užijte si podívanou — Balijci si úcty ke svým tradicím velmi váží.",
+          "Чекати й дивитися. Релігійні процесії на дорозі завжди мають перевагу, а балійці дуже цінують повагу до своїх традицій. До того ж це видовище варте кількох хвилин.",
+          "Počkat a dívat se. Náboženské průvody mají na silnici vždycky přednost a Balijci si úcty ke svým tradicím velmi váží. A ta podívaná za těch pár minut stojí.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури на Балі та в Індонезію з Праги", "Zájezdy na Bali a do Indonésie"),
+      title: tx("Тури на Балі з Чехії — ціни в кронах", "Zájezdy na Bali z Česka – ceny v Kč"),
       description: tx(
-        "Балі, Гілі, Ломбок і Комодо з вильотом із Праги. Зручні пересадки, ціни в CZK, підбір туру в Telegram.",
-        "Bali, Gili, Lombok a Komodo s odletem z Prahy. Pohodlné přestupy, ceny v CZK, výběr zájezdu přes Telegram.",
+        "Тури на Балі з Чехії: Убуд, Нуса-Дуа, Семіньяк, а ще Гілі, Ломбок і Комодо. Зручні пересадки, ціни в кронах. Альона підбере 3 готелі для вас.",
+        "Zájezdy na Bali z Česka: Ubud, Nusa Dua, Seminyak a k tomu Gili, Lombok i Komodo. Pohodlné přestupy, ceny v Kč. Aljona vám vybere 3 hotely na míru.",
       ),
     },
   },
@@ -1664,136 +1664,136 @@ export const destinations: Destination[] = [
     nameIn: tx("на Занзібарі", "na Zanzibaru"),
     flag: "🇹🇿",
     heroImage: hero("zanzibar"),
-    tagline: tx("Острів прянощів в Індійському океані", "Ostrov koření v Indickém oceánu"),
+    tagline: tx("Білий пісок і спеції", "Bílý písek a koření"),
     teaser: tx(
-      "Білосніжний пісок, бірюзова вода, Стоун-Таун і сафарі поруч — Африка, якої ви ще не бачили.",
-      "Bílý písek, tyrkysová voda, Stone Town a safari kousek odtud — Afrika, jakou jste ještě neviděli.",
+      "Океан усіх відтінків бірюзи, вулички Стоун-\u2060Тауна й сафарі зовсім поруч. Африка — але в шльопанцях.",
+      "Oceán ve všech odstínech tyrkysové, uličky Stone Townu a safari kousek odtud. Afrika, ale v žabkách.",
     ),
     intro: tx(
-      "Занзібар — тропічний острів біля узбережжя Танзанії, де пахне гвоздикою та корицею, а океан має всі відтінки бірюзи. Тут поєднуються пляжний відпочинок, історія арабських султанів у Стоун-Тауні та можливість злітати на справжнє сафарі. У зимовому сезоні з Праги літають прямі чартери, тож потрапити в африканське літо простіше, ніж здається. Ananas Tour підбере готель на тихій півночі чи на сході для кайтсерфінгу.",
-      "Zanzibar je tropický ostrov u pobřeží Tanzanie, kde to voní hřebíčkem a skořicí a oceán hraje všemi odstíny tyrkysové. Spojíte tu odpočinek na pláži, historii arabských sultánů ve Stone Townu i výlet na opravdové safari. V zimní sezóně létají z Prahy přímé chartery, takže africké léto je blíž, než se zdá. Ananas Tour vybere hotel na klidném severu nebo na východě pro kitesurfing.",
+      "Острів біля узбережжя Танзанії, де пахне гвоздикою й корицею, а взимку з Чехії літають прямі чартери. Підкажу, де жити: на півночі, щоб купатися без відпливів, чи на сході — заради кайту.",
+      "Ostrov u pobřeží Tanzanie, kde to voní hřebíčkem a skořicí a kam v zimě létají přímé chartery z Česka. Poradím, kde bydlet: na severu, kde koupání nekazí odliv, nebo na východě, kam se jezdí za kitem.",
     ),
-    bestSeason: tx("червень – жовтень, грудень – лютий", "červen – říjen, prosinec – únor"),
-    flightTime: tx("≈ 9 год з Праги (чартер)", "cca 9 h z Prahy (charter)"), // TODO(client): verify
+    bestSeason: tx("червень–жовтень, грудень–лютий", "červen–říjen, prosinec–únor"),
+    flightTime: tx("≈ 9 год з Праги (чартер)", "cca 9 h z Prahy (charter)"), // TODO(client): verify
     airports: ["PRG"],
     currency: tx("танзанійський шилінг (TZS), USD", "tanzanský šilink (TZS), USD"),
     entry: ENTRY_CHECK,
     regions: [
       {
-        title: tx("Північ: Нунгві та Кендва", "Sever: Nungwi a Kendwa"),
+        title: tx("Нунгві й Кендва", "Nungwi a Kendwa"),
         text: tx(
-          "Найкращі пляжі для купання: тут майже немає відпливів, а заходи сонця над океаном — найгарніші на острові.",
-          "Nejlepší pláže na koupání: odliv tu skoro není a západy slunce nad oceánem jsou nejkrásnější na ostrově.",
+          "Північ острова: відпливів тут майже немає, тож купатися можна цілий день, а заходи сонця над океаном — найгарніші на Занзібарі.",
+          "Sever ostrova: odliv tu skoro není, takže se dá koupat celý den. A západy slunce nad oceánem jsou nejhezčí na celém Zanzibaru.",
         ),
         image: img("zanzibar", 1),
       },
       {
-        title: tx("Схід: Паже та Джамбіані", "Východ: Paje a Jambiani"),
+        title: tx("Паже й Джамбіані", "Paje a Jambiani"),
         text: tx(
-          "Безкраї білі пляжі, кайтсерфінг і атмосферні бутик-готелі. Під час відпливу океан відходить далеко — ідеально для прогулянок.",
-          "Nekonečné bílé pláže, kitesurfing a stylové butikové hotely. Při odlivu oceán ustoupí daleko — ideální na procházky.",
+          "Схід: безкраї білі пляжі, кайтсерфінг і затишні бутик-готелі. У відплив океан відступає далеко — і можна гуляти дном.",
+          "Východ: nekonečné bílé pláže, kitesurfing a útulné butikové hotely. Při odlivu oceán ustoupí daleko a dá se procházet po dně.",
         ),
         image: img("zanzibar", 2),
       },
       {
         title: tx("Стоун-Таун", "Stone Town"),
         text: tx(
-          "Старе місто зі списку ЮНЕСКО: різьблені двері, вузькі вулички, базари прянощів і нічний ринок Фородхані.",
-          "Staré město na seznamu UNESCO: vyřezávané dveře, úzké uličky, trhy s kořením a noční trh Forodhani.",
+          "Старе місто під охороною ЮНЕСКО: різьблені двері, вузькі вулички, базари спецій і нічний ринок Фородхані.",
+          "Staré město pod ochranou UNESCO: vyřezávané dveře, úzké uličky, trhy s kořením a noční trh Forodhani.",
         ),
         image: img("zanzibar", 3),
       },
     ],
     money: [
       {
-        title: tx("Долари та шилінги", "Dolary a šilinky"),
+        title: tx("Долари й шилінги", "Dolary a šilinky"),
         text: tx(
-          "У готелях і на екскурсіях ціни часто в доларах. Беріть долари нового зразка без пошкоджень — старі купюри можуть не прийняти. Для ринків поміняйте трохи на шилінги.",
-          "V hotelech a na výletech jsou ceny často v dolarech. Berte nové a nepoškozené dolarové bankovky — staré nemusí přijmout. Na trhy si vyměňte trochu šilinků.",
+          "У готелях і на екскурсіях ціни часто в доларах. Беріть нові неушкоджені купюри — старі можуть не прийняти. А на ринок розміняйте трохи шилінгів.",
+          "V hotelech a na výletech bývají ceny v dolarech. Berte nové a nepoškozené bankovky, starší vám nemusí vzít. Na trhy si rozměňte trochu šilinků.",
         ),
       },
       {
         title: tx("Картки", "Karty"),
         text: tx(
-          "Картки приймають у більшості готелів, але поза ними готівка надійніша. Банкомати є в Стоун-Тауні та великих селищах.",
-          "Karty berou ve většině hotelů, mimo ně je ale spolehlivější hotovost. Bankomaty najdete ve Stone Townu a větších vesnicích.",
+          "Більшість готелів приймає картки, але за їхніми межами готівка надійніша. Банкомати є в Стоун-Тауні та більших селищах.",
+          "Většina hotelů bere karty, mimo ně je ale spolehlivější hotovost. Bankomaty najdete ve Stone Townu a větších vesnicích.",
         ),
       },
     ],
     tips: [
       {
         // TODO(client): verify visa rules by citizenship and the mandatory Zanzibar travel insurance.
-        title: tx("Віза та страховка", "Vízum a pojištění"),
+        title: tx("Віза й страховка", "Vízum a pojištění"),
         text: tx(
-          "Візові умови залежать від громадянства. Занзібар також вимагає спеціальну місцеву страховку для туристів — ми підкажемо актуальні правила перед поїздкою.",
-          "Vízové podmínky závisí na občanství. Zanzibar navíc vyžaduje speciální místní pojištění pro turisty — aktuální pravidla vám před cestou připomeneme.",
+          "Візові умови залежать від громадянства, а Занзібар ще й вимагає окрему місцеву страховку для туристів. Перевірю саме для вашої ситуації.",
+          "Vízové podmínky závisí na občanství a Zanzibar navíc vyžaduje vlastní povinné pojištění pro turisty. Ověřím pro vaši situaci.",
         ),
       },
       {
         // TODO(client): verify vaccination requirements.
         title: tx("Здоров’я", "Zdraví"),
         text: tx(
-          "Перед поїздкою порадьтеся з лікарем щодо профілактики малярії та щеплень. Користуйтеся репелентом увечері.",
-          "Před cestou se poraďte s lékařem o prevenci malárie a očkování. Večer používejte repelent.",
+          "Перед поїздкою порадьтеся з лікарем щодо щеплень і профілактики малярії. Увечері — репелент.",
+          "Před cestou se poraďte s lékařem o očkování a prevenci malárie. A večer nezapomeňte na repelent.",
         ),
       },
       {
         title: tx("Культура", "Kultura"),
         text: tx(
-          "Більшість населення — мусульмани. У селах і Стоун-Тауні закривайте плечі й коліна; купальник — лише на пляжі.",
-          "Většina obyvatel jsou muslimové. Ve vesnicích a ve Stone Townu mějte zakrytá ramena a kolena, plavky jen na pláži.",
+          "Більшість місцевих — мусульмани. У селах і Стоун-Тауні закривайте плечі й коліна; купальник — лише на пляжі.",
+          "Většina místních jsou muslimové. Ve vesnicích a ve Stone Townu mějte zakrytá ramena a kolena, plavky jen na pláži.",
         ),
       },
       {
         title: tx("Екскурсії", "Výlety"),
         text: tx(
-          "Тур за прянощами, черепахи на острові Призон, снорклінг біля Мнемби, Safari Blue та сафарі на материку.",
-          "Výlet za kořením, želvy na ostrově Prison Island, šnorchlování u Mnemby, Safari Blue a safari na pevnině.",
+          "Плантації спецій, черепахи на острові Призон, снорклінг біля Мнемби, Safari Blue — і сафарі на материку.",
+          "Plantáže koření, želvy na Prison Islandu, šnorchlování u Mnemby, Safari Blue a safari na pevnině.",
         ),
       },
     ],
     faq: [
       {
-        q: tx("Де жити, щоб купатися без відпливів?", "Kde bydlet, aby se dalo koupat bez odlivu?"),
+        q: tx("Де жити, щоб купатися без відпливів?", "Kde bydlet, aby nám koupání nekazil odliv?"),
         a: tx(
-          "На півночі — у Нунгві чи Кендві. На сході (Паже, Джамбіані) відпливи сильні: океан відходить на сотні метрів, зате там рай для кайтсерферів.",
-          "Na severu — v Nungwi nebo Kendwě. Na východě (Paje, Jambiani) je silný odliv a oceán ustoupí o stovky metrů, zato je to ráj kitesurferů.",
+          "На півночі — у Нунгві чи Кендві. На сході (Паже, Джамбіані) відпливи сильні й океан відступає на сотні метрів, зате там роздолля для кайтсерферів.",
+          "Na severu, v Nungwi nebo Kendwě. Na východě (Paje, Jambiani) je silný odliv a oceán ustoupí o stovky metrů, zato je tam kitesurfařům hej.",
         ),
       },
       {
         q: tx("Коли сезон дощів?", "Kdy je období dešťů?"),
         a: tx(
-          "Великі дощі — квітень–травень, короткі — у листопаді. Найкращий час — з червня по жовтень і з грудня по лютий.",
-          "Velké deště jsou v dubnu a květnu, krátké v listopadu. Nejlepší doba je od června do října a od prosince do února.",
+          "Великі дощі — у квітні–травні, короткі — у листопаді. Найкращий час — з червня до жовтня та з грудня до лютого.",
+          "Velké deště přicházejí v dubnu a květnu, ty krátké v listopadu. Nejlepší doba je od června do října a od prosince do února.",
         ),
       },
       {
-        q: tx("Чи можна поєднати Занзібар із сафарі?", "Dá se Zanzibar spojit se safari?"),
+        q: tx("Можна поєднати Занзібар із сафарі?", "Dá se Zanzibar spojit se safari?"),
         a: tx(
-          "Так. З острова літають невеликі літаки до нацпарків Танзанії — Селус (Ньєрере) чи Мікумі — на 1–3 дні. Ми допоможемо спланувати комбінацію.",
-          "Ano. Z ostrova létají malá letadla do tanzanských národních parků — Selous (Nyerere) nebo Mikumi — na 1–3 dny. Kombinaci vám pomůžeme naplánovat.",
+          "Так. З острова невеликими літаками летять на 1–3 дні до національних парків Танзанії — Ньєрере (Селус) чи Мікумі. Таку поїздку допоможу спланувати.",
+          "Ano. Malým letadlem se z ostrova dá na 1–3 dny zaletět do tanzanských národních parků Nyerere (Selous) nebo Mikumi. Takový výlet vám pomůžu naplánovat.",
         ),
       },
       {
         q: tx("Чи безпечно на Занзібарі?", "Je na Zanzibaru bezpečno?"),
         a: tx(
-          "Острів доброзичливий до туристів. Звичайні правила: не носіть цінне напоказ, увечері користуйтеся таксі від готелю, а екскурсії купуйте в перевірених агентів.",
-          "Ostrov je k turistům přátelský. Platí běžná pravidla: nenoste cennosti na odiv, večer jezděte hotelovým taxi a výlety kupujte u ověřených agentur.",
+          "Так, острів доброзичливий до туристів. Звичайні правила: не носіть цінні речі напоказ, увечері їздіть таксі від готелю, а екскурсії купуйте в перевірених агенціях.",
+          "Ano, ostrov je k turistům přátelský. Platí běžná pravidla: nenoste cennosti na odiv, večer jezděte hotelovým taxi a výlety kupujte u ověřených agentur.",
         ),
       },
       {
-        q: tx("Які розетки на Занзібарі?", "Jaké jsou na Zanzibaru zásuvky?"),
+        q: tx("Які на Занзібарі розетки?", "Jaké jsou na Zanzibaru zásuvky?"),
         a: tx(
-          "Переважно британського типу G (230 V). Візьміть універсальний адаптер.",
-          "Převážně britský typ G (230 V). Vezměte si univerzální adaptér.",
+          "Переважно британського типу G, 230 В. Візьміть універсальний адаптер.",
+          "Převážně britský typ G, 230 V. Vezměte si univerzální adaptér.",
         ),
       },
     ],
     seo: {
-      title: tx("Тури на Занзібар з Праги — пляжі та сафарі", "Zájezdy na Zanzibar z Prahy"),
+      title: tx("Тури на Занзібар з Чехії — ціни в кронах", "Zájezdy na Zanzibar z Česka – ceny v Kč"),
       description: tx(
-        "Занзібар із прямим чартером із Праги: Нунгві, Кендва, Паже, Стоун-Таун, сафарі. Ціни в CZK, підбір туру в Telegram.",
-        "Zanzibar s přímým charterem z Prahy: Nungwi, Kendwa, Paje, Stone Town, safari. Ceny v CZK, výběr zájezdu přes Telegram.",
+        "Тури на Занзібар з Чехії прямим чартером: Нунгві, Кендва, Паже, Стоун-Таун і сафарі на материку. Ціни в кронах. Альона підбере 3 готелі для вас.",
+        "Zájezdy na Zanzibar z Česka přímým charterem: Nungwi, Kendwa, Paje, Stone Town a safari na pevnině. Ceny v Kč. Aljona vám vybere 3 hotely na míru.",
       ),
     },
   },

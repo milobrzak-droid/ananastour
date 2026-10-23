@@ -6,7 +6,7 @@ import { PineapplePattern } from "@/components/brand/pineapple";
 import { InquiryForm } from "@/components/contact/inquiry-form";
 import { TelegramButton } from "@/components/contact/telegram";
 import { Button } from "@/components/ui";
-import type { Locale } from "@/i18n/config";
+import { t, type Locale } from "@/i18n/config";
 import { track } from "@/lib/analytics";
 
 export type ServiceIcon = "insurance" | "flight" | "hotel" | "transfer" | "visa" | "excursion";
@@ -31,6 +31,10 @@ const ICONS: Record<ServiceIcon, string> = {
 };
 
 const TONES = ["bg-white", "bg-ice", "bg-grey"];
+
+// Form heading: the manifest's "prickly part" in Aljona's first person. The selected
+// service shows right under it as the form's context line, so it is never repeated.
+const FORM_HEADING: Record<Locale, string> = { uk: "Колюче — на мені", cs: "Pichlavé beru já" };
 
 function Icon({ name }: { name: ServiceIcon }) {
   return (
@@ -83,7 +87,8 @@ export function ServiceOrder({
               </div>
             </div>
             <div className="flex flex-1 flex-col p-4 pt-5 sm:p-6 sm:pt-6">
-              <h2 className="font-display text-xl font-black uppercase leading-tight sm:text-2xl">{s.title}</h2>
+              {/* Steps back to text-xl in the narrow 3-column range (lg) so СТРАХУВАННЯ stays whole. */}
+              <h2 className="text-balance font-display text-xl font-black uppercase leading-tight sm:text-2xl lg:text-xl xl:text-2xl">{s.title}</h2>
               <p className="mt-2 text-ink/80">{s.text}</p>
               <ul className="mt-4 space-y-1.5 text-sm">
                 {s.points.map((p) => (
@@ -108,7 +113,7 @@ export function ServiceOrder({
         <PineapplePattern preset="section" opacity={0.35} />
         <div className="relative grid gap-10 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <h2 className="font-display text-3xl font-black uppercase sm:text-5xl">{formTitle}</h2>
+            <h2 className="text-balance font-display text-3xl font-black uppercase leading-[1.08] sm:text-5xl lg:text-[clamp(2.25rem,4vw,3rem)]">{formTitle}</h2>
             <p className="mt-3 text-paper/75">{formLead}</p>
             <p className="mt-8 text-sm font-semibold uppercase tracking-widest text-paper/75">{chooseLabel}</p>
             <div className="mt-3 flex flex-wrap gap-2" role="radiogroup" aria-label={chooseLabel}>
@@ -143,7 +148,7 @@ export function ServiceOrder({
             fields={["email", "message"]}
             source={`services-form-${current.id}`}
             variant="dark"
-            title={current.title}
+            title={t(FORM_HEADING, locale)}
           />
         </div>
       </div>
